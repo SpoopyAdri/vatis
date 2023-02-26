@@ -263,26 +263,31 @@ namespace Vatsim.Vatis.Client.Network
 
                 var server = mAppConfig.CachedServers.FirstOrDefault(t => t.Name == mAppConfig.ServerName);
 
-                var serverAddress = server.Address;
-
-                if (mAppConfig.ServerName == "AUTOMATIC")
+                if (server != null)
                 {
-                    try
+                    var serverAddress = server.Address;
+                    if (mAppConfig.ServerName == "AUTOMATIC")
                     {
-                        var bestFsdServer = await new HttpClient().GetStringAsync("http://fsd-http.connect.vatsim.net");
-                        if (!string.IsNullOrEmpty(bestFsdServer))
+                        try
                         {
-                            if (Regex.IsMatch(bestFsdServer, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"))
+                            var bestFsdServer = await new HttpClient().GetStringAsync("http://fsd-http.connect.vatsim.net");
+                            if (!string.IsNullOrEmpty(bestFsdServer))
                             {
-                                serverAddress = bestFsdServer;
+                                if (Regex.IsMatch(bestFsdServer, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"))
+                                {
+                                    serverAddress = bestFsdServer;
+                                }
                             }
                         }
+                        catch { }
                     }
-                    catch { }
+                    mSession.Connect(serverAddress, 6809);
+                    mPreviousMetar = "";
                 }
-
-                mSession.Connect(serverAddress, 6809);
-                mPreviousMetar = "";
+                else
+                {
+                    throw new Exception("Please choose VATSIM server in Settings.");
+                }
             }
         }
 

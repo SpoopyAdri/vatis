@@ -16,7 +16,8 @@ namespace Vatsim.Vatis.Client.Config
 
         [JsonIgnore] public string ConfigPath { get; }
 
-        [JsonIgnore] public bool ConfigRequired => string.IsNullOrEmpty(VatsimId) || string.IsNullOrEmpty(VatsimPasswordDecrypted) || string.IsNullOrEmpty(ServerName) || string.IsNullOrEmpty(Name);
+        [JsonIgnore] public bool ConfigRequired => string.IsNullOrEmpty(VatsimId) || 
+            string.IsNullOrEmpty(VatsimPasswordDecrypted) || string.IsNullOrEmpty(Name);
 
         [JsonIgnore]
         public string VatsimPasswordDecrypted
