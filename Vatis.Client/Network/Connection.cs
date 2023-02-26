@@ -11,6 +11,9 @@ using RestSharp;
 using Vatsim.Network.PDU;
 using Vatsim.Network;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 
 namespace Vatsim.Vatis.Client.Network
 {
@@ -250,7 +253,7 @@ namespace Vatsim.Vatis.Client.Network
                 mAirport.Longitude));
         }
 
-        public void Connect()
+        public async void Connect()
         {
             if (SetPasswordToken(mAppConfig.VatsimId, mAppConfig.VatsimPasswordDecrypted))
             {
@@ -260,7 +263,25 @@ namespace Vatsim.Vatis.Client.Network
 
                 var server = mAppConfig.CachedServers.FirstOrDefault(t => t.Name == mAppConfig.ServerName);
 
-                mSession.Connect(server.Address, 6809);
+                var serverAddress = server.Address;
+
+                if (mAppConfig.ServerName == "AUTOMATIC")
+                {
+                    try
+                    {
+                        var bestFsdServer = await new HttpClient().GetStringAsync("http://fsd-http.connect.vatsim.net");
+                        if (!string.IsNullOrEmpty(bestFsdServer))
+                        {
+                            if (Regex.IsMatch(bestFsdServer, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"))
+                            {
+                                serverAddress = bestFsdServer;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                mSession.Connect(serverAddress, 6809);
                 mPreviousMetar = "";
             }
         }
