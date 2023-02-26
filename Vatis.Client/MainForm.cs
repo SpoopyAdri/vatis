@@ -1,10 +1,14 @@
 using Appccelerate.EventBroker;
 using Appccelerate.EventBroker.Handlers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -624,16 +628,49 @@ namespace Vatsim.Vatis.Client
 
         private void DownloadServerList()
         {
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 try
                 {
-                    var servers = Vatsim.Network.NetworkInfo.GetServerList("https://status.vatsim.net");
-                    if (servers.Count > 0)
+                    var status = await new HttpClient().GetStringAsync("https://status.vatsim.net/status.json");
+                    if (!string.IsNullOrEmpty(status))
                     {
-                        mAppConfig.CachedServers.Clear();
-                        mAppConfig.CachedServers.AddRange(servers);
-                        mAppConfig.SaveConfig();
+                        var json = JObject.Parse(status);
+                        if (json.HasValues)
+                        {
+                            var servers = (JArray)json["data"]["servers"];
+                            if (servers.HasValues)
+                            {
+                                int random = new Random().Next(servers.Count);
+                                var serverListUrl = servers[random].ToString();
+                                var serverList = await new HttpClient().GetStringAsync(serverListUrl);
+                                var serverListJson = JArray.Parse(serverList);
+
+                                if (serverListJson.HasValues)
+                                {
+                                    mAppConfig.CachedServers.Clear();
+
+                                    foreach (var server in serverListJson)
+                                    {
+                                        var name = server["name"].ToString();
+                                        var hostname = server["hostname_or_ip"].ToString();
+
+                                        mAppConfig.CachedServers.Add(new Vatsim.Network.NetworkServerInfo
+                                        {
+                                            Name = name,
+                                            Address = hostname,
+                                        });
+
+                                        if (name == "AUTOMATIC")
+                                        {
+                                            mAppConfig.ServerName = "AUTOMATIC";
+                                        }
+                                    }
+
+                                    mAppConfig.SaveConfig();
+                                }
+                            }
+                        }
                     }
                 }
                 catch { }
