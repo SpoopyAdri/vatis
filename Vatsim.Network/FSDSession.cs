@@ -94,6 +94,7 @@ namespace Vatsim.Network
 		private readonly Random mRandom = new Random();
 		private Timer mServerAuthTimer;
 		private string mCurrentCallsign;
+		private System.Text.Encoding mTextEncoding = System.Text.Encoding.GetEncoding("iso-8859-1");
 
 		public bool Connected => mClientSocket?.Connected ?? false;
 
@@ -1154,7 +1155,7 @@ namespace Vatsim.Network
 			}
 			try
 			{
-				byte[] bytes = Encoding.Default.GetBytes(data);
+				byte[] bytes = mTextEncoding.GetBytes(data);
 				if (mClientSocket != null)
 				{
 					mClientSocket.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(SendCallback), mClientSocket);
@@ -1327,7 +1328,7 @@ namespace Vatsim.Network
 					return;
 				}
 				char[] chars = new char[bytesReceived + 1];
-				Decoder d = Encoding.Default.GetDecoder();
+				Decoder d = mTextEncoding.GetDecoder();
 				int charLen = d.GetChars(theSockId.mDataBuffer, 0, bytesReceived, chars, 0);
 				String data = new String(chars);
 				ProcessData(data);
