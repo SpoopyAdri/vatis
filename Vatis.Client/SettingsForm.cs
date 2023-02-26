@@ -57,20 +57,6 @@ namespace Vatsim.Vatis.Client
                     });
                 }
             }
-            else
-            {
-                mAppConfig.CachedServers = Vatsim.Network.NetworkInfo.GetServerList("https://status.vatsim.net");
-                mAppConfig.SaveConfig();
-
-                foreach (var server in mAppConfig.CachedServers)
-                {
-                    ddlServerName.Items.Add(new ComboBoxItem()
-                    {
-                        Text = server.Name,
-                        Value = server.Address
-                    });
-                }
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
