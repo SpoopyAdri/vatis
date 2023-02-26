@@ -370,7 +370,10 @@ namespace Vatsim.Vatis.Client
                                 await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token)
                                 .ContinueWith(t =>
                                 {
-                                    tabPage.Connection.SendSubscriberNotification();
+                                    if (!args.IsUpdated)
+                                    {
+                                        tabPage.Connection.SendSubscriberNotification();
+                                    }
                                 }, cancellationToken.Token);
                             }
                             catch (TaskCanceledException) { }
