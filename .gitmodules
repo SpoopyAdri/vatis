@@ -1,3 +1,6 @@
 [submodule "GeoVR"]
 	path = GeoVR
 	url = https://github.com/vatis-project/GeoVR.git
+[submodule "MetarParserCore"]
+	path = MetarParserCore
+	url = https://github.com/vatis-project/MetarParserCore.git

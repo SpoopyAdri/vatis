@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Vatsim.Vatis.Client": {
+      "commandName": "Project"
+    },
+    "Profile Editor": {
+      "commandName": "Project",
+      "commandLineArgs": "-editor"
+    }
+  }
+}
