@@ -31,7 +31,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
                 {
                     Timeout = 30000
                 };
-                jwtRequest.AddJsonBody(new PasswordTokenRequest(mAppConfig.VatsimId, mAppConfig.VatsimPasswordDecrypted));
+                jwtRequest.AddJsonBody(new PasswordTokenRequest(mAppConfig.UserId, mAppConfig.Password));
                 var jwtResponse = await client.ExecuteAsync<PasswordTokenResponse>(jwtRequest, token);
                 if (jwtResponse != null)
                 {

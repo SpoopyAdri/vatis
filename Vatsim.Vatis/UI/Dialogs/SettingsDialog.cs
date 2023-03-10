@@ -19,8 +19,8 @@ public partial class SettingsDialog : Form
 
         ddlNetworkRating.DataSource = Enum.GetValues(typeof(Vatsim.Network.NetworkRating));
         txtName.Text = mAppConfig.Name;
-        txtVatsimId.Text = mAppConfig.VatsimId;
-        txtVatsimPassword.Text = mAppConfig.VatsimPasswordDecrypted;
+        txtVatsimId.Text = mAppConfig.UserId;
+        txtVatsimPassword.Text = mAppConfig.Password;
         ddlNetworkRating.SelectedIndex = ddlNetworkRating.FindStringExact(mAppConfig.NetworkRating.ToString());
         ddlServerName.SelectedIndex = ddlServerName.FindStringExact(mAppConfig.ServerName);
         chkSuppressNotifications.Checked = mAppConfig.SuppressNotifications;
@@ -95,10 +95,10 @@ public partial class SettingsDialog : Form
         else
         {
             mAppConfig.Name = txtName.Text;
-            mAppConfig.VatsimId = txtVatsimId.Text;
-            mAppConfig.VatsimPasswordDecrypted = txtVatsimPassword.Text;
+            mAppConfig.UserId = txtVatsimId.Text;
+            mAppConfig.Password = txtVatsimPassword.Text;
             mAppConfig.NetworkRating = (Vatsim.Network.NetworkRating)ddlNetworkRating.SelectedItem;
-            mAppConfig.ServerName = (ddlServerName.SelectedItem as ComboBoxItem).Text;
+            mAppConfig.ServerName = (ddlServerName.SelectedItem as ComboBoxItem)?.Text;
             mAppConfig.SuppressNotifications = chkSuppressNotifications.Checked;
             mAppConfig.WindowProperties.TopMost = chkKeepVisible.Checked;
             mAppConfig.SaveConfig();

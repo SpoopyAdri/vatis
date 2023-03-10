@@ -5,9 +5,8 @@ namespace Vatsim.Vatis.Config;
 
 public interface IAppConfig : IConfig
 {
-    string AppPath { get; }
-    string VatsimId { get; set; }
-    string VatsimPasswordDecrypted { get; set; }
+    string UserId { get; set; }
+    string Password { get; set; }
     NetworkRating NetworkRating { get; set; }
     string Name { get; set; }
     List<NetworkServerInfo> CachedServers { get; set; }

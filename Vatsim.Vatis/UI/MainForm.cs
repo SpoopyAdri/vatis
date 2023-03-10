@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -96,10 +95,7 @@ public partial class MainForm : Form
     {
         base.OnLoad(e);
 
-        DownloadServerList();
-
         EventBus.Register(this);
-
         EventBus.Publish(this, new SessionStarted());
 
         if (mAppConfig.WindowProperties == null)
@@ -516,9 +512,7 @@ public partial class MainForm : Form
                     }
                     catch (AggregateException ex)
                     {
-                        tabPage.CompositeMeta.Error = "Error: " +
-                                                      string.Join(", ",
-                                                          ex.Flatten().InnerExceptions.Select(t => t.Message));
+                        tabPage.CompositeMeta.Error = "Error: " + string.Join(", ", ex.Flatten().InnerExceptions.Select(t => t.Message));
                         connection.Disconnect();
                     }
                     catch (Exception ex)
@@ -594,31 +588,6 @@ public partial class MainForm : Form
         if (atisTabs.SelectedTab != null)
         {
             mAppConfig.CurrentComposite = (atisTabs.SelectedTab.Tag as AtisComposite);
-        }
-    }
-
-    private void DownloadServerList()
-    {
-        var servers = Vatsim.Network.NetworkInfo.DownloadServerList("https://status.vatsim.net/status.json");
-        if (servers.IsCompletedSuccessfully)
-        {
-            mAppConfig.CachedServers.Clear();
-
-            foreach (var server in servers.Result)
-            {
-                mAppConfig.CachedServers.Add(new Vatsim.Network.NetworkServerInfo
-                {
-                    Name = server.Name,
-                    Address = server.Address,
-                });
-
-                if (server.Name == "AUTOMATIC")
-                {
-                    mAppConfig.ServerName = "AUTOMATIC";
-                }
-            }
-
-            mAppConfig.SaveConfig();
         }
     }
 

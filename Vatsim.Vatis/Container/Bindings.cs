@@ -16,7 +16,6 @@ public class Bindings : NinjectModule
     public override void Load()
     {
         Bind<VatisAppContext>().ToSelf();
-        Bind<IWindowFactory>().ToFactory();
         Bind<IAppConfig>().To(typeof(AppConfig)).InSingletonScope();
         Bind<IClientUpdater>().To(typeof(ClientUpdater)).InSingletonScope();
         Bind<IDownloader>().To(typeof(Downloader)).InSingletonScope();
@@ -24,5 +23,6 @@ public class Bindings : NinjectModule
         Bind<INavaidDatabase>().To(typeof(NavaidDatabase)).InSingletonScope();
         Bind<IAudioManager>().To(typeof(AudioManager)).InSingletonScope();
         Bind<ITextToSpeechRequest>().To(typeof(TextToSpeechRequest)).InSingletonScope();
+        Bind<IWindowFactory>().ToFactory();
     }
 }

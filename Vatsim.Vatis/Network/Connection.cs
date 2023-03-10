@@ -223,7 +223,7 @@ public class Connection
                 mSession.SendPDU(new PDUClientQueryResponse(Callsign, e.PDU.From, ClientQueryType.ATIS, new List<string> { "E", num.ToString() }));
                 break;
             case ClientQueryType.INF:
-                var msg = $"CID={mAppConfig.VatsimId} {mClientProperties.Name} {mClientProperties.Version} IP={mPublicIp} SYS_UID={mVolumeSerial} FSVER=N/A LT=0.00 LO=0.00 AL=50 {mAppConfig.Name}";
+                var msg = $"CID={mAppConfig.UserId} {mClientProperties.Name} {mClientProperties.Version} IP={mPublicIp} SYS_UID={mVolumeSerial} FSVER=N/A LT=0.00 LO=0.00 AL=50 {mAppConfig.Name}";
                 mSession.SendPDU(new PDUClientQueryResponse(Callsign, e.PDU.From, ClientQueryType.INF, new List<string>()
                 {
                     msg
@@ -256,7 +256,7 @@ public class Connection
 
     public async void Connect()
     {
-        if (SetPasswordToken(mAppConfig.VatsimId, mAppConfig.VatsimPasswordDecrypted))
+        if (SetPasswordToken(mAppConfig.UserId, mAppConfig.Password))
         {
             mAirport = mAirportDatabase.GetAirport(AirportIcao);
             if (mAirport == null)
@@ -318,7 +318,7 @@ public class Connection
 
     public void Disconnect()
     {
-        mSession.SendPDU(new PDUDeleteATC(Callsign, mAppConfig.VatsimId));
+        mSession.SendPDU(new PDUDeleteATC(Callsign, mAppConfig.UserId));
         mSession.Disconnect();
         mMetarUpdateTimer.Stop();
         mPositionUpdateTimer.Stop();
@@ -348,7 +348,7 @@ public class Connection
             mClientProperties.Name,
             mClientProperties.Version.Major,
             mClientProperties.Version.Minor,
-            mAppConfig.VatsimId,
+            mAppConfig.UserId,
             mVolumeSerial,
             null));
     }
@@ -358,8 +358,8 @@ public class Connection
         mSession.SendPDU(new PDUAddATC(
             Callsign,
             mAppConfig.Name,
-            mAppConfig.VatsimId,
-            string.IsNullOrEmpty(mPasswordToken) ? mAppConfig.VatsimPasswordDecrypted : mPasswordToken,
+            mAppConfig.UserId,
+            string.IsNullOrEmpty(mPasswordToken) ? mAppConfig.Password : mPasswordToken,
             mAppConfig.NetworkRating,
             ProtocolRevision.VatsimAuth));
 

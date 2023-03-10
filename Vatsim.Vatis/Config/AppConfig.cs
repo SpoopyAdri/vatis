@@ -1,38 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+using CredentialManagement;
 using Newtonsoft.Json;
 using Vatsim.Network;
+using Vatsim.Vatis.Io;
 
 namespace Vatsim.Vatis.Config;
 
 public class AppConfig : IAppConfig
 {
-    [JsonIgnore] public string AppPath { get; }
-
-    [JsonIgnore] public string ConfigPath { get; }
-
-    [JsonIgnore] public bool ConfigRequired => string.IsNullOrEmpty(VatsimId) || 
-                                               string.IsNullOrEmpty(VatsimPasswordDecrypted) || string.IsNullOrEmpty(Name);
+    [JsonIgnore] public bool ConfigRequired => string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Name);
 
     [JsonIgnore]
-    public string VatsimPasswordDecrypted
-    {
-        get => Decrypt(VatsimPassword);
-        set => VatsimPassword = Encrypt(value);
-    }
+    public string UserId { get; set; } = "";
+
+    [JsonIgnore]
+    public string Password { get; set; } = "";
 
     [JsonIgnore] public Profile CurrentProfile { get; set; }
 
     [JsonIgnore] public AtisComposite CurrentComposite { get; set; }
-
-    public string VatsimId { get; set; }
-
-    public string VatsimPassword { get; set; }
 
     public NetworkRating NetworkRating { get; set; }
 
@@ -58,13 +47,12 @@ public class AppConfig : IAppConfig
 
     public AppConfig()
     {
-        AppPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-        ConfigPath = Path.Combine(AppPath, "AppConfig.json");
         Profiles = new List<Profile>();
+        CachedServers = new List<NetworkServerInfo>();
 
         try
         {
-            LoadConfig(ConfigPath);
+            LoadConfig(PathProvider.AppConfigFilePath);
         }
         catch (FileNotFoundException)
         {
@@ -82,16 +70,28 @@ public class AppConfig : IAppConfig
         using var sr = new StreamReader(fs);
         JsonConvert.PopulateObject(sr.ReadToEnd(), this);
 
+        using (var credentialSet = new CredentialSet("org.vatsim.vatis"))
+        {
+            credentialSet.Load();
+            if (credentialSet.Count > 0)
+            {
+                UserId = credentialSet[0].Username;
+                Password = credentialSet[0].Password;
+            }
+        }
+
         ValidateConfig();
     }
 
     public void SaveConfig()
     {
-        var jsonSerializerSettings = new JsonSerializerSettings
+        using (var credentials = new Credential(UserId, Password, "org.vatsim.vatis", CredentialType.Generic))
         {
-            ContractResolver = new OrderedContractResolver(),
-        };
-        File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(this, Formatting.Indented, jsonSerializerSettings));
+            credentials.PersistanceType = PersistanceType.LocalComputer;
+            credentials.Save();
+        }
+
+        File.WriteAllText(PathProvider.AppConfigFilePath, JsonConvert.SerializeObject(this, Formatting.Indented));
     }
 
     private void ValidateConfig()
@@ -107,56 +107,5 @@ public class AppConfig : IAppConfig
             }
         }
         SaveConfig();
-    }
-
-    private string Encrypt(string value)
-    {
-        if (string.IsNullOrEmpty(value)) return "";
-        var desCryptoProvider = TripleDES.Create();
-        var hashMD5Provider = MD5.Create();
-
-        byte[] byteHash;
-        byte[] byteBuff;
-
-        byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(EncryptionKey));
-        desCryptoProvider.Key = byteHash;
-        desCryptoProvider.Mode = CipherMode.ECB;
-        byteBuff = Encoding.UTF8.GetBytes(value);
-
-        return Convert.ToBase64String(desCryptoProvider.CreateEncryptor()
-            .TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-    }
-
-    private string Decrypt(string value)
-    {
-        if (string.IsNullOrEmpty(value)) return "";
-        var desCryptoProvider = TripleDES.Create();
-        var hashMD5Provider = MD5.Create();
-
-        byte[] byteHash;
-        byte[] byteBuff;
-
-        byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(EncryptionKey));
-        desCryptoProvider.Key = byteHash;
-        desCryptoProvider.Mode = CipherMode.ECB;
-        byteBuff = Convert.FromBase64String(value);
-
-        return Encoding.UTF8.GetString(desCryptoProvider.CreateDecryptor()
-            .TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-    }
-
-    private static string EncryptionKey => new Guid(0xa1afdec5, 0x1f5c, 0x498b, 0xb4, 0xf1, 0x83, 0x49, 0x50, 0xfb, 0xea, 0xf0).ToString();
-
-    private class OrderedContractResolver : Newtonsoft.Json.Serialization.DefaultContractResolver
-    {
-        protected override IList<Newtonsoft.Json.Serialization.JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            var @base = base.CreateProperties(type, memberSerialization);
-            var ordered = @base
-                .OrderBy(p => p.Order ?? int.MaxValue)
-                .ThenBy(p => p.PropertyName)
-                .ToList();
-            return ordered;
-        }
     }
 }

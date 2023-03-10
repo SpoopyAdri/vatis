@@ -20,7 +20,6 @@ namespace Vatsim.Vatis;
 internal static class Program
 {
     private static IKernel mContainer;
-    private static IConfig mAppConfig;
 
     [STAThread]
     private static void Main(string[] args)
@@ -120,6 +119,6 @@ internal static class Program
 
     private static void OnProcessExit(object sender, EventArgs e)
     {
-        mAppConfig?.SaveConfig();
+        mContainer.Get<IAppConfig>().SaveConfig();
     }
 }

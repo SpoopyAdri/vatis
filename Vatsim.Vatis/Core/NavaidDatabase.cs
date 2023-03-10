@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Vatsim.Vatis.Config;
+using Serilog;
+using Vatsim.Vatis.Io;
 
 namespace Vatsim.Vatis.Core;
 
 public class NavaidDatabase : INavaidDatabase
 {
-    private readonly IAppConfig mAppConfig;
+    private readonly IDownloader mDownloader;
     private List<Airport> mAirports = new List<Airport>();
     private List<Navaid> mNavaids = new List<Navaid>();
 
-    public NavaidDatabase(IAppConfig appConfig)
+    public NavaidDatabase(IDownloader downloader)
     {
-        mAppConfig = appConfig;
-        LoadAirportDatabase();
-        LoadNavaidDatabase();
+        mDownloader = downloader;
     }
 
     public Airport GetAirport(string id)
@@ -40,49 +39,46 @@ public class NavaidDatabase : INavaidDatabase
         return null;
     }
 
-    private void LoadAirportDatabase()
+    public async Task LoadDatabases()
+    {
+        await Task.WhenAll(LoadNavaidDatabase(), LoadAirportDatabase());
+    }
+
+    private async Task LoadAirportDatabase()
     {
         try
         {
-            var path = Path.Combine(mAppConfig.AppPath, "airports.json");
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var sr = new StreamReader(fs))
-                {
-                    mAirports = JsonConvert.DeserializeObject<List<Airport>>(sr.ReadToEnd());
-                }
-            }
+            using var fs = new FileStream(PathProvider.AirportsFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs);
+            mAirports = JsonConvert.DeserializeObject<List<Airport>>(sr.ReadToEnd());
         }
         catch (FileNotFoundException)
         {
             try
             {
-                using var wc = new WebClient();
-                wc.DownloadFile("https://vatis.clowd.io/api/v4/Airports", Path.Combine(mAppConfig.AppPath, "airports.json"));
+                Log.Information("Downloading missing airport database");
+                await mDownloader.DownloadFileAsync("https://vatis.clowd.io/api/v4/Airports", PathProvider.AirportsFilePath, null);
+                await LoadAirportDatabase();
             }
             catch { }
         }
     }
 
-    private void LoadNavaidDatabase()
+    private async Task LoadNavaidDatabase()
     {
         try
         {
-            var path = Path.Combine(mAppConfig.AppPath, "navaids.json");
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var sr = new StreamReader(fs))
-                {
-                    mNavaids = JsonConvert.DeserializeObject<List<Navaid>>(sr.ReadToEnd());
-                }
-            }
+            using var fs = new FileStream(PathProvider.NavaidsFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs);
+            mNavaids = JsonConvert.DeserializeObject<List<Navaid>>(sr.ReadToEnd());
         }
         catch (FileNotFoundException)
         {
             try
             {
-                using var wc = new WebClient();
-                wc.DownloadFile("https://vatis.clowd.io/api/v4/Navaids", Path.Combine(mAppConfig.AppPath, "navaids.json"));
+                Log.Information("Downloading missing navaid database");
+                await mDownloader.DownloadFileAsync("https://vatis.clowd.io/api/v4/Navaids", PathProvider.NavaidsFilePath, null);
+                await LoadNavaidDatabase();
             }
             catch { }
         }

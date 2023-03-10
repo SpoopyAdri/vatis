@@ -1,7 +1,10 @@
 ﻿using Serilog;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Updates;
 
@@ -10,12 +13,16 @@ namespace Vatsim.Vatis.UI.Startup
     public partial class StartupWindow : Form
     {
         private IClientUpdater mClientUpdater;
+        private INavaidDatabase mNavData;
         private IWindowFactory mWindowFactory;
+        private IAppConfig mAppConfig;
 
-        public StartupWindow(IClientUpdater clientUpdater, IWindowFactory windowFactory)
+        public StartupWindow(IClientUpdater clientUpdater, IWindowFactory windowFactory, INavaidDatabase navData, IAppConfig appConfig)
         {
             mClientUpdater = clientUpdater;
             mWindowFactory = windowFactory;
+            mNavData = navData;
+            mAppConfig = appConfig;
             InitializeComponent();
         }
 
@@ -29,13 +36,43 @@ namespace Vatsim.Vatis.UI.Startup
         protected override async void OnShown(EventArgs e)
         {
             UpdateStatusLabel("Checking for new version...");
-
             if (await CheckForClientUpdates())
             {
                 Application.ExitThread();
             }
 
+            UpdateStatusLabel("Loading NavData...");
+            await mNavData.LoadDatabases();
+
+            UpdateStatusLabel("Downloading network server list...");
+            await DownloadServerList();
+
             ShowMainForm();
+        }
+
+        private async Task DownloadServerList()
+        {
+            var servers = await Vatsim.Network.NetworkInfo.DownloadServerList("https://status.vatsim.net/status.json");
+            if (servers.Count > 0)
+            {
+                mAppConfig.CachedServers.Clear();
+
+                foreach (var server in servers)
+                {
+                    mAppConfig.CachedServers.Add(new Vatsim.Network.NetworkServerInfo
+                    {
+                        Name = server.Name,
+                        Address = server.Address,
+                    });
+
+                    if (server.Name == "AUTOMATIC")
+                    {
+                        mAppConfig.ServerName = "AUTOMATIC";
+                    }
+                }
+
+                mAppConfig.SaveConfig();
+            }
         }
 
         private async Task<bool> CheckForClientUpdates()

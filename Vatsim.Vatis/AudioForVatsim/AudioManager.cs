@@ -23,8 +23,8 @@ public class AudioManager : IAudioManager
     {
         if (!mApiServerConnection.Authenticated)
         {
-            await mApiServerConnection.Connect(mAppConfig.VatsimId, 
-                mAppConfig.VatsimPasswordDecrypted, "vATIS " + Assembly.GetExecutingAssembly().GetName().Version);
+            await mApiServerConnection.Connect(mAppConfig.UserId,
+                mAppConfig.Password, "vATIS " + Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         await mApiServerConnection.RemoveBot(callsign).AwaitTimeout(5000);
