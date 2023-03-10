@@ -2,10 +2,10 @@
 
 namespace Vatsim.Vatis.Events;
 
-public class NetworkErrorReceivedEventArgs : EventArgs
+public class NetworkErrorReceived : EventArgs
 {
     public string Error { get; set; }
-    public NetworkErrorReceivedEventArgs(string error)
+    public NetworkErrorReceived(string error)
     {
         Error = error;
     }

@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Appccelerate.EventBroker;
 using Newtonsoft.Json;
 using RestSharp;
 using Vatsim.Vatis.Common;
@@ -24,7 +23,6 @@ public partial class ProfileConfigurationForm : Form
 {
     private readonly IAppConfig mAppConfig;
     private readonly IWindowFactory mWindowFactory;
-    private readonly IEventBroker mEventBroker;
     private readonly INavaidDatabase mNavaidDatabase;
     private readonly SynchronizationContext mSyncContext;
 
@@ -53,13 +51,7 @@ public partial class ProfileConfigurationForm : Form
     private bool mVisibilitySuffixChanged = false;
     private bool mUseDecimalTerminologyChanged = false;
 
-    [EventPublication(EventTopics.RefreshAtisComposites)]
-    public event EventHandler RefreshAtisComposites;
-
-    [EventPublication(EventTopics.AtisCompositeDeleted)]
-    public event EventHandler<AtisCompositeDeletedEventArgs> AtisCompositeDeleted;
-
-    public ProfileConfigurationForm(IEventBroker eventBroker, IWindowFactory windowFactory, IAppConfig appConfig,
+    public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
         INavaidDatabase navaidDatabase)
     {
         InitializeComponent();
@@ -69,10 +61,15 @@ public partial class ProfileConfigurationForm : Form
         mAppConfig = appConfig;
         mWindowFactory = windowFactory;
         mNavaidDatabase = navaidDatabase;
-        mEventBroker = eventBroker;
-        mEventBroker.Register(this);
 
         RefreshCompositeList();
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+
+        EventBus.Register(this);
     }
 
     private TreeNode CreateTreeMenuNode(string name, object tag)
@@ -465,7 +462,7 @@ public partial class ProfileConfigurationForm : Form
                     "Delete ATIS Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                AtisCompositeDeleted?.Invoke(this, new AtisCompositeDeletedEventArgs(composite.Id));
+                EventBus.Publish(this, new AtisCompositeDeleted(composite.Id));
 
                 mAppConfig.CurrentProfile.Composites.Remove(composite);
                 mAppConfig.SaveConfig();
@@ -511,7 +508,7 @@ public partial class ProfileConfigurationForm : Form
         }
 
         RefreshPresetList();
-        RefreshAtisComposites?.Invoke(this, EventArgs.Empty);
+        EventBus.Publish(this, new RefreshCompositesRequested());
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
@@ -845,7 +842,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (!btnApply.Enabled || ApplyChanges())
         {
-            RefreshAtisComposites?.Invoke(this, EventArgs.Empty);
+            EventBus.Publish(this, new RefreshCompositesRequested());
             Close();
         }
     }
@@ -1347,7 +1344,7 @@ public partial class ProfileConfigurationForm : Form
         btnDeletePreset.Enabled = ddlPresets.SelectedItem != null;
         btnRenamePreset.Enabled = ddlPresets.SelectedItem != null;
 
-        RefreshAtisComposites?.Invoke(this, EventArgs.Empty);
+        EventBus.Publish(this, new RefreshCompositesRequested());
     }
 
     private void ddlPresets_SelectedIndexChanged(object sender, EventArgs e)
@@ -2208,7 +2205,7 @@ public partial class ProfileConfigurationForm : Form
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
+        EventBus.Unregister(this);
         base.OnFormClosing(e);
-        mEventBroker?.Unregister(this);
     }
 }

@@ -1,35 +1,29 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Appccelerate.EventBroker;
-using Appccelerate.EventBroker.Handlers;
 using Newtonsoft.Json;
 using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
+using Vatsim.Vatis.Events;
 
 namespace Vatsim.Vatis.UI.Dialogs;
 
 public partial class ProfileListDialog : Form
 {
-    [EventPublication(EventTopics.PerformVersionCheck)]
-    public event EventHandler<EventArgs> RaisePerformVersionCheck;
-
-    private readonly IEventBroker mEventBroker;
     private readonly IWindowFactory mWindowFactory;
     private readonly IAppConfig mAppConfig;
     private bool mInitializing = true;
     private string mPreviousInputValue = "";
 
-    public ProfileListDialog(IWindowFactory windowFactory, IAppConfig appConfig, IEventBroker eventBroker)
+    public ProfileListDialog(IWindowFactory windowFactory, IAppConfig appConfig)
     {
         InitializeComponent();
 
         mWindowFactory = windowFactory;
         mAppConfig = appConfig;
-        mEventBroker = eventBroker;
     }
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -39,18 +33,6 @@ public partial class ProfileListDialog : Form
 
     public const int WM_NCLBUTTONDOWN = 0xA1;
     public const int HT_CAPTION = 0x2;
-
-    [EventSubscription(EventTopics.SessionStarted, typeof(OnUserInterfaceAsync))]
-    public void OnSessionProfileLoaded(object sender, EventArgs e)
-    {
-        Hide();
-    }
-
-    [EventSubscription(EventTopics.SessionEnded, typeof(OnUserInterfaceAsync))]
-    public void OnSessionEnded(object sender, EventArgs e)
-    {
-        Show();
-    }
 
     protected override void OnMouseDown(MouseEventArgs e)
     {
@@ -76,7 +58,7 @@ public partial class ProfileListDialog : Form
     {
         base.OnLoad(e);
 
-        mEventBroker.Register(this);
+        EventBus.Register(this);
 
         if (mAppConfig.ProfileListWindowProperties == null)
         {
@@ -87,17 +69,16 @@ public partial class ProfileListDialog : Form
         ScreenUtils.ApplyWindowProperties(mAppConfig.ProfileListWindowProperties, this);
         mInitializing = false;
 
-        lblVersion.Text = $"Version { Application.ProductVersion }";
+        lblVersion.Text = $"Version {Application.ProductVersion}";
 
         RefreshList();
-
-        RaisePerformVersionCheck?.Invoke(this, EventArgs.Empty);
     }
 
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
         base.OnFormClosed(e);
-        mEventBroker?.Unregister(this);
+
+        EventBus.Unregister(this);
     }
 
     protected override void OnPaint(PaintEventArgs pe)
@@ -116,7 +97,7 @@ public partial class ProfileListDialog : Form
 
     private void btnExit_Click(object sender, EventArgs e)
     {
-        Close();
+        Application.Exit();
     }
 
     private void btnNew_Click(object sender, EventArgs e)
@@ -404,5 +385,15 @@ public partial class ProfileListDialog : Form
                 MessageBox.Show(this, "Profile exported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+    }
+
+    public void HandleEvent(SessionStarted e)
+    {
+        Hide();
+    }
+
+    public void HandleEvent(SessionEnded e)
+    {
+        Show();
     }
 }

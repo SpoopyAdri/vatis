@@ -2,11 +2,11 @@
 
 namespace Vatsim.Vatis.Events;
 
-public class MetarResponseReceivedEventArgs : EventArgs
+public class MetarResponseReceived : EventArgs
 {
     public string Metar { get; set; }
     public bool IsUpdated { get; set; }
-    public MetarResponseReceivedEventArgs(string metar, bool isUpdated)
+    public MetarResponseReceived(string metar, bool isUpdated)
     {
         Metar = metar;
         IsUpdated = isUpdated;

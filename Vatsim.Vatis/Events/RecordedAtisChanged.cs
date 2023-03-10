@@ -3,10 +3,10 @@ using System.IO;
 
 namespace Vatsim.Vatis.Events;
 
-public class RecordedAtisChangedEventArgs : EventArgs
+public class RecordedAtisChanged : EventArgs
 {
     public MemoryStream AtisMemoryStream { get; set; }
-    public RecordedAtisChangedEventArgs(MemoryStream stream)
+    public RecordedAtisChanged(MemoryStream stream)
     {
         AtisMemoryStream = stream;
     }

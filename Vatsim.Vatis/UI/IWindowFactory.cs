@@ -1,4 +1,5 @@
 ﻿using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.UI.Startup;
 
 namespace Vatsim.Vatis.UI;
 
@@ -14,6 +15,6 @@ public interface IWindowFactory
     UserInputDialog CreateUserInputDialog();
     MainForm CreateMainForm();
     ProfileConfigurationForm CreateProfileConfigurationForm();
-    VersionCheckDialog CreateVersionCheckDialog();
     MiniDisplayForm CreateMiniDisplayForm();
+    StartupWindow CreateStartupWindow();
 }

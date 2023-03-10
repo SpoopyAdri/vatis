@@ -31,9 +31,9 @@ public class Connection
 
     public event EventHandler NetworkConnectedChanged;
     public event EventHandler NetworkDisconnectedChanged;
-    public event EventHandler<MetarResponseReceivedEventArgs> MetarResponseReceived;
-    public event EventHandler<NetworkErrorReceivedEventArgs> NetworkErrorReceived;
-    public event EventHandler<KillRequestReceivedEventArgs> KillRequestReceived;
+    public event EventHandler<MetarResponseReceived> MetarResponseReceived;
+    public event EventHandler<NetworkErrorReceived> NetworkErrorReceived;
+    public event EventHandler<KillRequestReceived> KillRequestReceived;
 
     private readonly FSDSession mSession;
     private readonly IAppConfig mAppConfig;
@@ -127,7 +127,7 @@ public class Connection
 
     private void OnKillRequestReceived(object sender, DataReceivedEventArgs<PDUKillRequest> e)
     {
-        KillRequestReceived?.Invoke(this, new KillRequestReceivedEventArgs(e.PDU.Reason));
+        KillRequestReceived?.Invoke(this, new KillRequestReceived(e.PDU.Reason));
         Disconnect();
     }
 
@@ -135,13 +135,13 @@ public class Connection
     {
         if (e.PDU.Fatal)
         {
-            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceivedEventArgs(e.PDU.Message));
+            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(e.PDU.Message));
         }
     }
 
     private void OnNetworkError(object sender, NetworkErrorEventArgs e)
     {
-        NetworkErrorReceived?.Invoke(this, new NetworkErrorReceivedEventArgs(e.Error));
+        NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(e.Error));
     }
 
     private async void OnAcarsResponseReceived(object sender, DataReceivedEventArgs<PDUMetarResponse> e)
@@ -155,7 +155,7 @@ public class Connection
             {
                 isNewMetar = true;
             }
-            MetarResponseReceived?.Invoke(this, new MetarResponseReceivedEventArgs(e.PDU.Metar, isNewMetar));
+            MetarResponseReceived?.Invoke(this, new MetarResponseReceived(e.PDU.Metar, isNewMetar));
         }
         mPreviousMetar = e.PDU.Metar;
     }
@@ -306,12 +306,12 @@ public class Connection
                 mPasswordToken = response.Data.token;
                 return true;
             }
-            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceivedEventArgs(response.Data.error_msg));
+            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(response.Data.error_msg));
             return false;
         }
         else
         {
-            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceivedEventArgs(response.ErrorMessage ?? "Could not get password token."));
+            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(response.ErrorMessage ?? "Could not get password token."));
             return false;
         }
     }

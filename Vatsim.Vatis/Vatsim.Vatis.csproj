@@ -9,6 +9,7 @@
 	<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 	<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
 	<Platforms>AnyCPU;x64</Platforms>
+	<LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Assets\MainIcon.ico</ApplicationIcon>
@@ -82,9 +83,6 @@
     <Compile Update="UI\Dialogs\SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Dialogs\VersionCheckDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UI\MiniDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,7 +94,6 @@
     <ProjectReference Include="..\MetarParserCore\src\MetarParserCore\MetarParserCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Appccelerate.EventBroker" Version="4.0.0" />
     <PackageReference Include="Concentus" Version="1.1.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NAudio" Version="2.0.1" />
@@ -107,7 +104,6 @@
     <PackageReference Include="Serilog" Version="3.0.0-dev-01901" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="3.0.0" />
-    <PackageReference Include="SimpleInjector" Version="5.3.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vatsim.Vatis.Core;
+namespace Vatsim.Vatis.UI;
 
 public class ResizableForm : Attribute
 {

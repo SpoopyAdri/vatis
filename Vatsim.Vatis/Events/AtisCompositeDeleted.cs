@@ -2,10 +2,10 @@
 
 namespace Vatsim.Vatis.Events;
 
-public class AtisCompositeDeletedEventArgs : EventArgs
+public class AtisCompositeDeleted : IEvent
 {
     public Guid Id { get; set; }
-    public AtisCompositeDeletedEventArgs(Guid id)
+    public AtisCompositeDeleted(Guid id)
     {
         Id = id;
     }

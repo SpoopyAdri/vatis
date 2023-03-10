@@ -12,8 +12,8 @@ using Ninject;
 using Serilog;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Container;
+using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Io;
-using Vatsim.Vatis.UI.Dialogs;
 
 namespace Vatsim.Vatis;
 
@@ -25,6 +25,12 @@ internal static class Program
     [STAThread]
     private static void Main(string[] args)
     {
+        if (IsAlreadyRunning())
+        {
+            Application.Exit();
+            return;
+        }
+
         Application.CurrentCulture = new CultureInfo("en-US");
         Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
         Application.EnableVisualStyles();
@@ -75,14 +81,7 @@ internal static class Program
 
         mContainer = new StandardKernel(new Bindings());
 
-        if (IsAlreadyRunning())
-        {
-            Application.Exit();
-            return;
-        }
-
-        mAppConfig = mContainer.Get<IAppConfig>();
-        Application.Run(mContainer.Get<ProfileListDialog>());
+        Application.Run(mContainer.Get<VatisAppContext>());
     }
 
     private static bool IsAlreadyRunning()
@@ -106,7 +105,7 @@ internal static class Program
 
     private static void ShowError(string error)
     {
-        MessageBox.Show("An error has occurred. Please refer to the log file for details. The error is: " + error,
+        MessageBox.Show("An error has occurred. Please refer to the log file for details.\n\n" + error,
             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 

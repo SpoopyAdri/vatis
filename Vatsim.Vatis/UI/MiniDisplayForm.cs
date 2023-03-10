@@ -2,11 +2,8 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Appccelerate.EventBroker;
-using Appccelerate.EventBroker.Handlers;
 using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.UI.Controls;
 
@@ -15,23 +12,14 @@ namespace Vatsim.Vatis.UI;
 [ResizableForm]
 public partial class MiniDisplayForm : Form
 {
-    [EventPublication(EventTopics.MinifiedWindowClosed)]
-    public event EventHandler<EventArgs> MinifiedWindowClosed;
-
-    [EventPublication(EventTopics.AtisUpdateAcknowledged)]
-    public event EventHandler<ClientEventArgs<AtisComposite>> AtisUpdateAcknowledged;
-
-    private readonly IEventBroker mEventBroker;
     private readonly IAppConfig mAppConfig;
     private readonly Timer mUtcClock;
     private bool mInitializing = true;
 
-    public MiniDisplayForm(IEventBroker eventBroker, IAppConfig appConfig)
+    public MiniDisplayForm(IAppConfig appConfig)
     {
         InitializeComponent();
 
-        mEventBroker = eventBroker;
-        mEventBroker.Register(this);
         mAppConfig = appConfig;
 
         utcClock.Text = DateTime.UtcNow.ToString("HH:mm/ss");
@@ -118,15 +106,15 @@ public partial class MiniDisplayForm : Form
 
     private void btnRestore_Click(object sender, EventArgs e)
     {
-        MinifiedWindowClosed?.Invoke(this, EventArgs.Empty);
+        EventBus.Publish(this, new MiniWindowClosed());
         Close();
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
+        EventBus.Publish(this, new MiniWindowClosed());
+        EventBus.Unregister(this);
         base.OnFormClosing(e);
-        MinifiedWindowClosed?.Invoke(this, EventArgs.Empty);
-        mEventBroker?.Unregister(this);
     }
 
     protected override void OnResize(EventArgs e)
@@ -158,6 +146,8 @@ public partial class MiniDisplayForm : Form
     {
         base.OnLoad(e);
 
+        EventBus.Register(this);
+
         if (mAppConfig.MiniDisplayWindowProperties == null)
         {
             mAppConfig.MiniDisplayWindowProperties = new WindowProperties();
@@ -172,12 +162,6 @@ public partial class MiniDisplayForm : Form
 
         ScreenUtils.ApplyWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
         mInitializing = false;
-    }
-
-    [EventSubscription(EventTopics.RefreshMinifiedWindow, typeof(OnUserInterfaceAsync))]
-    public void OnRefreshMinifiedWindow(object sender, EventArgs e)
-    {
-        RefreshDisplay();
     }
 
     private void RefreshDisplay()
@@ -253,7 +237,7 @@ public partial class MiniDisplayForm : Form
                     composite.MetarReceived += (x, y) => item.Metar = y.Value;
                     composite.NewAtisUpdate += (x, y) => item.IsNewAtis = true;
 
-                    item.AtisUpdateAcknowledged += (x, y) => AtisUpdateAcknowledged?.Invoke(this, new ClientEventArgs<AtisComposite>(composite));
+                    item.AtisUpdateAcknowledged += (x, y) => EventBus.Publish(this, new NewAtisAcknowledged(composite));
 
                     tlpMain.Controls.Add(item, col, row);
 
@@ -267,5 +251,10 @@ public partial class MiniDisplayForm : Form
                 }
             }
         }
+    }
+
+    public void HandleEvent(UpdateMiniWindowRequested e)
+    {
+        RefreshDisplay();
     }
 }

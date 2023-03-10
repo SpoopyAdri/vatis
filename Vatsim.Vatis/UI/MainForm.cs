@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Appccelerate.EventBroker;
-using Appccelerate.EventBroker.Handlers;
 using Vatsim.Vatis.Atis;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Common;
@@ -23,16 +22,6 @@ namespace Vatsim.Vatis.UI;
 
 public partial class MainForm : Form
 {
-    [EventPublication(EventTopics.SessionStarted)]
-    public event EventHandler<EventArgs> RaiseSessionStarted;
-
-    [EventPublication(EventTopics.SessionEnded)]
-    public event EventHandler<EventArgs> RaiseSessionEnded;
-
-    [EventPublication(EventTopics.RefreshMinifiedWindow)]
-    public event EventHandler<EventArgs> RefreshMinifiedWindow;
-
-    private readonly IEventBroker mEventBroker;
     private readonly IWindowFactory mWindowFactory;
     private readonly IAppConfig mAppConfig;
     private readonly IAudioManager mAudioManager;
@@ -45,7 +34,7 @@ public partial class MainForm : Form
     private const int WM_NCLBUTTONDOWN = 0xA1;
     private const int HT_CAPTION = 0x2;
 
-    public MainForm(IEventBroker eventBroker, IWindowFactory windowFactory, IAppConfig appConfig,
+    public MainForm(IWindowFactory windowFactory, IAppConfig appConfig,
         IAtisBuilder atisBuilder, INavaidDatabase airportDatabase, IAudioManager audioManager)
     {
         InitializeComponent();
@@ -55,7 +44,6 @@ public partial class MainForm : Form
         mAtisBuilder = atisBuilder;
         mAirportDatabase = airportDatabase;
         mAudioManager = audioManager;
-        mEventBroker = eventBroker;
         mSyncContext = SynchronizationContext.Current;
 
         utcClock.Text = DateTime.UtcNow.ToString("HH:mm/ss");
@@ -108,11 +96,12 @@ public partial class MainForm : Form
     {
         base.OnLoad(e);
 
-        mEventBroker.Register(this);
-
         DownloadServerList();
 
-        RaiseSessionStarted?.Invoke(this, EventArgs.Empty);
+        EventBus.Register(this);
+
+        EventBus.Publish(this, new SessionStarted());
+
         if (mAppConfig.WindowProperties == null)
         {
             mAppConfig.WindowProperties = new WindowProperties();
@@ -161,11 +150,17 @@ public partial class MainForm : Form
         }
     }
 
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        base.OnFormClosed(e);
+
+        EventBus.Publish(this, new SessionEnded());
+        EventBus.Unregister(this);
+    }
+
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
         base.OnFormClosing(e);
-        RaiseSessionEnded?.Invoke(this, EventArgs.Empty);
-        mEventBroker?.Unregister(this);
     }
 
     private void btnClose_Click(object sender, EventArgs e)
@@ -207,12 +202,6 @@ public partial class MainForm : Form
         WindowState = FormWindowState.Minimized;
     }
 
-    [EventSubscription(EventTopics.AppConfigUpdated, typeof(OnPublisher))]
-    public void OnAppConfigUpdated(object sender, EventArgs e)
-    {
-        ScreenUtils.ApplyWindowProperties(mAppConfig.WindowProperties, this);
-    }
-
     private void btnManageProfile_Click(object sender, EventArgs e)
     {
         using (var dlg = mWindowFactory.CreateProfileConfigurationForm())
@@ -228,43 +217,6 @@ public partial class MainForm : Form
         {
             form.TopMost = mAppConfig.WindowProperties.TopMost;
             form.ShowDialog();
-        }
-    }
-
-    [EventSubscription(EventTopics.RefreshAtisComposites, typeof(OnUserInterfaceAsync))]
-    public void OnRefreshAtisComposites(object sender, EventArgs e)
-    {
-        RefreshAtisComposites();
-    }
-
-    [EventSubscription(EventTopics.AtisCompositeDeleted, typeof(OnUserInterfaceAsync))]
-    public void OnAtisCompositeDeleted(object sender, AtisCompositeDeletedEventArgs e)
-    {
-        foreach (TabPage tab in atisTabs.TabPages)
-        {
-            var composite = tab.Tag as AtisComposite;
-            if (composite != null && composite.Id == e.Id)
-            {
-                var connection = mConnections.FirstOrDefault(x => x.AirportIcao == composite.Identifier);
-                if (connection != null)
-                {
-                    connection.Disconnect();
-                    mConnections.Remove(connection);
-                }
-
-                atisTabs.TabPages.Remove(tab);
-                atisTabs.Invalidate();
-            }
-        }
-    }
-
-    [EventSubscription(EventTopics.AtisUpdateAcknowledged, typeof(OnUserInterfaceAsync))]
-    public void OnAtisUpdateAcknowledged(object sender, ClientEventArgs<AtisComposite> e)
-    {
-        var tab = atisTabs.TabPages.Cast<AtisTabPage>().FirstOrDefault(x => x.Composite == e.Value);
-        if (tab != null)
-        {
-            tab.CompositeMeta.IsNewAtis = false;
         }
     }
 
@@ -599,7 +551,7 @@ public partial class MainForm : Form
                     tabPage.CompositeMeta.Wind = null;
                     tabPage.CompositeMeta.Altimeter = null;
 
-                    RefreshMinifiedWindow?.Invoke(this, EventArgs.Empty);
+                    EventBus.Publish(this, new UpdateMiniWindowRequested());
 
                     mSyncContext.Post(o =>
                     {
@@ -614,7 +566,7 @@ public partial class MainForm : Form
                 };
                 connection.NetworkConnectedChanged += (sender, args) =>
                 {
-                    RefreshMinifiedWindow?.Invoke(this, EventArgs.Empty);
+                    EventBus.Publish(this, new UpdateMiniWindowRequested());
 
                     mAudioManager.RemoveBot(connection.Callsign);
 
@@ -678,9 +630,47 @@ public partial class MainForm : Form
         dlg.ShowDialog();
     }
 
-    [EventSubscription(EventTopics.MinifiedWindowClosed, typeof(OnUserInterfaceAsync))]
-    public void OnMinfiedWindowClosed(object sender, EventArgs e)
+    public void HandleEvent(MiniWindowClosed e)
     {
         Show();
+    }
+
+    public void HandleEvent(GeneralSettingsUpdated e)
+    {
+        ScreenUtils.ApplyWindowProperties(mAppConfig.WindowProperties, this);
+    }
+
+    public void HandleEvent(RefreshCompositesRequested e)
+    {
+        RefreshAtisComposites();
+    }
+
+    public void HandleEvent(AtisCompositeDeleted e)
+    {
+        foreach (TabPage tab in atisTabs.TabPages)
+        {
+            var composite = tab.Tag as AtisComposite;
+            if (composite != null && composite.Id == e.Id)
+            {
+                var connection = mConnections.FirstOrDefault(x => x.AirportIcao == composite.Identifier);
+                if (connection != null)
+                {
+                    connection.Disconnect();
+                    mConnections.Remove(connection);
+                }
+
+                atisTabs.TabPages.Remove(tab);
+                atisTabs.Invalidate();
+            }
+        }
+    }
+
+    public void HandleEvent(NewAtisAcknowledged e)
+    {
+        var tab = atisTabs.TabPages.Cast<AtisTabPage>().FirstOrDefault(x => x.Composite == e.Composite);
+        if (tab != null)
+        {
+            tab.CompositeMeta.IsNewAtis = false;
+        }
     }
 }

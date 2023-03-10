@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
-using Appccelerate.EventBroker;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
+using Vatsim.Vatis.Events;
 
 namespace Vatsim.Vatis.UI.Dialogs;
 
 public partial class SettingsDialog : Form
 {
-    [EventPublication(EventTopics.AppConfigUpdated)]
-    public event EventHandler<EventArgs> RaiseAppConfigUpdated;
-
-    private readonly IEventBroker mEventBroker;
     private readonly IAppConfig mAppConfig;
 
-    public SettingsDialog(IEventBroker eventBroker, IAppConfig appConfig)
+    public SettingsDialog(IAppConfig appConfig)
     {
         InitializeComponent();
 
         mAppConfig = appConfig;
-        mEventBroker = eventBroker;
-        mEventBroker.Register(this);
 
         LoadNetworkServers();
 
@@ -37,10 +30,18 @@ public partial class SettingsDialog : Form
         }
     }
 
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+
+        EventBus.Register(this);
+    }
+
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
         base.OnFormClosing(e);
-        mEventBroker?.Unregister(this);
+
+        EventBus.Unregister(this);
     }
 
     private void LoadNetworkServers()
@@ -101,7 +102,9 @@ public partial class SettingsDialog : Form
             mAppConfig.SuppressNotifications = chkSuppressNotifications.Checked;
             mAppConfig.WindowProperties.TopMost = chkKeepVisible.Checked;
             mAppConfig.SaveConfig();
-            RaiseAppConfigUpdated?.Invoke(this, EventArgs.Empty);
+
+            EventBus.Publish(this, new GeneralSettingsUpdated());
+
             Close();
         }
     }
