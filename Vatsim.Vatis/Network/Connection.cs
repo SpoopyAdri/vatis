@@ -144,10 +144,8 @@ public class Connection
         NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(e.Error));
     }
 
-    private async void OnAcarsResponseReceived(object sender, DataReceivedEventArgs<PDUMetarResponse> e)
+    private void OnAcarsResponseReceived(object sender, DataReceivedEventArgs<PDUMetarResponse> e)
     {
-        e.PDU.Metar = await new HttpClient().GetStringAsync("http://127.0.0.1:5500/metar.txt");
-
         if (mPreviousMetar != e.PDU.Metar)
         {
             bool isNewMetar = false;
@@ -282,7 +280,7 @@ public class Connection
                     }
                     catch { }
                 }
-                mSession.Connect("d.downstairsgeek.com", 6809);
+                mSession.Connect(serverAddress, 6809);
                 mPreviousMetar = "";
             }
             else
