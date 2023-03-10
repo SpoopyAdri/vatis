@@ -62,7 +62,7 @@ public class Connection
         mPositionUpdateTimer.Elapsed += OnPositionUpdateTimerElapsed;
 
         mMetarUpdateTimer = new System.Timers.Timer();
-        mMetarUpdateTimer.Interval = 1000;
+        mMetarUpdateTimer.Interval = 300000;
         mMetarUpdateTimer.Elapsed += OnMetarUpdateTimerElapsed;
 
         try
@@ -354,6 +354,7 @@ public class Connection
     private void SendAddAtc()
     {
         mSession.SendPDU(new PDUAddATC(
+            AddATCPositionType.ATIS,
             Callsign,
             mAppConfig.Name,
             mAppConfig.UserId,
