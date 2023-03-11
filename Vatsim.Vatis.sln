@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoVR.Connection", "GeoVR\s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoVR.Shared", "GeoVR\source\GeoVR.Shared\GeoVR.Shared.csproj", "{D19861FE-F284-40EB-9E21-A8D4F88F98E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatsim.Network", "..\Vatsim.Network\Vatsim.Network.csproj", "{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetarParserCore", "MetarParserCore\src\MetarParserCore\MetarParserCore.csproj", "{EA3123AC-05FA-4BD5-984A-89DC77331145}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatsim.Network", "Vatsim.Network\Vatsim.Network.csproj", "{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,14 +77,6 @@ Global
 		{D19861FE-F284-40EB-9E21-A8D4F88F98E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D19861FE-F284-40EB-9E21-A8D4F88F98E6}.Release|x64.ActiveCfg = Release|Any CPU
 		{D19861FE-F284-40EB-9E21-A8D4F88F98E6}.Release|x64.Build.0 = Release|Any CPU
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Debug|x64.ActiveCfg = Debug|x64
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Debug|x64.Build.0 = Debug|x64
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Release|x64.ActiveCfg = Release|x64
-		{EE7EEA12-BFBC-4386-8E8A-ADFCED922EDA}.Release|x64.Build.0 = Release|x64
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -93,6 +85,14 @@ Global
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Release|x64.ActiveCfg = Release|Any CPU
 		{EA3123AC-05FA-4BD5-984A-89DC77331145}.Release|x64.Build.0 = Release|Any CPU
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Debug|x64.ActiveCfg = Debug|x64
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Debug|x64.Build.0 = Debug|x64
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Release|x64.ActiveCfg = Release|x64
+		{D6BBC3F7-A486-4FBA-B239-C655E43D62BE}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

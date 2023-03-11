@@ -88,10 +88,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Vatsim.Network\Vatsim.Network.csproj" />
     <ProjectReference Include="..\GeoVR\source\GeoVR.Connection\GeoVR.Connection.csproj" />
     <ProjectReference Include="..\GeoVR\source\GeoVR.Shared\GeoVR.Shared.csproj" />
     <ProjectReference Include="..\MetarParserCore\src\MetarParserCore\MetarParserCore.csproj" />
+    <ProjectReference Include="..\Vatsim.Network\Vatsim.Network.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Concentus" Version="1.1.7" />

@@ -4,6 +4,3 @@
 [submodule "MetarParserCore"]
 	path = MetarParserCore
 	url = https://github.com/vatis-project/MetarParserCore.git
-[submodule "Vatsim.Network"]
-	path = Vatsim.Network
-	url = https://github.com/vatis-project/Vatsim.Network.git
