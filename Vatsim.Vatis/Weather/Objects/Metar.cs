@@ -15,6 +15,11 @@ namespace Vatsim.Vatis.Weather.Objects
     public class Metar : ReportBase
     {
         /// <summary>
+        /// The raw METAR string
+        /// </summary>
+        public string RawMetar { get; set; }
+
+        /// <summary>
         /// Airport ICAO code
         /// </summary>
         [DataMember(Name = "airport", EmitDefaultValue = false)]

@@ -24,21 +24,23 @@ namespace Vatsim.Vatis.Weather
         /// <summary>
         /// Parse method
         /// </summary>
-        /// <param name="raw">Raw METAR string</param>
+        /// <param name="metar">Raw METAR string</param>
         /// <returns>Parsed Metar object</returns>
-        public Metar Parse(string raw)
+        public Metar Parse(string metar)
         {
-            if (string.IsNullOrEmpty(raw))
+            if (string.IsNullOrEmpty(metar))
                 return new Metar
                 {
                     ParseErrors = new []{ "Raw METAR is not correct" }
                 };
 
-            raw = raw.Replace("=", "");
-            var rawTokens = raw.ToUpper().Split(" ");
+            var rawTokens = metar.Replace("=", "").ToUpper().Split(" ");
             var groupedTokens = Recognizer.Instance().RecognizeAndGroupTokens(rawTokens);
 
-            return new Metar(groupedTokens, _currentMonth);
+            return new Metar(groupedTokens, _currentMonth)
+            {
+                RawMetar = metar
+            };
         }
 
         /// <summary>
