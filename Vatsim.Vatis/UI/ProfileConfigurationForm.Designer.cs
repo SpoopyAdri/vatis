@@ -64,7 +64,6 @@ namespace Vatsim.Vatis.UI
             this.chkPrefixNotams = new System.Windows.Forms.CheckBox();
             this.chkFaaFormat = new System.Windows.Forms.CheckBox();
             this.chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
-            this.tabNodes = new System.Windows.Forms.TabPage();
             this.pagePresets = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -120,7 +119,7 @@ namespace Vatsim.Vatis.UI
             this.ctxExport = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelCompositeList = new HitTestPanel();
+            this.panelCompositeList = new Vatsim.Vatis.UI.Controls.HitTestPanel();
             this.TreeMenu = new System.Windows.Forms.TreeView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -231,7 +230,6 @@ namespace Vatsim.Vatis.UI
             // 
             this.tabControl1.Controls.Add(this.pageGeneral);
             this.tabControl1.Controls.Add(this.pageFormat);
-            this.tabControl1.Controls.Add(this.tabNodes);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(15, 15);
             this.tabControl1.Name = "tabControl1";
@@ -595,16 +593,6 @@ namespace Vatsim.Vatis.UI
             this.compositeTooltip.SetToolTip(this.chkExternalAtisGenerator, "Use an external source for producing the ATIS text (e.g. UniATIS).");
             this.chkExternalAtisGenerator.UseVisualStyleBackColor = true;
             this.chkExternalAtisGenerator.CheckedChanged += new System.EventHandler(this.chkExternalAtisGenerator_CheckedChanged);
-            // 
-            // tabNodes
-            // 
-            this.tabNodes.Location = new System.Drawing.Point(4, 24);
-            this.tabNodes.Name = "tabNodes";
-            this.tabNodes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNodes.Size = new System.Drawing.Size(672, 304);
-            this.tabNodes.TabIndex = 2;
-            this.tabNodes.Text = "Node Formatting";
-            this.tabNodes.UseVisualStyleBackColor = true;
             // 
             // pagePresets
             // 
@@ -1358,7 +1346,7 @@ namespace Vatsim.Vatis.UI
             this.dataGridViewTextBoxColumn2.HeaderText = "Spoken";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // ProfileConfiguration
+            // ProfileConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1521,6 +1509,5 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel groupVoiceOption;
         private System.Windows.Forms.CheckBox chkDecimalTerminology;
-        private System.Windows.Forms.TabPage tabNodes;
     }
 }
