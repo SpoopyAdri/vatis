@@ -33,4 +33,5 @@ public interface IAtisComposite
     bool UseVisibilitySuffix { get; set; }
     bool UseDecimalTerminology { get; set; }
     bool UseTemperaturePlusPrefix { get; set; }
+    bool UseZuluTimeSuffix { get; set; }
 }

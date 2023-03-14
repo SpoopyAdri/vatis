@@ -51,6 +51,7 @@ public partial class ProfileConfigurationForm : Form
     private bool mVisibilitySuffixChanged = false;
     private bool mUseDecimalTerminologyChanged = false;
     private bool mUseTemperaturePlusPrefixChanged = false;
+    private bool mUseZuluTimeSuffixChanged = false;
 
     public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
         INavaidDatabase navaidDatabase)
@@ -828,6 +829,18 @@ public partial class ProfileConfigurationForm : Form
         {
             mCurrentComposite.UseDecimalTerminology = chkDecimalTerminology.Checked;
             mUseDecimalTerminologyChanged = false;
+        }
+
+        if (mUseTemperaturePlusPrefixChanged)
+        {
+            mCurrentComposite.UseTemperaturePlusPrefix = chkPrefixTemperature.Checked;
+            mUseTemperaturePlusPrefixChanged = false;
+        }
+
+        if(mUseZuluTimeSuffixChanged)
+        {
+            mCurrentComposite.UseZuluTimeSuffix = chkAppendZulu.Checked;
+            mUseZuluTimeSuffixChanged = false;
         }
 
         mTransitionLevelsChanged = false;
@@ -2174,6 +2187,26 @@ public partial class ProfileConfigurationForm : Form
         else
         {
             mUseTemperaturePlusPrefixChanged = false;
+            btnApply.Enabled = false;
+        }
+    }
+
+    private void chkAppendZulu_CheckedChanged(object sender, EventArgs e)
+    {
+        if (mCurrentComposite == null)
+            return;
+
+        if (!chkAppendZulu.Focused)
+            return;
+
+        if (chkAppendZulu.Checked != mCurrentComposite.UseZuluTimeSuffix)
+        {
+            mUseZuluTimeSuffixChanged = true;
+            btnApply.Enabled = true;
+        }
+        else
+        {
+            mUseZuluTimeSuffixChanged = false;
             btnApply.Enabled = false;
         }
     }

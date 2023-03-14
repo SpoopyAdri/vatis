@@ -36,6 +36,7 @@ public class AtisComposite : IAtisComposite
     public bool UseVisibilitySuffix { get; set; }
     public bool UseDecimalTerminology { get; set; }
     public bool UseTemperaturePlusPrefix { get; set; }
+    public bool UseZuluTimeSuffix { get; set; }
 
     internal AtisComposite Clone()
     {
@@ -60,6 +61,7 @@ public class AtisComposite : IAtisComposite
             UseVisibilitySuffix = UseVisibilitySuffix,
             UseDecimalTerminology = UseDecimalTerminology,
             UseTemperaturePlusPrefix = UseTemperaturePlusPrefix,
+            UseZuluTimeSuffix = UseZuluTimeSuffix,
             AtisVoice = AtisVoice,
             IDSEndpoint = IDSEndpoint
         };

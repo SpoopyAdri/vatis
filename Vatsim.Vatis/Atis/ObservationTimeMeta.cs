@@ -21,21 +21,13 @@ public class ObservationTimeMeta : AtisMeta
             && mComposite.ObservationTime.Enabled
             && mComposite.ObservationTime.Time != minutes;
 
-        if (!mComposite.UseFaaFormat)
-        {
-            VoiceAtis = string.Join(" ",
-                metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
-                metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(),
-                isSpecial ? "special" : "").Trim(' ');
-            TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}";
-        }
-        else
-        {
-            VoiceAtis = string.Join(" ", string.Join(" ",
-                metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
-                metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(), "zulu"),
-                isSpecial ? "special" : "");
-            TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}Z";
-        }
+        var useZuluPrefix = mComposite.UseZuluTimeSuffix || mComposite.UseFaaFormat;
+
+        VoiceAtis = string.Join(" ", string.Join(" ",
+            metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
+            metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(),
+            useZuluPrefix ? "zulu" : ""), isSpecial ? "special" : "");
+
+        TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}{(useZuluPrefix ? "Z" : "")}";
     }
 }
