@@ -79,7 +79,7 @@ public class CloudsMeta : AtisMeta
                     tts.Add($"{(layer == ceiling ? "ceiling " : "")}{altitude.NumbersToWords()} {cloudType} {convectiveType}");
                 }
 
-                acars.Add(cloud.RawValue);
+                acars.Add(layer.RawValue);
             }
         }
 
