@@ -1,29 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Vatsim.Vatis.MetarParser.Entity;
 
 namespace Vatsim.Vatis.Common;
 
 public static class StringUtils
 {
-    public static string PrintUnit(this Value.Unit unit, double value)
-    {
-        switch (unit)
-        {
-            case Value.Unit.KT:
-                return value > 1 ? "knots" : "knot";
-            case Value.Unit.MeterPerSecond:
-                return value > 1 ? "meters per second" : "meter per second";
-            case Value.Unit.KilometerPerHour:
-                return value > 1 ? "kilometers per hour" : "kilometer per hour";
-        }
-
-        return unit.ToString();
-    }
-
     /// <summary>
     /// Strips away multiple spaces.
     /// </summary>

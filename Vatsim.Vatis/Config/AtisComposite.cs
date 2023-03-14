@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Vatsim.Vatis.Events;
-using Vatsim.Vatis.MetarParser.Entity;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Weather.Objects;

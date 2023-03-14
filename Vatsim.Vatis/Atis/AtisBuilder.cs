@@ -14,7 +14,6 @@ using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
-using Vatsim.Vatis.MetarParser.Entity;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Weather.Objects;

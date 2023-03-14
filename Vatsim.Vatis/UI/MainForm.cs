@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -13,7 +12,6 @@ using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
-using Vatsim.Vatis.MetarParser;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
