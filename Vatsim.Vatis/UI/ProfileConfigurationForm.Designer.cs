@@ -131,6 +131,7 @@ namespace Vatsim.Vatis.UI
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkPrefixTemperature = new System.Windows.Forms.CheckBox();
             this.TlpMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.mainTabControl.SuspendLayout();
@@ -469,6 +470,7 @@ namespace Vatsim.Vatis.UI
             // 
             // pageFormat
             // 
+            this.pageFormat.Controls.Add(this.chkPrefixTemperature);
             this.pageFormat.Controls.Add(this.chkDecimalTerminology);
             this.pageFormat.Controls.Add(this.chkVisibilitySuffix);
             this.pageFormat.Controls.Add(this.chkSurfaceWindPrefix);
@@ -488,7 +490,7 @@ namespace Vatsim.Vatis.UI
             // chkDecimalTerminology
             // 
             this.chkDecimalTerminology.AutoSize = true;
-            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 262);
+            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 230);
             this.chkDecimalTerminology.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkDecimalTerminology.Name = "chkDecimalTerminology";
             this.chkDecimalTerminology.Size = new System.Drawing.Size(245, 19);
@@ -502,7 +504,7 @@ namespace Vatsim.Vatis.UI
             // chkVisibilitySuffix
             // 
             this.chkVisibilitySuffix.AutoSize = true;
-            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 194);
+            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 172);
             this.chkVisibilitySuffix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkVisibilitySuffix.Name = "chkVisibilitySuffix";
             this.chkVisibilitySuffix.Size = new System.Drawing.Size(333, 19);
@@ -516,7 +518,7 @@ namespace Vatsim.Vatis.UI
             // chkSurfaceWindPrefix
             // 
             this.chkSurfaceWindPrefix.AutoSize = true;
-            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 160);
+            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 143);
             this.chkSurfaceWindPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSurfaceWindPrefix.Name = "chkSurfaceWindPrefix";
             this.chkSurfaceWindPrefix.Size = new System.Drawing.Size(234, 19);
@@ -530,7 +532,7 @@ namespace Vatsim.Vatis.UI
             // chkConvertMetric
             // 
             this.chkConvertMetric.AutoSize = true;
-            this.chkConvertMetric.Location = new System.Drawing.Point(40, 228);
+            this.chkConvertMetric.Location = new System.Drawing.Point(40, 201);
             this.chkConvertMetric.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkConvertMetric.Name = "chkConvertMetric";
             this.chkConvertMetric.Size = new System.Drawing.Size(217, 19);
@@ -543,7 +545,7 @@ namespace Vatsim.Vatis.UI
             // chkTransitionLevelPrefix
             // 
             this.chkTransitionLevelPrefix.AutoSize = true;
-            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 126);
+            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 114);
             this.chkTransitionLevelPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
             this.chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
@@ -557,7 +559,7 @@ namespace Vatsim.Vatis.UI
             // chkPrefixNotams
             // 
             this.chkPrefixNotams.AutoSize = true;
-            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 92);
+            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 85);
             this.chkPrefixNotams.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrefixNotams.Name = "chkPrefixNotams";
             this.chkPrefixNotams.Size = new System.Drawing.Size(352, 19);
@@ -571,7 +573,7 @@ namespace Vatsim.Vatis.UI
             // chkFaaFormat
             // 
             this.chkFaaFormat.AutoSize = true;
-            this.chkFaaFormat.Location = new System.Drawing.Point(40, 58);
+            this.chkFaaFormat.Location = new System.Drawing.Point(40, 56);
             this.chkFaaFormat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkFaaFormat.Name = "chkFaaFormat";
             this.chkFaaFormat.Size = new System.Drawing.Size(184, 19);
@@ -584,7 +586,7 @@ namespace Vatsim.Vatis.UI
             // chkExternalAtisGenerator
             // 
             this.chkExternalAtisGenerator.AutoSize = true;
-            this.chkExternalAtisGenerator.Location = new System.Drawing.Point(40, 24);
+            this.chkExternalAtisGenerator.Location = new System.Drawing.Point(40, 27);
             this.chkExternalAtisGenerator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
             this.chkExternalAtisGenerator.Size = new System.Drawing.Size(310, 19);
@@ -1346,6 +1348,19 @@ namespace Vatsim.Vatis.UI
             this.dataGridViewTextBoxColumn2.HeaderText = "Spoken";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
+            // chkPrefixTemperature
+            // 
+            this.chkPrefixTemperature.AutoSize = true;
+            this.chkPrefixTemperature.Location = new System.Drawing.Point(40, 259);
+            this.chkPrefixTemperature.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkPrefixTemperature.Name = "chkPrefixTemperature";
+            this.chkPrefixTemperature.Size = new System.Drawing.Size(240, 19);
+            this.chkPrefixTemperature.TabIndex = 50;
+            this.chkPrefixTemperature.Text = "Prefix temperature/dewpoint with \"plus\"";
+            this.compositeTooltip.SetToolTip(this.chkPrefixTemperature, "Prefix temperature/dewpoint with \"plus\" if greater than 0");
+            this.chkPrefixTemperature.UseVisualStyleBackColor = true;
+            this.chkPrefixTemperature.CheckedChanged += new System.EventHandler(this.chkPrefixTemperature_CheckedChanged);
+            // 
             // ProfileConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1509,5 +1524,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel groupVoiceOption;
         private System.Windows.Forms.CheckBox chkDecimalTerminology;
+        private System.Windows.Forms.CheckBox chkPrefixTemperature;
     }
 }

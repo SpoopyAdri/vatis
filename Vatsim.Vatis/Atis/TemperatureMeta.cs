@@ -16,7 +16,7 @@ public class TemperatureMeta : AtisMeta
 
     public override void Parse(Metar metar)
     {
-        if (!mComposite.UseFaaFormat && metar.Temperature.DewPoint > 0)
+        if (mComposite.UseTemperaturePlusPrefix && metar.Temperature.DewPoint > 0)
         {
             VoiceAtis = $"Temperature plus {metar.Temperature.Value.NumberToSingular()}";
         }

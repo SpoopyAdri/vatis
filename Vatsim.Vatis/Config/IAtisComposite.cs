@@ -32,4 +32,5 @@ public interface IAtisComposite
     bool UseSurfaceWindPrefix { get; set; }
     bool UseVisibilitySuffix { get; set; }
     bool UseDecimalTerminology { get; set; }
+    bool UseTemperaturePlusPrefix { get; set; }
 }

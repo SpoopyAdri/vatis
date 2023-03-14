@@ -50,6 +50,7 @@ public partial class ProfileConfigurationForm : Form
     private bool mSurfaceWindPrefixChanged = false;
     private bool mVisibilitySuffixChanged = false;
     private bool mUseDecimalTerminologyChanged = false;
+    private bool mUseTemperaturePlusPrefixChanged = false;
 
     public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
         INavaidDatabase navaidDatabase)
@@ -142,6 +143,7 @@ public partial class ProfileConfigurationForm : Form
         chkVisibilitySuffix.Checked = mCurrentComposite.UseVisibilitySuffix;
         chkSurfaceWindPrefix.Checked = mCurrentComposite.UseSurfaceWindPrefix;
         chkDecimalTerminology.Checked = mCurrentComposite.UseDecimalTerminology;
+        chkPrefixTemperature.Checked = mCurrentComposite.UseTemperaturePlusPrefix;
 
         if (mCurrentComposite.ObservationTime != null)
         {
@@ -2156,6 +2158,26 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
+    private void chkPrefixTemperature_CheckedChanged(object sender, EventArgs e)
+    {
+        if (mCurrentComposite == null)
+            return;
+
+        if (!chkPrefixTemperature.Focused)
+            return;
+
+        if (chkPrefixTemperature.Checked != mCurrentComposite.UseTemperaturePlusPrefix)
+        {
+            mUseTemperaturePlusPrefixChanged = true;
+            btnApply.Enabled = true;
+        }
+        else
+        {
+            mUseTemperaturePlusPrefixChanged = false;
+            btnApply.Enabled = false;
+        }
+    }
+
     private void ToggleNonFaaOptions()
     {
         if (chkFaaFormat.Checked)
@@ -2179,6 +2201,10 @@ public partial class ProfileConfigurationForm : Form
             chkDecimalTerminology.Checked = false;
             chkDecimalTerminology.Enabled = false;
             mUseDecimalTerminologyChanged = true;
+
+            chkPrefixTemperature.Checked = false;
+            chkPrefixTemperature.Enabled = false;
+            mUseTemperaturePlusPrefixChanged = true;
         }
         else
         {
@@ -2187,6 +2213,7 @@ public partial class ProfileConfigurationForm : Form
             chkSurfaceWindPrefix.Enabled = true;
             chkVisibilitySuffix.Enabled = true;
             chkDecimalTerminology.Enabled = true;
+            chkPrefixTemperature.Enabled = true;
         }
     }
 
