@@ -17,6 +17,7 @@ using Vatsim.Vatis.Core;
 using Vatsim.Vatis.MetarParser.Entity;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
@@ -57,7 +58,7 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception($"{composite.Identifier} not found in airport database.");
         }
 
-        DecodedMetar metar;
+        Metar metar;
         string atisLetter;
         List<Variable> variables;
         ParseMetar(composite, out metar, out atisLetter, out variables);
@@ -134,7 +135,7 @@ public class AtisBuilder : IAtisBuilder
         }
     }
 
-    private string BuildExternalAtis(AtisComposite composite, DecodedMetar metar, List<Variable> variables)
+    private string BuildExternalAtis(AtisComposite composite, Metar metar, List<Variable> variables)
     {
         var preset = composite.CurrentPreset;
         var data = preset.ExternalGenerator;
@@ -209,7 +210,7 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception($"{composite.Identifier} not found in airport database.");
         }
 
-        DecodedMetar metar;
+        Metar metar;
         string atisLetter;
         List<Variable> variables;
         ParseMetar(composite, out metar, out atisLetter, out variables);
@@ -246,7 +247,7 @@ public class AtisBuilder : IAtisBuilder
         composite.AcarsText = acarsText.ToUpper();
     }
 
-    private void ParseMetar(AtisComposite composite, out DecodedMetar metar, out string atisLetter, out List<Variable> variables)
+    private void ParseMetar(AtisComposite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
     {
         metar = composite.DecodedMetar;
         var time = DoParse(metar, new ObservationTimeMeta(composite));
@@ -255,9 +256,9 @@ public class AtisBuilder : IAtisBuilder
         var visibility = DoParse(metar, new VisibilityMeta(composite));
         var presentWeather = DoParse(metar, new PresentWeatherMeta());
         var clouds = DoParse(metar, new CloudsMeta(composite));
-        var temp = DoParse(metar, new TemperatureMeta());
-        var dew = DoParse(metar, new DewpointMeta());
-        var pressure = DoParse(metar, new PressureMeta());
+        var temp = DoParse(metar, new TemperatureMeta(composite));
+        var dew = DoParse(metar, new DewpointMeta(composite));
+        var pressure = DoParse(metar, new PressureMeta(composite));
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.TextToSpeech} {visibility.TextToSpeech} {rvr.TextToSpeech} {presentWeather.TextToSpeech} {clouds.TextToSpeech} {temp.TextToSpeech} {dew.TextToSpeech} {pressure.TextToSpeech}";
@@ -321,7 +322,8 @@ public class AtisBuilder : IAtisBuilder
                 var myMetar = metar;
                 var tlValue = composite.TransitionLevels.FirstOrDefault(t =>
                 {
-                    return myMetar.Pressure.ActualValue >= t.Low && myMetar.Pressure.ActualValue <= t.High;
+                    return myMetar.AltimeterSetting.Value >= t.Low
+                        && myMetar.AltimeterSetting.Value <= t.High;
                 });
 
                 if (tlValue != null)
@@ -465,7 +467,7 @@ public class AtisBuilder : IAtisBuilder
         return input.ToUpper();
     }
 
-    private ParsedData DoParse(DecodedMetar metar, AtisMeta meta)
+    private ParsedData DoParse(Metar metar, AtisMeta meta)
     {
         meta.Parse(metar);
         return new ParsedData

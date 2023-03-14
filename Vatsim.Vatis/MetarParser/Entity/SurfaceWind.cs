@@ -36,18 +36,18 @@ public sealed class SurfaceWind
 
     public override string ToString()
     {
-        if (MeanDirection != null && MeanSpeed != null)
-        {
-            if (SpeedVariations != null)
-            {
-                return $"{ MeanDirection.ActualValue:000}{ MeanSpeed.ActualValue:00}G{ SpeedVariations.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
-            }
-            return $"{ MeanDirection.ActualValue:000}{ MeanSpeed.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
-        }
-        else if (VariableDirection)
-        {
-            return $"VRB{ MeanSpeed.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
-        }
+        //if (MeanDirection != null && MeanSpeed != null)
+        //{
+        //    if (SpeedVariations != null)
+        //    {
+        //        return $"{ MeanDirection.ActualValue:000}{ MeanSpeed.ActualValue:00}G{ SpeedVariations.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
+        //    }
+        //    return $"{ MeanDirection.ActualValue:000}{ MeanSpeed.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
+        //}
+        //else if (VariableDirection)
+        //{
+        //    return $"VRB{ MeanSpeed.ActualValue:00}{ MeanSpeed.ActualUnit.PrintUnitShort()}";
+        //}
         return "------";
     }
 }

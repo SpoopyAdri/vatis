@@ -18,6 +18,30 @@ namespace Vatsim.Vatis.Weather.Objects
         [DataMember(Name = "weatherConditions", EmitDefaultValue = false)]
         public WeatherCondition[] WeatherConditions { get; set; }
 
+        /// <summary>
+        /// Intensity or proximity
+        /// </summary>
+        [DataMember(Name = "intensityProximity", EmitDefaultValue = false)]
+        public string IntensityProximity { get; set; }
+
+        /// <summary>
+        /// Weather descriptor
+        /// </summary>
+        [DataMember(Name = "descriptor", EmitDefaultValue = false)]
+        public string Descriptor { get; set; }
+
+        /// <summary>
+        /// Weather type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// The raw weather phenomena string
+        /// </summary>
+        [DataMember(Name = "rawValue", EmitDefaultValue = false)]
+        public string RawValue { get; set; }
+
         #region Constructors
 
         /// <summary>
@@ -38,6 +62,8 @@ namespace Vatsim.Vatis.Weather.Objects
                 return;
             }
 
+            RawValue = string.Join("", tokens);
+
             var parsedData = new List<WeatherCondition>();
             var weatherToken = tokens.First();
             var noChangedToken = weatherToken;
@@ -53,14 +79,23 @@ namespace Vatsim.Vatis.Weather.Objects
 
             if (weatherToken.StartsWith("-"))
             {
+                IntensityProximity = weatherToken[..1];
                 parsedData.Add(WeatherCondition.Light);
                 weatherToken = weatherToken[1..];
             }
 
             if (weatherToken.StartsWith("+"))
             {
+                IntensityProximity = weatherToken[..1];
                 parsedData.Add(WeatherCondition.Heavy);
                 weatherToken = weatherToken[1..];
+            }
+
+            if (weatherToken.StartsWith("VC"))
+            {
+                IntensityProximity = weatherToken[..2];
+                parsedData.Add(WeatherCondition.Vicinity);
+                weatherToken = weatherToken[2..];
             }
 
             var weatherCodes = SplitIntoCodes(weatherToken);
@@ -70,8 +105,29 @@ namespace Vatsim.Vatis.Weather.Objects
                 return;
             }
             parsedData.AddRange(weatherCodes.Select(EnumTranslator.GetValueByDescription<WeatherCondition>));
-
             WeatherConditions = parsedData.ToArray();
+
+            if (weatherToken.Length > 2)
+            {
+                Descriptor = weatherToken[..2];
+                weatherToken = weatherToken[2..];
+
+                Type = weatherToken[..2];
+                weatherToken = weatherToken[2..];
+            }
+            else
+            {
+                string[] descriptors = { "MI", "PR", "BC", "DR", "BL", "SH", "TS", "FZ" };
+                if (descriptors.Contains(weatherToken[..2]))
+                {
+                    Descriptor = weatherToken[..2];
+                }
+                else
+                {
+                    Type = weatherToken[..2];
+                }
+                weatherToken = weatherToken[2..];
+            }
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Vatsim.Vatis.MetarParser.Entity;
@@ -21,27 +22,6 @@ public static class StringUtils
         }
 
         return unit.ToString();
-    }
-
-    public static string PrintUnitShort(this Value.Unit unit)
-    {
-        switch (unit)
-        {
-            case Value.Unit.KilometerPerHour:
-                return "KPH";
-            case Value.Unit.M:
-                return "M";
-            case Value.Unit.MeterPerSecond:
-                return "MPS";
-            case Value.Unit.KT:
-                return "KT";
-            case Value.Unit.Feet:
-                return "FT";
-            case Value.Unit.StatuteMile:
-                return "SM";
-            default:
-                return unit.ToString();
-        }
     }
 
     /// <summary>

@@ -14,6 +14,11 @@ namespace Vatsim.Vatis.Weather.Objects
     public class PrevailingVisibility
     {
         /// <summary>
+        /// The raw string value
+        /// </summary>
+        public string RawValue { get; init; }
+
+        /// <summary>
         /// Sign if visibility marked as CAVOK
         /// Means Ceiling and Visibility OK
         /// </summary>
@@ -51,6 +56,8 @@ namespace Vatsim.Vatis.Weather.Objects
                 errors.Add("Array of prevailing visibility tokens is empty");
                 return;
             }
+
+            RawValue = string.Join("", tokens);
 
             var visibilityToken = tokens.First();
             if (visibilityToken.Equals("CAVOK"))

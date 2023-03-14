@@ -1,117 +1,95 @@
 ﻿using System.Collections.Generic;
-using Vatsim.Vatis.MetarParser.Entity;
+using System.Linq;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
 public class PresentWeatherMeta : AtisMeta
 {
-    public override void Parse(DecodedMetar metar)
+    public override void Parse(Metar metar)
     {
-        List<string> tts = new List<string>();
-        List<string> acars = new List<string>();
+        var tts = new List<string>();
+        var acars = new List<string>();
 
         if (metar.PresentWeather != null)
         {
-            foreach (WeatherPhenomenon wp in metar.PresentWeather)
+            foreach (var weather in metar.PresentWeather)
             {
-                string a = "";
-                a += wp.IntensityProximity;
-                a += wp.Characteristics;
-                foreach (var x in wp.Types)
-                {
-                    a += x;
-                }
-                acars.Add(a);
+                var result = new List<string>();
 
-                string result = "";
-
-                if (wp.Characteristics == "SH")
+                if (weather.Descriptor == "SH" && 
+                    !string.IsNullOrEmpty(weather.Type))
                 {
-                    foreach (var x in wp.Types)
+                    string[] validTypes = { "RA", "SN", "PL", "GS", "GS" };
+                    if (validTypes.Contains(weather.Type))
                     {
-                        if (x == "RA" || x == "SN" || x == "PL" || x == "GS" || x == "GR")
+                        if (weather.IntensityProximity == "-")
                         {
-                            if (wp.IntensityProximity == "-")
-                            {
-                                result += "light ";
-                            }
-                            else if (wp.IntensityProximity == "+")
-                            {
-                                result += "heavy ";
-                            }
-                            result += $"{WeatherTypes[x]}{WeatherCharacteristics[wp.Characteristics]}";
+                            result.Add("light");
                         }
+                        else if (weather.IntensityProximity == "+")
+                        {
+                            result.Add("heavy");
+                        }
+                        result.Add(WeatherTypes[weather.Type]);
+                        result.Add(WeatherDescriptors[weather.Descriptor]);
                     }
                 }
                 else
                 {
-                    if (wp.Characteristics == "FZ")
+                    string[] validDescriptors = { "FZ", "BC", "BL" };
+                    if (!string.IsNullOrEmpty(weather.Descriptor) &&
+                        !string.IsNullOrEmpty(weather.Type) &&
+                        validDescriptors.Contains(weather.Descriptor))
                     {
-                        foreach (var x in wp.Types)
+                        if (weather.IntensityProximity == "-")
                         {
-                            if (x == "FG")
-                            {
-                                result += $"{WeatherCharacteristics[wp.Characteristics]} {WeatherTypes[x]}";
-                            }
+                            result.Add("light");
                         }
-                    }
-                    else if (wp.Characteristics == "BC")
-                    {
-                        foreach (var x in wp.Types)
+                        else if (weather.IntensityProximity == "+")
                         {
-                            if (x == "FG")
-                            {
-                                result += $"{WeatherCharacteristics[wp.Characteristics]} {WeatherTypes[x]}";
-                            }
+                            result.Add("heavy");
                         }
-                    }
-                    else if (wp.Characteristics == "BL")
-                    {
-                        foreach (var x in wp.Types)
+
+                        result.Add(WeatherDescriptors[weather.Descriptor]);
+                        result.Add(WeatherTypes[weather.Type]);
+
+                        if (weather.IntensityProximity == "VC")
                         {
-                            if (x == "SN")
-                            {
-                                result += $"{WeatherCharacteristics[wp.Characteristics]} {WeatherTypes[x]}";
-                            }
+                            result.Add("in vicinity");
                         }
                     }
                     else
                     {
-                        if (!string.IsNullOrEmpty(wp.Characteristics))
+                        if (!string.IsNullOrEmpty(weather.IntensityProximity))
                         {
-                            if (wp.Characteristics == "TS")
-                            {
-                                result += WeatherCharacteristics[wp.Characteristics];
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(wp.IntensityProximity))
-                        {
-                            switch (wp.IntensityProximity)
+                            switch (weather.IntensityProximity)
                             {
                                 case "+":
-                                    result += "heavy ";
+                                    result.Add("heavy");
                                     break;
                                 case "-":
-                                    result += "light ";
+                                    result.Add("light");
                                     break;
                             }
                         }
-                        if (wp.Types != null)
+                        if (!string.IsNullOrEmpty(weather.Descriptor))
                         {
-                            List<string> t = new List<string>();
-                            foreach (var x in wp.Types)
-                            {
-                                if (WeatherTypes.ContainsKey(x))
-                                {
-                                    t.Add(WeatherTypes[x]);
-                                }
-                            }
-                            result += string.Join(", ", t).Trim(',').Trim(' ');
+                            result.Add(WeatherDescriptors[weather.Descriptor]);
+                        }
+                        if (!string.IsNullOrEmpty(weather.Type))
+                        {
+                            result.Add(WeatherTypes[weather.Type]);
+                        }
+                        if (weather.IntensityProximity == "VC")
+                        {
+                            result.Add("in vicinity");
                         }
                     }
                 }
-                tts.Add(result);
+
+                acars.Add(weather.RawValue);
+                tts.Add(string.Join(" ", result));
             }
         }
 
@@ -145,7 +123,7 @@ public class PresentWeatherMeta : AtisMeta
         { "DS", "dust storm" }
     };
 
-    public static Dictionary<string, string> WeatherCharacteristics => new Dictionary<string, string>
+    public static Dictionary<string, string> WeatherDescriptors => new Dictionary<string, string>
     {
         { "PR", "partial" },
         { "BC", "patches" },

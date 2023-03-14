@@ -24,6 +24,12 @@ namespace Vatsim.Vatis.Weather.Objects
         [DataMember(Name = "value", EmitDefaultValue = false)]
         public int Value { get; init; }
 
+        /// <summary>
+        /// Raw altimeter value
+        /// </summary>
+        [DataMember(Name = "rawValue", EmitDefaultValue = false)]
+        public string RawValue { get; init; }
+
         #region Constructors
 
         /// <summary>
@@ -38,6 +44,8 @@ namespace Vatsim.Vatis.Weather.Objects
                 errors.Add("Array with altimeter token is empty");
                 return;
             }
+
+            RawValue = string.Join("", tokens);
 
             var altimeterToken = tokens.First();
 

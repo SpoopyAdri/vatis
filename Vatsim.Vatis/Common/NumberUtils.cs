@@ -278,7 +278,7 @@ public static class NumberUtils
         return heading;
     }
 
-    public static double ApplyMagVar(this double degrees, int? magvar = null)
+    public static double ApplyMagVar(this int degrees, int? magvar = null)
     {
         if (magvar == null)
             return degrees;

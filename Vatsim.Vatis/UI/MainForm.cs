@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -26,6 +27,7 @@ public partial class MainForm : Form
     private readonly IAudioManager mAudioManager;
     private readonly IAtisBuilder mAtisBuilder;
     private readonly INavaidDatabase mAirportDatabase;
+    private readonly Weather.MetarParser mMetarParser;
     private readonly SynchronizationContext mSyncContext;
     private readonly List<Connection> mConnections = new List<Connection>();
     private readonly System.Windows.Forms.Timer mUtcClock;
@@ -44,6 +46,7 @@ public partial class MainForm : Form
         mAirportDatabase = airportDatabase;
         mAudioManager = audioManager;
         mSyncContext = SynchronizationContext.Current;
+        mMetarParser = new Weather.MetarParser();
 
         utcClock.Text = DateTime.UtcNow.ToString("HH:mm/ss");
         mUtcClock = new System.Windows.Forms.Timer
@@ -295,8 +298,7 @@ public partial class MainForm : Form
                 };
                 tabPage.Connection.MetarResponseReceived += async (sender, args) =>
                 {
-                    var metar = MetarDecoder.ParseWithMode(args.Metar);
-                    metar.IsInternational = !composite.UseFaaFormat;
+                    var metar = mMetarParser.Parse(args.Metar);
 
                     composite.DecodedMetar = metar;
                     composite.MetarReceived?.Invoke(this, new ClientEventArgs<string>(args.Metar));
@@ -304,9 +306,9 @@ public partial class MainForm : Form
                     tabPage.CompositeMeta.Error = null;
                     tabPage.CompositeMeta.Metar = args.Metar;
                     if (metar.SurfaceWind != null)
-                        tabPage.CompositeMeta.Wind = metar.SurfaceWind.ToString();
-                    if (metar.Pressure != null)
-                        tabPage.CompositeMeta.Altimeter = metar.Pressure.ToString();
+                        tabPage.CompositeMeta.Wind = metar.SurfaceWind.RawValue;
+                    if (metar.AltimeterSetting != null)
+                        tabPage.CompositeMeta.Altimeter = metar.AltimeterSetting.RawValue;
                     tabPage.CompositeMeta.Status = ConnectionStatus.Connected;
 
                     tabPage.Parent?.Invalidate();

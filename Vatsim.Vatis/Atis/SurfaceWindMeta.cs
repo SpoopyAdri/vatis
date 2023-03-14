@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.MetarParser.Entity;
+using Vatsim.Vatis.Weather.Extensions;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
@@ -14,127 +15,116 @@ public class SurfaceWindMeta : AtisMeta
         mComposite = composite;
     }
 
-    public override void Parse(DecodedMetar metar)
+    public override void Parse(Metar metar)
     {
-        List<string> tts = new List<string>();
-        List<string> acars = new List<string>();
+        List<string> tts = new();
+        List<string> acars = new();
 
-        var magvar = mComposite.MagneticVariation?.MagneticDegrees ?? null;
+        var magVarDeg = mComposite.MagneticVariation?.MagneticDegrees ?? null;
 
-        if (metar.SurfaceWind != null)
+        if (metar.SurfaceWind == null)
+            return;
+
+        var windUnitSpoken = "";
+        switch (metar.SurfaceWind.WindUnit)
         {
-            if (metar.SurfaceWind.SpeedVariations != null)
-            {
-                // VRB10G20KT
-                if (metar.SurfaceWind.VariableDirection)
-                {
-                    if (mComposite.UseSurfaceWindPrefix)
-                    {
-                        tts.Add($"Surface wind variable { metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular() } gusts { metar.SurfaceWind.SpeedVariations.ActualValue.NumberToSingular() }");
-                    }
-                    else
-                    {
-                        tts.Add($"Wind variable at { metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular() } gusts { metar.SurfaceWind.SpeedVariations.ActualValue.NumberToSingular() }");
-                    }
+            case Weather.Enums.WindUnit.KilometersPerHour:
+                windUnitSpoken = metar.SurfaceWind.Speed > 1 ? "kilometers per hour" : "kilometer per hour";
+                break;
+            case Weather.Enums.WindUnit.MetersPerSecond:
+                windUnitSpoken = metar.SurfaceWind.Speed > 1 ? "meters per second" : "meter per second";
+                break;
+            case Weather.Enums.WindUnit.Knots:
+                windUnitSpoken = metar.SurfaceWind.Speed > 1 ? "knots" : "knot";
+                break;
+        }
 
-                    acars.Add($"VRB{ metar.SurfaceWind.MeanSpeed.ActualValue:00}G{ metar.SurfaceWind.SpeedVariations.ActualValue:00}{metar.SurfaceWind.MeanSpeed.ActualUnit.PrintUnitShort()}");
+        var windUnitText = EnumTranslator.GetEnumDescription(metar.SurfaceWind.WindUnit);
+
+        if (metar.SurfaceWind.GustSpeed > 0)
+        {
+            // VRB10G20KT
+            if (metar.SurfaceWind.IsVariable)
+            {
+                if (mComposite.UseSurfaceWindPrefix)
+                {
+                    tts.Add($"Surface wind variable {metar.SurfaceWind.Speed.NumberToSingular()} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
                 }
-                // 25010G16KT
                 else
                 {
-                    if (metar.IsInternational)
-                    {
-                        var speedUnit = "";
-                        switch (metar.SurfaceWind.MeanSpeed.ActualUnit)
-                        {
-                            case Value.Unit.KilometerPerHour:
-                                speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "kilometers per hour" : "kilometer per hour";
-                                break;
-                            case Value.Unit.MeterPerSecond:
-                                speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "meters per second" : "meter per second";
-                                break;
-                            case Value.Unit.KT:
-                                speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "knots" : "knot";
-                                break;
-                        }
-
-                        tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{ metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } degrees, { metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular() } { speedUnit } gusts { metar.SurfaceWind.SpeedVariations.ActualValue.NumberToSingular() }");
-                    }
-                    else
-                    {
-                        tts.Add($"Wind { metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } at {metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular()} gusts {metar.SurfaceWind.SpeedVariations.ActualValue.NumberToSingular()}");
-                    }
-
-                    acars.Add($"{ metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar):000}{ metar.SurfaceWind.MeanSpeed.ActualValue:00}G{ metar.SurfaceWind.SpeedVariations.ActualValue:00}{metar.SurfaceWind.MeanSpeed.ActualUnit.PrintUnitShort()}");
+                    tts.Add($"Wind variable at {metar.SurfaceWind.Speed.NumberToSingular()} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
                 }
+
+                acars.Add($"VRB{metar.SurfaceWind.Speed:00}G{metar.SurfaceWind.GustSpeed:00}{windUnitText}");
             }
-            // 25010KT
+            // 25010G16KT
             else
             {
-                if (metar.SurfaceWind.MeanDirection != null)
+                if (!mComposite.UseFaaFormat)
                 {
-                    if (metar.IsInternational)
+                    tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
+                }
+                else
+                {
+                    tts.Add($"Wind {metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} at {metar.SurfaceWind.Speed.NumberToSingular()} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
+                }
+
+                acars.Add($"{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg):000}{metar.SurfaceWind.Speed:00}G{metar.SurfaceWind.GustSpeed:00}{windUnitText}");
+            }
+        }
+        // 25010KT
+        else
+        {
+            if (metar.SurfaceWind.Direction > 0)
+            {
+                if (!mComposite.UseFaaFormat)
+                {
+                    tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
+                }
+                else
+                {
+                    if (metar.SurfaceWind.Direction == 0 && metar.SurfaceWind.Speed == 0)
                     {
-                        tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{ metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } degrees, {metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular()} {metar.SurfaceWind.MeanSpeed.ActualUnit.PrintUnit(metar.SurfaceWind.MeanSpeed.ActualValue)}");
+                        tts.Add($"Wind calm");
                     }
                     else
                     {
-                        if (metar.SurfaceWind.MeanDirection.ActualValue == 0 && metar.SurfaceWind.MeanSpeed.ActualValue == 0)
-                        {
-                            tts.Add($"Wind calm");
-                        }
-                        else
-                        {
-                            tts.Add($"Wind { metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } at {metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular()}");
-                        }
+                        tts.Add($"Wind {metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} at {metar.SurfaceWind.Speed.NumberToSingular()}");
                     }
-
-                    acars.Add($"{ metar.SurfaceWind.MeanDirection.ActualValue.ApplyMagVar(magvar):000}{ metar.SurfaceWind.MeanSpeed.ActualValue:00}{metar.SurfaceWind.MeanSpeed.ActualUnit.PrintUnitShort()}");
                 }
-            }
 
-            // VRB10KT
-            if (metar.SurfaceWind.SpeedVariations == null && metar.SurfaceWind.VariableDirection)
+                acars.Add($"{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg):000}{metar.SurfaceWind.Speed:00}{windUnitText}");
+            }
+        }
+
+        // VRB10KT
+        if (metar.SurfaceWind.GustSpeed == 0 && metar.SurfaceWind.IsVariable)
+        {
+            if (!mComposite.UseFaaFormat)
             {
-                if (metar.IsInternational)
-                {
-                    var speedUnit = "";
-                    switch (metar.SurfaceWind.MeanSpeed.ActualUnit)
-                    {
-                        case Value.Unit.KilometerPerHour:
-                            speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "kilometers per hour" : "kilometer per hour";
-                            break;
-                        case Value.Unit.MeterPerSecond:
-                            speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "meters per second" : "meter per second";
-                            break;
-                        case Value.Unit.KT:
-                            speedUnit = metar.SurfaceWind.MeanSpeed.ActualValue > 1 ? "knots" : "knot";
-                            break;
-                    }
-                    tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}variable at { metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular() } {speedUnit}");
-                }
-                else
-                {
-                    tts.Add($"Wind variable at { metar.SurfaceWind.MeanSpeed.ActualValue.NumberToSingular() }");
-                }
-
-                acars.Add($"VRB{ metar.SurfaceWind.MeanSpeed.ActualValue:00}");
+                tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}variable at {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
             }
-
-            // 250V360
-            if (metar.SurfaceWind.DirectionVariations != null && metar.SurfaceWind.DirectionVariations.Length == 2)
+            else
             {
-                if (metar.IsInternational)
-                {
-                    tts.Add($"Varying between { metar.SurfaceWind.DirectionVariations[0].ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } and { metar.SurfaceWind.DirectionVariations[1].ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } degrees");
-                }
-                else
-                {
-                    tts.Add($"Wind variable between { metar.SurfaceWind.DirectionVariations[0].ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() } and { metar.SurfaceWind.DirectionVariations[1].ActualValue.ApplyMagVar(magvar).ToString("000").NumberToSingular() }");
-                }
-
-                acars.Add($"{ metar.SurfaceWind.DirectionVariations[0].ActualValue.ApplyMagVar(magvar):000}V{ metar.SurfaceWind.DirectionVariations[1].ActualValue.ApplyMagVar(magvar):000}");
+                tts.Add($"Wind variable at {metar.SurfaceWind.Speed.NumberToSingular()}");
             }
+
+            acars.Add($"VRB{metar.SurfaceWind.Speed:00}{windUnitText}");
+        }
+
+        // 250V360
+        if (metar.SurfaceWind.ExtremeWindDirections != null)
+        {
+            if (!mComposite.UseFaaFormat)
+            {
+                tts.Add($"Varying between {metar.SurfaceWind.ExtremeWindDirections.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} and {metar.SurfaceWind.ExtremeWindDirections.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees");
+            }
+            else
+            {
+                tts.Add($"Wind variable between {metar.SurfaceWind.ExtremeWindDirections.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} and {metar.SurfaceWind.ExtremeWindDirections.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()}");
+            }
+
+            acars.Add($"{metar.SurfaceWind.ExtremeWindDirections.FirstExtremeDirection.ApplyMagVar(magVarDeg):000}V{metar.SurfaceWind.ExtremeWindDirections.LastExtremeWindDirection.ApplyMagVar(magVarDeg):000}");
         }
 
         TextToSpeech = string.Join(", ", tts).TrimEnd(',').TrimEnd(' ');

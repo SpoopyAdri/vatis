@@ -6,6 +6,7 @@ using Vatsim.Vatis.Events;
 using Vatsim.Vatis.MetarParser.Entity;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Config;
 
@@ -65,7 +66,7 @@ public class AtisComposite : IAtisComposite
 
     public override string ToString() => AtisType != AtisType.Combined ? $"{Name} ({Identifier}) {AtisType}" : $"{Name} ({Identifier})";
 
-    [JsonIgnore] public DecodedMetar DecodedMetar { get; set; }
+    [JsonIgnore] public Metar DecodedMetar { get; set; }
     [JsonIgnore] public AtisPreset CurrentPreset { get; set; }
     [JsonIgnore] public string CurrentAtisLetter { get; set; }
     [JsonIgnore] public string AcarsText { get; set; }

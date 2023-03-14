@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.MetarParser.Entity;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
@@ -15,68 +15,68 @@ public class CloudsMeta : AtisMeta
         mComposite = composite;
     }
 
-    public override void Parse(DecodedMetar metar)
+    public override void Parse(Metar metar)
     {
-        List<string> tts = new List<string>();
-        List<string> acars = new List<string>();
+        var tts = new List<string>();
+        var acars = new List<string>();
 
-        if (metar.Clouds != null)
+        if (metar.CloudLayers == null)
+            return;
+
+        var cloudPrefixIncluded = false;
+
+        var ceiling = metar.CloudLayers
+            .Where(n => n.Altitude > 0 && (n.CloudType == Weather.Enums.CloudType.Overcast ||
+                        n.CloudType == Weather.Enums.CloudType.Broken))
+            .Select(n => n).OrderBy(n => n.Altitude).FirstOrDefault();
+
+        foreach (var layer in metar.CloudLayers)
         {
-            bool cloudPrefixIncluded = false;
+            int altitude = layer.Altitude * 100;
+            if (mComposite.UseMetricUnits)
+                altitude = (int)(altitude * 0.30);
+            var cloudType = layer.CloudType == Weather.Enums.CloudType.None 
+                ? "" : layer.CloudType.ToString();
+            var convectiveType = layer.ConvectiveCloudType == Weather.Enums.ConvectiveCloudType.None 
+                ? "" : layer.ConvectiveCloudType.ToString();
 
-            foreach (var cloud in metar.Clouds)
+            if (!mComposite.UseFaaFormat)
             {
-                var cloudCoverage = CloudCoverage.ContainsKey(cloud.Amount.ToString())
-                    ? CloudCoverage[cloud.Amount.ToString()] : "";
+                var result = new List<string>();
 
-                var cloudType = CloudType.ContainsKey(cloud.Type.ToString())
-                    ? CloudType[cloud.Type.ToString()] : "";
-
-                if (metar.IsInternational)
+                if (!cloudPrefixIncluded &&
+                    layer.CloudType != Weather.Enums.CloudType.NoSignificantClouds &&
+                    layer.CloudType != Weather.Enums.CloudType.NoCloudDetected &&
+                    layer.CloudType != Weather.Enums.CloudType.Clear)
                 {
-                    var temp = "";
-                    if (!cloudPrefixIncluded && cloud.Amount != CloudLayer.CloudAmount.NSC && cloud.Amount != CloudLayer.CloudAmount.NCD && cloud.Amount != CloudLayer.CloudAmount.CLR)
-                    {
-                        temp += "clouds ";
-                        cloudPrefixIncluded = true;
-                    }
-                    temp += cloudCoverage;
-                    if (cloud.Type != CloudLayer.CloudType.NULL)
-                    {
-                        temp += string.Join(" ", cloudType);
-                    }
-                    if (cloud.BaseHeight != null && cloud.BaseHeight.ActualValue > 0)
-                    {
-                        if (mComposite.UseMetricUnits)
-                        {
-                            var value = cloud.BaseHeight.ActualValue * 0.3;
-                            temp += string.Join(" ", ((int)value).NumbersToWordsGroup(), "meters");
-                        }
-                        else
-                        {
-                            temp += string.Join(" ", ((int)cloud.BaseHeight.ActualValue).NumbersToWords(), "feet");
-                        }
-                    }
-                    tts.Add(temp);
+                    result.Add("clouds");
+                    cloudPrefixIncluded = true;
+                }
+
+                result.Add(cloudType);
+
+                if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None)
+                {
+                    result.Add(convectiveType);
+                }
+
+                if (altitude > 0)
+                {
+                    result.Add(string.Join(" ", altitude.NumbersToWordsGroup(),
+                        mComposite.UseMetricUnits ? "meters" : "feet"));
+                }
+
+                tts.Add(string.Join(" ", result));
+            }
+            else
+            {
+                if (layer.CloudType == Weather.Enums.CloudType.Few)
+                {
+                    tts.Add($"few clouds at {altitude.NumbersToWords()}");
                 }
                 else
                 {
-                    if (cloud.Amount == CloudLayer.CloudAmount.CLR)
-                    {
-                        tts.Add("Sky clear below one two thousand");
-                        acars.Add("CLR");
-                    }
-                    else
-                    {
-                        if (cloud.Amount == CloudLayer.CloudAmount.FEW)
-                        {
-                            tts.Add($"few clouds at {Convert.ToInt32(cloud.BaseHeight.ActualValue).NumbersToWords()}");
-                        }
-                        else
-                        {
-                            tts.Add($"{(cloud.IsCeiling ? "ceiling " : "")}{(cloud.BaseHeight != null ? Convert.ToInt32(cloud.BaseHeight.ActualValue).NumbersToWords() + " " : "")}{cloudCoverage}{(cloud.Type != CloudLayer.CloudType.NULL ? string.Concat(" ", cloudType) : "")}");
-                        }
-                    }
+                    tts.Add($"{(layer == ceiling ? "ceiling " : "")}{altitude.NumbersToWords()} {cloudType} {convectiveType}");
                 }
 
                 acars.Add(cloud.RawValue);

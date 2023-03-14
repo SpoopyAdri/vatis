@@ -1,32 +1,38 @@
-﻿using System;
-using Vatsim.Vatis.Common;
-using Vatsim.Vatis.MetarParser.Entity;
+﻿using Vatsim.Vatis.Common;
+using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
 public class PressureMeta : AtisMeta
 {
-    public override void Parse(DecodedMetar metar)
+    private AtisComposite mComposite;
+
+    public PressureMeta(AtisComposite composite)
     {
-        if (metar.Pressure != null)
+        mComposite = composite;
+    }
+
+    public override void Parse(Metar metar)
+    {
+        var value = metar.AltimeterSetting.Value;
+
+        if (metar.AltimeterSetting.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
-            if (metar.Pressure.ActualUnit == Value.Unit.MercuryInch)
+            TextToSpeech = $"Altimeter {value.NumberToSingular()}";
+            if (mComposite.UseFaaFormat)
             {
-                TextToSpeech = $"Altimeter {Convert.ToInt32(metar.Pressure.ActualValue).NumberToSingular()}";
-                if (!metar.IsInternational)
-                {
-                    Acars = $"A{ metar.Pressure.ActualValue } ({ metar.Pressure.ActualValue.ToString("0000").NumberToSingular().ToUpper() })";
-                }
-                else
-                {
-                    Acars = $"A{ metar.Pressure.ActualValue }";
-                }
+                Acars = $"A{value} ({value.ToString("0000").NumberToSingular().ToUpper()})";
             }
             else
             {
-                TextToSpeech = $"QNH {Convert.ToInt32(metar.Pressure.ActualValue).NumberToSingular()}";
-                Acars = $"Q{ metar.Pressure.ActualValue }";
+                Acars = $"A{value}";
             }
+        }
+        else
+        {
+            TextToSpeech = $"QNH {value.NumberToSingular()}";
+            Acars = $"Q{value}";
         }
     }
 }

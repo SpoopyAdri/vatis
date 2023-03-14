@@ -12,6 +12,11 @@ namespace Vatsim.Vatis.Weather.Objects
     public class SurfaceWind
     {
         /// <summary>
+        /// The raw string value
+        /// </summary>
+        public string RawValue { get; init; }
+
+        /// <summary>
         /// Current wind direction (heading)
         /// </summary>
         [DataMember(Name = "direction", EmitDefaultValue = false)]
@@ -66,6 +71,8 @@ namespace Vatsim.Vatis.Weather.Objects
                 errors.Add("Wind tokens were not found");
                 return;
             }
+
+            RawValue = string.Join(" ", tokens);
 
             var windValue = tokens[0].Substring(0, 3);
             if (windValue.Equals("VRB"))

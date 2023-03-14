@@ -13,6 +13,11 @@ namespace Vatsim.Vatis.Weather.Objects
     public class CloudLayer
     {
         /// <summary>
+        /// The raw string value
+        /// </summary>
+        public string RawValue { get; init; }
+
+        /// <summary>
         /// Cloud type
         /// </summary>
         [DataMember(Name = "cloudType", EmitDefaultValue = false)]
@@ -55,6 +60,8 @@ namespace Vatsim.Vatis.Weather.Objects
                 errors.Add("Array of cloud layer tokens is empty");
                 return;
             }
+
+            RawValue = string.Join("", tokens);
 
             var cloudToken = tokens.First();
             var parsedCloudType = ParseCloudType(cloudToken);
