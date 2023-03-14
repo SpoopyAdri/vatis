@@ -261,8 +261,8 @@ public class AtisBuilder : IAtisBuilder
         var pressure = DoParse(metar, new PressureMeta(composite));
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
-        var completeWxStringVoice = $"{surfaceWind.TextToSpeech} {visibility.TextToSpeech} {rvr.TextToSpeech} {presentWeather.TextToSpeech} {clouds.TextToSpeech} {temp.TextToSpeech} {dew.TextToSpeech} {pressure.TextToSpeech}";
-        var completeWxStringAcars = $"{surfaceWind.Acars} {visibility.Acars} {rvr.Acars} {presentWeather.Acars} {clouds.Acars} {temp.Acars}/{dew.Acars} {pressure.Acars}";
+        var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
+        var completeWxStringAcars = $"{surfaceWind.TextAtis} {visibility.TextAtis} {rvr.TextAtis} {presentWeather.TextAtis} {clouds.TextAtis} {temp.TextAtis}/{dew.TextAtis} {pressure.TextAtis}";
 
         var airportConditions = "";
         if (!string.IsNullOrEmpty(composite.CurrentPreset.AirportConditions) || composite.AirportConditionDefinitions.Any(t => t.Enabled))
@@ -343,15 +343,15 @@ public class AtisBuilder : IAtisBuilder
         {
             new Variable("FACILITY", mAirport.ID, mAirport.Name),
             new Variable("ATIS_LETTER", composite.CurrentAtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
-            new Variable("TIME", time.Acars, time.TextToSpeech, new []{"OBS_TIME","OBSTIME"}),
-            new Variable("WIND", surfaceWind.Acars, surfaceWind.TextToSpeech, new[]{"SURFACE_WIND"}),
-            new Variable("RVR", rvr.Acars, rvr.TextToSpeech),
-            new Variable("VIS", visibility.Acars, visibility.TextToSpeech, new[]{"PREVAILING_VISIBILITY"}),
-            new Variable("PRESENT_WX", presentWeather.Acars, presentWeather.TextToSpeech, new[]{"PRESENT_WEATHER"}),
-            new Variable("CLOUDS", clouds.Acars, clouds.TextToSpeech),
-            new Variable("TEMP", temp.Acars, temp.TextToSpeech),
-            new Variable("DEW", dew.Acars, dew.TextToSpeech),
-            new Variable("PRESSURE", pressure.Acars, pressure.TextToSpeech, new[]{"QNH"}),
+            new Variable("TIME", time.TextAtis, time.VoiceAtis, new []{"OBS_TIME","OBSTIME"}),
+            new Variable("WIND", surfaceWind.TextAtis, surfaceWind.VoiceAtis, new[]{"SURFACE_WIND"}),
+            new Variable("RVR", rvr.TextAtis, rvr.VoiceAtis),
+            new Variable("VIS", visibility.TextAtis, visibility.VoiceAtis, new[]{"PREVAILING_VISIBILITY"}),
+            new Variable("PRESENT_WX", presentWeather.TextAtis, presentWeather.VoiceAtis, new[]{"PRESENT_WEATHER"}),
+            new Variable("CLOUDS", clouds.TextAtis, clouds.VoiceAtis),
+            new Variable("TEMP", temp.TextAtis, temp.VoiceAtis),
+            new Variable("DEW", dew.TextAtis, dew.VoiceAtis),
+            new Variable("PRESSURE", pressure.TextAtis, pressure.VoiceAtis, new[]{"QNH"}),
             new Variable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
             new Variable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
             new Variable("NOTAMS", notamText, notamVoice),
@@ -472,8 +472,8 @@ public class AtisBuilder : IAtisBuilder
         meta.Parse(metar);
         return new ParsedData
         {
-            Acars = meta.Acars,
-            TextToSpeech = !string.IsNullOrEmpty(meta.TextToSpeech) ? $"{meta.TextToSpeech.TrimEnd('.')}." : ""
+            TextAtis = meta.TextAtis,
+            VoiceAtis = !string.IsNullOrEmpty(meta.VoiceAtis) ? $"{meta.VoiceAtis.TrimEnd('.')}." : ""
         };
     }
 

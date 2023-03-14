@@ -19,20 +19,20 @@ public class PressureMeta : AtisMeta
 
         if (metar.AltimeterSetting.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
-            TextToSpeech = $"Altimeter {value.NumberToSingular()}";
+            VoiceAtis = $"Altimeter {value.NumberToSingular()}";
             if (mComposite.UseFaaFormat)
             {
-                Acars = $"A{value} ({value.ToString("0000").NumberToSingular().ToUpper()})";
+                TextAtis = $"A{value} ({value.ToString("0000").NumberToSingular().ToUpper()})";
             }
             else
             {
-                Acars = $"A{value}";
+                TextAtis = $"A{value}";
             }
         }
         else
         {
-            TextToSpeech = $"QNH {value.NumberToSingular()}";
-            Acars = $"Q{value}";
+            VoiceAtis = $"QNH {value.NumberToSingular()}";
+            TextAtis = $"Q{value}";
         }
     }
 }

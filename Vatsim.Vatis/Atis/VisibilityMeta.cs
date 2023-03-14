@@ -159,8 +159,8 @@ public class VisibilityMeta : AtisMeta
                 }
             }
 
-            TextToSpeech = string.Join(", ", tts).Trim(',');
-            Acars = metar.PrevailingVisibility.RawValue;
+            VoiceAtis = string.Join(", ", tts).Trim(',');
+            TextAtis = metar.PrevailingVisibility.RawValue;
         }
     }
 }

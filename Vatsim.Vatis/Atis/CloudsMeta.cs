@@ -83,8 +83,8 @@ public class CloudsMeta : AtisMeta
             }
         }
 
-        TextToSpeech = string.Join(", ", tts).Trim(',').Trim(' ');
-        Acars = string.Join(" ", acars).TrimEnd(' ');
+        VoiceAtis = string.Join(", ", tts).Trim(',').Trim(' ');
+        TextAtis = string.Join(" ", acars).TrimEnd(' ');
     }
 
     public static Dictionary<string, string> CloudCoverage => new Dictionary<string, string>()

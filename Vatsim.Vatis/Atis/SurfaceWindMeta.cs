@@ -127,7 +127,7 @@ public class SurfaceWindMeta : AtisMeta
             acars.Add($"{metar.SurfaceWind.ExtremeWindDirections.FirstExtremeDirection.ApplyMagVar(magVarDeg):000}V{metar.SurfaceWind.ExtremeWindDirections.LastExtremeWindDirection.ApplyMagVar(magVarDeg):000}");
         }
 
-        TextToSpeech = string.Join(", ", tts).TrimEnd(',').TrimEnd(' ');
-        Acars = string.Join(" ", acars).TrimEnd(' ');
+        VoiceAtis = string.Join(", ", tts).TrimEnd(',').TrimEnd(' ');
+        TextAtis = string.Join(" ", acars).TrimEnd(' ');
     }
 }

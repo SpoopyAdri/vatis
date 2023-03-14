@@ -23,19 +23,19 @@ public class ObservationTimeMeta : AtisMeta
 
         if (!mComposite.UseFaaFormat)
         {
-            TextToSpeech = string.Join(" ",
+            VoiceAtis = string.Join(" ",
                 metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
                 metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(),
                 isSpecial ? "special" : "").Trim(' ');
-            Acars = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}";
+            TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}";
         }
         else
         {
-            TextToSpeech = string.Join(" ", string.Join(" ",
+            VoiceAtis = string.Join(" ", string.Join(" ",
                 metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
                 metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(), "zulu"),
                 isSpecial ? "special" : "");
-            Acars = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}Z";
+            TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}Z";
         }
     }
 }

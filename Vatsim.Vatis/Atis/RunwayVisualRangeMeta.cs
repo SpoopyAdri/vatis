@@ -107,7 +107,7 @@ public class RunwayVisualRangeMeta : AtisMeta
             }
         }
 
-        Acars = string.Join(" ", acars);
-        TextToSpeech = string.Join(" ", tts).TrimEnd('.');
+        TextAtis = string.Join(" ", acars);
+        VoiceAtis = string.Join(" ", tts).TrimEnd('.');
     }
 }

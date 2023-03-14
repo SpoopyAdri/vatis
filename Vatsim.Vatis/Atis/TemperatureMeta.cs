@@ -18,13 +18,13 @@ public class TemperatureMeta : AtisMeta
     {
         if (!mComposite.UseFaaFormat && metar.Temperature.DewPoint > 0)
         {
-            TextToSpeech = $"Temperature plus {metar.Temperature.Value.NumberToSingular()}";
+            VoiceAtis = $"Temperature plus {metar.Temperature.Value.NumberToSingular()}";
         }
         else
         {
-            TextToSpeech = $"Temperature {metar.Temperature.Value.NumberToSingular()}";
+            VoiceAtis = $"Temperature {metar.Temperature.Value.NumberToSingular()}";
         }
 
-        Acars = string.Concat((metar.Temperature.Value < 0) ? "M" : "", Math.Abs(metar.Temperature.Value).ToString("00"));
+        TextAtis = string.Concat((metar.Temperature.Value < 0) ? "M" : "", Math.Abs(metar.Temperature.Value).ToString("00"));
     }
 }

@@ -2,6 +2,6 @@
 
 public class ParsedData
 {
-    public string Acars { get; set; }
-    public string TextToSpeech { get; set; }
+    public string TextAtis { get; set; }
+    public string VoiceAtis { get; set; }
 }

@@ -93,8 +93,8 @@ public class PresentWeatherMeta : AtisMeta
             }
         }
 
-        TextToSpeech = string.Join(", ", tts).Trim(',').Trim(' ');
-        Acars = string.Join(" ", acars).Trim(' ');
+        VoiceAtis = string.Join(", ", tts).Trim(',').Trim(' ');
+        TextAtis = string.Join(" ", acars).Trim(' ');
     }
 
     public static Dictionary<string, string> WeatherTypes => new Dictionary<string, string>()
