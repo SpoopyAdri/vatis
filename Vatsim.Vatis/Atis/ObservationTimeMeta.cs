@@ -28,6 +28,6 @@ public class ObservationTimeMeta : AtisMeta
             metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(),
             useZuluPrefix ? "zulu" : ""), isSpecial ? "special" : "");
 
-        TextAtis = $"{metar.ObservationDayTime.Time.Hours}{metar.ObservationDayTime.Time.Minutes}{(useZuluPrefix ? "Z" : "")}";
+        TextAtis = $"{metar.ObservationDayTime.Time.Hours:00}{metar.ObservationDayTime.Time.Minutes:00}{(useZuluPrefix ? "Z" : "")}";
     }
 }
