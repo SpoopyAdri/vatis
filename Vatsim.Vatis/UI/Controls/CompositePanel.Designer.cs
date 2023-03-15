@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panelAtisText = new HitTestPanel();
+            this.panelAtisText = new Vatsim.Vatis.UI.Controls.HitTestPanel();
             this.saveAirportConditions = new System.Windows.Forms.PictureBox();
             this.txtArptCond = new System.Windows.Forms.RichTextBox();
             this.btnAirportConditions = new System.Windows.Forms.Label();
-            this.atisLetter = new ExButton();
-            this.panelMetar = new HitTestPanel();
-            this.rtbMetar = new RichTextBoxReadOnly();
-            this.panelQuickReadout = new HitTestPanel();
-            this.lblAltimeter = new HitTestLabel();
-            this.lblWind = new HitTestLabel();
+            this.atisLetter = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.panelMetar = new Vatsim.Vatis.UI.Controls.HitTestPanel();
+            this.rtbMetar = new Vatsim.Vatis.UI.Controls.RichTextBoxReadOnly();
+            this.panelQuickReadout = new Vatsim.Vatis.UI.Controls.HitTestPanel();
+            this.lblAltimeter = new Vatsim.Vatis.UI.Controls.HitTestLabel();
+            this.lblWind = new Vatsim.Vatis.UI.Controls.HitTestLabel();
             this.btnNotams = new System.Windows.Forms.Label();
-            this.hitTestPanel2 = new HitTestPanel();
+            this.hitTestPanel2 = new Vatsim.Vatis.UI.Controls.HitTestPanel();
             this.saveNotams = new System.Windows.Forms.PictureBox();
             this.txtNotams = new System.Windows.Forms.RichTextBox();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRecord = new ExButton();
-            this.btnConnect = new ExButton();
-            this.ddlPresets = new ExComboBox();
+            this.btnRecord = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnConnect = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.ddlPresets = new Vatsim.Vatis.UI.Controls.ExComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelAtisText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.saveAirportConditions)).BeginInit();

@@ -24,6 +24,7 @@ public interface IAtisComposite
     AtisPreset CurrentPreset { get; set; }
     string CurrentAtisLetter { get; set; }
     MemoryStream MemoryStream { get; set; }
+    CodeRange CodeRange { get; set; }
     bool UseFaaFormat { get; set; }
     bool UseExternalAtisGenerator { get; set; }
     bool UseNotamPrefix { get; set; }

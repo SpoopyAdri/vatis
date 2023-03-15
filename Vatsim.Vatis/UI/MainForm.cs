@@ -243,6 +243,7 @@ public partial class MainForm : Form
                 tab.Text = tabId;
                 tab.Connection.Frequency = composite.AtisFrequency;
                 tab.CompositeMeta.BindPresets(composite.Presets.Select(x => x.Name).ToList());
+                tab.CompositeMeta.AtisLetter = composite.CodeRange.Low.ToString();
                 atisTabs.Invalidate();
             }
             else

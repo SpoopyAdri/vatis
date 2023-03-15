@@ -38,6 +38,10 @@ namespace Vatsim.Vatis.UI
             this.pageConfiguration = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pageGeneral = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtCodeRangeHigh = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtCodeRangeLow = new System.Windows.Forms.TextBox();
             this.groupVoiceOption = new System.Windows.Forms.Panel();
             this.radioTextToSpeech = new System.Windows.Forms.RadioButton();
             this.ddlVoices = new System.Windows.Forms.ComboBox();
@@ -241,6 +245,10 @@ namespace Vatsim.Vatis.UI
             // 
             // pageGeneral
             // 
+            this.pageGeneral.Controls.Add(this.label15);
+            this.pageGeneral.Controls.Add(this.txtCodeRangeHigh);
+            this.pageGeneral.Controls.Add(this.label14);
+            this.pageGeneral.Controls.Add(this.txtCodeRangeLow);
             this.pageGeneral.Controls.Add(this.groupVoiceOption);
             this.pageGeneral.Controls.Add(this.label3);
             this.pageGeneral.Controls.Add(this.vhfFrequency);
@@ -259,6 +267,44 @@ namespace Vatsim.Vatis.UI
             this.pageGeneral.TabIndex = 1;
             this.pageGeneral.Text = "General";
             this.pageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(487, 78);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(18, 15);
+            this.label15.TabIndex = 42;
+            this.label15.Text = "to";
+            // 
+            // txtCodeRangeHigh
+            // 
+            this.txtCodeRangeHigh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCodeRangeHigh.Location = new System.Drawing.Point(507, 74);
+            this.txtCodeRangeHigh.Name = "txtCodeRangeHigh";
+            this.txtCodeRangeHigh.Size = new System.Drawing.Size(45, 23);
+            this.txtCodeRangeHigh.TabIndex = 41;
+            this.txtCodeRangeHigh.TextChanged += new System.EventHandler(this.txtCodeRangeHigh_TextChanged);
+            this.txtCodeRangeHigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AlphaOnly);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(360, 78);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 15);
+            this.label14.TabIndex = 40;
+            this.label14.Text = "Code Range:";
+            // 
+            // txtCodeRangeLow
+            // 
+            this.txtCodeRangeLow.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCodeRangeLow.Location = new System.Drawing.Point(440, 74);
+            this.txtCodeRangeLow.Name = "txtCodeRangeLow";
+            this.txtCodeRangeLow.Size = new System.Drawing.Size(45, 23);
+            this.txtCodeRangeLow.TabIndex = 39;
+            this.txtCodeRangeLow.TextChanged += new System.EventHandler(this.txtCodeRangeLow_TextChanged);
+            this.txtCodeRangeLow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AlphaOnly);
             // 
             // groupVoiceOption
             // 
@@ -1541,5 +1587,9 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkDecimalTerminology;
         private System.Windows.Forms.CheckBox chkPrefixTemperature;
         private System.Windows.Forms.CheckBox chkAppendZulu;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtCodeRangeLow;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtCodeRangeHigh;
     }
 }

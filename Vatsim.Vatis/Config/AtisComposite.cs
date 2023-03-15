@@ -27,6 +27,7 @@ public class AtisComposite : IAtisComposite
     public List<DefinedText> NotamDefinitions { get; set; } = new List<DefinedText>();
     public bool NotamsBeforeFreeText { get; set; }
     public List<TransitionLevel> TransitionLevels { get; set; } = new List<TransitionLevel>();
+    public CodeRange CodeRange { get; set; } = new CodeRange('A', 'Z');
     public bool UseFaaFormat { get; set; } = true;
     public bool UseExternalAtisGenerator { get; set; }
     public bool UseNotamPrefix { get; set; } = true;
@@ -145,4 +146,16 @@ public class TransitionLevel
     public int Low { get; set; }
     public int High { get; set; }
     public int Altitude { get; set; }
+}
+
+[Serializable]
+public class CodeRange
+{
+    public char Low { get; set; }
+    public char High { get; set; }
+    public CodeRange(char low, char high)
+    {
+        Low = low;
+        High = high;
+    }
 }

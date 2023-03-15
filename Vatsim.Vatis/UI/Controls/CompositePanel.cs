@@ -184,6 +184,7 @@ internal partial class CompositePanel : UserControl
             mAlternateColor = !mAlternateColor;
         };
 
+        AtisLetter = mComposite.CodeRange.Low.ToString();
         mComposite.CurrentAtisLetter = AtisLetter;
     }
 
@@ -217,9 +218,9 @@ internal partial class CompositePanel : UserControl
         switch (e.Button)
         {
             case MouseButtons.Right:
-                if (letter == 'A')
+                if (letter == mComposite.CodeRange.Low)
                 {
-                    AtisLetter = "Z";
+                    AtisLetter = mComposite.CodeRange.High.ToString();
                 }
                 else
                 {
@@ -228,9 +229,9 @@ internal partial class CompositePanel : UserControl
                 }
                 break;
             case MouseButtons.Left:
-                if (letter == 'Z')
+                if (letter == mComposite.CodeRange.High)
                 {
-                    AtisLetter = "A";
+                    AtisLetter = mComposite.CodeRange.Low.ToString();
                 }
                 else
                 {

@@ -32,6 +32,8 @@ public partial class ProfileConfigurationForm : Form
 
     private bool mFrequencyChanged = false;
     private bool mAtisTypeChanged = false;
+    private bool mCodeRangeLowChanged = false;
+    private bool mCodeRangeHighChanged = false;
     private bool mFaaFormatChanged = false;
     private bool mObservationTimeChanged = false;
     private bool mMagneticVariationChanged = false;
@@ -128,14 +130,35 @@ public partial class ProfileConfigurationForm : Form
         {
             case AtisType.Combined:
                 typeCombined.Checked = true;
+                txtCodeRangeLow.Enabled = false;
+                txtCodeRangeHigh.Enabled = false;
                 break;
             case AtisType.Departure:
                 typeDeparture.Checked = true;
+                txtCodeRangeLow.Enabled = true;
+                txtCodeRangeHigh.Enabled = true;
                 break;
             case AtisType.Arrival:
                 typeArrival.Checked = true;
+                txtCodeRangeLow.Enabled = true;
+                txtCodeRangeHigh.Enabled = true;
                 break;
         }
+
+        if (!char.IsLetter(mCurrentComposite.CodeRange.Low))
+        {
+            mCurrentComposite.CodeRange.Low = 'A';
+            mAppConfig.SaveConfig();
+        }
+
+        if (!char.IsLetter(mCurrentComposite.CodeRange.High))
+        {
+            mCurrentComposite.CodeRange.High = 'Z';
+            mAppConfig.SaveConfig();
+        }
+
+        txtCodeRangeLow.Text = mCurrentComposite.CodeRange.Low.ToString();
+        txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
         chkFaaFormat.Checked = mCurrentComposite.UseFaaFormat;
         chkExternalAtisGenerator.Checked = mCurrentComposite.UseExternalAtisGenerator;
@@ -624,6 +647,18 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
+        if (mCodeRangeLowChanged)
+        {
+            mCurrentComposite.CodeRange.Low = char.Parse(txtCodeRangeLow.Text);
+            mCodeRangeLowChanged = false;
+        }
+
+        if (mCodeRangeHighChanged)
+        {
+            mCurrentComposite.CodeRange.High = char.Parse(txtCodeRangeHigh.Text);
+            mCodeRangeHighChanged = false;
+        }
+
         if (mFaaFormatChanged)
         {
             mCurrentComposite.UseFaaFormat = chkFaaFormat.Checked;
@@ -901,6 +936,12 @@ public partial class ProfileConfigurationForm : Form
         if (!typeCombined.Focused)
             return;
 
+        if (typeCombined.Checked)
+        {
+            txtCodeRangeLow.Enabled = false;
+            txtCodeRangeHigh.Enabled = false;
+        }
+
         if (typeCombined.Checked && mCurrentComposite.AtisType != AtisType.Combined)
         {
             mAtisTypeChanged = true;
@@ -920,6 +961,12 @@ public partial class ProfileConfigurationForm : Form
 
         if (!typeDeparture.Focused)
             return;
+
+        if (typeDeparture.Checked)
+        {
+            txtCodeRangeLow.Enabled = true;
+            txtCodeRangeHigh.Enabled = true;
+        }
 
         if (typeDeparture.Checked && mCurrentComposite.AtisType != AtisType.Departure)
         {
@@ -941,6 +988,12 @@ public partial class ProfileConfigurationForm : Form
         if (!typeArrival.Focused)
             return;
 
+        if (typeArrival.Checked)
+        {
+            txtCodeRangeLow.Enabled = true;
+            txtCodeRangeHigh.Enabled = true;
+        }
+
         if (typeArrival.Checked && mCurrentComposite.AtisType != AtisType.Arrival)
         {
             mAtisTypeChanged = true;
@@ -949,6 +1002,46 @@ public partial class ProfileConfigurationForm : Form
         else
         {
             mAtisTypeChanged = false;
+            btnApply.Enabled = false;
+        }
+    }
+
+    private void txtCodeRangeLow_TextChanged(object sender, EventArgs e)
+    {
+        if (mCurrentComposite == null)
+            return;
+
+        if (!txtCodeRangeLow.Focused)
+            return;
+
+        if ((txtCodeRangeLow.Text ?? "") != mCurrentComposite.CodeRange.Low.ToString())
+        {
+            mCodeRangeLowChanged = true;
+            btnApply.Enabled = true;
+        }
+        else
+        {
+            mCodeRangeLowChanged = false;
+            btnApply.Enabled = false;
+        }
+    }
+
+    private void txtCodeRangeHigh_TextChanged(object sender, EventArgs e)
+    {
+        if (mCurrentComposite == null)
+            return;
+
+        if (!txtCodeRangeHigh.Focused)
+            return;
+
+        if ((txtCodeRangeHigh.Text ?? "") != mCurrentComposite.CodeRange.High.ToString())
+        {
+            mCodeRangeLowChanged = true;
+            btnApply.Enabled = true;
+        }
+        else
+        {
+            mCodeRangeLowChanged = false;
             btnApply.Enabled = false;
         }
     }
@@ -2275,5 +2368,10 @@ public partial class ProfileConfigurationForm : Form
     {
         EventBus.Unregister(this);
         base.OnFormClosing(e);
+    }
+
+    private void AlphaOnly(object sender, KeyPressEventArgs e)
+    {
+        e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
     }
 }
