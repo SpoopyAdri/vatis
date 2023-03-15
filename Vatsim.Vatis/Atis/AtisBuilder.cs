@@ -96,11 +96,6 @@ public class AtisBuilder : IAtisBuilder
                     }
                 }
             }
-
-            if (composite.UseFaaFormat)
-            {
-                voiceString.Append($"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.");
-            }
         }
 
         if (composite.AtisVoice.UseTextToSpeech)
@@ -237,17 +232,11 @@ public class AtisBuilder : IAtisBuilder
             }
         }
 
-        acarsText = Regex.Replace(acarsText, @"\s+(?=[.,?!])", ""); // remove extra spaces before punctuation
         acarsText = Regex.Replace(acarsText, @"\s+", " ");
         acarsText = Regex.Replace(acarsText, @"(?<=\*)(-?[\,0-9]+)", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\#)(-?[\,0-9]+)", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{3})", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{4})", "$1");
-
-        if (composite.UseFaaFormat)
-        {
-            acarsText += $" ...ADVS YOU HAVE INFO { composite.CurrentAtisLetter }.";
-        }
 
         composite.AcarsText = acarsText.ToUpper();
     }
@@ -360,7 +349,8 @@ public class AtisBuilder : IAtisBuilder
             new Variable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
             new Variable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
             new Variable("NOTAMS", notamText, notamVoice),
-            new Variable("TL", transitionLevelText, transitionLevelVoice)
+            new Variable("TL", transitionLevelText, transitionLevelVoice),
+            new Variable("CLOSING", $" ...ADVS YOU HAVE INFO {composite.CurrentAtisLetter }.", $"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.")
         };
     }
 
