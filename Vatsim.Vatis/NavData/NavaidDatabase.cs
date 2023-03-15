@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Serilog;
 using Vatsim.Vatis.Io;
 
-namespace Vatsim.Vatis.Core;
+namespace Vatsim.Vatis.NavData;
 
 public class NavaidDatabase : INavaidDatabase
 {
@@ -83,28 +83,4 @@ public class NavaidDatabase : INavaidDatabase
             catch { }
         }
     }
-}
-
-public class Navaid
-{
-    [JsonProperty("ID")]
-    public string ID { get; set; }
-
-    [JsonProperty("Name")]
-    public string Name { get; set; }
-}
-
-public class Airport
-{
-    [JsonProperty("ID")]
-    public string ID { get; set; }
-
-    [JsonProperty("Name")]
-    public string Name { get; set; }
-
-    [JsonProperty("Lat")]
-    public double Latitude { get; set; }
-
-    [JsonProperty("Lon")]
-    public double Longitude { get; set; }
 }

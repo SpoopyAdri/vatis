@@ -11,11 +11,12 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using RestSharp;
-using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 

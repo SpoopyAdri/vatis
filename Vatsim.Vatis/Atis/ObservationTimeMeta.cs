@@ -1,5 +1,5 @@
-﻿using Vatsim.Vatis.Common;
-using Vatsim.Vatis.Config;
+﻿using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;

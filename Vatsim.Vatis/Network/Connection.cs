@@ -8,11 +8,11 @@ using System.Timers;
 using RestSharp;
 using Vatsim.Network;
 using Vatsim.Network.PDU;
-using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.Network;
 

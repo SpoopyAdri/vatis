@@ -3,12 +3,12 @@ using System.Linq;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
 public static class ClientAudioUtilities
 {
     public static bool IsInputDevicePresent => WaveIn.DeviceCount > 0;
-        
+
     public static IEnumerable<string> GetInputDevices()
     {
         return GetWasapiInputDevices();

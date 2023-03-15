@@ -11,11 +11,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RestSharp;
 using Vatsim.Vatis.AudioForVatsim;
-using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
@@ -375,7 +375,7 @@ public class AtisBuilder : IAtisBuilder
 
         // parse runways
         input = Regex.Replace(input, @"\b(RY|RWY|RWYS)?\s?([0-9]{1,2})([LRC]?)\b", m =>
-            StringUtils.RwyNumbersToWords(int.Parse(m.Groups[2].Value), m.Groups[3].Value,
+            StringExtensions.RwyNumbersToWords(int.Parse(m.Groups[2].Value), m.Groups[3].Value,
                 prefix: !string.IsNullOrEmpty(m.Groups[1].Value),
                 plural: !string.IsNullOrEmpty(m.Groups[1].Value) && m.Groups[1].Value == "RWYS",
                 leadingZero: !composite.UseFaaFormat));

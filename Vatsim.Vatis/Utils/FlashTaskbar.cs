@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
 public static class FlashTaskbar
 {
@@ -144,6 +144,6 @@ public static class FlashTaskbar
     /// </summary>
     private static bool Win2000OrLater
     {
-        get { return System.Environment.OSVersion.Version.Major >= 5; }
+        get { return Environment.OSVersion.Version.Major >= 5; }
     }
 }

@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Updates;
 
 namespace Vatsim.Vatis.UI.Startup

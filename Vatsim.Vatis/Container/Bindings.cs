@@ -5,6 +5,7 @@ using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Io;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI;
 using Vatsim.Vatis.Updates;

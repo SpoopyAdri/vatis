@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Vatsim.Vatis.Core;
+namespace Vatsim.Vatis.NavData;
 
 public interface INavaidDatabase
 {

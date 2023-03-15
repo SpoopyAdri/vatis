@@ -1,12 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
-public static class StringUtils
+public static class StringExtensions
 {
+    public static string GetCheckSum(this string filePath)
+    {
+        using var crypto = SHA256.Create();
+        using FileStream fileStream = File.OpenRead(filePath);
+        return crypto.ComputeHash(fileStream).ToHex();
+    }
+
+    public static string ToHex(this byte[] bytes)
+    {
+        StringBuilder result = new StringBuilder(bytes.Length * 2);
+        for (int i = 0; i < bytes.Length; i++)
+            result.Append(bytes[i].ToString("x2"));
+        return result.ToString();
+    }
+
     /// <summary>
     /// Strips away multiple spaces.
     /// </summary>
@@ -131,7 +149,7 @@ public static class StringUtils
         uint freqint = Convert.ToUInt32(Convert.ToDouble(freq) * 1000000);
         freqint /= 1000;
 
-        if (((freqint % 100) == 20) || ((freqint % 100) == 70))
+        if (freqint % 100 == 20 || freqint % 100 == 70)
         {
             freqint += 5;
         }

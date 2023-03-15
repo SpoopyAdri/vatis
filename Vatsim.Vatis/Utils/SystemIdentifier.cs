@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Management;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
 public static class SystemIdentifier
 {

@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.UI.Controls;
+using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 

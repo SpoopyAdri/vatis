@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
-public static class NumberUtils
+public static class NumberExtensions
 {
     /// <summary>
     /// Translates numeric digit into word string.
@@ -20,25 +20,25 @@ public static class NumberUtils
             return "zero";
 
         if (number < 0)
-            return "minus " + NumbersToWordsGroup(Math.Abs(number));
+            return "minus " + Math.Abs(number).NumbersToWordsGroup();
 
         string words = "";
 
-        if ((number / 1000000) > 0)
+        if (number / 1000000 > 0)
         {
-            words += NumbersToWordsGroup(number / 1000000) + " million ";
+            words += (number / 1000000).NumbersToWordsGroup() + " million ";
             number %= 1000000;
         }
 
-        if ((number / 1000) > 0)
+        if (number / 1000 > 0)
         {
-            words += NumbersToWordsGroup(number / 1000) + " thousand ";
+            words += (number / 1000).NumbersToWordsGroup() + " thousand ";
             number %= 1000;
         }
 
-        if ((number / 100) > 0)
+        if (number / 100 > 0)
         {
-            words += NumbersToWordsGroup(number / 100) + " hundred ";
+            words += (number / 100).NumbersToWordsGroup() + " hundred ";
             number %= 100;
         }
 
@@ -55,7 +55,7 @@ public static class NumberUtils
             else
             {
                 words += tensMap[number / 10];
-                if ((number % 10) > 0)
+                if (number % 10 > 0)
                     words += "-" + unitsMap[number % 10];
             }
         }
@@ -81,25 +81,25 @@ public static class NumberUtils
             return "zero";
 
         if (isNegative)
-            return "minus " + NumbersToWords(Math.Abs(number));
+            return "minus " + Math.Abs(number).NumbersToWords();
 
         string words = "";
 
-        if ((number / 1000000) > 0)
+        if (number / 1000000 > 0)
         {
-            words += NumbersToWords(number / 1000000) + " million ";
+            words += (number / 1000000).NumbersToWords() + " million ";
             number %= 1000000;
         }
 
-        if ((number / 1000) > 0)
+        if (number / 1000 > 0)
         {
-            words += NumbersToWords(number / 1000) + " thousand ";
+            words += (number / 1000).NumbersToWords() + " thousand ";
             number %= 1000;
         }
 
-        if ((number / 100) > 0)
+        if (number / 100 > 0)
         {
-            words += NumbersToWords(number / 100) + " hundred ";
+            words += (number / 100).NumbersToWords() + " hundred ";
             number %= 100;
         }
 
@@ -113,7 +113,7 @@ public static class NumberUtils
             else
             {
                 words += tensMap[number / 10];
-                if ((number % 10) >= 0)
+                if (number % 10 >= 0)
                     words += " " + unitsMap[number % 10];
             }
         }

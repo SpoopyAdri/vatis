@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vatsim.Vatis.Atis;
 using Vatsim.Vatis.AudioForVatsim;
-using Vatsim.Vatis.Common;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
+using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 

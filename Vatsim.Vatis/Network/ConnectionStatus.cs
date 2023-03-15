@@ -1,4 +1,4 @@
-﻿namespace Vatsim.Vatis.Core;
+﻿namespace Vatsim.Vatis.Network;
 
 public enum ConnectionStatus
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Vatsim.Vatis.Common;
+namespace Vatsim.Vatis.Utils;
 
 public static class TabPageExtensions
 {
