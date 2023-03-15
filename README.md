@@ -17,9 +17,8 @@ xPilot is licensed under the [GPLv3 open-source license](LICENSE).
 
 # Acknowledgments
 * [GeoVR](https://github.com/macaba/GeoVR) AFV client library
-* [Appccelerate.EventBroker](http://appccelerate.github.io/eventbroker.html) event broker library
 * [Concentus](https://github.com/lostromb/concentus) OPUS audio codec implementation
 * [NAudio](https://github.com/naudio/NAudio) .NET audio library
 * [Json.NET](https://www.newtonsoft.com/json) high-performance JSON framework
 * [RestSharp](https://restsharp.dev/) .NET REST API client
-* [Simple Injector](https://simpleinjector.org/) .NET dependency injection
+* [Ninject](http://www.ninject.org/) .NET dependency injection
