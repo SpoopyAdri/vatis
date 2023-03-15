@@ -374,7 +374,7 @@ public class AtisBuilder : IAtisBuilder
         input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS { m.Groups[1].Value.ConvertAlphaNumericToWordGroup() }");
 
         // parse runways
-        input = Regex.Replace(input, @"\b(RY|RWY|RWYS)?\s?([0-9]{1,2})([LRC]?)\b", m =>
+        input = Regex.Replace(input, @"\b(RY|RWY|RWYS)\s?([0-9]{1,2})([LRC]?)\b", m =>
             StringExtensions.RwyNumbersToWords(int.Parse(m.Groups[2].Value), m.Groups[3].Value,
                 prefix: !string.IsNullOrEmpty(m.Groups[1].Value),
                 plural: !string.IsNullOrEmpty(m.Groups[1].Value) && m.Groups[1].Value == "RWYS",
