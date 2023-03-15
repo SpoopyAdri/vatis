@@ -294,6 +294,11 @@ public partial class MainForm : Form
                         connection.Connect();
                     }
                 };
+                tabPage.Connection.MetarNotFoundReceived += (sender, args) =>
+                {
+                    tabPage.CompositeMeta.Error = "Error: METAR not found";
+                    connection.Disconnect();
+                };
                 tabPage.Connection.MetarResponseReceived += async (sender, args) =>
                 {
                     var metar = mMetarParser.Parse(args.Metar);
@@ -524,6 +529,7 @@ public partial class MainForm : Form
                 connection.NetworkErrorReceived += (sender, args) =>
                 {
                     tabPage.CompositeMeta.Error = "Network Error: " + args.Error;
+                    connection.Disconnect();
                 };
                 connection.KillRequestReceived += (sender, args) =>
                 {

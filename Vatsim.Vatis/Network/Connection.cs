@@ -32,6 +32,7 @@ public class Connection
     public event EventHandler NetworkConnectedChanged;
     public event EventHandler NetworkDisconnectedChanged;
     public event EventHandler<MetarResponseReceived> MetarResponseReceived;
+    public event EventHandler MetarNotFoundReceived;
     public event EventHandler<NetworkErrorReceived> NetworkErrorReceived;
     public event EventHandler<KillRequestReceived> KillRequestReceived;
 
@@ -133,7 +134,11 @@ public class Connection
 
     private void OnProtocolErrorReceived(object sender, DataReceivedEventArgs<PDUProtocolError> e)
     {
-        if (e.PDU.Fatal)
+        if (e.PDU.ErrorType == NetworkError.NoWeatherProfile)
+        {
+            MetarNotFoundReceived?.Invoke(this, EventArgs.Empty);
+        }
+        else if (e.PDU.Fatal)
         {
             NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(e.PDU.Message));
         }
