@@ -78,6 +78,9 @@ public class AtisBuilder : IAtisBuilder
 
             foreach (var variable in variables)
             {
+                voiceString.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
+                voiceString.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
+
                 voiceString.Replace($"[{variable.Find}]", variable.VoiceReplace);
                 voiceString.Replace($"${variable.Find}", variable.VoiceReplace);
 
@@ -85,6 +88,9 @@ public class AtisBuilder : IAtisBuilder
                 {
                     foreach (var alias in variable.Aliases)
                     {
+                        voiceString.Replace($"[{alias}:VOX]", variable.VoiceReplace);
+                        voiceString.Replace($"${alias}:VOX", variable.VoiceReplace);
+
                         voiceString.Replace($"[{alias}]", variable.VoiceReplace);
                         voiceString.Replace($"${alias}", variable.VoiceReplace);
                     }
@@ -212,6 +218,9 @@ public class AtisBuilder : IAtisBuilder
 
         foreach (var variable in variables)
         {
+            acarsText = acarsText.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
+            acarsText = acarsText.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
+
             acarsText = acarsText.Replace($"[{variable.Find}]", variable.TextReplace);
             acarsText = acarsText.Replace($"${variable.Find}", variable.TextReplace);
 
@@ -219,6 +228,9 @@ public class AtisBuilder : IAtisBuilder
             {
                 foreach (var alias in variable.Aliases)
                 {
+                    acarsText = acarsText.Replace($"[{alias}:VOX]", variable.VoiceReplace);
+                    acarsText = acarsText.Replace($"${alias}:VOX", variable.VoiceReplace);
+
                     acarsText = acarsText.Replace($"[{alias}]", variable.TextReplace);
                     acarsText = acarsText.Replace($"${alias}", variable.TextReplace);
                 }
