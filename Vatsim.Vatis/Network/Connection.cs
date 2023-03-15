@@ -395,7 +395,7 @@ public class Connection
     {
         foreach (var subscriber in mSubscribers)
         {
-            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"***{AirportIcao} ATIS UPDATE: {Composite.CurrentAtisLetter} {Composite.DecodedMetar.SurfaceWind} - {Composite.DecodedMetar.Pressure}"));
+            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"***{AirportIcao} ATIS UPDATE: {Composite.CurrentAtisLetter} {Composite.DecodedMetar.SurfaceWind.RawValue} - {Composite.DecodedMetar.AltimeterSetting.RawValue}"));
         }
 
         foreach (var subscriber in mEuroscopeSubscribers)
@@ -403,7 +403,7 @@ public class Connection
             mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"ATIS info:{AirportIcao}:{Composite.CurrentAtisLetter}:"));
         }
 
-        mSession.SendPDU(new PDUClientQuery(Callsign, PDUBase.CLIENT_QUERY_BROADCAST_RECIPIENT, ClientQueryType.NewATIS, new List<string> { $"ATIS {Composite.CurrentAtisLetter}:  {Composite.DecodedMetar.SurfaceWind} - {Composite.DecodedMetar.Pressure}" }));
+        mSession.SendPDU(new PDUClientQuery(Callsign, PDUBase.CLIENT_QUERY_BROADCAST_RECIPIENT, ClientQueryType.NewATIS, new List<string> { $"ATIS {Composite.CurrentAtisLetter}:  {Composite.DecodedMetar.SurfaceWind.RawValue} {Composite.DecodedMetar.AltimeterSetting.RawValue}" }));
     }
 }
 
