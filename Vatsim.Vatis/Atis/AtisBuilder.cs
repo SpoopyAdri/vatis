@@ -57,10 +57,7 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception($"{composite.Identifier} not found in airport database.");
         }
 
-        Metar metar;
-        string atisLetter;
-        List<Variable> variables;
-        ParseMetar(composite, out metar, out atisLetter, out variables);
+        ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
 
         GenerateAcarsText(composite);
 
@@ -209,10 +206,7 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception($"{composite.Identifier} not found in airport database.");
         }
 
-        Metar metar;
-        string atisLetter;
-        List<Variable> variables;
-        ParseMetar(composite, out metar, out atisLetter, out variables);
+        ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
 
         var acarsText = composite.CurrentPreset.Template;
 
@@ -515,7 +509,7 @@ public class AtisBuilder : IAtisBuilder
         }
     }
 
-    private Dictionary<string, string> Translations => new Dictionary<string, string>
+    private static Dictionary<string, string> Translations => new Dictionary<string, string>
     {
         {"ACFT", "AIRCRAFT"},
         {"ADVS", "ADVISE"},
