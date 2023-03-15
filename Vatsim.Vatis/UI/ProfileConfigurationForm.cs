@@ -112,7 +112,7 @@ public partial class ProfileConfigurationForm : Form
                     return;
 
                 mCurrentComposite = mAppConfig.CurrentProfile.Composites
-                    .FirstOrDefault(x => x.Identifier == composite.Identifier && x.AtisType == composite.AtisType);
+                    .FirstOrDefault(x => x.Id == composite.Id);
 
                 LoadComposite();
                 RefreshPresetList();
@@ -400,6 +400,13 @@ public partial class ProfileConfigurationForm : Form
                     clone.Identifier = dlg.Identifier;
                     clone.Name = dlg.CompositeName;
                     clone.AtisType = dlg.Type;
+
+                    var presets = new List<AtisPreset>();
+                    foreach (var preset in composite.Presets)
+                    {
+                        presets.Add(preset.Clone());
+                    }
+                    clone.Presets = presets;
 
                     mAppConfig.CurrentProfile.Composites.Add(clone);
                     mAppConfig.SaveConfig();

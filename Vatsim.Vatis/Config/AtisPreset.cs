@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Vatsim.Vatis.Config;
 
 [System.Serializable]
 public class AtisPreset : IAtisProfile
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
     public string AirportConditions { get; set; }
     public string Notams { get; set; }
@@ -20,6 +22,8 @@ public class AtisPreset : IAtisProfile
     {
         return new AtisPreset
         {
+            Id = Guid.NewGuid(),
+            Name = Name,
             AirportConditions = AirportConditions,
             Notams = Notams,
             ArbitraryText = ArbitraryText,

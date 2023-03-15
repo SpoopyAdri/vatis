@@ -46,7 +46,6 @@ public class AtisComposite : IAtisComposite
             AtisFrequency = AtisFrequency,
             ObservationTime = ObservationTime,
             MagneticVariation = MagneticVariation,
-            Presets = Presets,
             AirportConditionDefinitions = AirportConditionDefinitions,
             AirportConditionsBeforeFreeText = AirportConditionsBeforeFreeText,
             NotamDefinitions = NotamDefinitions,
