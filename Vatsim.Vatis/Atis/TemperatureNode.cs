@@ -11,15 +11,20 @@ public class TemperatureNode : AtisNode
 
     public override void Parse(Metar metar)
     {
-        if (Composite.UseTemperaturePlusPrefix && metar.Temperature.DewPoint > 0)
+        Parse(metar.Temperature);
+    }
+
+    public void Parse(TemperatureInfo node)
+    {
+        if (Composite.UseTemperaturePlusPrefix && node.Value > 0)
         {
-            VoiceAtis = $"Temperature plus {metar.Temperature.Value.NumberToSingular()}";
+            VoiceAtis = $"Temperature plus {node.Value.NumberToSingular()}";
         }
         else
         {
-            VoiceAtis = $"Temperature {metar.Temperature.Value.NumberToSingular()}";
+            VoiceAtis = $"Temperature {node.Value.NumberToSingular()}";
         }
 
-        TextAtis = string.Concat((metar.Temperature.Value < 0) ? "M" : "", Math.Abs(metar.Temperature.Value).ToString("00"));
+        TextAtis = string.Concat((node.Value < 0) ? "M" : "", Math.Abs(node.Value).ToString("00"));
     }
 }

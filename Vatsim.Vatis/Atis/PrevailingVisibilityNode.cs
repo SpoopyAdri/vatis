@@ -11,39 +11,44 @@ public class PrevailingVisibilityNode : AtisNode
 
     public override void Parse(Metar metar)
     {
+        Parse(metar.PrevailingVisibility);
+    }
+
+    public void Parse(PrevailingVisibility node)
+    {
         List<string> tts = new List<string>();
-        if (metar.PrevailingVisibility != null)
+        if (node != null)
         {
-            if (metar.PrevailingVisibility.IsCavok)
+            if (node.IsCavok)
             {
                 tts.Add("CAV-OK");
             }
             else
             {
-                if (metar.PrevailingVisibility.VisibilityInMeters != null)
+                if (node.VisibilityInMeters != null)
                 {
-                    if (metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue == 9999)
+                    if (node.VisibilityInMeters.VisibilityValue == 9999)
                     {
                         tts.Add("Visibility one, zero kilometers or more");
                     }
                     else
                     {
-                        if (metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue > 5000)
+                        if (node.VisibilityInMeters.VisibilityValue > 5000)
                         {
-                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue / 1000} {(Composite.UseVisibilitySuffix ? "kilometers" : "")}");
+                            tts.Add($"Visibility {node.VisibilityInMeters.VisibilityValue / 1000} {(Composite.UseVisibilitySuffix ? "kilometers" : "")}");
                         }
                         else
                         {
-                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue.NumbersToWords()} {(Composite.UseVisibilitySuffix ? "meters" : "")}");
+                            tts.Add($"Visibility {node.VisibilityInMeters.VisibilityValue.NumbersToWords()} {(Composite.UseVisibilitySuffix ? "meters" : "")}");
                         }
                     }
                 }
                 else
                 {
-                    if (metar.PrevailingVisibility.RawValue.Contains("/"))
+                    if (node.RawValue.Contains("/"))
                     {
                         string result = "";
-                        switch (metar.PrevailingVisibility.RawValue)
+                        switch (node.RawValue)
                         {
                             case "M1/4SM":
                                 result = "less than one quarter.";
@@ -113,17 +118,17 @@ public class PrevailingVisibilityNode : AtisNode
                     }
                     else
                     {
-                        tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInStatuteMiles.WholeNumber}");
+                        tts.Add($"Visibility {node.VisibilityInStatuteMiles.WholeNumber}");
                     }
                 }
 
-                if (metar.PrevailingVisibility.VisibilityInMeters != null)
+                if (node.VisibilityInMeters != null)
                 {
-                    if (metar.PrevailingVisibility.VisibilityInMeters.VisibilityDirection != Weather.Enums.VisibilityDirection.NotSet)
+                    if (node.VisibilityInMeters.VisibilityDirection != Weather.Enums.VisibilityDirection.NotSet)
                     {
-                        var minVis = metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue;
+                        var minVis = node.VisibilityInMeters.VisibilityValue;
 
-                        switch (metar.PrevailingVisibility.VisibilityInMeters.VisibilityDirection)
+                        switch (node.VisibilityInMeters.VisibilityDirection)
                         {
                             case Weather.Enums.VisibilityDirection.North:
                                 tts.Add($"To the north {minVis.NumbersToWordsGroup()}");
@@ -155,7 +160,7 @@ public class PrevailingVisibilityNode : AtisNode
             }
 
             VoiceAtis = string.Join(", ", tts).Trim(',');
-            TextAtis = metar.PrevailingVisibility.RawValue;
+            TextAtis = node.RawValue;
         }
     }
 }

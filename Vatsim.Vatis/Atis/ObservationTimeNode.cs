@@ -10,7 +10,12 @@ public class ObservationTimeNode : AtisNode
 
     public override void Parse(Metar metar)
     {
-        var minutes = metar.ObservationDayTime.Time.Minutes;
+        Parse(metar.ObservationDayTime);
+    }
+
+    public void Parse(ObservationDayTime node)
+    {
+        var minutes = node.Time.Minutes;
 
         var isSpecial = Composite.ObservationTime != null
             && Composite.ObservationTime.Enabled
@@ -19,10 +24,10 @@ public class ObservationTimeNode : AtisNode
         var useZuluPrefix = Composite.UseZuluTimeSuffix || Composite.UseFaaFormat;
 
         VoiceAtis = string.Join(" ", string.Join(" ",
-            metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),
-            metar.ObservationDayTime.Time.Minutes.ToString("00").NumberToSingular(),
+            node.Time.Hours.ToString("00").NumberToSingular(),
+            node.Time.Minutes.ToString("00").NumberToSingular(),
             useZuluPrefix ? "zulu" : ""), isSpecial ? "special" : "");
 
-        TextAtis = $"{metar.ObservationDayTime.Time.Hours:00}{metar.ObservationDayTime.Time.Minutes:00}{(useZuluPrefix ? "Z" : "")}";
+        TextAtis = $"{node.Time.Hours:00}{node.Time.Minutes:00}{(useZuluPrefix ? "Z" : "")}";
     }
 }

@@ -12,20 +12,25 @@ public class CloudNode : AtisNode
 
     public override void Parse(Metar metar)
     {
+        Parse(metar.CloudLayers);
+    }
+
+    public void Parse(CloudLayer[] node)
+    {
         var tts = new List<string>();
         var acars = new List<string>();
 
-        if (metar.CloudLayers == null)
+        if (node == null)
             return;
 
         var cloudPrefixIncluded = false;
 
-        var ceiling = metar.CloudLayers
+        var ceiling = node
             .Where(n => n.Altitude > 0 && (n.CloudType == Weather.Enums.CloudType.Overcast ||
                         n.CloudType == Weather.Enums.CloudType.Broken))
             .Select(n => n).OrderBy(n => n.Altitude).FirstOrDefault();
 
-        foreach (var layer in metar.CloudLayers)
+        foreach (var layer in node)
         {
             int altitude = layer.Altitude * 100;
             if (Composite.UseMetricUnits)

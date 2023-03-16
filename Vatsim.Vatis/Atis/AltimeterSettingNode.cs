@@ -10,9 +10,14 @@ public class AltimeterSettingNode : AtisNode
 
     public override void Parse(Metar metar)
     {
-        var value = metar.AltimeterSetting.Value;
+        Parse(metar.AltimeterSetting);
+    }
 
-        if (metar.AltimeterSetting.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
+    public void Parse(AltimeterSetting node)
+    {
+        var value = node.Value;
+
+        if (node.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
             VoiceAtis = $"Altimeter {value.NumberToSingular()}";
             if (Composite.UseFaaFormat)

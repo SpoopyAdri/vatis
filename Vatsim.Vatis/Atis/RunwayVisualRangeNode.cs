@@ -12,13 +12,18 @@ public class RunwayVisualRangeNode : AtisNode
 
     public override void Parse(Metar metar)
     {
+        Parse(metar.RunwayVisualRanges);
+    }
+
+    public void Parse(RunwayVisualRange[] node)
+    {
         var tts = new List<string>();
         var acars = new List<string>();
 
-        if (metar.RunwayVisualRanges == null)
+        if (node == null)
             return;
 
-        foreach(var rvr in metar.RunwayVisualRanges)
+        foreach (var rvr in node)
         {
             var result = new List<string>();
 

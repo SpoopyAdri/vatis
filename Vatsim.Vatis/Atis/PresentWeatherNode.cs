@@ -11,12 +11,17 @@ public class PresentWeatherNode : AtisNode
 
     public override void Parse(Metar metar)
     {
+        Parse(metar.PresentWeather);
+    }
+
+    public void Parse(WeatherPhenomena[] node)
+    {
         var tts = new List<string>();
         var acars = new List<string>();
 
-        if (metar.PresentWeather != null)
+        if (node != null)
         {
-            foreach (var weather in metar.PresentWeather)
+            foreach (var weather in node)
             {
                 var result = new List<string>();
 
