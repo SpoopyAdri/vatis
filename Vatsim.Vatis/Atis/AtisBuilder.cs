@@ -350,6 +350,7 @@ public class AtisBuilder : IAtisBuilder
             new Variable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
             new Variable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
             new Variable("NOTAMS", notamText, notamVoice),
+            new Variable("TREND", trends.TextAtis, trends.VoiceAtis),
             new Variable("TL", transitionLevelText, transitionLevelVoice),
             new Variable("CLOSING", $" ...ADVS YOU HAVE INFO {composite.CurrentAtisLetter }.", $"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.")
         };
