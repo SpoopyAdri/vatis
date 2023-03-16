@@ -78,9 +78,9 @@ public class CloudNode : AtisNode
                 {
                     tts.Add($"{(layer == ceiling ? "ceiling " : "")}{altitude.NumbersToWords()} {cloudType} {convectiveType}");
                 }
-
-                acars.Add(layer.RawValue);
             }
+
+            acars.Add(layer.RawValue);
         }
 
         VoiceAtis = string.Join(", ", tts).Trim(',').Trim(' ');
