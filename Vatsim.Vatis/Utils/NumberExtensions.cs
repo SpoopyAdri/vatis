@@ -208,45 +208,6 @@ public static class NumberExtensions
     }
 
     /// <summary>
-    /// Translates a decimal into its human readable string variant for the speech synthesizer.
-    /// For example, 121.75 would translate to "one two one point seven five"
-    /// </summary>
-    /// <param name="input">Decimal to translate</param>
-    /// <param name="isIcao">If true, use "decimal". If false, use "point"</param>
-    /// <returns></returns>
-    public static string DecimalToWordString(this double input, bool isIcao = true)
-    {
-        try
-        {
-            string result = "";
-
-            string s = input.ToString();
-            string[] parts = s.Split('.');
-            var values = input.ToString(System.Globalization.CultureInfo.InvariantCulture).Split('.');
-
-            result = $"{values[0]} {(isIcao ? "decimal" : "point")} {values[1]}";
-
-            result = result.Replace("0", "zero ");
-            result = result.Replace("1", "one ");
-            result = result.Replace("2", "two ");
-            result = result.Replace("3", "three ");
-            result = result.Replace("4", "four ");
-            result = result.Replace("5", "five ");
-            result = result.Replace("6", "six ");
-            result = result.Replace("7", "seven ");
-            result = result.Replace("8", "eight ");
-            result = result.Replace("9", "niner ");
-            result = result.Replace("  ", " ");
-
-            return result;
-        }
-        catch
-        {
-            return input.ToString();
-        }
-    }
-
-    /// <summary>
     /// Normalizes heading degrees
     /// </summary>
     /// <param name="heading"></param>

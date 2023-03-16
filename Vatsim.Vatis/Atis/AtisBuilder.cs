@@ -368,7 +368,7 @@ public class AtisBuilder : IAtisBuilder
                                $"{ int.Parse(m.Groups[4].Value).NumberToSingular() } zulu"));
 
         // vhf frequencies
-        input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => Convert.ToDouble(m.Groups[1].Value).DecimalToWordString(composite.UseDecimalTerminology));
+        input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => m.Groups[1].Value.NumberToSingular(composite.UseDecimalTerminology));
 
         // letters
         input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => string.Format("{0}", m.Value.ConvertAlphaNumericToWordGroup())).Trim();
