@@ -8,12 +8,8 @@ namespace Vatsim.Vatis.Atis;
 
 public class CloudsMeta : AtisMeta
 {
-    private AtisComposite mComposite;
-
-    public CloudsMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public CloudsMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
@@ -33,14 +29,14 @@ public class CloudsMeta : AtisMeta
         foreach (var layer in metar.CloudLayers)
         {
             int altitude = layer.Altitude * 100;
-            if (mComposite.UseMetricUnits)
+            if (Composite.UseMetricUnits)
                 altitude = (int)(altitude * 0.30);
             var cloudType = layer.CloudType == Weather.Enums.CloudType.None 
                 ? "" : layer.CloudType.ToString();
             var convectiveType = layer.ConvectiveCloudType == Weather.Enums.ConvectiveCloudType.None 
                 ? "" : layer.ConvectiveCloudType.ToString();
 
-            if (!mComposite.UseFaaFormat)
+            if (!Composite.UseFaaFormat)
             {
                 var result = new List<string>();
 
@@ -63,7 +59,7 @@ public class CloudsMeta : AtisMeta
                 if (altitude > 0)
                 {
                     result.Add(string.Join(" ", altitude.NumbersToWordsGroup(),
-                        mComposite.UseMetricUnits ? "meters" : "feet"));
+                        Composite.UseMetricUnits ? "meters" : "feet"));
                 }
 
                 tts.Add(string.Join(" ", result));

@@ -8,6 +8,9 @@ namespace Vatsim.Vatis.Atis;
 
 public class RunwayVisualRangeMeta : AtisMeta
 {
+    public RunwayVisualRangeMeta()
+    { }
+
     public override void Parse(Metar metar)
     {
         var tts = new List<string>();

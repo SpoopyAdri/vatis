@@ -7,12 +7,8 @@ namespace Vatsim.Vatis.Atis;
 
 public class VisibilityMeta : AtisMeta
 {
-    private AtisComposite mComposite;
-
-    public VisibilityMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public VisibilityMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
@@ -35,11 +31,11 @@ public class VisibilityMeta : AtisMeta
                     {
                         if (metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue > 5000)
                         {
-                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue / 1000} {(mComposite.UseVisibilitySuffix ? "kilometers" : "")}");
+                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue / 1000} {(Composite.UseVisibilitySuffix ? "kilometers" : "")}");
                         }
                         else
                         {
-                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue.NumbersToWords()} {(mComposite.UseVisibilitySuffix ? "meters" : "")}");
+                            tts.Add($"Visibility {metar.PrevailingVisibility.VisibilityInMeters.VisibilityValue.NumbersToWords()} {(Composite.UseVisibilitySuffix ? "meters" : "")}");
                         }
                     }
                 }

@@ -244,15 +244,16 @@ public class AtisBuilder : IAtisBuilder
     private void ParseMetar(AtisComposite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
     {
         metar = composite.DecodedMetar;
-        var time = DoParse(metar, new ObservationTimeMeta(composite));
-        var surfaceWind = DoParse(metar, new SurfaceWindMeta(composite));
-        var rvr = DoParse(metar, new RunwayVisualRangeMeta());
-        var visibility = DoParse(metar, new VisibilityMeta(composite));
-        var presentWeather = DoParse(metar, new PresentWeatherMeta());
-        var clouds = DoParse(metar, new CloudsMeta(composite));
-        var temp = DoParse(metar, new TemperatureMeta(composite));
-        var dew = DoParse(metar, new DewpointMeta(composite));
-        var pressure = DoParse(metar, new PressureMeta(composite));
+        var time = NodeParser.Parse<ObservationTimeMeta>(metar, composite);
+        var surfaceWind = NodeParser.Parse<SurfaceWindMeta>(metar, composite);
+        var rvr = NodeParser.Parse<RunwayVisualRangeMeta>(metar, composite);
+        var visibility = NodeParser.Parse<VisibilityMeta>(metar, composite);
+        var presentWeather = NodeParser.Parse<PresentWeatherMeta>(metar, composite);
+        var clouds = NodeParser.Parse<CloudsMeta>(metar, composite);
+        var temp = NodeParser.Parse<TemperatureMeta>(metar, composite);
+        var dew = NodeParser.Parse<DewpointMeta>(metar, composite);
+        var pressure = NodeParser.Parse<PressureMeta>(metar, composite);
+        var trends = NodeParser.Parse<TrendMeta>(metar, composite);
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
@@ -460,16 +461,6 @@ public class AtisBuilder : IAtisBuilder
         input = Regex.Replace(input, @"\*", "");
 
         return input.ToUpper();
-    }
-
-    private ParsedData DoParse(Metar metar, AtisMeta meta)
-    {
-        meta.Parse(metar);
-        return new ParsedData
-        {
-            TextAtis = meta.TextAtis,
-            VoiceAtis = !string.IsNullOrEmpty(meta.VoiceAtis) ? $"{meta.VoiceAtis.TrimEnd('.')}." : ""
-        };
     }
 
     private async void PostIdsUpdate(AtisComposite composite, CancellationToken token)

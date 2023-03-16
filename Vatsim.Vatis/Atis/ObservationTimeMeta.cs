@@ -6,22 +6,18 @@ namespace Vatsim.Vatis.Atis;
 
 public class ObservationTimeMeta : AtisMeta
 {
-    private AtisComposite mComposite;
-
-    public ObservationTimeMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public ObservationTimeMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
         var minutes = metar.ObservationDayTime.Time.Minutes;
 
-        var isSpecial = mComposite.ObservationTime != null
-            && mComposite.ObservationTime.Enabled
-            && mComposite.ObservationTime.Time != minutes;
+        var isSpecial = Composite.ObservationTime != null
+            && Composite.ObservationTime.Enabled
+            && Composite.ObservationTime.Time != minutes;
 
-        var useZuluPrefix = mComposite.UseZuluTimeSuffix || mComposite.UseFaaFormat;
+        var useZuluPrefix = Composite.UseZuluTimeSuffix || Composite.UseFaaFormat;
 
         VoiceAtis = string.Join(" ", string.Join(" ",
             metar.ObservationDayTime.Time.Hours.ToString("00").NumberToSingular(),

@@ -8,21 +8,17 @@ namespace Vatsim.Vatis.Atis;
 
 public class SurfaceWindMeta : AtisMeta
 {
-    private AtisComposite mComposite;
-
-    public SurfaceWindMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public SurfaceWindMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
         List<string> tts = new();
         List<string> acars = new();
 
-        var magVarDeg = mComposite.MagneticVariation?.MagneticDegrees ?? null;
+        var magVarDeg = Composite.MagneticVariation?.MagneticDegrees ?? null;
 
-        if (metar.SurfaceWind == null)
+        if (metar == null)
             return;
 
         var windUnitSpoken = "";
@@ -46,7 +42,7 @@ public class SurfaceWindMeta : AtisMeta
             // VRB10G20KT
             if (metar.SurfaceWind.IsVariable)
             {
-                if (mComposite.UseSurfaceWindPrefix)
+                if (Composite.UseSurfaceWindPrefix)
                 {
                     tts.Add($"Surface wind variable {metar.SurfaceWind.Speed.NumberToSingular()} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
                 }
@@ -60,9 +56,9 @@ public class SurfaceWindMeta : AtisMeta
             // 25010G16KT
             else
             {
-                if (!mComposite.UseFaaFormat)
+                if (!Composite.UseFaaFormat)
                 {
-                    tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
+                    tts.Add($"{(Composite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken} gusts {metar.SurfaceWind.GustSpeed.NumberToSingular()}");
                 }
                 else
                 {
@@ -77,9 +73,9 @@ public class SurfaceWindMeta : AtisMeta
         {
             if (metar.SurfaceWind.Direction > 0)
             {
-                if (!mComposite.UseFaaFormat)
+                if (!Composite.UseFaaFormat)
                 {
-                    tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
+                    tts.Add($"{(Composite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}{metar.SurfaceWind.Direction.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees, {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
                 }
                 else
                 {
@@ -100,9 +96,9 @@ public class SurfaceWindMeta : AtisMeta
         // VRB10KT
         if (metar.SurfaceWind.GustSpeed == 0 && metar.SurfaceWind.IsVariable)
         {
-            if (!mComposite.UseFaaFormat)
+            if (!Composite.UseFaaFormat)
             {
-                tts.Add($"{(mComposite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}variable at {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
+                tts.Add($"{(Composite.UseSurfaceWindPrefix ? "Surface Wind " : "Wind ")}variable at {metar.SurfaceWind.Speed.NumberToSingular()} {windUnitSpoken}");
             }
             else
             {
@@ -115,7 +111,7 @@ public class SurfaceWindMeta : AtisMeta
         // 250V360
         if (metar.SurfaceWind.ExtremeWindDirections != null)
         {
-            if (!mComposite.UseFaaFormat)
+            if (!Composite.UseFaaFormat)
             {
                 tts.Add($"Varying between {metar.SurfaceWind.ExtremeWindDirections.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} and {metar.SurfaceWind.ExtremeWindDirections.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000").NumberToSingular()} degrees");
             }

@@ -6,6 +6,9 @@ namespace Vatsim.Vatis.Atis;
 
 public class PresentWeatherMeta : AtisMeta
 {
+    public PresentWeatherMeta()
+    { }
+
     public override void Parse(Metar metar)
     {
         var tts = new List<string>();

@@ -7,16 +7,12 @@ namespace Vatsim.Vatis.Atis;
 
 public class TemperatureMeta : AtisMeta
 {
-    private readonly AtisComposite mComposite;
-
-    public TemperatureMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public TemperatureMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
-        if (mComposite.UseTemperaturePlusPrefix && metar.Temperature.DewPoint > 0)
+        if (Composite.UseTemperaturePlusPrefix && metar.Temperature.DewPoint > 0)
         {
             VoiceAtis = $"Temperature plus {metar.Temperature.Value.NumberToSingular()}";
         }

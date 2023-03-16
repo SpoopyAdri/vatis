@@ -6,12 +6,8 @@ namespace Vatsim.Vatis.Atis;
 
 public class PressureMeta : AtisMeta
 {
-    private AtisComposite mComposite;
-
-    public PressureMeta(AtisComposite composite)
-    {
-        mComposite = composite;
-    }
+    public PressureMeta()
+    { }
 
     public override void Parse(Metar metar)
     {
@@ -20,7 +16,7 @@ public class PressureMeta : AtisMeta
         if (metar.AltimeterSetting.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
             VoiceAtis = $"Altimeter {value.NumberToSingular()}";
-            if (mComposite.UseFaaFormat)
+            if (Composite.UseFaaFormat)
             {
                 TextAtis = $"A{value} ({value.ToString("0000").NumberToSingular().ToUpper()})";
             }
