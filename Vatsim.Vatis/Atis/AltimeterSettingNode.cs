@@ -1,12 +1,11 @@
-﻿using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Utils;
+﻿using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class PressureMeta : AtisMeta
+public class AltimeterSettingNode : AtisNode
 {
-    public PressureMeta()
+    public AltimeterSettingNode()
     { }
 
     public override void Parse(Metar metar)

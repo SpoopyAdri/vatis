@@ -5,13 +5,13 @@ namespace Vatsim.Vatis.Atis;
 
 public static class NodeParser
 {
-    public static ParsedData Parse<T>(Metar metar, AtisComposite composite) where T : AtisMeta, new()
+    public static ParsedResult Parse<T>(Metar metar, AtisComposite composite) where T : AtisNode, new()
     {
         T obj = new T();
         obj.Composite = composite;
         obj.Parse(metar);
 
-        return new ParsedData
+        return new ParsedResult
         {
             TextAtis = obj.TextAtis,
             VoiceAtis = obj.VoiceAtis,
@@ -19,7 +19,7 @@ public static class NodeParser
     }
 }
 
-public class ParsedData
+public class ParsedResult
 {
     public string TextAtis { get; set; }
     public string VoiceAtis { get; set; }

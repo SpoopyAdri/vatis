@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class VisibilityMeta : AtisMeta
+public class PrevailingVisibilityNode : AtisNode
 {
-    public VisibilityMeta()
+    public PrevailingVisibilityNode()
     { }
 
     public override void Parse(Metar metar)

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class CloudsMeta : AtisMeta
+public class CloudNode : AtisNode
 {
-    public CloudsMeta()
+    public CloudNode()
     { }
 
     public override void Parse(Metar metar)

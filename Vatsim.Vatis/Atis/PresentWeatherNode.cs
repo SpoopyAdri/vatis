@@ -4,9 +4,9 @@ using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class PresentWeatherMeta : AtisMeta
+public class PresentWeatherNode : AtisNode
 {
-    public PresentWeatherMeta()
+    public PresentWeatherNode()
     { }
 
     public override void Parse(Metar metar)

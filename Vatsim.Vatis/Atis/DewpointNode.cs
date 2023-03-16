@@ -1,13 +1,12 @@
 ﻿using System;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class DewpointMeta : AtisMeta
+public class DewpointNode : AtisNode
 {
-    public DewpointMeta()
+    public DewpointNode()
     { }
 
     public override void Parse(Metar metar)

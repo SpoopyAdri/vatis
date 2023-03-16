@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Extensions;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class SurfaceWindMeta : AtisMeta
+public class SurfaceWindNode : AtisNode
 {
-    public SurfaceWindMeta()
+    public SurfaceWindNode()
     { }
 
     public override void Parse(Metar metar)

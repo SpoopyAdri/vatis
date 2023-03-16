@@ -1,13 +1,12 @@
 ﻿using System;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class TemperatureMeta : AtisMeta
+public class TemperatureNode : AtisNode
 {
-    public TemperatureMeta()
+    public TemperatureNode()
     { }
 
     public override void Parse(Metar metar)

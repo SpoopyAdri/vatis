@@ -2,9 +2,9 @@
 
 namespace Vatsim.Vatis.Atis;
 
-public class TrendMeta : AtisMeta
+public class TrendNode : AtisNode
 {
-    public TrendMeta()
+    public TrendNode()
     { }
 
     public override void Parse(Metar metar)

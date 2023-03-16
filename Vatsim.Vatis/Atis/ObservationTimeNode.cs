@@ -1,12 +1,11 @@
-﻿using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Utils;
+﻿using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class ObservationTimeMeta : AtisMeta
+public class ObservationTimeNode : AtisNode
 {
-    public ObservationTimeMeta()
+    public ObservationTimeNode()
     { }
 
     public override void Parse(Metar metar)

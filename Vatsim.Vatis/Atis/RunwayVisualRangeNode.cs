@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class RunwayVisualRangeMeta : AtisMeta
+public class RunwayVisualRangeNode : AtisNode
 {
-    public RunwayVisualRangeMeta()
+    public RunwayVisualRangeNode()
     { }
 
     public override void Parse(Metar metar)

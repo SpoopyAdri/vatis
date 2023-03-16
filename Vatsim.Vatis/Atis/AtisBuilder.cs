@@ -244,16 +244,16 @@ public class AtisBuilder : IAtisBuilder
     private void ParseMetar(AtisComposite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
     {
         metar = composite.DecodedMetar;
-        var time = NodeParser.Parse<ObservationTimeMeta>(metar, composite);
-        var surfaceWind = NodeParser.Parse<SurfaceWindMeta>(metar, composite);
-        var rvr = NodeParser.Parse<RunwayVisualRangeMeta>(metar, composite);
-        var visibility = NodeParser.Parse<VisibilityMeta>(metar, composite);
-        var presentWeather = NodeParser.Parse<PresentWeatherMeta>(metar, composite);
-        var clouds = NodeParser.Parse<CloudsMeta>(metar, composite);
-        var temp = NodeParser.Parse<TemperatureMeta>(metar, composite);
-        var dew = NodeParser.Parse<DewpointMeta>(metar, composite);
-        var pressure = NodeParser.Parse<PressureMeta>(metar, composite);
-        var trends = NodeParser.Parse<TrendMeta>(metar, composite);
+        var time = NodeParser.Parse<ObservationTimeNode>(metar, composite);
+        var surfaceWind = NodeParser.Parse<SurfaceWindNode>(metar, composite);
+        var rvr = NodeParser.Parse<RunwayVisualRangeNode>(metar, composite);
+        var visibility = NodeParser.Parse<PrevailingVisibilityNode>(metar, composite);
+        var presentWeather = NodeParser.Parse<PresentWeatherNode>(metar, composite);
+        var clouds = NodeParser.Parse<CloudNode>(metar, composite);
+        var temp = NodeParser.Parse<TemperatureNode>(metar, composite);
+        var dew = NodeParser.Parse<DewpointNode>(metar, composite);
+        var pressure = NodeParser.Parse<AltimeterSettingNode>(metar, composite);
+        var trends = NodeParser.Parse<TrendNode>(metar, composite);
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
