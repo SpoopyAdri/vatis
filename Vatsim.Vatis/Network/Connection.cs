@@ -35,6 +35,7 @@ public class Connection
     public event EventHandler MetarNotFoundReceived;
     public event EventHandler<NetworkErrorReceived> NetworkErrorReceived;
     public event EventHandler<KillRequestReceived> KillRequestReceived;
+    public event EventHandler<ClientEventArgs<string>> ChangeServerReceived;
 
     private const string VATDNS_ENDPOINT = "http://fsd-http.connect.vatsim.net";
     private const string FSD_AUTH_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
@@ -93,6 +94,12 @@ public class Connection
         mSession.KillRequestReceived += OnKillRequestReceived;
         mSession.TextMessageReceived += OnTextMessageReceived;
         mSession.ATCPositionReceived += OnATCPositionReceived;
+        mSession.ChangeServerReceived += OnChangeServerReceived;
+    }
+
+    private void OnChangeServerReceived(object sender, DataReceivedEventArgs<PDUChangeServer> e)
+    {
+        ChangeServerReceived?.Invoke(this, new ClientEventArgs<string>(e.PDU.NewServer));
     }
 
     private void OnATCPositionReceived(object sender, DataReceivedEventArgs<PDUATCPosition> e)

@@ -580,6 +580,11 @@ public partial class MainForm : Form
                         mSyncContext.Post(o => { tabPage.CompositeMeta.VoiceRecordedAtisActive = false; }, null);
                     }
                 };
+                connection.ChangeServerReceived += (sender, args) =>
+                {
+                    connection.Disconnect();
+                    connection.Connect();
+                };
 
                 tabPage.CompositeMeta.BindPresets(composite.Presets.Select(x => x.Name).ToList());
 
