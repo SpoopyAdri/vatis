@@ -16,6 +16,9 @@ public interface IDownloader
     Task<Stream> PostJsonDownloadAsync(string url, object content, 
         CancellationToken? cancellationToken = null);
 
-    Task<T> PostJsonAsync<T>(string url, object content, 
+    Task<T> PostJsonAsyncResponse<T>(string url, object content, 
+        CancellationToken? cancellationToken = null);
+
+    Task PostJsonAsync(string url, object content,
         CancellationToken? cancellationToken = null);
 }

@@ -25,6 +25,11 @@ public static class StringExtensions
         return result.ToString();
     }
 
+    public static string StripNewLineChars(this string input)
+    {
+        return Regex.Replace(input, @"\t|\n|\r", "");
+    }
+
     /// <summary>
     /// Strips away multiple spaces.
     /// </summary>

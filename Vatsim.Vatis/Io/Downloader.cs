@@ -58,12 +58,19 @@ public class Downloader : IDownloader
         return await response.Content.ReadAsStreamAsync();
     }
 
-    public async Task<T> PostJsonAsync<T>(string url, object content, CancellationToken? cancellationToken = null)
+    public async Task<T> PostJsonAsyncResponse<T>(string url, object content, CancellationToken? cancellationToken = null)
     {
         var response = await mHttpClient.PostAsJsonAsync(url, content,
             cancellationToken.GetValueOrDefault());
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<T>();
+    }
+
+    public async Task PostJsonAsync(string url, object content, CancellationToken? cancellationToken = null)
+    {
+        var response = await mHttpClient.PostAsJsonAsync(url, content,
+            cancellationToken.GetValueOrDefault());
+        response.EnsureSuccessStatusCode();
     }
 
     private async Task DownloadToStreamAsync(string url, Stream stream, IProgress<int>? progress)

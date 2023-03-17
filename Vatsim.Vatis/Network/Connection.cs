@@ -313,7 +313,7 @@ public class Connection
         {
             var json = new PasswordTokenRequest(cid, password);
 
-            var response = await mDownloader.PostJsonAsync<PasswordTokenResponse>(FSD_AUTH_ENDPOINT, json);
+            var response = await mDownloader.PostJsonAsyncResponse<PasswordTokenResponse>(FSD_AUTH_ENDPOINT, json);
 
             if (response != null)
             {

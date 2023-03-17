@@ -31,7 +31,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
             try
             {
                 var requestBody = new PasswordTokenRequest(mAppConfig.UserId, mAppConfig.Password);
-                var response = await mDownloader.PostJsonAsync<PasswordTokenResponse>(FSD_JWT_ENDPOINT, requestBody, token);
+                var response = await mDownloader.PostJsonAsyncResponse<PasswordTokenResponse>(FSD_JWT_ENDPOINT, requestBody, token);
                 if (response != null)
                 {
                     mJwtToken = response.token;

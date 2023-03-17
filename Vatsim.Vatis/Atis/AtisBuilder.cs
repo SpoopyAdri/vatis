@@ -478,16 +478,16 @@ public class AtisBuilder : IAtisBuilder
             Facility = composite.Identifier,
             Preset = composite.CurrentPreset.Name,
             AtisLetter = composite.CurrentAtisLetter,
-            AirportConditions = composite.CurrentPreset.AirportConditions,
-            Notams = composite.CurrentPreset.Notams,
+            AirportConditions = composite.CurrentPreset.AirportConditions.StripNewLineChars(),
+            Notams = composite.CurrentPreset.Notams.StripNewLineChars(),
             Timestamp = DateTime.UtcNow,
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-            AtisType = composite.AtisType
+            AtisType = composite.AtisType.ToString().ToLowerInvariant()
         };
 
         try
         {
-            await mDownloader.PostJsonAsync<IdsRestRequest>(composite.IDSEndpoint, json);
+            await mDownloader.PostJsonAsync(composite.IDSEndpoint, json);
         }
         catch (TaskCanceledException) { }
         catch (Exception ex)
@@ -698,8 +698,7 @@ internal class IdsRestRequest
     public string Notams { get; set; }
     public DateTime Timestamp { get; set; }
     public string Version { get; set; }
-    [JsonConverter(typeof(StringEnumConverter))]
-    public AtisType AtisType { get; set; }
+    public string AtisType { get; set; }
 }
 
 internal class Variable
