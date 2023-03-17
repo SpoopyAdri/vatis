@@ -1143,6 +1143,19 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
+    private void PopulateSelectedPreset()
+    {
+        mCurrentPreset = mCurrentComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlPresets.SelectedValue.ToString());
+
+        if (mCurrentPreset != null)
+        {
+            chkExternalAtisGenerator.Enabled = true;
+            chkExternalAtisGenerator.Checked = mCurrentPreset.ExternalGenerator.Enabled;
+
+            AddDynamicPresetControl();
+        }
+    }
+
     private void chkObservationTime_CheckedChanged(object sender, EventArgs e)
     {
         if (mCurrentComposite == null)
@@ -1500,11 +1513,13 @@ public partial class ProfileConfigurationForm : Form
 
             if (!string.IsNullOrEmpty(selectNewPreset))
             {
-                ddlPresets.SelectedItem = selectNewPreset;
+                ddlPresets.SelectedIndex = ddlPresets.FindStringExact(selectNewPreset);
+                PopulateSelectedPreset();
             }
             else if (mCurrentComposite.CurrentPreset != null)
             {
-                ddlPresets.SelectedItem = mCurrentComposite.CurrentPreset.Name;
+                ddlPresets.SelectedIndex = ddlPresets.FindStringExact(mCurrentComposite.CurrentPreset.Name);
+                PopulateSelectedPreset();
             }
             else
             {
@@ -1527,16 +1542,7 @@ public partial class ProfileConfigurationForm : Form
 
         if (ddlPresets.SelectedItem != null)
         {
-            mCurrentPreset =
-                mCurrentComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlPresets.SelectedValue.ToString());
-
-            if (mCurrentPreset != null)
-            {
-                chkExternalAtisGenerator.Enabled = true;
-                chkExternalAtisGenerator.Checked = mCurrentPreset.ExternalGenerator.Enabled;
-
-                AddDynamicPresetControl();
-            }
+            PopulateSelectedPreset();
         }
         else
         {
