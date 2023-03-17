@@ -1122,7 +1122,7 @@ public partial class ProfileConfigurationForm : Form
         dynamicPresetControl.Controls.Clear();
         dynamicPresetControl.Controls.Add(mPresetControl);
 
-        if (mCurrentPreset.ExternalGenerator.Enabled || chkExternalAtisGenerator.Checked)
+        if (chkExternalAtisGenerator.Checked)
         {
             if (mPresetControl is ExternalAtisGenerator control)
             {
