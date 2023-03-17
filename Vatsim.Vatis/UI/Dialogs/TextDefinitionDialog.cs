@@ -14,4 +14,10 @@ public partial class TextDefinitionDialog : Form
         get => txtDefinition.Text;
         set => txtDefinition.Text = value;
     }
+
+    public string Description
+    {
+        get => txtDescription.Text;
+        set => txtDescription.Text = value;
+    }
 }

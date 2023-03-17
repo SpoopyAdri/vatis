@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
-using Vatsim.Vatis.Core;
 
 namespace Vatsim.Vatis.UI.Dialogs;
 
@@ -95,15 +94,19 @@ public partial class NotamDefinitionsDialog : Form
                     return;
                 }
 
-                if (mComposite.NotamDefinitions.Any(t => t.Text == dlg.TextValue))
+                if (!string.IsNullOrEmpty(dlg.Description) && mComposite.NotamDefinitions.Any(t => t.Description == dlg.Description))
                 {
-                    MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition",
-                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, "A definition with this description label already exists.", "Duplicate Description", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                else if (mComposite.NotamDefinitions.Any(t => t.Text == dlg.TextValue))
+                {
+                    MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
                 else
                 {
                     var definition = new DefinedText
                     {
+                        Description = dlg.Description,
                         Text = dlg.TextValue,
                         Ordinal = mComposite.NotamDefinitions.Count + 1
                     };
@@ -131,13 +134,17 @@ public partial class NotamDefinitionsDialog : Form
                     return;
                 }
 
-                if (mComposite.NotamDefinitions.Any(t => t.Text == dlg.TextValue && t != selectedDefinition))
+                if (!string.IsNullOrEmpty(dlg.Description) && mComposite.NotamDefinitions.Any(t => t.Description == dlg.Description && t != selectedDefinition))
                 {
-                    MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition",
-                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, "A definition with this description label already exists.", "Duplicate Description", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                else if (mComposite.NotamDefinitions.Any(t => t.Text == dlg.TextValue && t != selectedDefinition))
+                {
+                    MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
                 else
                 {
+                    selectedDefinition.Description = dlg.Description;
                     selectedDefinition.Text = dlg.TextValue;
                     PopulateList();
                 }
@@ -167,7 +174,7 @@ public partial class NotamDefinitionsDialog : Form
 
     private void lstConditions_Format(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = (e.ListItem as DefinedText)?.Text;
+        e.Value = (e.ListItem as DefinedText)?.ToString();
     }
 
     private void lstConditions_SelectedIndexChanged(object sender, EventArgs e)

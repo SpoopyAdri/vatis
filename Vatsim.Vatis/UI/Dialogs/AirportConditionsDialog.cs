@@ -47,7 +47,7 @@ public partial class AirportConditionsDialog : Form
 
     private void lstConditions_Format(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = (e.ListItem as DefinedText)?.Text;
+        e.Value = (e.ListItem as DefinedText)?.ToString();
     }
 
     private void lstConditions_SelectedIndexChanged(object sender, EventArgs e)
@@ -158,7 +158,12 @@ public partial class AirportConditionsDialog : Form
                     return;
                 }
 
-                if (mComposite.AirportConditionDefinitions.Any(t => t.Text == dlg.TextValue))
+                if (!string.IsNullOrEmpty(dlg.Description) && 
+                    mComposite.AirportConditionDefinitions.Any(t => t.Description == dlg.Description))
+                {
+                    MessageBox.Show(this, "A definition with this description label already exists.", "Duplicate Description", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                else if (mComposite.AirportConditionDefinitions.Any(t => t.Text == dlg.TextValue))
                 {
                     MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition",
                         MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -167,6 +172,7 @@ public partial class AirportConditionsDialog : Form
                 {
                     var definition = new DefinedText
                     {
+                        Description = dlg.Description,
                         Text = dlg.TextValue,
                         Ordinal = mComposite.AirportConditionDefinitions.Count + 1
                     };
@@ -184,25 +190,28 @@ public partial class AirportConditionsDialog : Form
             dlg.TopMost = mKeepOnTop;
             if (lstConditions.SelectedItem is DefinedText selectedDefinition)
             {
+                dlg.Description = selectedDefinition.Description;
                 dlg.TextValue = selectedDefinition.Text;
 
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     if (string.IsNullOrEmpty(dlg.TextValue))
                     {
-                        MessageBox.Show(this, "Text cannot be empty.", "Edit Definition", MessageBoxButtons.OK,
-                            MessageBoxIcon.Hand);
+                        MessageBox.Show(this, "Text cannot be empty.", "Edit Definition", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         return;
                     }
 
-                    if (mComposite.AirportConditionDefinitions.Any(t =>
-                            t.Text == dlg.TextValue && t != selectedDefinition))
+                    if (!string.IsNullOrEmpty(dlg.Description) && mComposite.AirportConditionDefinitions.Any(t => t.Description == dlg.Description && t != selectedDefinition))
                     {
-                        MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition",
-                            MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, "A definition with this description label already exists.", "Duplicate Description", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                    else if (mComposite.AirportConditionDefinitions.Any(t => t.Text == dlg.TextValue && t != selectedDefinition))
+                    {
+                        MessageBox.Show(this, "A definition with this text already exists.", "Duplicate Definition", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                     else
                     {
+                        selectedDefinition.Description = dlg.Description;
                         selectedDefinition.Text = dlg.TextValue;
                         PopulateList();
                     }
