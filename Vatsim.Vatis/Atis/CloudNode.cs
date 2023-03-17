@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Vatsim.Vatis.Utils;
+using Vatsim.Vatis.Weather.Extensions;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
@@ -39,6 +40,15 @@ public class CloudNode : AtisNode
                 ? "" : layer.CloudType.ToString();
             var convectiveType = layer.ConvectiveCloudType == Weather.Enums.ConvectiveCloudType.None 
                 ? "" : layer.ConvectiveCloudType.ToString();
+
+            if (Composite.UseMetricUnits)
+            {
+                acars.Add($"{EnumTranslator.GetEnumDescription(layer.CloudType)}{(altitude / 100):000}{(layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None ? EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType) : "")}");
+            }
+            else
+            {
+                acars.Add(layer.RawValue);
+            }
 
             if (!Composite.UseFaaFormat)
             {
@@ -79,8 +89,6 @@ public class CloudNode : AtisNode
                     tts.Add($"{(layer == ceiling ? "ceiling " : "")}{altitude.NumbersToWords()} {cloudType} {convectiveType}");
                 }
             }
-
-            acars.Add(layer.RawValue);
         }
 
         VoiceAtis = string.Join(", ", tts).Trim(',').Trim(' ');
