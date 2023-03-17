@@ -16,15 +16,21 @@ public class TemperatureNode : AtisNode
 
     public void Parse(TemperatureInfo node)
     {
-        if (Composite.UseTemperaturePlusPrefix && node.Value > 0)
+        if (node == null || node.Temperature == null)
         {
-            VoiceAtis = $"Temperature plus {node.Value.NumberToSingular()}";
+            VoiceAtis = "Temperature missing";
+            return;
+        }
+
+        if (Composite.UseTemperaturePlusPrefix && node.Temperature > 0)
+        {
+            VoiceAtis = $"Temperature plus {node.Temperature?.NumberToSingular()}";
         }
         else
         {
-            VoiceAtis = $"Temperature {node.Value.NumberToSingular()}";
+            VoiceAtis = $"Temperature {node.Temperature?.NumberToSingular()}";
         }
 
-        TextAtis = string.Concat((node.Value < 0) ? "M" : "", Math.Abs(node.Value).ToString("00"));
+        TextAtis = string.Concat((node.Temperature < 0) ? "M" : "", Math.Abs(node.Temperature.Value).ToString("00"));
     }
 }

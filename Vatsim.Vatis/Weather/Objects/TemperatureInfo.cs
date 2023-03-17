@@ -14,13 +14,13 @@ namespace Vatsim.Vatis.Weather.Objects
         /// Temperature value in Celsius
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
-        public int Value { get; init; }
+        public int? Temperature { get; init; }
 
         /// <summary>
         /// Temperature dew point in Celsius
         /// </summary>
         [DataMember(Name = "dewPoint", EmitDefaultValue = false)]
-        public int DewPoint { get; init; }
+        public int? DewPoint { get; init; }
 
         #region Constructors
 
@@ -50,13 +50,7 @@ namespace Vatsim.Vatis.Weather.Objects
             }
 
             var values = temperatureToken.Split('/');
-            if (values.Length < 2 || values.Length >= 2 && string.IsNullOrEmpty(values[1]))
-            {
-                errors.Add($"Cannot parse \"{temperatureToken}\" as temperature token");
-                return;
-            }
-
-            Value = GetTemperatureValue(values[0]);
+            Temperature = GetTemperatureValue(values[0]);
             DewPoint = GetTemperatureValue(values[1]);
         }
 
@@ -70,8 +64,11 @@ namespace Vatsim.Vatis.Weather.Objects
         /// <param name="stringValue">Temperature value</param>
         /// <returns></returns>
 
-        private int GetTemperatureValue(string stringValue)
+        private int? GetTemperatureValue(string stringValue)
         {
+            if (string.IsNullOrEmpty(stringValue))
+                return null;
+
             if (stringValue.Contains("M"))
                 stringValue = stringValue.Replace("M", "-");
 

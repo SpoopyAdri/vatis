@@ -21,7 +21,7 @@
 
         public static string CloudLayer => @"^((FEW|SCT|BKN|OVC|VV)\d{3}(CB|TCU)?|SKC|NSC|CLR|NCD)$";
 
-        public static string Temperature => @"^M?\d{2}\/M?\d{2}$";
+        public static string Temperature => @"^M?\d{0,2}\/M?\d{0,2}$";
 
         public static string AltimeterSetting => @"^(A|Q){1}\d{4}$";
 

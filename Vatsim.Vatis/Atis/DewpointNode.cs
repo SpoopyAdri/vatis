@@ -16,15 +16,21 @@ public class DewpointNode : AtisNode
 
     public void Parse(TemperatureInfo node)
     {
+        if (node == null || node.DewPoint == null)
+        {
+            VoiceAtis = "Dewpoint missing";
+            return;
+        }
+
         if (Composite.UseTemperaturePlusPrefix && node.DewPoint > 0)
         {
-            VoiceAtis = $"Dewpoint plus {node.DewPoint.NumberToSingular()}";
+            VoiceAtis = $"Dewpoint plus {node.DewPoint?.NumberToSingular()}";
         }
         else
         {
-            VoiceAtis = $"Dewpoint {node.DewPoint.NumberToSingular()}";
+            VoiceAtis = $"Dewpoint {node.DewPoint?.NumberToSingular()}";
         }
 
-        TextAtis = string.Concat((node.DewPoint < 0) ? "M" : "", Math.Abs(node.DewPoint).ToString("00"));
+        TextAtis = string.Concat((node.DewPoint < 0) ? "M" : "", Math.Abs(node.DewPoint.Value).ToString("00"));
     }
 }
