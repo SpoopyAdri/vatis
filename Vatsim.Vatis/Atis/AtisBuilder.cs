@@ -12,6 +12,7 @@ using Newtonsoft.Json.Converters;
 using RestSharp;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Dialogs;
@@ -25,13 +26,15 @@ public class AtisBuilder : IAtisBuilder
     private readonly INavaidDatabase mNavData;
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
     private readonly IAudioManager mAudioManager;
+    private readonly IDownloader mDownloader;
     private Airport mAirport;
 
-    public AtisBuilder(INavaidDatabase airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager)
+    public AtisBuilder(INavaidDatabase airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
     {
         mNavData = airportDatabase;
         mTextToSpeechRequest = textToSpeechRequest;
         mAudioManager = audioManager;
+        mDownloader = downloader;
     }
 
     public async Task BuildAtisAsync(AtisComposite composite, CancellationToken cancellationToken)
@@ -59,21 +62,22 @@ public class AtisBuilder : IAtisBuilder
 
         ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
 
-        GenerateAcarsText(composite);
-
         var voiceString = new StringBuilder();
 
         if (composite.CurrentPreset.ExternalGenerator.Enabled)
         {
-            var result = BuildExternalAtis(composite, metar, variables);
+            var result = await BuildExternalAtisAsync(composite, metar, variables);
 
             if (result == null)
                 throw new Exception("Failed to create external ATIS");
 
             voiceString = new StringBuilder(result);
+            composite.AcarsText = voiceString.ToString().ToUpper();
         }
         else
         {
+            GenerateAcarsText(composite);
+
             voiceString = new StringBuilder(composite.CurrentPreset.Template);
 
             foreach (var variable in variables)
@@ -132,8 +136,11 @@ public class AtisBuilder : IAtisBuilder
         }
     }
 
-    private string BuildExternalAtis(AtisComposite composite, Metar metar, List<Variable> variables)
+    private async Task<string> BuildExternalAtisAsync(AtisComposite composite, Metar metar, List<Variable> variables)
     {
+        if (composite.CurrentPreset == null)
+            return null;
+
         var preset = composite.CurrentPreset;
         var data = preset.ExternalGenerator;
 
@@ -163,22 +170,19 @@ public class AtisBuilder : IAtisBuilder
                 url = url.Replace("$notams", notams.TextReplace);
             }
 
-            var result = "";
-
             System.Diagnostics.Debug.WriteLine(url);
 
-            var client = new RestClient();
-            var request = new RestRequest(url);
-            var response = client.Get<string>(request);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            try
             {
-                result = Regex.Replace(response.Content, @"\[(.*?)\]", " $1 ");
-                result = Regex.Replace(result, @"\s+", " ");
-                return result;
+                var response = await mDownloader.DownloadStringAsync(url);
+                response = Regex.Replace(response, @"\[(.*?)\]", " $1 ");
+                response = Regex.Replace(response, @"\s+", " ");
+                return response;
             }
-
-            throw new Exception("External ATIS Error: " + response.StatusDescription);
+            catch (Exception ex)
+            {
+                throw new Exception("External ATIS Error: " + ex.Message);
+            }
         }
 
         return null;
