@@ -452,6 +452,10 @@ public partial class MainForm : Form
                             connection.Disconnect();
                         }
                     }
+                    else
+                    {
+                        mAtisBuilder.GenerateAcarsText(composite);
+                    }
                 };
                 tabPage.CompositeMeta.GenerateNewAtis += async (sender, args) =>
                 {
