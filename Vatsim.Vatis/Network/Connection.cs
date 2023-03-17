@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Timers;
-using RestSharp;
 using Vatsim.Network;
 using Vatsim.Network.PDU;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
@@ -36,9 +36,13 @@ public class Connection
     public event EventHandler<NetworkErrorReceived> NetworkErrorReceived;
     public event EventHandler<KillRequestReceived> KillRequestReceived;
 
+    private const string VATDNS_ENDPOINT = "http://fsd-http.connect.vatsim.net";
+    private const string FSD_AUTH_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
+
     private readonly FSDSession mSession;
     private readonly IAppConfig mAppConfig;
     private readonly INavaidDatabase mAirportDatabase;
+    private readonly IDownloader mDownloader;
     private readonly ClientProperties mClientProperties;
     private readonly string mVolumeSerial;
     private System.Timers.Timer mPositionUpdateTimer;
@@ -51,10 +55,11 @@ public class Connection
     private List<string> mEuroscopeSubscribers = new List<string>();
     private List<string> mCapsReceived = new List<string>();
 
-    public Connection(IAppConfig config, INavaidDatabase airportDatabase)
+    public Connection(IAppConfig config, INavaidDatabase airportDatabase, IDownloader downloader)
     {
         mAppConfig = config;
         mAirportDatabase = airportDatabase;
+        mDownloader = downloader;
 
         mClientProperties = new ClientProperties("vATIS", Assembly.GetExecutingAssembly().GetName().Version, Environment.ProcessPath.GetCheckSum());
 
@@ -259,7 +264,7 @@ public class Connection
 
     public async void Connect()
     {
-        if (SetPasswordToken(mAppConfig.UserId, mAppConfig.Password))
+        if (await SetPasswordTokenAsync(mAppConfig.UserId, mAppConfig.Password))
         {
             mAirport = mAirportDatabase.GetAirport(AirportIcao);
             if (mAirport == null)
@@ -274,7 +279,7 @@ public class Connection
                 {
                     try
                     {
-                        var bestFsdServer = await new HttpClient().GetStringAsync("http://fsd-http.connect.vatsim.net");
+                        var bestFsdServer = await mDownloader.DownloadStringAsync(VATDNS_ENDPOINT);
                         if (!string.IsNullOrEmpty(bestFsdServer))
                         {
                             if (Regex.IsMatch(bestFsdServer, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"))
@@ -295,26 +300,26 @@ public class Connection
         }
     }
 
-    private bool SetPasswordToken(string cid, string password)
+    private async Task<bool> SetPasswordTokenAsync(string cid, string password)
     {
-        var client = new RestClient();
-        var request = new RestRequest("https://auth.vatsim.net/api/fsd-jwt");
-        request.Timeout = 5000;
-        request.AddJsonBody(new PasswordTokenRequest(cid, password));
-        var response = client.Post<PasswordTokenResponse>(request);
-        if (response.IsSuccessful)
+        try
         {
-            if (response.Data != null)
+            var json = new PasswordTokenRequest(cid, password);
+
+            var response = await mDownloader.PostJsonAsync<PasswordTokenResponse>(FSD_AUTH_ENDPOINT, json);
+
+            if (response != null)
             {
-                mPasswordToken = response.Data.token;
+                mPasswordToken = response.token;
                 return true;
             }
-            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(response.Data.error_msg));
+
+            NetworkErrorReceived?.Invoke(this, new Events.NetworkErrorReceived(response.error_msg));
             return false;
         }
-        else
+        catch (Exception ex)
         {
-            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(response.ErrorMessage ?? "Could not get password token."));
+            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(ex.Message ?? "Could not get password token."));
             return false;
         }
     }
@@ -393,6 +398,9 @@ public class Connection
 
     public void SendSubscriberNotification()
     {
+        if (Composite.DecodedMetar == null)
+            return;
+
         foreach (var subscriber in mSubscribers)
         {
             mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"***{AirportIcao} ATIS UPDATE: {Composite.CurrentAtisLetter} {Composite.DecodedMetar.SurfaceWind.RawValue} - {Composite.DecodedMetar.AltimeterSetting.RawValue}"));

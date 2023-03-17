@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using RestSharp;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Io;
@@ -111,19 +110,16 @@ public class AtisBuilder : IAtisBuilder
 
             System.Diagnostics.Debug.WriteLine(tts);
 
-            await Task.Run(() =>
+            await Task.Delay(5000, cancellationToken); // catches multiple atis letter button presses in quick succession
+
+            var response = await mTextToSpeechRequest.RequestSynthesizedText(tts, cancellationToken);
+
+            if (response != null)
             {
-                Task.Delay(5000, cancellationToken); // catches multiple atis letter button presses in quick succession
+                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
 
-                var response = mTextToSpeechRequest.RequestSynthesizedText(tts, cancellationToken);
-
-                if (response.Result != null)
-                {
-                    mAudioManager.AddOrUpdateBot(response.Result, composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
-
-                    PostIdsUpdate(composite, cancellationToken);
-                }
-            }, cancellationToken);
+                PostIdsUpdate(composite, cancellationToken);
+            }
         }
         else
         {
@@ -479,14 +475,6 @@ public class AtisBuilder : IAtisBuilder
 
         try
         {
-            var client = new RestClient(composite.IDSEndpoint)
-            {
-                Timeout = 5000
-            };
-            var request = new RestRequest
-            {
-                Method = Method.POST
-            };
             var json = new IdsRestRequest
             {
                 Facility = composite.Identifier,
@@ -498,8 +486,8 @@ public class AtisBuilder : IAtisBuilder
                 Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
                 AtisType = composite.AtisType
             };
-            request.AddParameter("application/json", JsonConvert.SerializeObject(json), ParameterType.RequestBody);
-            await client.ExecuteAsync(request, token);
+
+            await mDownloader.PostJsonAsync<IdsRestRequest>(composite.IDSEndpoint, json);
         }
         catch (TaskCanceledException) { }
         catch (Exception ex)

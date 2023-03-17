@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Vatsim.Vatis.Io;
@@ -46,6 +48,22 @@ public class Downloader : IDownloader
         using var stream = new MemoryStream();
         await DownloadToStreamAsync(url, stream, progress);
         return stream.ToArray();
+    }
+
+    public async Task<Stream> PostJsonDownloadAsync(string url, object content, CancellationToken? cancellationToken = null)
+    {
+        var response = await mHttpClient.PostAsJsonAsync(url, content, 
+            cancellationToken.GetValueOrDefault());
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStreamAsync();
+    }
+
+    public async Task<T> PostJsonAsync<T>(string url, object content, CancellationToken? cancellationToken = null)
+    {
+        var response = await mHttpClient.PostAsJsonAsync(url, content,
+            cancellationToken.GetValueOrDefault());
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<T>();
     }
 
     private async Task DownloadToStreamAsync(string url, Stream stream, IProgress<int>? progress)

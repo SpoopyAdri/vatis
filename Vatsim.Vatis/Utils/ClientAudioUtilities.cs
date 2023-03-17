@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
@@ -70,5 +72,15 @@ public static class ClientAudioUtilities
         MMDeviceEnumerator em = new MMDeviceEnumerator();
         var something = em.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
         return something.Select(x => x.FriendlyName);
+    }
+
+    public static async Task AwaitTimeout(this Task task, int timeout)
+    {
+        if (task == await Task.WhenAny(task, Task.Delay(timeout)))
+        {
+            await task;
+            return;
+        }
+        throw new TimeoutException();
     }
 }

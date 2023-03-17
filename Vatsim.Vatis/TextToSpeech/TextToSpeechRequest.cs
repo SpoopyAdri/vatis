@@ -1,41 +1,40 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using RestSharp;
 using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Io;
 using Vatsim.Vatis.Network;
 
 namespace Vatsim.Vatis.TextToSpeech;
 
 public class TextToSpeechRequest : ITextToSpeechRequest
 {
+    private const string FSD_JWT_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
+    private const string TTS_SERVICE_ENDPOINT = "https://tts.clowd.io/Request";
     private readonly IAppConfig mAppConfig;
+    private readonly IDownloader mDownloader;
     private string mJwtToken;
     private DateTime mJwtValidTo;
 
-    public TextToSpeechRequest(IAppConfig config)
+    public TextToSpeechRequest(IAppConfig config, IDownloader downloader)
     {
         mAppConfig = config;
+        mDownloader = downloader;
     }
 
     public async Task<byte[]> RequestSynthesizedText(string text, CancellationToken token)
     {
-        var client = new RestClient();
-
         if (string.IsNullOrEmpty(mJwtToken) || mJwtValidTo < DateTime.UtcNow)
         {
             try
             {
-                var jwtRequest = new RestRequest("https://auth.vatsim.net/api/fsd-jwt", Method.POST)
+                var requestBody = new PasswordTokenRequest(mAppConfig.UserId, mAppConfig.Password);
+                var response = await mDownloader.PostJsonAsync<PasswordTokenResponse>(FSD_JWT_ENDPOINT, requestBody, token);
+                if (response != null)
                 {
-                    Timeout = 30000
-                };
-                jwtRequest.AddJsonBody(new PasswordTokenRequest(mAppConfig.UserId, mAppConfig.Password));
-                var jwtResponse = await client.ExecuteAsync<PasswordTokenResponse>(jwtRequest, token);
-                if (jwtResponse != null)
-                {
-                    mJwtToken = jwtResponse.Data.token;
+                    mJwtToken = response.token;
                     var handler = new JwtSecurityTokenHandler();
                     var jwtToken = handler.ReadJwtToken(mJwtToken);
                     if (jwtToken != null)
@@ -48,24 +47,22 @@ public class TextToSpeechRequest : ITextToSpeechRequest
             catch (OperationCanceledException) { }
         }
 
-        var request = new RestRequest("https://tts.clowd.io/Request", Method.POST);
-        request.AddJsonBody(new TextToSpeechRequestDto
-        {
-            Text = text,
-            Voice = mAppConfig.CurrentComposite.AtisVoice.GetVoiceNameForRequest ?? "default",
-            Jwt = mJwtToken
-        });
-
         try
         {
-            var response = await client.ExecuteAsync(request, token);
-            if (response.StatusCode == (System.Net.HttpStatusCode)429)
+            var ttsDto = new TextToSpeechRequestDto
             {
-                throw new Exception(response.Content);
-            }
-            if (response.IsSuccessful)
+                Text = text,
+                Voice = mAppConfig.CurrentComposite.AtisVoice.GetVoiceNameForRequest ?? "default",
+                Jwt = mJwtToken
+            };
+
+            var ttsResponse = await mDownloader.PostJsonDownloadAsync(TTS_SERVICE_ENDPOINT, ttsDto, token);
+
+            if (ttsResponse != null)
             {
-                return client.DownloadData(request);
+                using var stream = new MemoryStream();
+                await ttsResponse.CopyToAsync(stream, token);
+                return stream.ToArray();
             }
         }
         catch (TaskCanceledException) { }

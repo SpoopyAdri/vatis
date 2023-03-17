@@ -6,6 +6,7 @@ using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.Network;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI;
 using Vatsim.Vatis.Updates;
@@ -25,5 +26,6 @@ public class Bindings : NinjectModule
         Bind<IAudioManager>().To(typeof(AudioManager)).InSingletonScope();
         Bind<ITextToSpeechRequest>().To(typeof(TextToSpeechRequest)).InSingletonScope();
         Bind<IWindowFactory>().ToFactory();
+        Bind<IConnectionFactory>().ToFactory();
     }
 }

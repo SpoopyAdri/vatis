@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using Vatsim.Vatis.Weather.Enums;
-using Vatsim.Vatis.Weather.Extensions;
 
 namespace Vatsim.Vatis.Weather.Objects
 {

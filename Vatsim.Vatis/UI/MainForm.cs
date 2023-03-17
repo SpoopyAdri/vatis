@@ -13,6 +13,7 @@ using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Network;
+using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
@@ -25,7 +26,7 @@ public partial class MainForm : Form
     private readonly IAppConfig mAppConfig;
     private readonly IAudioManager mAudioManager;
     private readonly IAtisBuilder mAtisBuilder;
-    private readonly INavaidDatabase mAirportDatabase;
+    private readonly IConnectionFactory mConnectionFactory;
     private readonly Weather.MetarParser mMetarParser;
     private readonly SynchronizationContext mSyncContext;
     private readonly List<Connection> mConnections = new List<Connection>();
@@ -35,14 +36,14 @@ public partial class MainForm : Form
     private const int HT_CAPTION = 0x2;
 
     public MainForm(IWindowFactory windowFactory, IAppConfig appConfig,
-        IAtisBuilder atisBuilder, INavaidDatabase airportDatabase, IAudioManager audioManager)
+        IAtisBuilder atisBuilder, IAudioManager audioManager, IConnectionFactory connectionFactory)
     {
         InitializeComponent();
 
         mWindowFactory = windowFactory;
+        mConnectionFactory = connectionFactory;
         mAppConfig = appConfig;
         mAtisBuilder = atisBuilder;
-        mAirportDatabase = airportDatabase;
         mAudioManager = audioManager;
         mSyncContext = SynchronizationContext.Current;
         mMetarParser = new Weather.MetarParser();
@@ -248,12 +249,10 @@ public partial class MainForm : Form
             }
             else
             {
-                var connection = new Connection(mAppConfig, mAirportDatabase)
-                {
-                    Frequency = composite.AtisFrequency,
-                    AirportIcao = composite.Identifier,
-                    Composite = composite
-                };
+                var connection = mConnectionFactory.CreateConnection();
+                connection.Frequency = composite.AtisFrequency;
+                connection.AirportIcao = composite.Identifier;
+                connection.Composite = composite;
 
                 composite.Connection = connection;
                 composite.AtisCallsign = connection.Callsign;
@@ -437,9 +436,7 @@ public partial class MainForm : Form
                                 .ContinueWith(t => { tabPage.Connection.SendSubscriberNotification(); },
                                     cancellationToken.Token);
                         }
-                        catch (TaskCanceledException)
-                        {
-                        }
+                        catch (TaskCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
