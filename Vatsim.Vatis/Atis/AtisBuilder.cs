@@ -116,18 +116,18 @@ public class AtisBuilder : IAtisBuilder
 
             if (response != null)
             {
-                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
-
                 PostIdsUpdate(composite, cancellationToken);
+
+                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
             }
         }
         else
         {
             if (composite.MemoryStream != null)
             {
-                await mAudioManager.AddOrUpdateBot(composite.MemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
-
                 PostIdsUpdate(composite, cancellationToken);
+
+                await mAudioManager.AddOrUpdateBot(composite.MemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
             }
         }
     }
@@ -473,20 +473,20 @@ public class AtisBuilder : IAtisBuilder
         if (string.IsNullOrEmpty(composite.IDSEndpoint) || composite.CurrentPreset == null)
             return;
 
+        var json = new IdsRestRequest
+        {
+            Facility = composite.Identifier,
+            Preset = composite.CurrentPreset.Name,
+            AtisLetter = composite.CurrentAtisLetter,
+            AirportConditions = composite.CurrentPreset.AirportConditions,
+            Notams = composite.CurrentPreset.Notams,
+            Timestamp = DateTime.UtcNow,
+            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+            AtisType = composite.AtisType
+        };
+
         try
         {
-            var json = new IdsRestRequest
-            {
-                Facility = composite.Identifier,
-                Preset = composite.CurrentPreset.Name,
-                AtisLetter = composite.CurrentAtisLetter,
-                AirportConditions = composite.CurrentPreset.AirportConditions,
-                Notams = composite.CurrentPreset.Notams,
-                Timestamp = DateTime.UtcNow,
-                Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-                AtisType = composite.AtisType
-            };
-
             await mDownloader.PostJsonAsync<IdsRestRequest>(composite.IDSEndpoint, json);
         }
         catch (TaskCanceledException) { }
