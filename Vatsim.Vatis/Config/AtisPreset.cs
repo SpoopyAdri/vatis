@@ -16,7 +16,6 @@ public class AtisPreset : IAtisProfile
 
     [JsonIgnore] public bool IsAirportConditionsDirty { get; set; }
     [JsonIgnore] public bool IsNotamsDirty { get; set; }
-    [JsonIgnore] public bool IsTemplateDirty { get; set; }
 
     internal AtisPreset Clone()
     {
@@ -37,6 +36,7 @@ public class AtisPreset : IAtisProfile
 
 public class ExternalGenerator
 {
+    public bool Enabled { get; set; }
     public string Url { get; set; }
     public string Arrival { get; set; }
     public string Departure { get; set; }

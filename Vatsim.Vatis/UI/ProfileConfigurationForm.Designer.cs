@@ -69,11 +69,9 @@ namespace Vatsim.Vatis.UI
             this.chkTransitionLevelPrefix = new System.Windows.Forms.CheckBox();
             this.chkPrefixNotams = new System.Windows.Forms.CheckBox();
             this.chkFaaFormat = new System.Windows.Forms.CheckBox();
-            this.chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
             this.pagePresets = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.txtAtisTemplate = new System.Windows.Forms.TextBox();
+            this.chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
+            this.dynamicPresetControl = new System.Windows.Forms.Panel();
             this.btnRenamePreset = new System.Windows.Forms.Button();
             this.btnDeletePreset = new System.Windows.Forms.Button();
             this.btnCopyPreset = new System.Windows.Forms.Button();
@@ -85,26 +83,6 @@ namespace Vatsim.Vatis.UI
             this.gridContractions = new System.Windows.Forms.DataGridView();
             this.ColumnFind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pageExternalAtis = new System.Windows.Forms.TabPage();
-            this.txtSelectedPreset = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.groupTest = new System.Windows.Forms.GroupBox();
-            this.btnFetchMetar = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.txtMetar = new System.Windows.Forms.TextBox();
-            this.txtResponse = new System.Windows.Forms.TextBox();
-            this.tlpVariables = new System.Windows.Forms.TableLayoutPanel();
-            this.txtExternalRemarks = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtExternalDep = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtExternalArr = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtExternalApp = new System.Windows.Forms.TextBox();
-            this.txtExternalUrl = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.pageTransitionLevel = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.gridTransitionLevels = new System.Windows.Forms.DataGridView();
@@ -149,13 +127,9 @@ namespace Vatsim.Vatis.UI
             ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).BeginInit();
             this.pageFormat.SuspendLayout();
             this.pagePresets.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.pageContractions.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridContractions)).BeginInit();
-            this.pageExternalAtis.SuspendLayout();
-            this.groupTest.SuspendLayout();
-            this.tlpVariables.SuspendLayout();
             this.pageTransitionLevel.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTransitionLevels)).BeginInit();
@@ -209,7 +183,6 @@ namespace Vatsim.Vatis.UI
             this.mainTabControl.Controls.Add(this.pageConfiguration);
             this.mainTabControl.Controls.Add(this.pagePresets);
             this.mainTabControl.Controls.Add(this.pageContractions);
-            this.mainTabControl.Controls.Add(this.pageExternalAtis);
             this.mainTabControl.Controls.Add(this.pageTransitionLevel);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Enabled = false;
@@ -526,7 +499,6 @@ namespace Vatsim.Vatis.UI
             this.pageFormat.Controls.Add(this.chkTransitionLevelPrefix);
             this.pageFormat.Controls.Add(this.chkPrefixNotams);
             this.pageFormat.Controls.Add(this.chkFaaFormat);
-            this.pageFormat.Controls.Add(this.chkExternalAtisGenerator);
             this.pageFormat.Location = new System.Drawing.Point(4, 24);
             this.pageFormat.Name = "pageFormat";
             this.pageFormat.Padding = new System.Windows.Forms.Padding(3);
@@ -538,7 +510,7 @@ namespace Vatsim.Vatis.UI
             // chkAppendZulu
             // 
             this.chkAppendZulu.AutoSize = true;
-            this.chkAppendZulu.Location = new System.Drawing.Point(40, 269);
+            this.chkAppendZulu.Location = new System.Drawing.Point(40, 268);
             this.chkAppendZulu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAppendZulu.Name = "chkAppendZulu";
             this.chkAppendZulu.Size = new System.Drawing.Size(234, 19);
@@ -551,7 +523,7 @@ namespace Vatsim.Vatis.UI
             // chkPrefixTemperature
             // 
             this.chkPrefixTemperature.AutoSize = true;
-            this.chkPrefixTemperature.Location = new System.Drawing.Point(40, 241);
+            this.chkPrefixTemperature.Location = new System.Drawing.Point(40, 237);
             this.chkPrefixTemperature.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrefixTemperature.Name = "chkPrefixTemperature";
             this.chkPrefixTemperature.Size = new System.Drawing.Size(240, 19);
@@ -564,7 +536,7 @@ namespace Vatsim.Vatis.UI
             // chkDecimalTerminology
             // 
             this.chkDecimalTerminology.AutoSize = true;
-            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 213);
+            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 206);
             this.chkDecimalTerminology.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkDecimalTerminology.Name = "chkDecimalTerminology";
             this.chkDecimalTerminology.Size = new System.Drawing.Size(245, 19);
@@ -578,7 +550,7 @@ namespace Vatsim.Vatis.UI
             // chkVisibilitySuffix
             // 
             this.chkVisibilitySuffix.AutoSize = true;
-            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 157);
+            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 144);
             this.chkVisibilitySuffix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkVisibilitySuffix.Name = "chkVisibilitySuffix";
             this.chkVisibilitySuffix.Size = new System.Drawing.Size(333, 19);
@@ -592,7 +564,7 @@ namespace Vatsim.Vatis.UI
             // chkSurfaceWindPrefix
             // 
             this.chkSurfaceWindPrefix.AutoSize = true;
-            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 129);
+            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 113);
             this.chkSurfaceWindPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSurfaceWindPrefix.Name = "chkSurfaceWindPrefix";
             this.chkSurfaceWindPrefix.Size = new System.Drawing.Size(234, 19);
@@ -606,7 +578,7 @@ namespace Vatsim.Vatis.UI
             // chkConvertMetric
             // 
             this.chkConvertMetric.AutoSize = true;
-            this.chkConvertMetric.Location = new System.Drawing.Point(40, 185);
+            this.chkConvertMetric.Location = new System.Drawing.Point(40, 175);
             this.chkConvertMetric.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkConvertMetric.Name = "chkConvertMetric";
             this.chkConvertMetric.Size = new System.Drawing.Size(217, 19);
@@ -619,7 +591,7 @@ namespace Vatsim.Vatis.UI
             // chkTransitionLevelPrefix
             // 
             this.chkTransitionLevelPrefix.AutoSize = true;
-            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 101);
+            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 82);
             this.chkTransitionLevelPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
             this.chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
@@ -633,7 +605,7 @@ namespace Vatsim.Vatis.UI
             // chkPrefixNotams
             // 
             this.chkPrefixNotams.AutoSize = true;
-            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 73);
+            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 51);
             this.chkPrefixNotams.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrefixNotams.Name = "chkPrefixNotams";
             this.chkPrefixNotams.Size = new System.Drawing.Size(352, 19);
@@ -647,7 +619,7 @@ namespace Vatsim.Vatis.UI
             // chkFaaFormat
             // 
             this.chkFaaFormat.AutoSize = true;
-            this.chkFaaFormat.Location = new System.Drawing.Point(40, 45);
+            this.chkFaaFormat.Location = new System.Drawing.Point(40, 20);
             this.chkFaaFormat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkFaaFormat.Name = "chkFaaFormat";
             this.chkFaaFormat.Size = new System.Drawing.Size(184, 19);
@@ -657,23 +629,10 @@ namespace Vatsim.Vatis.UI
             this.chkFaaFormat.UseVisualStyleBackColor = true;
             this.chkFaaFormat.CheckedChanged += new System.EventHandler(this.chkFaaFormat_CheckedChanged);
             // 
-            // chkExternalAtisGenerator
-            // 
-            this.chkExternalAtisGenerator.AutoSize = true;
-            this.chkExternalAtisGenerator.Location = new System.Drawing.Point(40, 17);
-            this.chkExternalAtisGenerator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
-            this.chkExternalAtisGenerator.Size = new System.Drawing.Size(310, 19);
-            this.chkExternalAtisGenerator.TabIndex = 43;
-            this.chkExternalAtisGenerator.Text = "Use external source to produce ATIS text (e.g. UniATIS)";
-            this.compositeTooltip.SetToolTip(this.chkExternalAtisGenerator, "Use an external source for producing the ATIS text (e.g. UniATIS).");
-            this.chkExternalAtisGenerator.UseVisualStyleBackColor = true;
-            this.chkExternalAtisGenerator.CheckedChanged += new System.EventHandler(this.chkExternalAtisGenerator_CheckedChanged);
-            // 
             // pagePresets
             // 
-            this.pagePresets.Controls.Add(this.label5);
-            this.pagePresets.Controls.Add(this.panel2);
+            this.pagePresets.Controls.Add(this.chkExternalAtisGenerator);
+            this.pagePresets.Controls.Add(this.dynamicPresetControl);
             this.pagePresets.Controls.Add(this.btnRenamePreset);
             this.pagePresets.Controls.Add(this.btnDeletePreset);
             this.pagePresets.Controls.Add(this.btnCopyPreset);
@@ -687,46 +646,29 @@ namespace Vatsim.Vatis.UI
             this.pagePresets.Text = "Presets";
             this.pagePresets.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // chkExternalAtisGenerator
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 15);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "ATIS Template:";
+            this.chkExternalAtisGenerator.AutoSize = true;
+            this.chkExternalAtisGenerator.Enabled = false;
+            this.chkExternalAtisGenerator.Location = new System.Drawing.Point(15, 41);
+            this.chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
+            this.chkExternalAtisGenerator.Size = new System.Drawing.Size(242, 19);
+            this.chkExternalAtisGenerator.TabIndex = 7;
+            this.chkExternalAtisGenerator.Text = "Use external ATIS generator (e.g. UniATIS)";
+            this.chkExternalAtisGenerator.UseVisualStyleBackColor = true;
+            this.chkExternalAtisGenerator.CheckedChanged += new System.EventHandler(this.chkExternalAtisGenerator_CheckedChanged);
             // 
-            // panel2
+            // dynamicPresetControl
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.txtAtisTemplate);
-            this.panel2.Location = new System.Drawing.Point(14, 63);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(4, 6, 6, 6);
-            this.panel2.Size = new System.Drawing.Size(680, 286);
-            this.panel2.TabIndex = 6;
-            // 
-            // txtAtisTemplate
-            // 
-            this.txtAtisTemplate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAtisTemplate.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtAtisTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAtisTemplate.Enabled = false;
-            this.txtAtisTemplate.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtAtisTemplate.Location = new System.Drawing.Point(4, 6);
-            this.txtAtisTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtAtisTemplate.Multiline = true;
-            this.txtAtisTemplate.Name = "txtAtisTemplate";
-            this.txtAtisTemplate.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtAtisTemplate.Size = new System.Drawing.Size(668, 272);
-            this.txtAtisTemplate.TabIndex = 4;
-            this.txtAtisTemplate.TextChanged += new System.EventHandler(this.txtTemplate_TextChanged);
+            this.dynamicPresetControl.Location = new System.Drawing.Point(15, 64);
+            this.dynamicPresetControl.Name = "dynamicPresetControl";
+            this.dynamicPresetControl.Size = new System.Drawing.Size(681, 286);
+            this.dynamicPresetControl.TabIndex = 6;
             // 
             // btnRenamePreset
             // 
             this.btnRenamePreset.Enabled = false;
-            this.btnRenamePreset.Location = new System.Drawing.Point(564, 14);
+            this.btnRenamePreset.Location = new System.Drawing.Point(565, 13);
             this.btnRenamePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRenamePreset.Name = "btnRenamePreset";
             this.btnRenamePreset.Size = new System.Drawing.Size(64, 24);
@@ -738,7 +680,7 @@ namespace Vatsim.Vatis.UI
             // btnDeletePreset
             // 
             this.btnDeletePreset.Enabled = false;
-            this.btnDeletePreset.Location = new System.Drawing.Point(631, 14);
+            this.btnDeletePreset.Location = new System.Drawing.Point(632, 13);
             this.btnDeletePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDeletePreset.Name = "btnDeletePreset";
             this.btnDeletePreset.Size = new System.Drawing.Size(64, 24);
@@ -750,7 +692,7 @@ namespace Vatsim.Vatis.UI
             // btnCopyPreset
             // 
             this.btnCopyPreset.Enabled = false;
-            this.btnCopyPreset.Location = new System.Drawing.Point(496, 14);
+            this.btnCopyPreset.Location = new System.Drawing.Point(497, 13);
             this.btnCopyPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyPreset.Name = "btnCopyPreset";
             this.btnCopyPreset.Size = new System.Drawing.Size(64, 24);
@@ -761,7 +703,7 @@ namespace Vatsim.Vatis.UI
             // 
             // btnNewPreset
             // 
-            this.btnNewPreset.Location = new System.Drawing.Point(428, 14);
+            this.btnNewPreset.Location = new System.Drawing.Point(429, 13);
             this.btnNewPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnNewPreset.Name = "btnNewPreset";
             this.btnNewPreset.Size = new System.Drawing.Size(64, 24);
@@ -774,7 +716,7 @@ namespace Vatsim.Vatis.UI
             // 
             this.ddlPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPresets.FormattingEnabled = true;
-            this.ddlPresets.Location = new System.Drawing.Point(14, 15);
+            this.ddlPresets.Location = new System.Drawing.Point(15, 14);
             this.ddlPresets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddlPresets.Name = "ddlPresets";
             this.ddlPresets.Size = new System.Drawing.Size(408, 23);
@@ -856,236 +798,6 @@ namespace Vatsim.Vatis.UI
             // 
             this.ColumnReplace.HeaderText = "Spoken";
             this.ColumnReplace.Name = "ColumnReplace";
-            // 
-            // pageExternalAtis
-            // 
-            this.pageExternalAtis.Controls.Add(this.txtSelectedPreset);
-            this.pageExternalAtis.Controls.Add(this.label11);
-            this.pageExternalAtis.Controls.Add(this.groupTest);
-            this.pageExternalAtis.Controls.Add(this.tlpVariables);
-            this.pageExternalAtis.Controls.Add(this.txtExternalUrl);
-            this.pageExternalAtis.Controls.Add(this.label6);
-            this.pageExternalAtis.Location = new System.Drawing.Point(4, 24);
-            this.pageExternalAtis.Name = "pageExternalAtis";
-            this.pageExternalAtis.Size = new System.Drawing.Size(710, 362);
-            this.pageExternalAtis.TabIndex = 4;
-            this.pageExternalAtis.Text = "External ATIS Generator";
-            this.pageExternalAtis.UseVisualStyleBackColor = true;
-            // 
-            // txtSelectedPreset
-            // 
-            this.txtSelectedPreset.AutoSize = true;
-            this.txtSelectedPreset.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtSelectedPreset.Location = new System.Drawing.Point(67, 15);
-            this.txtSelectedPreset.Name = "txtSelectedPreset";
-            this.txtSelectedPreset.Size = new System.Drawing.Size(45, 15);
-            this.txtSelectedPreset.TabIndex = 10;
-            this.txtSelectedPreset.Text = "[None]";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 15);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 15);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Preset:";
-            // 
-            // groupTest
-            // 
-            this.groupTest.Controls.Add(this.btnFetchMetar);
-            this.groupTest.Controls.Add(this.label10);
-            this.groupTest.Controls.Add(this.btnTest);
-            this.groupTest.Controls.Add(this.txtMetar);
-            this.groupTest.Controls.Add(this.txtResponse);
-            this.groupTest.Enabled = false;
-            this.groupTest.Location = new System.Drawing.Point(21, 208);
-            this.groupTest.Name = "groupTest";
-            this.groupTest.Size = new System.Drawing.Size(669, 140);
-            this.groupTest.TabIndex = 7;
-            this.groupTest.TabStop = false;
-            this.groupTest.Text = "Test URL";
-            // 
-            // btnFetchMetar
-            // 
-            this.btnFetchMetar.Location = new System.Drawing.Point(528, 23);
-            this.btnFetchMetar.Name = "btnFetchMetar";
-            this.btnFetchMetar.Size = new System.Drawing.Size(47, 23);
-            this.btnFetchMetar.TabIndex = 7;
-            this.btnFetchMetar.Text = "Fetch";
-            this.btnFetchMetar.UseVisualStyleBackColor = true;
-            this.btnFetchMetar.Click += new System.EventHandler(this.btnFetchMetar_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 27);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "METAR:";
-            // 
-            // btnTest
-            // 
-            this.btnTest.Enabled = false;
-            this.btnTest.Location = new System.Drawing.Point(580, 23);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(68, 23);
-            this.btnTest.TabIndex = 3;
-            this.btnTest.Text = "Test URL";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // txtMetar
-            // 
-            this.txtMetar.Location = new System.Drawing.Point(72, 23);
-            this.txtMetar.Name = "txtMetar";
-            this.txtMetar.Size = new System.Drawing.Size(451, 23);
-            this.txtMetar.TabIndex = 5;
-            this.txtMetar.TextChanged += new System.EventHandler(this.txtMetar_TextChanged);
-            // 
-            // txtResponse
-            // 
-            this.txtResponse.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtResponse.Location = new System.Drawing.Point(23, 52);
-            this.txtResponse.Multiline = true;
-            this.txtResponse.Name = "txtResponse";
-            this.txtResponse.ReadOnly = true;
-            this.txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResponse.Size = new System.Drawing.Size(625, 74);
-            this.txtResponse.TabIndex = 4;
-            // 
-            // tlpVariables
-            // 
-            this.tlpVariables.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tlpVariables.ColumnCount = 2;
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.40575F));
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.59425F));
-            this.tlpVariables.Controls.Add(this.txtExternalRemarks, 1, 3);
-            this.tlpVariables.Controls.Add(this.label12, 0, 3);
-            this.tlpVariables.Controls.Add(this.label8, 0, 1);
-            this.tlpVariables.Controls.Add(this.txtExternalDep, 1, 1);
-            this.tlpVariables.Controls.Add(this.label7, 0, 0);
-            this.tlpVariables.Controls.Add(this.txtExternalArr, 1, 0);
-            this.tlpVariables.Controls.Add(this.label9, 0, 2);
-            this.tlpVariables.Controls.Add(this.txtExternalApp, 1, 2);
-            this.tlpVariables.Enabled = false;
-            this.tlpVariables.Location = new System.Drawing.Point(21, 67);
-            this.tlpVariables.Name = "tlpVariables";
-            this.tlpVariables.RowCount = 4;
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVariables.Size = new System.Drawing.Size(669, 130);
-            this.tlpVariables.TabIndex = 2;
-            // 
-            // txtExternalRemarks
-            // 
-            this.txtExternalRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalRemarks.Location = new System.Drawing.Point(148, 101);
-            this.txtExternalRemarks.Name = "txtExternalRemarks";
-            this.txtExternalRemarks.Size = new System.Drawing.Size(516, 23);
-            this.txtExternalRemarks.TabIndex = 7;
-            this.txtExternalRemarks.TextChanged += new System.EventHandler(this.txtExternalRemarks_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(5, 98);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(135, 30);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Remarks:";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.compositeTooltip.SetToolTip(this.label12, "Variable: $remarks");
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(5, 34);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(135, 30);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Departure Runways:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.compositeTooltip.SetToolTip(this.label8, "Variable: $deprwy");
-            // 
-            // txtExternalDep
-            // 
-            this.txtExternalDep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalDep.Location = new System.Drawing.Point(148, 37);
-            this.txtExternalDep.Name = "txtExternalDep";
-            this.txtExternalDep.Size = new System.Drawing.Size(516, 23);
-            this.txtExternalDep.TabIndex = 3;
-            this.txtExternalDep.TextChanged += new System.EventHandler(this.txtExternalDep_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(5, 2);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(135, 30);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Arrival Runways:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.compositeTooltip.SetToolTip(this.label7, "Variable: $arrrwy");
-            // 
-            // txtExternalArr
-            // 
-            this.txtExternalArr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalArr.Location = new System.Drawing.Point(148, 5);
-            this.txtExternalArr.Name = "txtExternalArr";
-            this.txtExternalArr.Size = new System.Drawing.Size(516, 23);
-            this.txtExternalArr.TabIndex = 1;
-            this.txtExternalArr.TextChanged += new System.EventHandler(this.txtExternalArr_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(5, 66);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(135, 30);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Approaches in Use:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.compositeTooltip.SetToolTip(this.label9, "Variable: $app");
-            // 
-            // txtExternalApp
-            // 
-            this.txtExternalApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalApp.Location = new System.Drawing.Point(148, 69);
-            this.txtExternalApp.Name = "txtExternalApp";
-            this.txtExternalApp.Size = new System.Drawing.Size(516, 23);
-            this.txtExternalApp.TabIndex = 5;
-            this.txtExternalApp.TextChanged += new System.EventHandler(this.txtExternalApp_TextChanged);
-            // 
-            // txtExternalUrl
-            // 
-            this.txtExternalUrl.Enabled = false;
-            this.txtExternalUrl.Location = new System.Drawing.Point(70, 37);
-            this.txtExternalUrl.Name = "txtExternalUrl";
-            this.txtExternalUrl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtExternalUrl.Size = new System.Drawing.Size(620, 23);
-            this.txtExternalUrl.TabIndex = 1;
-            this.txtExternalUrl.TextChanged += new System.EventHandler(this.txtExternalUrl_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "URL:";
             // 
             // pageTransitionLevel
             // 
@@ -1458,17 +1170,9 @@ namespace Vatsim.Vatis.UI
             this.pageFormat.PerformLayout();
             this.pagePresets.ResumeLayout(false);
             this.pagePresets.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.pageContractions.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridContractions)).EndInit();
-            this.pageExternalAtis.ResumeLayout(false);
-            this.pageExternalAtis.PerformLayout();
-            this.groupTest.ResumeLayout(false);
-            this.groupTest.PerformLayout();
-            this.tlpVariables.ResumeLayout(false);
-            this.tlpVariables.PerformLayout();
             this.pageTransitionLevel.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTransitionLevels)).EndInit();
@@ -1512,8 +1216,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.TabPage pagePresets;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtAtisTemplate;
         private System.Windows.Forms.Button btnRenamePreset;
         private System.Windows.Forms.Button btnDeletePreset;
         private System.Windows.Forms.Button btnCopyPreset;
@@ -1544,7 +1246,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn high;
         private System.Windows.Forms.DataGridViewTextBoxColumn transitionLevel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox vhfFrequency;
         private System.Windows.Forms.RadioButton typeCombined;
         private System.Windows.Forms.RadioButton typeDeparture;
@@ -1552,27 +1253,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.CheckBox chkFaaFormat;
-        private System.Windows.Forms.CheckBox chkExternalAtisGenerator;
-        private System.Windows.Forms.TabPage pageExternalAtis;
-        private System.Windows.Forms.TableLayoutPanel tlpVariables;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtExternalDep;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtExternalArr;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtExternalApp;
-        private System.Windows.Forms.TextBox txtExternalUrl;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtResponse;
-        private System.Windows.Forms.Button btnTest;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtMetar;
-        private System.Windows.Forms.GroupBox groupTest;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label txtSelectedPreset;
-        private System.Windows.Forms.Button btnFetchMetar;
-        private System.Windows.Forms.TextBox txtExternalRemarks;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage pageFormat;
         private System.Windows.Forms.TabPage pageGeneral;
@@ -1591,5 +1271,7 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TextBox txtCodeRangeLow;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtCodeRangeHigh;
+        private System.Windows.Forms.Panel dynamicPresetControl;
+        private System.Windows.Forms.CheckBox chkExternalAtisGenerator;
     }
 }

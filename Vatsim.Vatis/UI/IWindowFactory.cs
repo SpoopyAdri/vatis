@@ -1,4 +1,5 @@
-﻿using Vatsim.Vatis.UI.Dialogs;
+﻿using Vatsim.Vatis.UI.Controls;
+using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.UI.Startup;
 
 namespace Vatsim.Vatis.UI;
@@ -17,4 +18,6 @@ public interface IWindowFactory
     ProfileConfigurationForm CreateProfileConfigurationForm();
     MiniDisplayForm CreateMiniDisplayForm();
     StartupWindow CreateStartupWindow();
+    AtisTemplate CreateAtisTemplateControl();
+    ExternalAtisGenerator CreateExternalAtisGeneratorControl();
 }

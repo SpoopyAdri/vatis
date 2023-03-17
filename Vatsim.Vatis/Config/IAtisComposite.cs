@@ -26,7 +26,6 @@ public interface IAtisComposite
     MemoryStream MemoryStream { get; set; }
     CodeRange CodeRange { get; set; }
     bool UseFaaFormat { get; set; }
-    bool UseExternalAtisGenerator { get; set; }
     bool UseNotamPrefix { get; set; }
     bool UseTransitionLevelPrefix { get; set; }
     bool UseMetricUnits { get; set; }

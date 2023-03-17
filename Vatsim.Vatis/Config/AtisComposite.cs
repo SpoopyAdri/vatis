@@ -29,7 +29,6 @@ public class AtisComposite : IAtisComposite
     public List<TransitionLevel> TransitionLevels { get; set; } = new List<TransitionLevel>();
     public CodeRange CodeRange { get; set; } = new CodeRange('A', 'Z');
     public bool UseFaaFormat { get; set; } = true;
-    public bool UseExternalAtisGenerator { get; set; }
     public bool UseNotamPrefix { get; set; } = true;
     public bool UseTransitionLevelPrefix { get; set; } = true;
     public bool UseMetricUnits { get; set; }
@@ -53,7 +52,6 @@ public class AtisComposite : IAtisComposite
             NotamsBeforeFreeText = NotamsBeforeFreeText,
             TransitionLevels = TransitionLevels,
             UseFaaFormat = UseFaaFormat,
-            UseExternalAtisGenerator = UseExternalAtisGenerator,
             UseNotamPrefix = UseNotamPrefix,
             UseTransitionLevelPrefix = UseTransitionLevelPrefix,
             UseMetricUnits = UseMetricUnits,

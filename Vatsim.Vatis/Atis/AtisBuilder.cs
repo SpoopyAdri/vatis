@@ -63,7 +63,7 @@ public class AtisBuilder : IAtisBuilder
 
         var voiceString = new StringBuilder();
 
-        if (composite.UseExternalAtisGenerator)
+        if (composite.CurrentPreset.ExternalGenerator.Enabled)
         {
             var result = BuildExternalAtis(composite, metar, variables);
 

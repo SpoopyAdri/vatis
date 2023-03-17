@@ -157,6 +157,19 @@ public static class StringExtensions
         return freqint * 1000;
     }
 
+    public static string RandomLetter()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var random = new Random();
+        return new string(Enumerable.Range(1, 1).Select(_ => chars[random.Next(chars.Length)]).ToArray());
+    }
+
+    public static bool IsValidUrl(this string value)
+    {
+        var pattern = new Regex(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
+        return pattern.IsMatch(value.Trim());
+    }
+
     /// <summary>
     /// Phoentic Alphabet
     /// </summary>

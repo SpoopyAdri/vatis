@@ -4,17 +4,14 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using RestSharp;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
 
@@ -25,7 +22,7 @@ public partial class ProfileConfigurationForm : Form
     private readonly IAppConfig mAppConfig;
     private readonly IWindowFactory mWindowFactory;
     private readonly INavaidDatabase mNavaidDatabase;
-    private readonly SynchronizationContext mSyncContext;
+    private Control mPresetControl;
 
     private AtisComposite mCurrentComposite = null;
     private AtisPreset mCurrentPreset = null;
@@ -42,11 +39,6 @@ public partial class ProfileConfigurationForm : Form
     private bool mContractionsChanged = false;
     private bool mTransitionLevelsChanged = false;
     private bool mExternalAtisGeneratorChanged = false;
-    private bool mExternalUrlChanged = false;
-    private bool mExternalArrivalChanged = false;
-    private bool mExternalDepartureChanged = false;
-    private bool mExternalApproachesChanged = false;
-    private bool mExternalRemarksChanged = false;
     private bool mPrefixNotamsChanged = false;
     private bool mTransitionLevelPrefixChanged = false;
     private bool mConvertMetricChanged = false;
@@ -61,13 +53,21 @@ public partial class ProfileConfigurationForm : Form
     {
         InitializeComponent();
 
-        mSyncContext = SynchronizationContext.Current;
-
         mAppConfig = appConfig;
         mWindowFactory = windowFactory;
         mNavaidDatabase = navaidDatabase;
 
         RefreshCompositeList();
+    }
+
+    protected override CreateParams CreateParams
+    {
+        get
+        {
+            CreateParams cp = base.CreateParams;
+            cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+            return cp;
+        }
     }
 
     protected override void OnLoad(EventArgs e)
@@ -77,6 +77,12 @@ public partial class ProfileConfigurationForm : Form
         EventBus.Register(this);
     }
 
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+        EventBus.Unregister(this);
+        base.OnFormClosing(e);
+    }
+
     private TreeNode CreateTreeMenuNode(string name, object tag)
     {
         return new TreeNode
@@ -84,6 +90,65 @@ public partial class ProfileConfigurationForm : Form
             Tag = tag,
             Text = name,
         };
+    }
+
+    public void HandleEvent(AtisTemplateChanged evt)
+    {
+        if (mCurrentPreset == null)
+            return;
+
+        if (evt.Value != mCurrentPreset.Template)
+        {
+            mCurrentPreset.Template = evt.Value;
+            btnApply.Enabled = true;
+        }
+    }
+
+    public void HandleEvent(ExternalAtisConfigChanged evt)
+    {
+        if (mCurrentPreset == null)
+            return;
+
+        mCurrentPreset.ExternalGenerator ??= new();
+
+        switch (evt.Component)
+        {
+            case ExternalAtisComponent.Url:
+                if (evt.Value != mCurrentPreset.ExternalGenerator.Url)
+                {
+                    mCurrentPreset.ExternalGenerator.Url = evt.Value;
+                    btnApply.Enabled = true;
+                }
+                break;
+            case ExternalAtisComponent.ArrivalRunways:
+                if (evt.Value != mCurrentPreset.ExternalGenerator.Arrival)
+                {
+                    mCurrentPreset.ExternalGenerator.Arrival = evt.Value;
+                    btnApply.Enabled = true;
+                }
+                break;
+            case ExternalAtisComponent.DepartureRunways:
+                if (evt.Value != mCurrentPreset.ExternalGenerator.Departure)
+                {
+                    mCurrentPreset.ExternalGenerator.Departure = evt.Value;
+                    btnApply.Enabled = true;
+                }
+                break;
+            case ExternalAtisComponent.Approaches:
+                if (evt.Value != mCurrentPreset.ExternalGenerator.Approaches)
+                {
+                    mCurrentPreset.ExternalGenerator.Approaches = evt.Value;
+                    btnApply.Enabled = true;
+                }
+                break;
+            case ExternalAtisComponent.Remarks:
+                if (evt.Value != mCurrentPreset.ExternalGenerator.Remarks)
+                {
+                    mCurrentPreset.ExternalGenerator.Remarks = evt.Value;
+                    btnApply.Enabled = true;
+                }
+                break;
+        }
     }
 
     private void btnManageComposite_MouseClick(object sender, MouseEventArgs e)
@@ -103,7 +168,6 @@ public partial class ProfileConfigurationForm : Form
             ctxRename.Enabled = true;
             ctxCopy.Enabled = true;
             ctxExport.Enabled = true;
-            txtAtisTemplate.Text = "";
             Text = $"Profile Configuration: {TreeMenu.SelectedNode.Text}";
             btnApply.Enabled = false;
             if (mAppConfig.CurrentProfile != null)
@@ -161,7 +225,6 @@ public partial class ProfileConfigurationForm : Form
         txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
         chkFaaFormat.Checked = mCurrentComposite.UseFaaFormat;
-        chkExternalAtisGenerator.Checked = mCurrentComposite.UseExternalAtisGenerator;
         chkPrefixNotams.Checked = mCurrentComposite.UseNotamPrefix;
         chkTransitionLevelPrefix.Checked = mCurrentComposite.UseTransitionLevelPrefix;
         chkConvertMetric.Checked = mCurrentComposite.UseMetricUnits;
@@ -253,8 +316,6 @@ public partial class ProfileConfigurationForm : Form
                 tl.Altitude
             });
         }
-
-        pageExternalAtis.SetVisible(mCurrentComposite.UseExternalAtisGenerator);
 
         if (mCurrentComposite.Identifier.StartsWith("K") || mCurrentComposite.Identifier.StartsWith("P"))
         {
@@ -520,7 +581,6 @@ public partial class ProfileConfigurationForm : Form
         chkObservationTime.Checked = false;
         txtIdsEndpoint.Text = "";
 
-        pageExternalAtis.SetVisible(false);
         pageTransitionLevel.SetVisible(false);
 
         TreeMenu.Nodes.Clear();
@@ -569,7 +629,7 @@ public partial class ProfileConfigurationForm : Form
 
     private bool ApplyChanges()
     {
-        if (!string.IsNullOrEmpty(txtIdsEndpoint.Text) && !IsValidUrl(txtIdsEndpoint.Text))
+        if (!string.IsNullOrEmpty(txtIdsEndpoint.Text) && !txtIdsEndpoint.Text.IsValidUrl())
         {
             MessageBox.Show("IDS endpoint URL is not a valid hyperlink format.");
             return false;
@@ -667,7 +727,7 @@ public partial class ProfileConfigurationForm : Form
 
         if (mExternalAtisGeneratorChanged)
         {
-            mCurrentComposite.UseExternalAtisGenerator = chkExternalAtisGenerator.Checked;
+            mCurrentPreset.ExternalGenerator.Enabled = chkExternalAtisGenerator.Checked;
             mExternalAtisGeneratorChanged = false;
         }
 
@@ -705,11 +765,6 @@ public partial class ProfileConfigurationForm : Form
             mCurrentComposite.AtisVoice.Voice =
                 ddlVoices.SelectedItem == null ? "Default" : ddlVoices.SelectedItem.ToString();
             mVoiceOptionsChanged = false;
-        }
-
-        if (mCurrentPreset != null && mCurrentPreset.IsTemplateDirty)
-        {
-            mCurrentPreset.Template = txtAtisTemplate.Text;
         }
 
         List<string> usedContractions = new List<string>();
@@ -806,36 +861,6 @@ public partial class ProfileConfigurationForm : Form
                     }
                 }
             }
-        }
-
-        if (mExternalUrlChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Url = txtExternalUrl.Text;
-            mExternalUrlChanged = false;
-        }
-
-        if (mExternalArrivalChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Arrival = txtExternalArr.Text;
-            mExternalArrivalChanged = false;
-        }
-
-        if (mExternalDepartureChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Departure = txtExternalDep.Text;
-            mExternalDepartureChanged = false;
-        }
-
-        if (mExternalApproachesChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Approaches = txtExternalApp.Text;
-            mExternalApproachesChanged = false;
-        }
-
-        if (mExternalRemarksChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Remarks = txtExternalRemarks.Text;
-            mExternalRemarksChanged = false;
         }
 
         if (mPrefixNotamsChanged)
@@ -1069,16 +1094,15 @@ public partial class ProfileConfigurationForm : Form
 
     private void chkExternalAtisGenerator_CheckedChanged(object sender, EventArgs e)
     {
-        if (mCurrentComposite == null)
+        if (mCurrentPreset == null)
             return;
 
         if (!chkExternalAtisGenerator.Focused)
             return;
 
-        pageExternalAtis.SetVisible(chkExternalAtisGenerator.Checked);
-        RefreshPresetList();
+        AddDynamicPresetControl();
 
-        if (chkExternalAtisGenerator.Checked != mCurrentComposite.UseExternalAtisGenerator)
+        if (chkExternalAtisGenerator.Checked != mCurrentPreset.ExternalGenerator.Enabled)
         {
             mExternalAtisGeneratorChanged = true;
             btnApply.Enabled = true;
@@ -1086,6 +1110,36 @@ public partial class ProfileConfigurationForm : Form
         else
         {
             btnApply.Enabled = false;
+        }
+    }
+
+    private void AddDynamicPresetControl()
+    {
+        mPresetControl = chkExternalAtisGenerator.Checked
+            ? mWindowFactory.CreateExternalAtisGeneratorControl()
+            : mWindowFactory.CreateAtisTemplateControl() as Control;
+        mPresetControl.Dock = DockStyle.Fill;
+        dynamicPresetControl.Controls.Clear();
+        dynamicPresetControl.Controls.Add(mPresetControl);
+
+        if (mCurrentPreset.ExternalGenerator.Enabled || chkExternalAtisGenerator.Checked)
+        {
+            if (mPresetControl is ExternalAtisGenerator control)
+            {
+                control.Composite = mCurrentComposite;
+                control.ExternalUrl = mCurrentPreset.ExternalGenerator.Url;
+                control.ArrivalRunways = mCurrentPreset.ExternalGenerator.Arrival;
+                control.DepartureRunways = mCurrentPreset.ExternalGenerator.Departure;
+                control.Approaches = mCurrentPreset.ExternalGenerator.Approaches;
+                control.Remarks = mCurrentPreset.ExternalGenerator.Remarks;
+            }
+        }
+        else
+        {
+            if (mPresetControl is AtisTemplate control)
+            {
+                control.Template = mCurrentPreset.Template;
+            }
         }
     }
 
@@ -1425,8 +1479,6 @@ public partial class ProfileConfigurationForm : Form
             {
                 mCurrentComposite.Presets.RemoveAll(x => x.Name == ddlPresets.SelectedItem.ToString());
                 mAppConfig.SaveConfig();
-                txtAtisTemplate.Text = "";
-                txtAtisTemplate.Enabled = false;
                 RefreshPresetList();
             }
         }
@@ -1436,11 +1488,15 @@ public partial class ProfileConfigurationForm : Form
     {
         if (mCurrentComposite != null)
         {
+            ddlPresets.DataSource = null;
             ddlPresets.Items.Clear();
-            foreach (var preset in mCurrentComposite.Presets)
-            {
-                ddlPresets.Items.Add(preset.Name);
-            }
+
+            ddlPresets.DataSource = mCurrentComposite.Presets;
+            ddlPresets.DisplayMember = "Name";
+            ddlPresets.ValueMember = "Id";
+
+            if (mPresetControl != null)
+                dynamicPresetControl.Controls.Remove(mPresetControl);
 
             if (!string.IsNullOrEmpty(selectNewPreset))
             {
@@ -1468,55 +1524,24 @@ public partial class ProfileConfigurationForm : Form
         btnCopyPreset.Enabled = ddlPresets.SelectedItem != null;
         btnDeletePreset.Enabled = ddlPresets.SelectedItem != null;
         btnRenamePreset.Enabled = ddlPresets.SelectedItem != null;
-        txtAtisTemplate.Enabled = ddlPresets.SelectedItem != null;
 
         if (ddlPresets.SelectedItem != null)
         {
             mCurrentPreset =
-                mCurrentComposite.Presets.FirstOrDefault(x => x.Name == ddlPresets.SelectedItem.ToString());
+                mCurrentComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlPresets.SelectedValue.ToString());
 
             if (mCurrentPreset != null)
             {
-                if (mCurrentComposite.UseExternalAtisGenerator)
-                {
-                    txtAtisTemplate.Enabled = false;
-                    txtAtisTemplate.Text = "";
+                chkExternalAtisGenerator.Enabled = true;
+                chkExternalAtisGenerator.Checked = mCurrentPreset.ExternalGenerator.Enabled;
 
-                    txtSelectedPreset.Text = mCurrentPreset.Name;
-                    txtExternalUrl.Enabled = ddlPresets.SelectedItem != null;
-                    tlpVariables.Enabled = ddlPresets.SelectedItem != null;
-                    groupTest.Enabled = ddlPresets.SelectedItem != null;
-
-                    if (mCurrentPreset.ExternalGenerator != null)
-                    {
-                        txtExternalUrl.Text = mCurrentPreset.ExternalGenerator.Url;
-                        txtExternalArr.Text = mCurrentPreset.ExternalGenerator.Arrival;
-                        txtExternalDep.Text = mCurrentPreset.ExternalGenerator.Departure;
-                        txtExternalApp.Text = mCurrentPreset.ExternalGenerator.Approaches;
-                        txtExternalRemarks.Text = mCurrentPreset.ExternalGenerator.Remarks;
-                    }
-                }
-                else
-                {
-                    txtAtisTemplate.Enabled = true;
-                    txtAtisTemplate.Text = mCurrentPreset.Template;
-                }
+                AddDynamicPresetControl();
             }
         }
-    }
-
-    private void txtTemplate_TextChanged(object sender, EventArgs e)
-    {
-        if (!txtAtisTemplate.Focused)
-            return;
-
-        if (mCurrentPreset != null)
+        else
         {
-            if (mCurrentPreset.Template != txtAtisTemplate.Text)
-            {
-                btnApply.Enabled = true;
-                mCurrentPreset.IsTemplateDirty = true;
-            }
+            chkExternalAtisGenerator.Enabled = false;
+            chkExternalAtisGenerator.Checked = false;
         }
     }
 
@@ -1971,187 +1996,6 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void btnTest_Click(object sender, EventArgs e)
-    {
-        var url = txtExternalUrl.Text;
-        if (!string.IsNullOrEmpty(url))
-        {
-            url = url.Replace("$metar", System.Web.HttpUtility.UrlEncode(txtMetar.Text));
-            url = url.Replace("$arrrwy", txtExternalArr.Text);
-            url = url.Replace("$deprwy", txtExternalDep.Text);
-            url = url.Replace("$app", txtExternalApp.Text);
-            url = url.Replace("$remarks", txtExternalRemarks.Text);
-            url = url.Replace("$atiscode", RandomLetter());
-
-            Task.Run(() =>
-            {
-                mSyncContext.Post(o =>
-                {
-                    btnTest.Text = "Loading...";
-                    btnTest.Enabled = false;
-                }, null);
-
-                var result = "";
-
-                try
-                {
-                    var client = new RestClient();
-                    var request = new RestRequest(url);
-                    var response = client.Get<string>(request);
-
-                    result = Regex.Replace(response.Content, @"\[(.*?)\]", " $1 ");
-                    result = Regex.Replace(result, @"\s+", " ");
-                }
-                catch
-                {
-                }
-
-                mSyncContext.Post(o =>
-                {
-                    txtResponse.Text = result.Trim(' ');
-                    btnTest.Text = "Test URL";
-                    btnTest.Enabled = true;
-                }, null);
-            });
-        }
-    }
-
-    private void btnFetchMetar_Click(object sender, EventArgs e)
-    {
-        Task.Run(() =>
-        {
-            mSyncContext.Post(o =>
-            {
-                btnFetchMetar.Enabled = false;
-                btnTest.Enabled = false;
-            }, null);
-
-            var result = "";
-
-            try
-            {
-                var client = new RestClient();
-                var request = new RestRequest("https://metar.vatsim.net/metar.php?id=" + mCurrentComposite.Identifier);
-                result = client.Get<string>(request).Content;
-            }
-            catch
-            {
-            }
-
-            mSyncContext.Post(o =>
-            {
-                txtMetar.Text = result;
-                btnFetchMetar.Enabled = true;
-                btnTest.Enabled = true;
-            }, null);
-        });
-    }
-
-    private void txtExternalUrl_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!txtExternalUrl.Focused)
-            return;
-
-        if (txtExternalUrl.Text != mCurrentPreset.ExternalGenerator.Url)
-        {
-            mExternalUrlChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mExternalUrlChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtExternalArr_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!txtExternalArr.Focused)
-            return;
-
-        if (txtExternalArr.Text != mCurrentPreset.ExternalGenerator.Arrival)
-        {
-            mExternalArrivalChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mExternalArrivalChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtExternalDep_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!txtExternalDep.Focused)
-            return;
-
-        if (txtExternalDep.Text != mCurrentPreset.ExternalGenerator.Departure)
-        {
-            mExternalDepartureChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mExternalArrivalChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtExternalApp_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!txtExternalApp.Focused)
-            return;
-
-        if (txtExternalApp.Text != mCurrentPreset.ExternalGenerator.Approaches)
-        {
-            mExternalApproachesChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mExternalApproachesChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtExternalRemarks_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!txtExternalRemarks.Focused)
-            return;
-
-        if (txtExternalRemarks.Text != mCurrentPreset.ExternalGenerator.Remarks)
-        {
-            mExternalRemarksChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mExternalRemarksChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtMetar_TextChanged(object sender, EventArgs e)
-    {
-        btnTest.Enabled = !string.IsNullOrEmpty(txtMetar.Text);
-    }
-
     private void chkPrefixNotams_CheckedChanged(object sender, EventArgs e)
     {
         if (mCurrentComposite == null)
@@ -2349,25 +2193,6 @@ public partial class ProfileConfigurationForm : Form
             chkDecimalTerminology.Enabled = true;
             chkPrefixTemperature.Enabled = true;
         }
-    }
-
-    private static string RandomLetter()
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var random = new Random();
-        return new string(Enumerable.Range(1, 1).Select(_ => chars[random.Next(chars.Length)]).ToArray());
-    }
-
-    public bool IsValidUrl(string value)
-    {
-        var pattern = new Regex(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
-        return pattern.IsMatch(value.Trim());
-    }
-
-    protected override void OnFormClosing(FormClosingEventArgs e)
-    {
-        EventBus.Unregister(this);
-        base.OnFormClosing(e);
     }
 
     private void AlphaOnly(object sender, KeyPressEventArgs e)
