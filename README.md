@@ -20,5 +20,4 @@ xPilot is licensed under the [GPLv3 open-source license](LICENSE).
 * [Concentus](https://github.com/lostromb/concentus) OPUS audio codec implementation
 * [NAudio](https://github.com/naudio/NAudio) .NET audio library
 * [Json.NET](https://www.newtonsoft.com/json) high-performance JSON framework
-* [RestSharp](https://restsharp.dev/) .NET REST API client
 * [Ninject](http://www.ninject.org/) .NET dependency injection
