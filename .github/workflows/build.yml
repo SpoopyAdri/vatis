@@ -1,9 +1,8 @@
 name: Build Client
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - 'dev/*'
     tags:
       - 'v*'
 
@@ -18,23 +17,15 @@ jobs:
       with:
         submodules: 'recursive'
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Publish
-      working-directory: ./Vatis.Client
+    - name: Build client
+      working-directory: ./Vatsim.Vatis
       run: |
         dotnet publish --runtime win-x64 --self-contained true --configuration Release --framework net6.0-windows `
-        -p:PublishSingleFile=true -p:PublishReadyToRun=true --output ./publish
+        -p:PublishReadyToRun=true --output ./publish
 
     - name: Client Hash
       run: |
-        $hash = (Get-FileHash .\Vatis.Client\publish\vATIS.exe -Algorithm SHA256).Hash.ToLower()
+        $hash = (Get-FileHash .\Vatsim.Vatis\publish\vATIS.exe -Algorithm SHA256).Hash.ToLower()
         echo "CLIENT_HASH=$hash" >> $env:GITHUB_ENV
 
     - name: Checkout VatsimAuth
@@ -54,27 +45,25 @@ jobs:
 
     - name: Copy Client Files
       run: |
-        Copy-Item -Path .\auth\build\RelWithDebInfo\VatsimAuth.dll -Destination .\Vatis.Client\publish\
-        Copy-Item -Path .\airports.json -Destination .\Vatis.Client\publish\
-        Copy-Item -Path .\navaids.json -Destination .\Vatis.Client\publish\
+        Copy-Item -Path .\auth\build\RelWithDebInfo\VatsimAuth.dll -Destination .\Vatsim.Vatis\publish\
 
     - name: Get Client Version
       run: |
-        $path = ls .\Vatis.Client\publish\*.exe | select -First 1 | % fullname
+        $path = ls .\Vatsim.Vatis\publish\vATIS.dll | select -First 1 | % fullname
         $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($path).ProductVersion
         echo "CLIENT_VER=$version" >> $env:GITHUB_ENV
-        "!define Version ""$version""" | Out-File -FilePath .\Version.txt
+        "!define Version ""$version""" | Out-File -FilePath .\Installer\Version.txt
 
     - name: Create Installer
-      uses: joncloud/makensis-action@v3.6
+      uses: joncloud/makensis-action@v4
       with:
-        script-file: '.\installer.nsi'
+        script-file: '.\Installer\installer.nsi'
 
     - name: Upload installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: vATIS-Setup-${{ env.CLIENT_VER }}
-        path: vATIS-Setup-${{ env.CLIENT_VER }}.exe
+        path: .\Installer\vATIS-Setup-${{ env.CLIENT_VER }}.exe
 
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')
