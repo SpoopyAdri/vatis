@@ -5,13 +5,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("vATIS")]
+[assembly: AssemblyCompany("vATIS")]
+[assembly: AssemblyProduct("vATIS")]
 [assembly: AssemblyDescription("Virtual Automated ATIS Generator for VATSIM")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Justin Shannon")]
-[assembly: AssemblyProduct("Vatsim.Vatis.Client")]
-[assembly: AssemblyCopyright("Copyright © 2021 Justin Shannon")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyConfiguration("Release")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -31,5 +28,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.3")]
-[assembly: AssemblyInformationalVersion("4.0.0-beta.3")]
+[assembly: AssemblyVersion("4.0.0.4")]
+[assembly: AssemblyInformationalVersion("4.0.0-beta.4")]
