@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.UI;
 
 namespace Vatsim.Vatis.Utils;

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Vatsim.Vatis.AudioForVatsim;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
@@ -36,7 +36,7 @@ public class AtisBuilder : IAtisBuilder
         mDownloader = downloader;
     }
 
-    public async Task BuildAtisAsync(AtisComposite composite, CancellationToken cancellationToken)
+    public async Task BuildAtisAsync(Composite composite, CancellationToken cancellationToken)
     {
         if (composite == null)
         {
@@ -132,7 +132,7 @@ public class AtisBuilder : IAtisBuilder
         }
     }
 
-    private async Task<string> BuildExternalAtisAsync(AtisComposite composite, Metar metar, List<Variable> variables)
+    private async Task<string> BuildExternalAtisAsync(Composite composite, Metar metar, List<Variable> variables)
     {
         if (composite.CurrentPreset == null)
             return null;
@@ -184,7 +184,7 @@ public class AtisBuilder : IAtisBuilder
         return null;
     }
 
-    public void GenerateAcarsText(AtisComposite composite)
+    public void GenerateAcarsText(Composite composite)
     {
         if (composite == null)
         {
@@ -241,7 +241,7 @@ public class AtisBuilder : IAtisBuilder
         composite.AcarsText = acarsText.ToUpper();
     }
 
-    private void ParseMetar(AtisComposite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
+    private void ParseMetar(Composite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
     {
         metar = composite.DecodedMetar;
         var time = NodeParser.Parse<ObservationTimeNode>(metar, composite);
@@ -356,7 +356,7 @@ public class AtisBuilder : IAtisBuilder
         };
     }
 
-    private string FormatForTextToSpeech(string input, AtisComposite composite)
+    private string FormatForTextToSpeech(string input, Composite composite)
     {
         System.Diagnostics.Debug.WriteLine(input);
 
@@ -465,7 +465,7 @@ public class AtisBuilder : IAtisBuilder
         return input.ToUpper();
     }
 
-    private async void PostIdsUpdate(AtisComposite composite, CancellationToken token)
+    private async void PostIdsUpdate(Composite composite, CancellationToken token)
     {
         if (Debugger.IsAttached)
             return;

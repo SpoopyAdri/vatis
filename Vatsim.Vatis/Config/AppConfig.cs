@@ -6,6 +6,8 @@ using CredentialManagement;
 using Newtonsoft.Json;
 using Vatsim.Network;
 using Vatsim.Vatis.Io;
+using Vatsim.Vatis.Profiles;
+using Vatsim.Vatis.UI;
 
 namespace Vatsim.Vatis.Config;
 
@@ -21,7 +23,7 @@ public class AppConfig : IAppConfig
 
     [JsonIgnore] public Profile CurrentProfile { get; set; }
 
-    [JsonIgnore] public AtisComposite CurrentComposite { get; set; }
+    [JsonIgnore] public Composite CurrentComposite { get; set; }
 
     public NetworkRating NetworkRating { get; set; }
 

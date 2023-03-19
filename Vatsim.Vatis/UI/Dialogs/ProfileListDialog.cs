@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI.Dialogs;

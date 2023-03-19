@@ -13,6 +13,7 @@ using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Network;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
@@ -135,7 +136,7 @@ public partial class MainForm : Form
 
         if (atisTabs.TabPages.Count > 0)
         {
-            mAppConfig.CurrentComposite = (atisTabs.TabPages[0].Tag as AtisComposite);
+            mAppConfig.CurrentComposite = (atisTabs.TabPages[0].Tag as Composite);
         }
     }
 
@@ -601,7 +602,7 @@ public partial class MainForm : Form
     {
         if (atisTabs.SelectedTab != null)
         {
-            mAppConfig.CurrentComposite = (atisTabs.SelectedTab.Tag as AtisComposite);
+            mAppConfig.CurrentComposite = (atisTabs.SelectedTab.Tag as Composite);
         }
     }
 
@@ -632,7 +633,7 @@ public partial class MainForm : Form
     {
         foreach (TabPage tab in atisTabs.TabPages)
         {
-            var composite = tab.Tag as AtisComposite;
+            var composite = tab.Tag as Composite;
             if (composite != null && composite.Id == e.Id)
             {
                 var connection = mConnections.FirstOrDefault(x => x.AirportIcao == composite.Identifier);

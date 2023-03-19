@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Network;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.UI.Dialogs;
 
 namespace Vatsim.Vatis.UI.Controls;
@@ -17,14 +18,14 @@ internal partial class CompositePanel : UserControl
     private System.Timers.Timer mBlinkTimer;
 
     private string mCurrentAtisLetter = "A";
-    private AtisPreset mSelectedPreset;
-    private AtisPreset mPreviousPreset;
+    private Preset mSelectedPreset;
+    private Preset mPreviousPreset;
     private int mSelectedIndex = -1;
     private ConnectionStatus mConnectionStatus;
     private string mErrorMessage = "";
     private readonly System.Threading.SynchronizationContext mSyncContext;
     private readonly Connection mConnection;
-    private readonly AtisComposite mComposite;
+    private readonly Composite mComposite;
     private readonly IAppConfig mAppConfig;
 
     public event EventHandler<EventArgs> ConnectButtonClicked;
@@ -164,7 +165,7 @@ internal partial class CompositePanel : UserControl
         }
     }
 
-    public CompositePanel(Connection connection, AtisComposite composite, IAppConfig appConfig)
+    public CompositePanel(Connection connection, Composite composite, IAppConfig appConfig)
     {
         InitializeComponent();
 

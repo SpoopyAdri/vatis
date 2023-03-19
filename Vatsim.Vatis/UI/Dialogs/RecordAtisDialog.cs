@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using NAudio.Wave;
 using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI.Dialogs;
@@ -25,7 +26,7 @@ public partial class RecordAtisDialog : Form
 
     private bool HasAtisStream => AtisMemoryStream.Length > 0;
 
-    public RecordAtisDialog(IAppConfig appConfig, AtisComposite composite)
+    public RecordAtisDialog(IAppConfig appConfig, Composite composite)
     {
         InitializeComponent();
 

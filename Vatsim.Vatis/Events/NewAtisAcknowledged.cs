@@ -1,10 +1,10 @@
-﻿using Vatsim.Vatis.Config;
+﻿using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.Events;
 public class NewAtisAcknowledged : IEvent
 {
-    public AtisComposite Composite { get; set; }
-    public NewAtisAcknowledged(AtisComposite composite)
+    public Composite Composite { get; set; }
+    public NewAtisAcknowledged(Composite composite)
     {
         Composite = composite;
     }

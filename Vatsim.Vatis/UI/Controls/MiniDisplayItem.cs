@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.UI.Controls;
 
@@ -14,7 +14,7 @@ public partial class MiniDisplayItem : UserControl
     private bool mIsNewAtis;
     private System.Timers.Timer mBlinkTimer;
 
-    public AtisComposite Composite { get; set; }
+    public Composite Composite { get; set; }
     public string Icao
     {
         get => txtIcao.Text;

@@ -7,9 +7,9 @@ using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Weather.Objects;
 
-namespace Vatsim.Vatis.Config;
+namespace Vatsim.Vatis.Profiles;
 
-public class AtisComposite : IAtisComposite
+public class Composite : IComposite, ICloneable
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
@@ -21,7 +21,7 @@ public class AtisComposite : IAtisComposite
     public MagneticVariationMeta MagneticVariation { get; set; } = new MagneticVariationMeta();
     public AtisVoiceMeta AtisVoice { get; set; } = new AtisVoiceMeta();
     public string IDSEndpoint { get; set; }
-    public List<AtisPreset> Presets { get; set; } = new List<AtisPreset>();
+    public List<Preset> Presets { get; set; } = new List<Preset>();
     public List<DefinedText> AirportConditionDefinitions { get; set; } = new List<DefinedText>();
     public bool AirportConditionsBeforeFreeText { get; set; }
     public List<DefinedText> NotamDefinitions { get; set; } = new List<DefinedText>();
@@ -38,37 +38,17 @@ public class AtisComposite : IAtisComposite
     public bool UseTemperaturePlusPrefix { get; set; }
     public bool UseZuluTimeSuffix { get; set; }
 
-    internal AtisComposite Clone()
+    public object Clone()
     {
-        return new AtisComposite
-        {
-            Contractions = Contractions,
-            AtisFrequency = AtisFrequency,
-            ObservationTime = ObservationTime,
-            MagneticVariation = MagneticVariation,
-            AirportConditionDefinitions = AirportConditionDefinitions,
-            AirportConditionsBeforeFreeText = AirportConditionsBeforeFreeText,
-            NotamDefinitions = NotamDefinitions,
-            NotamsBeforeFreeText = NotamsBeforeFreeText,
-            TransitionLevels = TransitionLevels,
-            UseFaaFormat = UseFaaFormat,
-            UseNotamPrefix = UseNotamPrefix,
-            UseTransitionLevelPrefix = UseTransitionLevelPrefix,
-            UseMetricUnits = UseMetricUnits,
-            UseSurfaceWindPrefix = UseSurfaceWindPrefix,
-            UseVisibilitySuffix = UseVisibilitySuffix,
-            UseDecimalTerminology = UseDecimalTerminology,
-            UseTemperaturePlusPrefix = UseTemperaturePlusPrefix,
-            UseZuluTimeSuffix = UseZuluTimeSuffix,
-            AtisVoice = AtisVoice,
-            IDSEndpoint = IDSEndpoint
-        };
+        var composite = (Composite)MemberwiseClone();
+        composite.Id = Guid.NewGuid();
+        return composite;
     }
 
     public override string ToString() => AtisType != AtisType.Combined ? $"{Name} ({Identifier}) {AtisType}" : $"{Name} ({Identifier})";
 
     [JsonIgnore] public Metar DecodedMetar { get; set; }
-    [JsonIgnore] public AtisPreset CurrentPreset { get; set; }
+    [JsonIgnore] public Preset CurrentPreset { get; set; }
     [JsonIgnore] public string CurrentAtisLetter { get; set; }
     [JsonIgnore] public string AcarsText { get; set; }
     [JsonIgnore] public uint AfvFrequency => ((uint)AtisFrequency + 100000) * 1000;

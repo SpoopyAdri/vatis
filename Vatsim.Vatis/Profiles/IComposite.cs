@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Vatsim.Vatis.Config;
+namespace Vatsim.Vatis.Profiles;
 
-public interface IAtisComposite
+public interface IComposite
 {
     Guid Id { get; set; }
     string Name { get; set; }
@@ -20,8 +20,8 @@ public interface IAtisComposite
     MagneticVariationMeta MagneticVariation { get; set; }
     AtisVoiceMeta AtisVoice { get; set; }
     string IDSEndpoint { get; set; }
-    List<AtisPreset> Presets { get; set; }
-    AtisPreset CurrentPreset { get; set; }
+    List<Preset> Presets { get; set; }
+    Preset CurrentPreset { get; set; }
     string CurrentAtisLetter { get; set; }
     MemoryStream MemoryStream { get; set; }
     CodeRange CodeRange { get; set; }

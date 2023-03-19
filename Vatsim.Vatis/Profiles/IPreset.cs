@@ -1,6 +1,6 @@
-﻿namespace Vatsim.Vatis.Config;
+﻿namespace Vatsim.Vatis.Profiles;
 
-public interface IAtisProfile
+public interface IPreset
 {
     string Name { get; set; }
     string AirportConditions { get; set; }

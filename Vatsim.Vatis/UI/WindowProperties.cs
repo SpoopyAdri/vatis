@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Vatsim.Vatis.Config;
+namespace Vatsim.Vatis.UI;
 
 public class WindowProperties
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Vatsim.Vatis.Config;
+namespace Vatsim.Vatis.Profiles;
 
 [XmlType("Facility")]
 [Serializable]

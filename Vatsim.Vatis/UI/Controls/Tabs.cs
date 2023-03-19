@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.UI.Dialogs;
 
 namespace Vatsim.Vatis.UI.Controls;
@@ -100,7 +100,7 @@ internal class Tabs : TabControl
 
         using (SolidBrush brush = new SolidBrush(Color.White))
         {
-            var comp = tabPage.Tag as AtisComposite;
+            var comp = tabPage.Tag as Composite;
             if (tabPage.Connection.IsConnected)
             {
                 layoutRect.X -= comp.AtisType == AtisType.Combined ? 5 : 4;

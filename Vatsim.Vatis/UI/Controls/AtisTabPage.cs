@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Network;
+using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.UI.Controls;
 
@@ -13,7 +14,7 @@ internal class AtisTabPage : TabPage
     private System.Timers.Timer mBlinkTimer;
 
     public Connection Connection { get; private set; }
-    public AtisComposite Composite { get; private set; }
+    public Composite Composite { get; private set; }
     public CompositePanel CompositeMeta { get; private set; }
     public bool IsNewAtis
     {
@@ -28,7 +29,7 @@ internal class AtisTabPage : TabPage
         }
     }
 
-    public AtisTabPage(Connection connection, AtisComposite composite, IAppConfig appConfig)
+    public AtisTabPage(Connection connection, Composite composite, IAppConfig appConfig)
     {
         Connection = connection;
         Composite = composite;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Io;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI.Controls;
@@ -41,7 +41,7 @@ public partial class ExternalAtisGenerator : UserControl
         set => txtExternalRemarks.Text = value;
     }
 
-    public AtisComposite Composite { get; set; }
+    public Composite Composite { get; set; }
 
     public ExternalAtisGenerator(IDownloader downloader)
     {

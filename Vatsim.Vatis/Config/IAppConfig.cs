@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Vatsim.Network;
+using Vatsim.Vatis.Profiles;
+using Vatsim.Vatis.UI;
 
 namespace Vatsim.Vatis.Config;
 
-public interface IAppConfig : IConfig
+public interface IAppConfig
 {
     string UserId { get; set; }
     string Password { get; set; }
@@ -18,7 +20,7 @@ public interface IAppConfig : IConfig
     WindowProperties MiniDisplayWindowProperties { get; set; }
     List<Profile> Profiles { get; set; }
     Profile CurrentProfile { get; set; }
-    AtisComposite CurrentComposite { get; set; }
+    Composite CurrentComposite { get; set; }
     string MicrophoneDevice { get; set; }
     string PlaybackDevice { get; set; }
     void LoadConfig(string path);

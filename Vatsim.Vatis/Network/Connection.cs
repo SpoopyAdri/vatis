@@ -11,6 +11,7 @@ using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
 
@@ -27,7 +28,7 @@ public class Connection
         _ => $"{AirportIcao}_ATIS",
     };
     public bool IsConnected => mSession.Connected;
-    public AtisComposite Composite { get; set; }
+    public Composite Composite { get; set; }
 
     public event EventHandler NetworkConnectedChanged;
     public event EventHandler NetworkDisconnectedChanged;

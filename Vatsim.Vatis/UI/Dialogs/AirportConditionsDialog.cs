@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.UI.Dialogs;
 
 public partial class AirportConditionsDialog : Form
 {
-    private readonly AtisComposite mComposite;
+    private readonly Composite mComposite;
     private readonly bool mKeepOnTop = false;
 
-    public AirportConditionsDialog(AtisComposite composite, bool onTop = false)
+    public AirportConditionsDialog(Composite composite, bool onTop = false)
     {
         InitializeComponent();
 

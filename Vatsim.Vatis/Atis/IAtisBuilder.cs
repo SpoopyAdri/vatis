@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Vatsim.Vatis.Config;
+using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.Atis;
 
 public interface IAtisBuilder
 {
-    Task BuildAtisAsync(AtisComposite composite, CancellationToken cancellationToken);
-    void GenerateAcarsText(AtisComposite composite);
+    Task BuildAtisAsync(Composite composite, CancellationToken cancellationToken);
+    void GenerateAcarsText(Composite composite);
 }

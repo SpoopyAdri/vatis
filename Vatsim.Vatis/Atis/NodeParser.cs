@@ -1,11 +1,11 @@
-﻿using Vatsim.Vatis.Config;
+﻿using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
 public static class NodeParser
 {
-    public static ParsedResult Parse<T>(Metar metar, AtisComposite composite) where T : AtisNode, new()
+    public static ParsedResult Parse<T>(Metar metar, Composite composite) where T : AtisNode, new()
     {
         T obj = new T();
         obj.Composite = composite;

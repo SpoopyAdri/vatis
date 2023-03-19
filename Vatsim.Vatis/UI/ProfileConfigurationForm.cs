@@ -11,6 +11,7 @@ using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
@@ -24,8 +25,8 @@ public partial class ProfileConfigurationForm : Form
     private readonly INavaidDatabase mNavaidDatabase;
     private Control mPresetControl;
 
-    private AtisComposite mCurrentComposite = null;
-    private AtisPreset mCurrentPreset = null;
+    private Composite mCurrentComposite = null;
+    private Preset mCurrentPreset = null;
 
     private bool mFrequencyChanged = false;
     private bool mAtisTypeChanged = false;
@@ -172,7 +173,7 @@ public partial class ProfileConfigurationForm : Form
             btnApply.Enabled = false;
             if (mAppConfig.CurrentProfile != null)
             {
-                var composite = TreeMenu.SelectedNode.Tag as AtisComposite;
+                var composite = TreeMenu.SelectedNode.Tag as Composite;
 
                 if (composite == null)
                     return;
@@ -408,7 +409,7 @@ public partial class ProfileConfigurationForm : Form
                     }
                 }
 
-                var composite = new AtisComposite
+                var composite = new Composite
                 {
                     Identifier = dlg.Identifier,
                     Name = dlg.CompositeName,
@@ -443,7 +444,7 @@ public partial class ProfileConfigurationForm : Form
             var previousName = "";
             var previousType = AtisType.Combined;
 
-            var composite = TreeMenu.SelectedNode.Tag as AtisComposite;
+            var composite = TreeMenu.SelectedNode.Tag as Composite;
 
             while (!flag)
             {
@@ -480,15 +481,15 @@ public partial class ProfileConfigurationForm : Form
                         }
                     }
 
-                    var clone = composite.Clone();
+                    var clone = (Composite)composite.Clone();
                     clone.Identifier = dlg.Identifier;
                     clone.Name = dlg.CompositeName;
                     clone.AtisType = dlg.Type;
 
-                    var presets = new List<AtisPreset>();
+                    var presets = new List<Preset>();
                     foreach (var preset in composite.Presets)
                     {
-                        presets.Add(preset.Clone());
+                        presets.Add((Preset)preset.Clone());
                     }
                     clone.Presets = presets;
 
@@ -511,7 +512,7 @@ public partial class ProfileConfigurationForm : Form
 
         if (TreeMenu.SelectedNode != null)
         {
-            if (TreeMenu.SelectedNode.Tag is AtisComposite composite)
+            if (TreeMenu.SelectedNode.Tag is Composite composite)
             {
                 var previousValue = "";
 
@@ -549,7 +550,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (TreeMenu.SelectedNode != null)
         {
-            var composite = TreeMenu.SelectedNode.Tag as AtisComposite;
+            var composite = TreeMenu.SelectedNode.Tag as Composite;
 
             if (MessageBox.Show(this,
                     string.Format(
@@ -1374,7 +1375,7 @@ public partial class ProfileConfigurationForm : Form
                     return;
                 }
 
-                var preset = new AtisPreset
+                var preset = new Preset
                 {
                     Name = dlg.Value,
                     Template = "[FACILITY] ATIS INFO [ATIS_CODE] [OBS_TIME]. [FULL_WX_STRING]. [ARPT_COND] [NOTAMS]"
@@ -1464,7 +1465,7 @@ public partial class ProfileConfigurationForm : Form
                 }
                 else
                 {
-                    var clone = mCurrentPreset.Clone();
+                    var clone = (Preset)mCurrentPreset.Clone();
                     clone.Name = dlg.Value;
                     mCurrentComposite.Presets.Add(clone);
                     mAppConfig.SaveConfig();
@@ -1670,12 +1671,12 @@ public partial class ProfileConfigurationForm : Form
     {
         try
         {
-            var composite = new AtisComposite();
+            var composite = new Composite();
 
             using var fs = new FileStream(fullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using (var sr = new StreamReader(fs))
             {
-                composite = JsonConvert.DeserializeObject<AtisComposite>(sr.ReadToEnd(), new JsonSerializerSettings
+                composite = JsonConvert.DeserializeObject<Composite>(sr.ReadToEnd(), new JsonSerializerSettings
                 {
                     MissingMemberHandling = MissingMemberHandling.Error
                 });
@@ -1810,7 +1811,7 @@ public partial class ProfileConfigurationForm : Form
                     existing.Presets.Clear();
                     foreach (var preset in profile.Profiles)
                     {
-                        var p = new AtisPreset
+                        var p = new Preset
                         {
                             Name = preset.Name,
                             Template = preset.AtisTemplate,
@@ -1827,7 +1828,7 @@ public partial class ProfileConfigurationForm : Form
             }
             else
             {
-                var composite = new AtisComposite();
+                var composite = new Composite();
                 composite.Name = profile.Name;
                 composite.Identifier = profile.ID;
                 if (!string.IsNullOrEmpty(profile.AtisFrequency))
@@ -1901,7 +1902,7 @@ public partial class ProfileConfigurationForm : Form
 
                 foreach (var preset in profile.Profiles)
                 {
-                    var p = new AtisPreset
+                    var p = new Preset
                     {
                         Name = preset.Name,
                         Template = preset.AtisTemplate,
