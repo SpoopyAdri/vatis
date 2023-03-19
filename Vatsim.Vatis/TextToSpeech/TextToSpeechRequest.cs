@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Vatsim.Vatis.Config;
@@ -52,7 +53,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
             var ttsDto = new TextToSpeechRequestDto
             {
                 Text = text,
-                Voice = mAppConfig.CurrentComposite.AtisVoice.GetVoiceNameForRequest ?? "default",
+                Voice = mAppConfig.Voices.FirstOrDefault(n => n.Name == mAppConfig.CurrentComposite.AtisVoice.Voice).Id ?? "default",
                 Jwt = mJwtToken
             };
 

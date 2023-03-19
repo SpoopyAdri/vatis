@@ -47,6 +47,8 @@ public class AppConfig : IAppConfig
 
     public string PlaybackDevice { get; set; }
 
+    public List<VoiceMetaData> Voices { get; set; }
+
     public AppConfig()
     {
         Profiles = new List<Profile>();

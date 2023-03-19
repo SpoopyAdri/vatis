@@ -73,6 +73,13 @@ public class Downloader : IDownloader
         response.EnsureSuccessStatusCode();
     }
 
+    public async Task<T> DownloadJsonStringAsync<T>(string url)
+    {
+        var response = await mHttpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<T>();
+    }
+
     private async Task DownloadToStreamAsync(string url, Stream stream, IProgress<int>? progress)
     {
         var response = await mHttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);

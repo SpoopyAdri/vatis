@@ -308,12 +308,6 @@ namespace Vatsim.Vatis.UI
             // 
             this.ddlVoices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlVoices.FormattingEnabled = true;
-            this.ddlVoices.Items.AddRange(new object[] {
-            "Default",
-            "US Male",
-            "US Female",
-            "UK Male",
-            "UK Female"});
             this.ddlVoices.Location = new System.Drawing.Point(130, 1);
             this.ddlVoices.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddlVoices.Name = "ddlVoices";

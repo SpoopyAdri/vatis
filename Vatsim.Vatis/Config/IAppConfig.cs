@@ -23,6 +23,7 @@ public interface IAppConfig
     Composite CurrentComposite { get; set; }
     string MicrophoneDevice { get; set; }
     string PlaybackDevice { get; set; }
+    List<VoiceMetaData> Voices { get; set; }
     void LoadConfig(string path);
     void SaveConfig();
 }

@@ -59,6 +59,8 @@ public partial class ProfileConfigurationForm : Form
         mNavaidDatabase = navaidDatabase;
 
         RefreshCompositeList();
+
+        LoadVoiceList();
     }
 
     protected override CreateParams CreateParams
@@ -82,6 +84,13 @@ public partial class ProfileConfigurationForm : Form
     {
         EventBus.Unregister(this);
         base.OnFormClosing(e);
+    }
+
+    private void LoadVoiceList()
+    {
+        ddlVoices.DataSource = mAppConfig.Voices;
+        ddlVoices.ValueMember = "Id";
+        ddlVoices.DisplayMember = "Name";
     }
 
     private TreeNode CreateTreeMenuNode(string name, object tag)
@@ -259,19 +268,20 @@ public partial class ProfileConfigurationForm : Form
             {
                 ddlVoices.Enabled = true;
 
-                if (!ddlVoices.Items.Contains(mCurrentComposite.AtisVoice.Voice))
+                var voices = ddlVoices.DataSource as List<VoiceMetaData>;
+                if(!voices.Any(n => n.Name == mCurrentComposite.AtisVoice.Voice))
                 {
-                    ddlVoices.SelectedItem = "Default";
+                    ddlVoices.SelectedText = "Default";
                 }
                 else
                 {
-                    ddlVoices.SelectedItem = mCurrentComposite.AtisVoice.Voice;
+                    ddlVoices.SelectedItem = voices.FirstOrDefault(n => n.Name == mCurrentComposite.AtisVoice.Voice);
                 }
 
                 var meta = new AtisVoiceMeta
                 {
                     UseTextToSpeech = true,
-                    Voice = ddlVoices.SelectedItem.ToString()
+                    Voice = (ddlVoices.SelectedItem as VoiceMetaData).Name
                 };
                 mCurrentComposite.AtisVoice = meta;
                 mAppConfig.SaveConfig();
@@ -762,9 +772,9 @@ public partial class ProfileConfigurationForm : Form
 
         if (mVoiceOptionsChanged)
         {
+            var selectedVoice = ddlVoices.SelectedItem as VoiceMetaData;
             mCurrentComposite.AtisVoice.UseTextToSpeech = radioTextToSpeech.Checked;
-            mCurrentComposite.AtisVoice.Voice =
-                ddlVoices.SelectedItem == null ? "Default" : ddlVoices.SelectedItem.ToString();
+            mCurrentComposite.AtisVoice.Voice = selectedVoice == null ? "Default" : selectedVoice.Name;
             mVoiceOptionsChanged = false;
         }
 
@@ -1308,9 +1318,11 @@ public partial class ProfileConfigurationForm : Form
         if (!ddlVoices.Focused)
             return;
 
+        var selected = ddlVoices.SelectedItem as VoiceMetaData;
+
         if (mCurrentComposite.AtisVoice != null)
         {
-            if (ddlVoices.SelectedItem.ToString() != mCurrentComposite.AtisVoice.Voice)
+            if (selected.Name != mCurrentComposite.AtisVoice.Voice)
             {
                 mVoiceOptionsChanged = true;
                 btnApply.Enabled = true;
@@ -1321,7 +1333,7 @@ public partial class ProfileConfigurationForm : Form
             mCurrentComposite.AtisVoice = new AtisVoiceMeta
             {
                 UseTextToSpeech = true,
-                Voice = ddlVoices.SelectedItem == null ? "Default" : ddlVoices.SelectedItem.ToString()
+                Voice = selected == null ? "Default" : selected.Name,
             };
 
             mVoiceOptionsChanged = true;

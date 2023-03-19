@@ -1,9 +1,11 @@
 ﻿using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Updates;
 
@@ -14,14 +16,16 @@ namespace Vatsim.Vatis.UI.Startup
         private IClientUpdater mClientUpdater;
         private INavaidDatabase mNavData;
         private IWindowFactory mWindowFactory;
+        private IDownloader mDownloader;
         private IAppConfig mAppConfig;
 
-        public StartupWindow(IClientUpdater clientUpdater, IWindowFactory windowFactory, INavaidDatabase navData, IAppConfig appConfig)
+        public StartupWindow(IClientUpdater clientUpdater, IWindowFactory windowFactory, INavaidDatabase navData, IAppConfig appConfig, IDownloader downloader)
         {
             mClientUpdater = clientUpdater;
             mWindowFactory = windowFactory;
             mNavData = navData;
             mAppConfig = appConfig;
+            mDownloader = downloader;
             InitializeComponent();
         }
 
@@ -46,7 +50,25 @@ namespace Vatsim.Vatis.UI.Startup
             UpdateStatusLabel("Downloading network server list...");
             await DownloadServerList();
 
+            UpdateStatusLabel("Downloading available voices...");
+            await DownloadVoiceList();
+
             ShowMainForm();
+        }
+
+        private async Task DownloadVoiceList()
+        {
+            try
+            {
+                var voices = await mDownloader.DownloadJsonStringAsync<List<VoiceMetaData>>("https://tts.clowd.io/Voices");
+
+                if (voices != null)
+                {
+                    mAppConfig.Voices = voices;
+                    mAppConfig.SaveConfig();
+                }
+            }
+            catch { }
         }
 
         private async Task DownloadServerList()
