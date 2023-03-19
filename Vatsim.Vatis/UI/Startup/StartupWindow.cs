@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
@@ -34,6 +35,15 @@ namespace Vatsim.Vatis.UI.Startup
             base.OnLoad(e);
 
             EventBus.Register(this);
+        }
+
+        protected override void OnPaint(PaintEventArgs pevent)
+        {
+            base.OnPaint(pevent);
+            Rectangle rect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, 
+                ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+            using Pen pen = new Pen(Color.FromArgb(0, 0, 0));
+            pevent.Graphics.DrawRectangle(pen, rect);
         }
 
         protected override async void OnShown(EventArgs e)
