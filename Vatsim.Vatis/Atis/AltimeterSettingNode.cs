@@ -15,6 +15,7 @@ public class AltimeterSettingNode : AtisNode
 
     public void Parse(AltimeterSetting node)
     {
+        Node = node;
         var value = node.Value;
 
         if (node.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)

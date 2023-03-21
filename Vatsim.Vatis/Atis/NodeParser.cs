@@ -15,6 +15,7 @@ public static class NodeParser
         {
             TextAtis = obj.TextAtis,
             VoiceAtis = obj.VoiceAtis,
+            Node = obj.Node
         };
     }
 }
@@ -23,4 +24,5 @@ public class ParsedResult
 {
     public string TextAtis { get; set; }
     public string VoiceAtis { get; set; }
+    public object Node { get; set; }
 }

@@ -255,6 +255,32 @@ public class AtisBuilder : IAtisBuilder
         var pressure = NodeParser.Parse<AltimeterSettingNode>(metar, composite);
         var trends = NodeParser.Parse<TrendNode>(metar, composite);
 
+        // Altimeter conversion for PRESSURE_INHG and PRESSURE_HPA variables
+        // TODO: refactor this so it can be moved into the NodeParser
+        var pressureNode = pressure.Node as AltimeterSetting;
+        var pressureHpa = 0.0;
+        var pressureInHg = 0.0;
+        var inHgText = "";
+        var inHgVoice = "";
+        var hpaText = "";
+        var hpaVoice = "";
+
+        if (pressureNode.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
+        {
+            pressureInHg = pressureNode.Value;
+            pressureHpa = (int)Math.Floor((pressureNode.Value / 100.0) * 33.86);
+        }
+        else
+        {
+            pressureHpa = pressureNode.Value;
+            pressureInHg = (int)Math.Floor((pressureNode.Value * 0.0295) * 100);
+        }
+
+        inHgText = $"A{pressureInHg}";
+        inHgVoice = $"Altimeter {pressureInHg.NumberToSingular()}";
+        hpaText = $"Q{pressureHpa}";
+        hpaVoice = $"QNH {pressureHpa.NumberToSingular()}";
+
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
         var completeWxStringAcars = $"{surfaceWind.TextAtis} {visibility.TextAtis} {rvr.TextAtis} {presentWeather.TextAtis} {clouds.TextAtis} {temp.TextAtis}{(!string.IsNullOrEmpty(temp.TextAtis) || !string.IsNullOrEmpty(dew.TextAtis) ? "/" : "")}{dew.TextAtis} {pressure.TextAtis}";
@@ -347,6 +373,8 @@ public class AtisBuilder : IAtisBuilder
             new Variable("TEMP", temp.TextAtis, temp.VoiceAtis),
             new Variable("DEW", dew.TextAtis, dew.VoiceAtis),
             new Variable("PRESSURE", pressure.TextAtis, pressure.VoiceAtis, new[]{"QNH"}),
+            new Variable("PRESSURE_INHG", inHgText, inHgVoice),
+            new Variable("PRESSURE_HPA", hpaText, hpaVoice),
             new Variable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
             new Variable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
             new Variable("NOTAMS", notamText, notamVoice),

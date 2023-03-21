@@ -9,4 +9,5 @@ public abstract class AtisNode
     public Composite Composite { get; set; }
     public string VoiceAtis { get; set; }
     public string TextAtis { get; set; }
+    public object Node { get; set; }
 }
