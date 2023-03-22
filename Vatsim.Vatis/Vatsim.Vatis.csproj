@@ -12,6 +12,9 @@
 	<LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
+	<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <PropertyGroup>
     <ApplicationIcon>Assets\MainIcon.ico</ApplicationIcon>
     <DebugType>embedded</DebugType>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
