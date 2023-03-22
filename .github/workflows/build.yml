@@ -49,11 +49,17 @@ jobs:
       with:
         script-file: '.\Installer\installer.nsi'
 
+    - name: Move installer
+      working-directory: Installer
+      shell: bash
+      run: |
+        mv vATIS-Setup-${{ env.CLIENT_VER }}.exe ..
+
     - name: Upload installer
       uses: actions/upload-artifact@v3
       with:
         name: vATIS-Setup-${{ env.CLIENT_VER }}
-        path: .\Installer\vATIS-Setup-${{ env.CLIENT_VER }}.exe
+        path: vATIS-Setup-${{ env.CLIENT_VER }}.exe
 
     - name: Get version
       id: get_version
@@ -64,15 +70,12 @@ jobs:
       run: |
         cat > CHANGELOG.txt << EOF
         ## Download
-        🔗 [Download](https://github.com/vatis-project/vatis/releases/download/${{ steps.get_version.outputs.version }}/vATIS-Setup-${{ env.CLIENT_VER }}.exe)
+        🔗 [Download vATIS](https://github.com/vatis-project/vatis/releases/download/${{ steps.get_version.outputs.version }}/vATIS-Setup-${{ env.CLIENT_VER }}.exe)
         ---
         ### Added
         ### Changed
         ### Fixed
         EOF
-
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
 
     - name: Create release
       if: startsWith(github.ref, 'refs/tags/v')
