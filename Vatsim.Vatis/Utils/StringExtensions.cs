@@ -27,7 +27,7 @@ public static class StringExtensions
 
     public static string StripNewLineChars(this string input)
     {
-        return Regex.Replace(input, @"\t|\n|\r", "");
+        return Regex.Replace(input ?? "", @"\t|\n|\r", "");
     }
 
     /// <summary>
