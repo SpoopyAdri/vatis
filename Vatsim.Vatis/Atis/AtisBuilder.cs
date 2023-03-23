@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Serilog;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
@@ -518,6 +520,10 @@ public class AtisBuilder : IAtisBuilder
             await mDownloader.PostJsonAsync(composite.IDSEndpoint, json);
         }
         catch (TaskCanceledException) { }
+        catch (HttpRequestException ex)
+        {
+            Log.Error(ex.ToString());
+        }
         catch (Exception ex)
         {
             throw new Exception("PostIdsUpdate Error: " + ex.Message);
