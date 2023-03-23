@@ -79,7 +79,6 @@ jobs:
       shell: bash
       run: |
         cat > CHANGELOG.txt << EOF
-        ## Download
         🔗 [Download vATIS](https://github.com/vatis-project/vatis/releases/download/${{ steps.get_version.outputs.version }}/vATIS-Setup-${{ env.CLIENT_VER }}.exe)
         ---
         ### Added
