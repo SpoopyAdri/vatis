@@ -8,6 +8,7 @@ on:
 
 env:
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+  TEST_VERSION: ${{ !startsWith(github.ref, 'refs/tags/v') }}
 
 jobs:
   build:
@@ -50,7 +51,7 @@ jobs:
       run: |
         cmake -E make_directory build
         cd build
-        cmake .. -DCLIENT_HASH=${{ env.CLIENT_HASH }} -DVATSIM_CLIENT_ID=${{ secrets.CLIENT_ID }} -DVATSIM_CLIENT_KEY=${{ secrets.CLIENT_KEY }}
+        cmake .. -DCLIENT_HASH=${{ env.CLIENT_HASH }} -DVATSIM_CLIENT_ID=${{ secrets.CLIENT_ID }} -DVATSIM_CLIENT_KEY=${{ secrets.CLIENT_KEY }} -DTEST_VERSION=${{ env.TEST_VERSION }}
         cmake --build . --config RelWithDebInfo
         Copy-Item -Path .\RelWithDebInfo\VatsimAuth.dll -Destination ..\..\Vatsim.Vatis\publish\
 
