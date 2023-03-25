@@ -365,8 +365,6 @@ public partial class MainForm : Form
                     {
                         tabPage.CompositeMeta.IncrementAtisLetter();
 
-                        composite.NewAtisUpdate?.Invoke(this, EventArgs.Empty); // update mini display
-
                         if (!mAppConfig.SuppressNotifications)
                         {
                             var sound = new SoundPlayer(Vatsim.Vatis.Properties.Resources.NewUpdate);
@@ -423,6 +421,8 @@ public partial class MainForm : Form
 
                     if (composite.DecodedMetar == null)
                         return;
+
+                    composite.NewAtisUpdate?.Invoke(this, new ClientEventArgs<string>(tabPage.CompositeMeta.AtisLetter)); // update mini display
 
                     if (composite.AtisVoice.UseTextToSpeech)
                     {
@@ -655,7 +655,7 @@ public partial class MainForm : Form
         var tab = atisTabs.TabPages.Cast<AtisTabPage>().FirstOrDefault(x => x.Composite == e.Composite);
         if (tab != null)
         {
-            tab.CompositeMeta.IsNewAtis = false;
+            tab.IsNewAtis = false;
         }
     }
 }
