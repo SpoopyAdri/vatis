@@ -147,9 +147,7 @@ public static class NumberExtensions
                 group.Add(string.Join(" ", temp).Trim(' '));
             }
 
-            return punctuationMatch.Success
-                ? string.Join(useDecimalTerminology ? " decimal " : " point ", group) + punctuationMatch.Value
-                : string.Join(useDecimalTerminology ? " decimal " : " point ", group);
+            return string.Join(useDecimalTerminology ? " decimal " : " point ", group);
         }
 
         return input;

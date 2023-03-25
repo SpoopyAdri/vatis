@@ -269,19 +269,19 @@ public class AtisBuilder : IAtisBuilder
 
         if (pressureNode.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
-            pressureInHg = pressureNode.Value;
+            pressureInHg = pressureNode.Value / 100.0;
             pressureHpa = (int)Math.Floor((pressureNode.Value / 100.0) * 33.86);
         }
         else
         {
             pressureHpa = pressureNode.Value;
-            pressureInHg = (int)Math.Floor((pressureNode.Value * 0.0295) * 100);
+            pressureInHg = (int)Math.Floor((pressureNode.Value * 0.0295) * 100) / 100.0;
         }
 
-        inHgText = $"A{pressureInHg}";
-        inHgVoice = $"Altimeter {pressureInHg.NumberToSingular()}";
-        hpaText = $"Q{pressureHpa}";
-        hpaVoice = $"QNH {pressureHpa.NumberToSingular()}";
+        inHgText = pressureInHg.ToString();
+        inHgVoice = pressureInHg.ToString().NumberToSingular(composite.UseDecimalTerminology);
+        hpaText = pressureHpa.ToString();
+        hpaVoice = pressureHpa.NumberToSingular();
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
