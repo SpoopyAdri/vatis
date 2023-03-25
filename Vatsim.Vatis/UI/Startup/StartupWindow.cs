@@ -84,7 +84,7 @@ namespace Vatsim.Vatis.UI.Startup
         private async Task DownloadServerList()
         {
             var servers = await Vatsim.Network.NetworkInfo.DownloadServerList("https://status.vatsim.net/status.json");
-            if (servers.Count > 0)
+            if (servers != null && servers.Count > 0)
             {
                 mAppConfig.CachedServers.Clear();
 
