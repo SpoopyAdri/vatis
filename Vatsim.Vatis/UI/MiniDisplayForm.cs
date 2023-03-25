@@ -235,7 +235,11 @@ public partial class MiniDisplayForm : Form
                     };
 
                     composite.MetarReceived += (x, y) => item.Metar = y.Value;
-                    composite.NewAtisUpdate += (x, y) => item.IsNewAtis = true;
+                    composite.NewAtisUpdate += (x, y) =>
+                    {
+                        item.IsNewAtis = true;
+                        item.AtisLetter = y.Value;
+                    };
 
                     item.AtisUpdateAcknowledged += (x, y) => EventBus.Publish(this, new NewAtisAcknowledged(composite));
 

@@ -57,7 +57,7 @@ public class Composite : IComposite, ICloneable
     [JsonIgnore] public Connection Connection { get; set; }
 
     [JsonIgnore] public EventHandler<ClientEventArgs<string>> MetarReceived;
-    [JsonIgnore] public EventHandler<EventArgs> NewAtisUpdate;
+    [JsonIgnore] public EventHandler<ClientEventArgs<string>> NewAtisUpdate;
 }
 
 [Serializable]
