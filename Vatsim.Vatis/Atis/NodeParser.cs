@@ -14,7 +14,7 @@ public static class NodeParser
         return new ParsedResult
         {
             TextAtis = obj.TextAtis,
-            VoiceAtis = obj.VoiceAtis,
+            VoiceAtis = $"{obj.VoiceAtis}.",
             Node = obj.Node
         };
     }
