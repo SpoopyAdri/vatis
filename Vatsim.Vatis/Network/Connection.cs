@@ -38,7 +38,7 @@ public class Connection
     public event EventHandler<KillRequestReceived> KillRequestReceived;
     public event EventHandler<ClientEventArgs<string>> ChangeServerReceived;
 
-    private const string VATDNS_ENDPOINT = "http://fsd-http.connect.vatsim.net";
+    private const string VATDNS_ENDPOINT = "http://fsd.vatsim.net";
     private const string FSD_AUTH_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
 
     private readonly FSDSession mSession;
