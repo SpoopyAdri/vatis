@@ -242,6 +242,7 @@ public partial class ProfileConfigurationForm : Form
         chkSurfaceWindPrefix.Checked = mCurrentComposite.UseSurfaceWindPrefix;
         chkDecimalTerminology.Checked = mCurrentComposite.UseDecimalTerminology;
         chkPrefixTemperature.Checked = mCurrentComposite.UseTemperaturePlusPrefix;
+        chkAppendZulu.Checked = mCurrentComposite.UseZuluTimeSuffix;
 
         if (mCurrentComposite.ObservationTime != null)
         {
