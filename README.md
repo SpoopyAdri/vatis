@@ -7,7 +7,7 @@ vATIS is a simple and intuitive program for generating ATIS broadcasts on the VA
 [1]: https://github.com/vatis-project/vatis/releases/latest
 
 # Resources
-:globe_with_meridians: [Website and Documentation](https://vatis.clowd.io)
+:globe_with_meridians: [Documentation](https://docs.vatis.clowd.io)
 
 # Contributing
 xPilot is written in C# (.NET 6.0). Please read the [Contribution Guide](CONTRIBUTING.md) for details on how to contribute to the project.
