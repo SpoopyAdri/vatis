@@ -13,7 +13,8 @@ namespace Vatsim.Vatis.Config;
 
 public class AppConfig : IAppConfig
 {
-    [JsonIgnore] public bool ConfigRequired => string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Name);
+    [JsonIgnore] 
+    public bool ConfigRequired => string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Name);
 
     [JsonIgnore]
     public string UserId { get; set; } = "";
@@ -21,9 +22,17 @@ public class AppConfig : IAppConfig
     [JsonIgnore]
     public string Password { get; set; } = "";
 
-    [JsonIgnore] public Profile CurrentProfile { get; set; }
+    [JsonIgnore] 
+    public Profile CurrentProfile { get; set; }
 
-    [JsonIgnore] public Composite CurrentComposite { get; set; }
+    [JsonIgnore] 
+    public Composite CurrentComposite { get; set; }
+
+    [JsonIgnore]
+    public string AuthToken { get; set; }
+
+    [JsonIgnore]
+    public DateTime AuthTokenGeneratedAt { get; set; }
 
     public NetworkRating NetworkRating { get; set; }
 

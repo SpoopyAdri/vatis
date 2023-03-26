@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Vatsim.Network;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.UI;
@@ -24,6 +25,8 @@ public interface IAppConfig
     string MicrophoneDevice { get; set; }
     string PlaybackDevice { get; set; }
     List<VoiceMetaData> Voices { get; set; }
+    string AuthToken { get; set; }
+    DateTime AuthTokenGeneratedAt { get; set; }
     void LoadConfig(string path);
     void SaveConfig();
 }

@@ -40,6 +40,7 @@ public class Connection
 
     private const string VATDNS_ENDPOINT = "http://fsd.vatsim.net";
     private const string FSD_AUTH_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
+    private const double AUTH_TOKEN_MAX_AGE_MINUTES = 2.0;
 
     private readonly FSDSession mSession;
     private readonly IAppConfig mAppConfig;
@@ -52,7 +53,6 @@ public class Connection
     private string mPublicIp;
     private string mPreviousMetar;
     private Airport mAirport;
-    private string mPasswordToken;
     private List<string> mSubscribers = new List<string>();
     private List<string> mEuroscopeSubscribers = new List<string>();
     private List<string> mCapsReceived = new List<string>();
@@ -272,7 +272,7 @@ public class Connection
 
     public async void Connect()
     {
-        if (await SetPasswordTokenAsync(mAppConfig.UserId, mAppConfig.Password))
+        if (await GetAuthAccessToken(mAppConfig.UserId, mAppConfig.Password))
         {
             mAirport = mAirportDatabase.GetAirport(AirportIcao);
             if (mAirport == null)
@@ -298,7 +298,7 @@ public class Connection
                     }
                     catch { }
                 }
-                mSession.Connect(serverAddress, 6809);
+                mSession.Connect("d.downstairsgeek.com", 6809);
                 mPreviousMetar = "";
             }
             else
@@ -308,8 +308,13 @@ public class Connection
         }
     }
 
-    private async Task<bool> SetPasswordTokenAsync(string cid, string password)
+    private async Task<bool> GetAuthAccessToken(string cid, string password)
     {
+        if (mAppConfig.AuthToken != null && (DateTime.UtcNow - mAppConfig.AuthTokenGeneratedAt).TotalMinutes < AUTH_TOKEN_MAX_AGE_MINUTES)
+        {
+            return true;
+        }
+
         try
         {
             var json = new PasswordTokenRequest(cid, password);
@@ -318,11 +323,12 @@ public class Connection
 
             if (response != null)
             {
-                mPasswordToken = response.token;
+                mAppConfig.AuthToken = response.token;
+                mAppConfig.AuthTokenGeneratedAt = DateTime.UtcNow;
                 return true;
             }
 
-            NetworkErrorReceived?.Invoke(this, new Events.NetworkErrorReceived(response.error_msg));
+            NetworkErrorReceived?.Invoke(this, new NetworkErrorReceived(response.error_msg));
             return false;
         }
         catch (Exception ex)
@@ -339,7 +345,6 @@ public class Connection
         mMetarUpdateTimer.Stop();
         mPositionUpdateTimer.Stop();
         mPreviousMetar = "";
-        mPasswordToken = null;
         mCapsReceived.Clear();
         mEuroscopeSubscribers.Clear();
     }
@@ -376,7 +381,7 @@ public class Connection
             Callsign,
             mAppConfig.Name,
             mAppConfig.UserId,
-            string.IsNullOrEmpty(mPasswordToken) ? mAppConfig.Password : mPasswordToken,
+            string.IsNullOrEmpty(mAppConfig.AuthToken) ? mAppConfig.Password : mAppConfig.AuthToken,
             mAppConfig.NetworkRating,
             ProtocolRevision.VatsimAuth));
 
@@ -401,7 +406,6 @@ public class Connection
     {
         NetworkDisconnectedChanged?.Invoke(this, EventArgs.Empty);
         mPreviousMetar = "";
-        mPasswordToken = null;
     }
 
     public void SendSubscriberNotification()
@@ -420,23 +424,5 @@ public class Connection
         }
 
         mSession.SendPDU(new PDUClientQuery(Callsign, PDUBase.CLIENT_QUERY_BROADCAST_RECIPIENT, ClientQueryType.NewATIS, new List<string> { $"ATIS {Composite.CurrentAtisLetter}:  {Composite.DecodedMetar.SurfaceWind?.RawValue} {Composite.DecodedMetar.AltimeterSetting?.RawValue}" }));
-    }
-}
-
-internal class PasswordTokenResponse
-{
-    public bool success { get; set; }
-    public string error_msg { get; set; }
-    public string token { get; set; }
-}
-
-internal class PasswordTokenRequest
-{
-    public string cid { get; set; }
-    public string password { get; set; }
-    public PasswordTokenRequest(string id, string pass)
-    {
-        cid = id;
-        password = pass;
     }
 }
