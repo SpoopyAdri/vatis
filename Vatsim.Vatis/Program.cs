@@ -57,7 +57,7 @@ internal static class Program
         if (Debugger.IsAttached)
         {
             installPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "org.vatsim.vatis");
+                "vATIS-4.0");
         }
 
         PathProvider.SetInstallPath(installPath);
