@@ -1,4 +1,4 @@
-﻿namespace Vatsim.Vatis.Config;
+﻿namespace Vatsim.Vatis.TextToSpeech;
 
 public class VoiceMetaData
 {

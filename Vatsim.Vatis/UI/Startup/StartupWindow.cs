@@ -8,6 +8,7 @@ using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
+using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.Updates;
 
 namespace Vatsim.Vatis.UI.Startup
