@@ -109,7 +109,24 @@ public class AppConfig : IAppConfig
                 composite.UseSurfaceWindPrefix = false;
                 composite.UseVisibilitySuffix = false;
             }
+
+            if (!char.IsLetter(composite.CodeRange.Low))
+            {
+                composite.CodeRange.Low = 'A';
+            }
+
+            if (!char.IsLetter(composite.CodeRange.High))
+            {
+                composite.CodeRange.Low = 'Z';
+            }
+
+            if (char.ToLower(composite.CodeRange.High) < char.ToLower(composite.CodeRange.Low))
+            {
+                composite.CodeRange.Low = 'A';
+                composite.CodeRange.High = 'Z';
+            }
         }
+
         SaveConfig();
     }
 }
