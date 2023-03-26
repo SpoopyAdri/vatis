@@ -1072,12 +1072,12 @@ public partial class ProfileConfigurationForm : Form
 
         if ((txtCodeRangeHigh.Text ?? "") != mCurrentComposite.CodeRange.High.ToString())
         {
-            mCodeRangeLowChanged = true;
+            mCodeRangeHighChanged = true;
             btnApply.Enabled = true;
         }
         else
         {
-            mCodeRangeLowChanged = false;
+            mCodeRangeHighChanged = false;
             btnApply.Enabled = false;
         }
     }
