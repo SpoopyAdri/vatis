@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Vatsim.Network;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.Profiles;
+using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI;
 
 namespace Vatsim.Vatis.Config;

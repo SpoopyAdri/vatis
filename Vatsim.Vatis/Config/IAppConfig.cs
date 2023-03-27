@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Vatsim.Network;
 using Vatsim.Vatis.Profiles;
+using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI;
 
 namespace Vatsim.Vatis.Config;

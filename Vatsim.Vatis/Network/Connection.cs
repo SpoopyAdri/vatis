@@ -298,7 +298,7 @@ public class Connection
                     }
                     catch { }
                 }
-                mSession.Connect("d.downstairsgeek.com", 6809);
+                mSession.Connect(serverAddress, 6809);
                 mPreviousMetar = "";
             }
             else
