@@ -219,18 +219,6 @@ public partial class ProfileConfigurationForm : Form
                 break;
         }
 
-        if (!char.IsLetter(mCurrentComposite.CodeRange.Low))
-        {
-            mCurrentComposite.CodeRange.Low = 'A';
-            mAppConfig.SaveConfig();
-        }
-
-        if (!char.IsLetter(mCurrentComposite.CodeRange.High))
-        {
-            mCurrentComposite.CodeRange.High = 'Z';
-            mAppConfig.SaveConfig();
-        }
-
         txtCodeRangeLow.Text = mCurrentComposite.CodeRange.Low.ToString();
         txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
@@ -718,6 +706,17 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
+        if (mCodeRangeLowChanged || mCodeRangeHighChanged)
+        {
+            char low = char.Parse(txtCodeRangeLow.Text);
+            char high = char.Parse(txtCodeRangeHigh.Text);
+            if (char.ToLower(high) < char.ToLower(low))
+            {
+                MessageBox.Show("ATIS code range must be in alphabetical order.");
+                return false;
+            }
+        }
+
         if (mCodeRangeLowChanged)
         {
             mCurrentComposite.CodeRange.Low = char.Parse(txtCodeRangeLow.Text);
@@ -1072,12 +1071,12 @@ public partial class ProfileConfigurationForm : Form
 
         if ((txtCodeRangeHigh.Text ?? "") != mCurrentComposite.CodeRange.High.ToString())
         {
-            mCodeRangeLowChanged = true;
+            mCodeRangeHighChanged = true;
             btnApply.Enabled = true;
         }
         else
         {
-            mCodeRangeLowChanged = false;
+            mCodeRangeHighChanged = false;
             btnApply.Enabled = false;
         }
     }
