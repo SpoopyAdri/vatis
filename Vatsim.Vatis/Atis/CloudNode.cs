@@ -86,7 +86,17 @@ public class CloudNode : AtisNode
                 }
                 else
                 {
-                    tts.Add($"{(layer == ceiling ? "ceiling " : "")}{altitude.NumbersToWords()} {cloudType} {convectiveType}");
+                    switch (layer.CloudType)
+                    {
+                        case Weather.Enums.CloudType.Clear:
+                            cloudType = "sky clear below one-two thousand";
+                            break;
+                        case Weather.Enums.CloudType.SkyClear:
+                            cloudType = "sky clear";
+                            break;
+                    }
+
+                    tts.Add($"{(layer == ceiling ? "ceiling " : "")}{(altitude > 0 ? altitude.NumbersToWords() : "")} {cloudType} {convectiveType}");
                 }
             }
         }
