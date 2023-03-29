@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Weather.Objects;
@@ -55,6 +56,7 @@ public class Composite : IComposite, ICloneable
     [JsonIgnore] public string AtisCallsign { get; set; }
     [JsonIgnore] public MemoryStream MemoryStream { get; set; }
     [JsonIgnore] public Connection Connection { get; set; }
+    [JsonIgnore] public Airport AirportData { get; set; }
 
     [JsonIgnore] public EventHandler<ClientEventArgs<string>> MetarReceived;
     [JsonIgnore] public EventHandler<ClientEventArgs<string>> NewAtisUpdate;

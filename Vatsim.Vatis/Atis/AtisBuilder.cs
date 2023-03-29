@@ -8,15 +8,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Serilog;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.TextToSpeech;
-using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
@@ -28,7 +25,6 @@ public class AtisBuilder : IAtisBuilder
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
     private readonly IAudioManager mAudioManager;
     private readonly IDownloader mDownloader;
-    private Airport mAirport;
 
     public AtisBuilder(INavaidDatabase airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
     {
@@ -55,11 +51,8 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception("DecodedMetar is null");
         }
 
-        mAirport = mNavData.GetAirport(composite.Identifier);
-        if (mAirport == null)
-        {
-            throw new Exception($"{composite.Identifier} not found in airport database.");
-        }
+        var airport = mNavData.GetAirport(composite.Identifier);
+        composite.AirportData = airport ?? throw new Exception($"{composite.Identifier} not found in airport database.");
 
         ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
 
@@ -120,7 +113,7 @@ public class AtisBuilder : IAtisBuilder
             {
                 PostIdsUpdate(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
+                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
         else
@@ -129,7 +122,7 @@ public class AtisBuilder : IAtisBuilder
             {
                 PostIdsUpdate(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(composite.MemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, mAirport.Latitude, mAirport.Longitude);
+                await mAudioManager.AddOrUpdateBot(composite.MemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
     }
@@ -203,11 +196,8 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception("DecodedMetar is null");
         }
 
-        mAirport = mNavData.GetAirport(composite.Identifier);
-        if (mAirport == null)
-        {
-            throw new Exception($"{composite.Identifier} not found in airport database.");
-        }
+        var airport = mNavData.GetAirport(composite.Identifier);
+        composite.AirportData = airport ?? throw new Exception($"{composite.Identifier} not found in airport database.");
 
         ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
 
@@ -364,7 +354,7 @@ public class AtisBuilder : IAtisBuilder
 
         variables = new List<Variable>
         {
-            new Variable("FACILITY", mAirport.ID, mAirport.Name),
+            new Variable("FACILITY", composite.AirportData.ID, composite.AirportData.Name),
             new Variable("ATIS_LETTER", composite.CurrentAtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
             new Variable("TIME", time.TextAtis, time.VoiceAtis, new []{"OBS_TIME","OBSTIME"}),
             new Variable("WIND", surfaceWind.TextAtis, surfaceWind.VoiceAtis, new[]{"SURFACE_WIND"}),
