@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace Vatsim.Vatis.Profiles;
 
@@ -19,6 +20,9 @@ public class Preset : IPreset, ICloneable
 
     [JsonIgnore] 
     public bool IsNotamsDirty { get; set; }
+
+    [JsonIgnore]
+    public bool HasClosingVariable => new string[] { "[CLOSING]", "$CLOSING", "[CLOSING:VOX]", "$CLOSING:VOX" }.Any(n => Template.Contains(n));
 
     public object Clone()
     {

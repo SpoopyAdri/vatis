@@ -60,6 +60,7 @@ namespace Vatsim.Vatis.UI
             this.chkMagneticVar = new System.Windows.Forms.CheckBox();
             this.magneticVar = new System.Windows.Forms.NumericUpDown();
             this.pageFormat = new System.Windows.Forms.TabPage();
+            this.chkAutoIncludeClosingStatement = new System.Windows.Forms.CheckBox();
             this.chkAppendZulu = new System.Windows.Forms.CheckBox();
             this.chkPrefixTemperature = new System.Windows.Forms.CheckBox();
             this.chkDecimalTerminology = new System.Windows.Forms.CheckBox();
@@ -484,6 +485,7 @@ namespace Vatsim.Vatis.UI
             // 
             // pageFormat
             // 
+            this.pageFormat.Controls.Add(this.chkAutoIncludeClosingStatement);
             this.pageFormat.Controls.Add(this.chkAppendZulu);
             this.pageFormat.Controls.Add(this.chkPrefixTemperature);
             this.pageFormat.Controls.Add(this.chkDecimalTerminology);
@@ -501,10 +503,25 @@ namespace Vatsim.Vatis.UI
             this.pageFormat.Text = "Formatting";
             this.pageFormat.UseVisualStyleBackColor = true;
             // 
+            // chkAutoIncludeClosingStatement
+            // 
+            this.chkAutoIncludeClosingStatement.AutoSize = true;
+            this.chkAutoIncludeClosingStatement.Location = new System.Drawing.Point(40, 47);
+            this.chkAutoIncludeClosingStatement.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkAutoIncludeClosingStatement.Name = "chkAutoIncludeClosingStatement";
+            this.chkAutoIncludeClosingStatement.Size = new System.Drawing.Size(354, 19);
+            this.chkAutoIncludeClosingStatement.TabIndex = 52;
+            this.chkAutoIncludeClosingStatement.Text = "Automatically include closing statement at the end of the ATIS";
+            this.compositeTooltip.SetToolTip(this.chkAutoIncludeClosingStatement, "Automatically appends closing statement (\"ADVISE ON INITIAL CONTACT YOU HAVE INFO" +
+        "RMATION X\") at the end of the ATIS.\r\nIgnored if [CLOSING] variable is included i" +
+        "n the ATIS template.");
+            this.chkAutoIncludeClosingStatement.UseVisualStyleBackColor = true;
+            this.chkAutoIncludeClosingStatement.CheckedChanged += new System.EventHandler(this.chkAutoIncludeClosingStatement_CheckedChanged);
+            // 
             // chkAppendZulu
             // 
             this.chkAppendZulu.AutoSize = true;
-            this.chkAppendZulu.Location = new System.Drawing.Point(40, 268);
+            this.chkAppendZulu.Location = new System.Drawing.Point(40, 263);
             this.chkAppendZulu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkAppendZulu.Name = "chkAppendZulu";
             this.chkAppendZulu.Size = new System.Drawing.Size(234, 19);
@@ -517,7 +534,7 @@ namespace Vatsim.Vatis.UI
             // chkPrefixTemperature
             // 
             this.chkPrefixTemperature.AutoSize = true;
-            this.chkPrefixTemperature.Location = new System.Drawing.Point(40, 237);
+            this.chkPrefixTemperature.Location = new System.Drawing.Point(40, 236);
             this.chkPrefixTemperature.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrefixTemperature.Name = "chkPrefixTemperature";
             this.chkPrefixTemperature.Size = new System.Drawing.Size(240, 19);
@@ -530,7 +547,7 @@ namespace Vatsim.Vatis.UI
             // chkDecimalTerminology
             // 
             this.chkDecimalTerminology.AutoSize = true;
-            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 206);
+            this.chkDecimalTerminology.Location = new System.Drawing.Point(40, 209);
             this.chkDecimalTerminology.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkDecimalTerminology.Name = "chkDecimalTerminology";
             this.chkDecimalTerminology.Size = new System.Drawing.Size(245, 19);
@@ -544,7 +561,7 @@ namespace Vatsim.Vatis.UI
             // chkVisibilitySuffix
             // 
             this.chkVisibilitySuffix.AutoSize = true;
-            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 144);
+            this.chkVisibilitySuffix.Location = new System.Drawing.Point(40, 155);
             this.chkVisibilitySuffix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkVisibilitySuffix.Name = "chkVisibilitySuffix";
             this.chkVisibilitySuffix.Size = new System.Drawing.Size(333, 19);
@@ -558,7 +575,7 @@ namespace Vatsim.Vatis.UI
             // chkSurfaceWindPrefix
             // 
             this.chkSurfaceWindPrefix.AutoSize = true;
-            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 113);
+            this.chkSurfaceWindPrefix.Location = new System.Drawing.Point(40, 128);
             this.chkSurfaceWindPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkSurfaceWindPrefix.Name = "chkSurfaceWindPrefix";
             this.chkSurfaceWindPrefix.Size = new System.Drawing.Size(234, 19);
@@ -572,7 +589,7 @@ namespace Vatsim.Vatis.UI
             // chkConvertMetric
             // 
             this.chkConvertMetric.AutoSize = true;
-            this.chkConvertMetric.Location = new System.Drawing.Point(40, 175);
+            this.chkConvertMetric.Location = new System.Drawing.Point(40, 182);
             this.chkConvertMetric.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkConvertMetric.Name = "chkConvertMetric";
             this.chkConvertMetric.Size = new System.Drawing.Size(217, 19);
@@ -585,7 +602,7 @@ namespace Vatsim.Vatis.UI
             // chkTransitionLevelPrefix
             // 
             this.chkTransitionLevelPrefix.AutoSize = true;
-            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 82);
+            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(40, 101);
             this.chkTransitionLevelPrefix.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
             this.chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
@@ -599,7 +616,7 @@ namespace Vatsim.Vatis.UI
             // chkPrefixNotams
             // 
             this.chkPrefixNotams.AutoSize = true;
-            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 51);
+            this.chkPrefixNotams.Location = new System.Drawing.Point(40, 74);
             this.chkPrefixNotams.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chkPrefixNotams.Name = "chkPrefixNotams";
             this.chkPrefixNotams.Size = new System.Drawing.Size(352, 19);
@@ -1267,5 +1284,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TextBox txtCodeRangeHigh;
         private System.Windows.Forms.Panel dynamicPresetControl;
         private System.Windows.Forms.CheckBox chkExternalAtisGenerator;
+        private System.Windows.Forms.CheckBox chkAutoIncludeClosingStatement;
     }
 }

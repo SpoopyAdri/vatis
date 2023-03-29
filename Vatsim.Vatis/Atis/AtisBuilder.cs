@@ -96,6 +96,11 @@ public class AtisBuilder : IAtisBuilder
             }
         }
 
+        if(!composite.CurrentPreset.HasClosingVariable && composite.AutoIncludeClosingStatement)
+        {
+            voiceString.Append($"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.");
+        }
+
         if (composite.AtisVoice.UseTextToSpeech)
         {
             var tts = FormatForTextToSpeech(voiceString.ToString().ToUpper(), composite);
@@ -224,11 +229,17 @@ public class AtisBuilder : IAtisBuilder
             }
         }
 
+        acarsText = Regex.Replace(acarsText, @"\s+(?=[.,?!])", ""); // remove extra spaces before punctuation
         acarsText = Regex.Replace(acarsText, @"\s+", " ");
         acarsText = Regex.Replace(acarsText, @"(?<=\*)(-?[\,0-9]+)", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\#)(-?[\,0-9]+)", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{3})", "$1");
         acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{4})", "$1");
+
+        if (!composite.CurrentPreset.HasClosingVariable && composite.AutoIncludeClosingStatement)
+        {
+            acarsText += $" ...ADVS YOU HAVE INFO {composite.CurrentAtisLetter}.";
+        }
 
         composite.AcarsText = acarsText.ToUpper();
     }

@@ -34,6 +34,7 @@ public partial class ProfileConfigurationForm : Form
     private bool mCodeRangeLowChanged = false;
     private bool mCodeRangeHighChanged = false;
     private bool mFaaFormatChanged = false;
+    private bool mAutoIncludeClosingStatementChanged = false;
     private bool mObservationTimeChanged = false;
     private bool mMagneticVariationChanged = false;
     private bool mVoiceOptionsChanged = false;
@@ -224,6 +225,7 @@ public partial class ProfileConfigurationForm : Form
         txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
         chkFaaFormat.Checked = mCurrentComposite.UseFaaFormat;
+        chkAutoIncludeClosingStatement.Checked = mCurrentComposite.AutoIncludeClosingStatement;
         chkPrefixNotams.Checked = mCurrentComposite.UseNotamPrefix;
         chkTransitionLevelPrefix.Checked = mCurrentComposite.UseTransitionLevelPrefix;
         chkConvertMetric.Checked = mCurrentComposite.UseMetricUnits;
@@ -737,6 +739,12 @@ public partial class ProfileConfigurationForm : Form
             mFaaFormatChanged = false;
         }
 
+        if (mAutoIncludeClosingStatementChanged)
+        {
+            mCurrentComposite.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
+            mAutoIncludeClosingStatementChanged = false;
+        }
+
         if (mExternalAtisGeneratorChanged)
         {
             mCurrentPreset.ExternalGenerator.Enabled = chkExternalAtisGenerator.Checked;
@@ -1096,6 +1104,25 @@ public partial class ProfileConfigurationForm : Form
         if (chkFaaFormat.Checked != mCurrentComposite.UseFaaFormat)
         {
             mFaaFormatChanged = true;
+            btnApply.Enabled = true;
+        }
+        else
+        {
+            btnApply.Enabled = false;
+        }
+    }
+
+    private void chkAutoIncludeClosingStatement_CheckedChanged(object sender, EventArgs e)
+    {
+        if (mCurrentPreset == null)
+            return;
+
+        if (!chkAutoIncludeClosingStatement.Focused)
+            return;
+
+        if (chkAutoIncludeClosingStatement.Checked != mCurrentComposite.AutoIncludeClosingStatement)
+        {
+            mAutoIncludeClosingStatementChanged = true;
             btnApply.Enabled = true;
         }
         else

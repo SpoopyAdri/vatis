@@ -30,6 +30,7 @@ public class Composite : IComposite, ICloneable
     public List<TransitionLevel> TransitionLevels { get; set; } = new List<TransitionLevel>();
     public CodeRange CodeRange { get; set; } = new CodeRange('A', 'Z');
     public bool UseFaaFormat { get; set; } = true;
+    public bool AutoIncludeClosingStatement { get; set; } = true;
     public bool UseNotamPrefix { get; set; } = true;
     public bool UseTransitionLevelPrefix { get; set; } = true;
     public bool UseMetricUnits { get; set; }
