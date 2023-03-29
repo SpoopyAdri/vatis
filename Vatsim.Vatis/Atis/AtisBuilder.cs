@@ -278,8 +278,8 @@ public class AtisBuilder : IAtisBuilder
             pressureInHg = (int)Math.Floor((pressureNode.Value * 0.0295) * 100) / 100.0;
         }
 
-        inHgText = pressureInHg.ToString();
-        inHgVoice = pressureInHg.ToString().NumberToSingular(composite.UseDecimalTerminology);
+        inHgText = pressureInHg.ToString("00.00");
+        inHgVoice = pressureInHg.ToString("00.00").NumberToSingular(composite.UseDecimalTerminology);
         hpaText = pressureHpa.ToString();
         hpaVoice = pressureHpa.NumberToSingular();
 
