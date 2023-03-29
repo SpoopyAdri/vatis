@@ -67,28 +67,6 @@ public class AtisVoiceMeta
 {
     public bool UseTextToSpeech { get; set; } = true;
     public string Voice { get; set; } = "Default";
-    [JsonIgnore]
-    public string GetVoiceNameForRequest
-    {
-        get
-        {
-            switch (Voice)
-            {
-                case "Default":
-                    return "default";
-                case "US Male":
-                    return "us-male";
-                case "US Female":
-                    return "us-female";
-                case "UK Male":
-                    return "uk-male";
-                case "UK Female":
-                    return "uk-female";
-                default:
-                    return "default";
-            }
-        }
-    }
 }
 
 [Serializable]
