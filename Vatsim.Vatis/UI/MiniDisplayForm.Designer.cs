@@ -31,10 +31,10 @@ namespace Vatsim.Vatis.UI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MiniDisplayForm));
-            this.btnRestore = new ExButton();
-            this.utcClock = new HitTestLabel();
+            this.btnRestore = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.utcClock = new Vatsim.Vatis.UI.Controls.HitTestLabel();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.hitTestPanel1 = new HitTestPanel();
+            this.hitTestPanel1 = new Vatsim.Vatis.UI.Controls.HitTestPanel();
             this.hitTestPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace Vatsim.Vatis.UI
             this.btnRestore.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRestore.ForeColor = System.Drawing.Color.White;
             this.btnRestore.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.Image")));
-            this.btnRestore.Location = new System.Drawing.Point(277, 6);
+            this.btnRestore.Location = new System.Drawing.Point(282, 6);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Pushed = false;
             this.btnRestore.PushedColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
@@ -65,7 +65,7 @@ namespace Vatsim.Vatis.UI
             this.utcClock.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.utcClock.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.utcClock.ForeColor = System.Drawing.Color.White;
-            this.utcClock.Location = new System.Drawing.Point(186, 5);
+            this.utcClock.Location = new System.Drawing.Point(191, 5);
             this.utcClock.Name = "utcClock";
             this.utcClock.ShowBorder = false;
             this.utcClock.Size = new System.Drawing.Size(90, 22);
@@ -82,7 +82,7 @@ namespace Vatsim.Vatis.UI
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 1;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.Size = new System.Drawing.Size(300, 35);
+            this.tlpMain.Size = new System.Drawing.Size(305, 35);
             this.tlpMain.TabIndex = 8;
             // 
             // hitTestPanel1
@@ -95,20 +95,20 @@ namespace Vatsim.Vatis.UI
             this.hitTestPanel1.Name = "hitTestPanel1";
             this.hitTestPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.hitTestPanel1.ShowBorder = false;
-            this.hitTestPanel1.Size = new System.Drawing.Size(300, 30);
+            this.hitTestPanel1.Size = new System.Drawing.Size(305, 30);
             this.hitTestPanel1.TabIndex = 9;
             // 
-            // MiniDisplay
+            // MiniDisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(310, 75);
+            this.ClientSize = new System.Drawing.Size(315, 75);
+            this.ControlBox = false;
             this.Controls.Add(this.tlpMain);
             this.Controls.Add(this.hitTestPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(85, 75);
             this.Name = "MiniDisplayForm";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

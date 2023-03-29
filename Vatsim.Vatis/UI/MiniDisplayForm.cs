@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,12 +10,19 @@ using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 
-[ResizableForm]
 public partial class MiniDisplayForm : Form
 {
     private readonly IAppConfig mAppConfig;
     private readonly Timer mUtcClock;
     private bool mInitializing = true;
+    private const int WM_NCLBUTTONDOWN = 0xA1;
+    private const int HT_CAPTION = 0x2;
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    public static extern bool ReleaseCapture();
 
     public MiniDisplayForm(IAppConfig appConfig)
     {
@@ -33,7 +41,7 @@ public partial class MiniDisplayForm : Form
         };
         mUtcClock.Start();
     }
-
+    
     protected override CreateParams CreateParams
     {
         get
@@ -43,51 +51,14 @@ public partial class MiniDisplayForm : Form
             return handleParam;
         }
     }
-
-    protected override void WndProc(ref Message m)
+    protected override void OnMouseDown(MouseEventArgs e)
     {
-        const int RESIZE_HANDLE_SIZE = 10;
-
-        switch (m.Msg)
+        base.OnMouseDown(e);
+        if (e.Button == MouseButtons.Left)
         {
-            case 0x0084/*NCHITTEST*/ :
-                base.WndProc(ref m);
-
-                if ((int)m.Result == 0x01/*HTCLIENT*/)
-                {
-                    Point screenPoint = new Point(m.LParam.ToInt32());
-                    Point clientPoint = this.PointToClient(screenPoint);
-                    if (clientPoint.Y <= RESIZE_HANDLE_SIZE)
-                    {
-                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                            m.Result = (IntPtr)13/*HTTOPLEFT*/ ;
-                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                            m.Result = (IntPtr)12/*HTTOP*/ ;
-                        else
-                            m.Result = (IntPtr)14/*HTTOPRIGHT*/ ;
-                    }
-                    else if (clientPoint.Y <= (Size.Height - RESIZE_HANDLE_SIZE))
-                    {
-                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                            m.Result = (IntPtr)10/*HTLEFT*/ ;
-                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                            m.Result = (IntPtr)2/*HTCAPTION*/ ;
-                        else
-                            m.Result = (IntPtr)11/*HTRIGHT*/ ;
-                    }
-                    else
-                    {
-                        if (clientPoint.X <= RESIZE_HANDLE_SIZE)
-                            m.Result = (IntPtr)16/*HTBOTTOMLEFT*/ ;
-                        else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
-                            m.Result = (IntPtr)15/*HTBOTTOM*/ ;
-                        else
-                            m.Result = (IntPtr)17/*HTBOTTOMRIGHT*/ ;
-                    }
-                }
-                return;
+            ReleaseCapture();
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
-        base.WndProc(ref m);
     }
 
     protected override void OnShown(EventArgs e)
@@ -115,20 +86,6 @@ public partial class MiniDisplayForm : Form
         EventBus.Publish(this, new MiniWindowClosed());
         EventBus.Unregister(this);
         base.OnFormClosing(e);
-    }
-
-    protected override void OnResize(EventArgs e)
-    {
-        base.OnResize(e);
-        RefreshDisplay();
-        utcClock.Visible = ClientSize.Width > 120;
-        Invalidate();
-
-        if (!mInitializing)
-        {
-            ScreenUtils.SaveWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
-            mAppConfig.SaveConfig();
-        }
     }
 
     protected override void OnMove(EventArgs e)
@@ -166,9 +123,16 @@ public partial class MiniDisplayForm : Form
 
     private void RefreshDisplay()
     {
+        tlpMain.RowCount = 1;
+        tlpMain.ColumnCount = 1;
         tlpMain.Controls.Clear();
-        tlpMain.RowStyles.Clear();
         tlpMain.ColumnStyles.Clear();
+        tlpMain.RowStyles.Clear();
+
+        tlpMain.ColumnStyles.Add(new ColumnStyle
+        {
+            SizeType = SizeType.AutoSize
+        });
 
         while (tlpMain.Controls.Count > 0)
             tlpMain.Controls[0].Dispose();
@@ -184,80 +148,59 @@ public partial class MiniDisplayForm : Form
                 ForeColor = Color.White,
                 TextAlign = ContentAlignment.MiddleCenter
             });
-            MinimumSize = new Size(310, 75);
+            Size = new Size(315, 80);
             return;
         }
 
-        int colWidth = 75;
-        int colCount = ClientSize.Width / colWidth;
-
-        int rowHeight = 35;
-        int rowCount = ClientSize.Height / rowHeight;
-
-        tlpMain.RowCount = rowCount;
-        for (int i = 0; i < rowCount; i++)
+        foreach (var composite in mAppConfig.CurrentProfile.Composites.OrderBy(n => n.Identifier))
         {
-            tlpMain.RowStyles.Add(new RowStyle
+            composite.MetarReceived = null;
+            composite.NewAtisUpdate = null;
+
+            if (composite.Connection.IsConnected)
             {
-                SizeType = SizeType.Absolute,
-                Height = rowHeight,
-            });
-        }
-
-        tlpMain.ColumnCount = colCount;
-        for (int i = 0; i < colCount; i++)
-        {
-            tlpMain.ColumnStyles.Add(new ColumnStyle
-            {
-                SizeType = SizeType.Absolute,
-                Width = colWidth
-            });
-        }
-
-        if (mAppConfig != null)
-        {
-            int row = 0;
-            int col = 0;
-
-            foreach (var composite in mAppConfig.CurrentProfile.Composites)
-            {
-                composite.MetarReceived = null;
-                composite.NewAtisUpdate = null;
-
-                if (composite.Connection.IsConnected)
+                var item = new MiniDisplayItem
                 {
-                    var item = new MiniDisplayItem
-                    {
-                        Icao = composite.Identifier,
-                        AtisLetter = composite.CurrentAtisLetter,
-                        Metar = composite?.DecodedMetar?.RawMetar ?? "",
-                        Composite = composite
-                    };
+                    Icao = composite.Identifier,
+                    AtisLetter = composite.CurrentAtisLetter,
+                    Metar = composite?.DecodedMetar?.RawMetar ?? "",
+                    Wind = composite?.DecodedMetar?.SurfaceWind.RawValue ?? "-M-",
+                    Altimeter = composite?.DecodedMetar?.AltimeterSetting.RawValue ?? "-M-",
+                    Composite = composite,
+                    Margin = new Padding(0, 0, 0, 5),
+                    Dock = DockStyle.Fill
+                };
 
-                    composite.MetarReceived += (x, y) => item.Metar = y.Value;
-                    composite.NewAtisUpdate += (x, y) =>
-                    {
-                        item.IsNewAtis = true;
-                        item.AtisLetter = y.Value;
-                    };
+                item.AtisUpdateAcknowledged += (sender, args) =>
+                {
+                    EventBus.Publish(this, new NewAtisAcknowledged(composite));
+                };
 
-                    item.AtisUpdateAcknowledged += (x, y) => EventBus.Publish(this, new NewAtisAcknowledged(composite));
+                composite.MetarReceived += (sender, args) => item.Metar = args.Value;
+                composite.DecodedMetarUpdated += (sender, args) =>
+                {
+                    item.Wind = composite.DecodedMetar?.SurfaceWind.RawValue ?? "-M";
+                    item.Altimeter = composite.DecodedMetar?.AltimeterSetting.RawValue ?? "-M";
+                };
+                composite.NewAtisUpdate += (sender, args) =>
+                {
+                    item.IsNewAtis = true;
+                    item.AtisLetter = args.Value;
+                };
 
-                    tlpMain.Controls.Add(item, col, row);
-
-                    if (col > colCount)
-                    {
-                        col = 0;
-                        row++;
-                    }
-
-                    col++;
-                }
+                tlpMain.RowCount++;
+                tlpMain.RowStyles.Add(new RowStyle
+                {
+                    SizeType = SizeType.AutoSize
+                });
+                tlpMain.Controls.Add(item, 0, tlpMain.RowCount - 1);
             }
         }
+
+        Height = (tlpMain.RowCount * 35) + 15;
     }
 
-    public void HandleEvent(UpdateMiniWindowRequested e)
+    public void HandleEvent(UpdateMiniWindowRequested evt)
     {
         RefreshDisplay();
     }

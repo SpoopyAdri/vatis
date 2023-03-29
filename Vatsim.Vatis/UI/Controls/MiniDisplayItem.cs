@@ -17,17 +17,25 @@ public partial class MiniDisplayItem : UserControl
     public Composite Composite { get; set; }
     public string Icao
     {
-        get => txtIcao.Text;
-        set => txtIcao.Text = value;
+        get => lblIdentifier.Text;
+        set => lblIdentifier.Text = value;
     }
     public string AtisLetter
     {
-        get => txtAtisLetter.Text;
-        set => txtAtisLetter.Text = value;
+        get => lblAtisLetter.Text;
+        set => lblAtisLetter.Text = value;
     }
     public string Metar
     {
-        set => mSyncContext.Post(o => { metarTooltip.SetToolTip(txtIcao, value); }, null);
+        set => mSyncContext.Post(o => { metarTooltip.SetToolTip(lblIdentifier, value); }, null);
+    }
+    public string Wind
+    {
+        set => lblWind.Text = value;
+    }
+    public string Altimeter
+    {
+        set => lblAltimeter.Text = value;
     }
     public bool IsNewAtis
     {
@@ -36,7 +44,7 @@ public partial class MiniDisplayItem : UserControl
         {
             mIsNewAtis = value;
             mBlinkTimer.Enabled = value;
-            txtAtisLetter.ForeColor = Color.Cyan;
+            lblAtisLetter.ForeColor = Color.Cyan;
         }
     }
 
@@ -50,7 +58,7 @@ public partial class MiniDisplayItem : UserControl
         mBlinkTimer.Interval = 500;
         mBlinkTimer.Elapsed += (e, v) =>
         {
-            txtAtisLetter.ForeColor = mAlternateColor ? Color.Cyan : Color.FromArgb(241, 196, 15);
+            lblAtisLetter.ForeColor = mAlternateColor ? Color.Cyan : Color.FromArgb(241, 196, 15);
             mAlternateColor = !mAlternateColor;
         };
     }

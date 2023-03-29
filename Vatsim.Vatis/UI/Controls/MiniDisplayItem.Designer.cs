@@ -30,57 +30,110 @@
         {
             this.components = new System.ComponentModel.Container();
             this.metarTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtIcao = new System.Windows.Forms.Label();
-            this.txtAtisLetter = new System.Windows.Forms.Label();
+            this.lblIdentifier = new System.Windows.Forms.Label();
+            this.lblAtisLetter = new System.Windows.Forms.Label();
+            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.lblAltimeter = new System.Windows.Forms.Label();
+            this.lblWind = new System.Windows.Forms.Label();
+            this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // metarTooltip
             // 
             this.metarTooltip.AutomaticDelay = 1000;
             // 
-            // txtIcao
+            // lblIdentifier
             // 
-            this.txtIcao.AutoSize = true;
-            this.txtIcao.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtIcao.ForeColor = System.Drawing.Color.White;
-            this.txtIcao.Location = new System.Drawing.Point(2, 5);
-            this.txtIcao.Name = "txtIcao";
-            this.txtIcao.Size = new System.Drawing.Size(50, 21);
-            this.txtIcao.TabIndex = 0;
-            this.txtIcao.Text = "KXXX";
+            this.lblIdentifier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.lblIdentifier.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblIdentifier.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblIdentifier.ForeColor = System.Drawing.Color.White;
+            this.lblIdentifier.Location = new System.Drawing.Point(3, 0);
+            this.lblIdentifier.Name = "lblIdentifier";
+            this.lblIdentifier.Size = new System.Drawing.Size(64, 35);
+            this.lblIdentifier.TabIndex = 0;
+            this.lblIdentifier.Text = "KXXX";
+            this.lblIdentifier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtAtisLetter
+            // lblAtisLetter
             // 
-            this.txtAtisLetter.AutoSize = true;
-            this.txtAtisLetter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtAtisLetter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtAtisLetter.ForeColor = System.Drawing.Color.Cyan;
-            this.txtAtisLetter.Location = new System.Drawing.Point(49, 5);
-            this.txtAtisLetter.Name = "txtAtisLetter";
-            this.txtAtisLetter.Size = new System.Drawing.Size(20, 21);
-            this.txtAtisLetter.TabIndex = 1;
-            this.txtAtisLetter.Text = "X";
-            this.txtAtisLetter.Click += new System.EventHandler(this.txtAtisLetter_Click);
+            this.lblAtisLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.lblAtisLetter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblAtisLetter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAtisLetter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAtisLetter.ForeColor = System.Drawing.Color.Cyan;
+            this.lblAtisLetter.Location = new System.Drawing.Point(73, 0);
+            this.lblAtisLetter.Name = "lblAtisLetter";
+            this.lblAtisLetter.Size = new System.Drawing.Size(24, 35);
+            this.lblAtisLetter.TabIndex = 1;
+            this.lblAtisLetter.Text = "X";
+            this.lblAtisLetter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAtisLetter.Click += new System.EventHandler(this.txtAtisLetter_Click);
+            // 
+            // tlpMain
+            // 
+            this.tlpMain.ColumnCount = 4;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpMain.Controls.Add(this.lblAltimeter, 3, 0);
+            this.tlpMain.Controls.Add(this.lblWind, 2, 0);
+            this.tlpMain.Controls.Add(this.lblAtisLetter, 1, 0);
+            this.tlpMain.Controls.Add(this.lblIdentifier, 0, 0);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Location = new System.Drawing.Point(0, 0);
+            this.tlpMain.Name = "tlpMain";
+            this.tlpMain.RowCount = 1;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.Size = new System.Drawing.Size(300, 35);
+            this.tlpMain.TabIndex = 2;
+            // 
+            // lblAltimeter
+            // 
+            this.lblAltimeter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.lblAltimeter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAltimeter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblAltimeter.ForeColor = System.Drawing.Color.White;
+            this.lblAltimeter.Location = new System.Drawing.Point(223, 0);
+            this.lblAltimeter.Name = "lblAltimeter";
+            this.lblAltimeter.Size = new System.Drawing.Size(74, 35);
+            this.lblAltimeter.TabIndex = 3;
+            this.lblAltimeter.Text = "A3020";
+            this.lblAltimeter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWind
+            // 
+            this.lblWind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.lblWind.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblWind.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWind.ForeColor = System.Drawing.Color.White;
+            this.lblWind.Location = new System.Drawing.Point(103, 0);
+            this.lblWind.Name = "lblWind";
+            this.lblWind.Size = new System.Drawing.Size(114, 35);
+            this.lblWind.TabIndex = 2;
+            this.lblWind.Text = "26010G25KT 260V280";
+            this.lblWind.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MiniDisplayItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.Controls.Add(this.txtAtisLetter);
-            this.Controls.Add(this.txtIcao);
-            this.MaximumSize = new System.Drawing.Size(70, 30);
-            this.MinimumSize = new System.Drawing.Size(70, 30);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.Controls.Add(this.tlpMain);
             this.Name = "MiniDisplayItem";
-            this.Size = new System.Drawing.Size(70, 30);
+            this.Size = new System.Drawing.Size(300, 35);
+            this.tlpMain.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ToolTip metarTooltip;
-        private System.Windows.Forms.Label txtIcao;
-        private System.Windows.Forms.Label txtAtisLetter;
+        private System.Windows.Forms.Label lblIdentifier;
+        private System.Windows.Forms.Label lblAtisLetter;
+        private System.Windows.Forms.TableLayoutPanel tlpMain;
+        private System.Windows.Forms.Label lblAltimeter;
+        private System.Windows.Forms.Label lblWind;
     }
 }

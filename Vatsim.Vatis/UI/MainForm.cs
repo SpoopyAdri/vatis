@@ -319,50 +319,9 @@ public partial class MainForm : Form
 
                     tabPage.Parent?.Invalidate();
 
-                    if (composite.AtisVoice.UseTextToSpeech)
-                    {
-                        try
-                        {
-                            // If there's a previous request, cancel it.
-                            if (cancellationToken != null)
-                                cancellationToken.Cancel();
-
-                            cancellationToken = new CancellationTokenSource();
-
-                            await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token)
-                                .ContinueWith(t =>
-                                {
-                                    if (!args.IsUpdated)
-                                    {
-                                        tabPage.Connection.SendSubscriberNotification();
-                                    }
-                                }, cancellationToken.Token);
-                        }
-                        catch (TaskCanceledException)
-                        {
-                        }
-                        catch (AggregateException ex)
-                        {
-                            tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
-                                ex.Flatten().InnerExceptions.Select(t => t.Message));
-                            connection.Disconnect();
-                        }
-                        catch (Exception ex)
-                        {
-                            tabPage.CompositeMeta.Error = "Error: " + ex.Message;
-                            connection.Disconnect();
-                        }
-                    }
-                    else
-                    {
-                        mAtisBuilder.GenerateAcarsText(composite);
-                        mSyncContext.Post(
-                            o => { tabPage.CompositeMeta.VoiceRecordEnabled = !composite.AtisVoice.UseTextToSpeech; },
-                            null);
-                    }
-
                     if (args.IsUpdated)
                     {
+                        // this will trigger a new ATIS build
                         tabPage.CompositeMeta.IncrementAtisLetter();
 
                         if (!mAppConfig.SuppressNotifications)
@@ -372,6 +331,50 @@ public partial class MainForm : Form
                         }
 
                         mSyncContext.Post(o => { FlashTaskbar.Flash(this); }, null);
+                    }
+                    else
+                    {
+                        if (composite.AtisVoice.UseTextToSpeech)
+                        {
+                            try
+                            {
+                                // If there's a previous request, cancel it.
+                                if (cancellationToken != null)
+                                    cancellationToken.Cancel();
+
+                                cancellationToken = new CancellationTokenSource();
+
+                                await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token)
+                                    .ContinueWith(t =>
+                                    {
+                                        if (!args.IsUpdated)
+                                        {
+                                            tabPage.Connection.SendSubscriberNotification();
+                                        }
+                                    }, cancellationToken.Token);
+                            }
+                            catch (TaskCanceledException)
+                            {
+                            }
+                            catch (AggregateException ex)
+                            {
+                                tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
+                                    ex.Flatten().InnerExceptions.Select(t => t.Message));
+                                connection.Disconnect();
+                            }
+                            catch (Exception ex)
+                            {
+                                tabPage.CompositeMeta.Error = "Error: " + ex.Message;
+                                connection.Disconnect();
+                            }
+                        }
+                        else
+                        {
+                            mAtisBuilder.GenerateAcarsText(composite);
+                            mSyncContext.Post(
+                                o => { tabPage.CompositeMeta.VoiceRecordEnabled = !composite.AtisVoice.UseTextToSpeech; },
+                                null);
+                        }
                     }
                 };
                 tabPage.CompositeMeta.PresetChanged += async (sender, args) =>
@@ -422,6 +425,7 @@ public partial class MainForm : Form
                     if (composite.DecodedMetar == null)
                         return;
 
+                    composite.DecodedMetarUpdated?.Invoke(this, EventArgs.Empty);
                     composite.NewAtisUpdate?.Invoke(this, new ClientEventArgs<string>(tabPage.CompositeMeta.AtisLetter)); // update mini display
 
                     if (composite.AtisVoice.UseTextToSpeech)
