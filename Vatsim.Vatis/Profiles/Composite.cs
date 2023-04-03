@@ -39,6 +39,7 @@ public class Composite : IComposite, ICloneable
     public bool UseDecimalTerminology { get; set; }
     public bool UseTemperaturePlusPrefix { get; set; }
     public bool UseZuluTimeSuffix { get; set; }
+    [Obsolete] public bool UseExternalAtisGenerator { internal get; set; }
 
     public object Clone()
     {
