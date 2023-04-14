@@ -415,14 +415,14 @@ public class Connection
 
         foreach (var subscriber in mSubscribers)
         {
-            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"***{AirportIcao} ATIS UPDATE: {Composite.CurrentAtisLetter} {Composite.DecodedMetar.SurfaceWind?.RawValue} - {Composite.DecodedMetar.AltimeterSetting?.RawValue}"));
+            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"***{AirportIcao} ATIS UPDATE: {Composite.AtisLetter} {Composite.DecodedMetar.SurfaceWind?.RawValue} - {Composite.DecodedMetar.AltimeterSetting?.RawValue}"));
         }
 
         foreach (var subscriber in mEuroscopeSubscribers)
         {
-            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"ATIS info:{AirportIcao}:{Composite.CurrentAtisLetter}:"));
+            mSession.SendPDU(new PDUTextMessage(Callsign, subscriber, $"ATIS info:{AirportIcao}:{Composite.AtisLetter}:"));
         }
 
-        mSession.SendPDU(new PDUClientQuery(Callsign, PDUBase.CLIENT_QUERY_BROADCAST_RECIPIENT, ClientQueryType.NewATIS, new List<string> { $"ATIS {Composite.CurrentAtisLetter}:  {Composite.DecodedMetar.SurfaceWind?.RawValue} {Composite.DecodedMetar.AltimeterSetting?.RawValue}" }));
+        mSession.SendPDU(new PDUClientQuery(Callsign, PDUBase.CLIENT_QUERY_BROADCAST_RECIPIENT, ClientQueryType.NewATIS, new List<string> { $"ATIS {Composite.AtisLetter}:  {Composite.DecodedMetar.SurfaceWind?.RawValue} {Composite.DecodedMetar.AltimeterSetting?.RawValue}" }));
     }
 }

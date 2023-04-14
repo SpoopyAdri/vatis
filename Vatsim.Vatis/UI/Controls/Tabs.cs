@@ -111,7 +111,7 @@ internal class Tabs : TabControl
         if (tabPage.Connection.IsConnected)
         {
             using SolidBrush brush = new SolidBrush(tabPage.ForeColor);
-            g.DrawString(tabPage.CompositeMeta.AtisLetter, Font, brush, layoutRect, stringFormat);
+            g.DrawString(tabPage.Composite.AtisLetter, Font, brush, layoutRect, stringFormat);
         }
     }
 

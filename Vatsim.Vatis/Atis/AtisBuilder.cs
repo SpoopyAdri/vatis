@@ -92,7 +92,7 @@ public class AtisBuilder : IAtisBuilder
         if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
         {
             var voiceTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
-            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.CurrentAtisLetter);
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.AtisLetter);
             voiceTemplate = Regex.Replace(voiceTemplate, @"{letter\|word}", atisLetter);
             template += voiceTemplate;
         }
@@ -165,7 +165,7 @@ public class AtisBuilder : IAtisBuilder
         if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
         {
             var voiceTemplate = composite.AtisFormat.ClosingStatement.Template.Voice;
-            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.CurrentAtisLetter);
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.AtisLetter);
             voiceTemplate = Regex.Replace(voiceTemplate, @"{letter\|word}", atisLetter);
             template += voiceTemplate;
         }
@@ -211,7 +211,7 @@ public class AtisBuilder : IAtisBuilder
         {
             Facility = composite.Identifier,
             Preset = composite.CurrentPreset.Name,
-            AtisLetter = composite.CurrentAtisLetter,
+            AtisLetter = composite.AtisLetter,
             AirportConditions = composite.CurrentPreset.AirportConditions.StripNewLineChars(),
             Notams = composite.CurrentPreset.Notams.StripNewLineChars(),
             Timestamp = DateTime.UtcNow,
@@ -268,7 +268,7 @@ public class AtisBuilder : IAtisBuilder
             url = url.Replace("$deprwy", data.Departure);
             url = url.Replace("$app", data.Approaches);
             url = url.Replace("$remarks", data.Remarks);
-            url = url.Replace("$atiscode", composite.CurrentAtisLetter);
+            url = url.Replace("$atiscode", composite.AtisLetter);
 
             var aptcond = variables.FirstOrDefault(x => x.Find == "ARPT_COND");
             if (aptcond != null)
@@ -319,7 +319,7 @@ public class AtisBuilder : IAtisBuilder
         var pressure = NodeParser.Parse<AltimeterSettingNode, AltimeterSetting>(metar, composite);
         var trends = NodeParser.Parse<TrendNode, Trend>(metar, composite);
 
-        atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
+        atisLetter = char.Parse(composite.AtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
         var completeWxStringAcars = $"{surfaceWind.TextAtis} {visibility.TextAtis} {rvr.TextAtis} {presentWeather.TextAtis} {clouds.TextAtis} {temp.TextAtis}{(!string.IsNullOrEmpty(temp.TextAtis) || !string.IsNullOrEmpty(dew.TextAtis) ? "/" : "")}{dew.TextAtis} {pressure.TextAtis}";
 
@@ -401,7 +401,7 @@ public class AtisBuilder : IAtisBuilder
         variables = new List<AtisVariable>
         {
             new AtisVariable("FACILITY", composite.AirportData.ID, composite.AirportData.Name),
-            new AtisVariable("ATIS_LETTER", composite.CurrentAtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
+            new AtisVariable("ATIS_LETTER", composite.AtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
             new AtisVariable("TIME", time.TextAtis, time.VoiceAtis, new []{"OBS_TIME","OBSTIME"}),
             new AtisVariable("WIND", surfaceWind.TextAtis, surfaceWind.VoiceAtis, new[]{"SURFACE_WIND"}),
             new AtisVariable("RVR", rvr.TextAtis, rvr.VoiceAtis),
@@ -423,7 +423,7 @@ public class AtisBuilder : IAtisBuilder
 
         if (!string.IsNullOrEmpty(closingTextTemplate) && !string.IsNullOrEmpty(closingVoiceTemplate))
         {
-            closingTextTemplate = Regex.Replace(closingTextTemplate, @"{letter}", composite.CurrentAtisLetter);
+            closingTextTemplate = Regex.Replace(closingTextTemplate, @"{letter}", composite.AtisLetter);
             closingTextTemplate = Regex.Replace(closingTextTemplate, @"{letter\|word}", atisLetter);
 
             closingVoiceTemplate = Regex.Replace(closingVoiceTemplate, @"{letter}", atisLetter);

@@ -44,7 +44,7 @@ public class Composite : IComposite, ICloneable
 
     [JsonIgnore] public Metar DecodedMetar { get; set; }
     [JsonIgnore] public Preset CurrentPreset { get; set; }
-    [JsonIgnore] public string CurrentAtisLetter { get; set; }
+    [JsonIgnore] public string AtisLetter { get; set; }
     [JsonIgnore] public string TextAtis { get; set; }
     [JsonIgnore] public uint AfvFrequency => ((uint)AtisFrequency + 100000) * 1000;
     [JsonIgnore] public string AtisCallsign { get; set; }

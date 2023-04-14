@@ -136,7 +136,7 @@ public partial class MiniDisplayForm : Form
                 var item = new MiniDisplayItem
                 {
                     Icao = composite.Identifier,
-                    AtisLetter = composite.CurrentAtisLetter,
+                    AtisLetter = composite.AtisLetter,
                     Metar = composite?.DecodedMetar?.RawMetar ?? "",
                     Wind = composite?.DecodedMetar?.SurfaceWind.RawValue ?? "-M-",
                     Altimeter = composite?.DecodedMetar?.AltimeterSetting.RawValue ?? "-M-",

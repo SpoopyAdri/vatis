@@ -21,7 +21,7 @@ public interface IComposite
     string IDSEndpoint { get; set; }
     List<Preset> Presets { get; set; }
     Preset CurrentPreset { get; set; }
-    string CurrentAtisLetter { get; set; }
+    string AtisLetter { get; set; }
     MemoryStream RecordedMemoryStream { get; set; }
     CodeRangeMeta CodeRange { get; set; }
     AtisFormat.AtisFormat AtisFormat { get; set; }

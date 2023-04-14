@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -16,8 +17,6 @@ internal partial class CompositePanel : UserControl
     private bool mAlternateColor;
     private bool mIsNewAtis;
     private System.Timers.Timer mBlinkTimer;
-
-    private string mCurrentAtisLetter = "A";
     private Preset mSelectedPreset;
     private Preset mPreviousPreset;
     private int mSelectedIndex = -1;
@@ -44,16 +43,6 @@ internal partial class CompositePanel : UserControl
     {
         get => btnRecord.Clicked;
         set => mSyncContext.Post(o => btnRecord.Clicked = value, null);
-    }
-
-    public string AtisLetter
-    {
-        get => mCurrentAtisLetter;
-        set
-        {
-            mCurrentAtisLetter = value;
-            mSyncContext.Post(o => atisLetter.Text = mCurrentAtisLetter, null);
-        }
     }
 
     public bool IsNewAtis
@@ -134,6 +123,11 @@ internal partial class CompositePanel : UserControl
         }, null);
     }
 
+    public void SyncAtisLetter()
+    {
+        mSyncContext.Post(o => atisLetter.Text = mComposite.AtisLetter, null);
+    }
+
     public void BindPresets(List<string> presets)
     {
         foreach (var preset in presets)
@@ -185,8 +179,7 @@ internal partial class CompositePanel : UserControl
             mAlternateColor = !mAlternateColor;
         };
 
-        AtisLetter = mComposite.CodeRange.Low.ToString();
-        mComposite.CurrentAtisLetter = AtisLetter;
+        atisLetter.Text = mComposite.AtisLetter;
     }
 
     private void OnNetworkDisconnectChanged(object sender, EventArgs e)
@@ -206,43 +199,40 @@ internal partial class CompositePanel : UserControl
 
     private void atisLetter_MouseUp(object sender, MouseEventArgs e)
     {
-        if (IsNewAtis)
+        if (IsNewAtis && Parent != null)
         {
-            if (Parent != null)
-            {
-                (Parent as AtisTabPage).IsNewAtis = false;
-                return;
-            }
+            (Parent as AtisTabPage).IsNewAtis = false;
+            return;
         }
 
-        char letter = Convert.ToChar(AtisLetter);
+        char letter = Convert.ToChar(atisLetter.Text);
         switch (e.Button)
         {
             case MouseButtons.Right:
                 if (letter == mComposite.CodeRange.Low)
                 {
-                    AtisLetter = mComposite.CodeRange.High.ToString();
+                    atisLetter.Text = mComposite.CodeRange.High.ToString();
                 }
                 else
                 {
                     letter--;
-                    AtisLetter = letter.ToString();
+                    atisLetter.Text = letter.ToString();
                 }
                 break;
             case MouseButtons.Left:
                 if (letter == mComposite.CodeRange.High)
                 {
-                    AtisLetter = mComposite.CodeRange.Low.ToString();
+                    atisLetter.Text = mComposite.CodeRange.Low.ToString();
                 }
                 else
                 {
                     letter++;
-                    AtisLetter = letter.ToString();
+                    atisLetter.Text = letter.ToString();
                 }
                 break;
         }
 
-        mComposite.CurrentAtisLetter = AtisLetter;
+        mComposite.AtisLetter = letter.ToString();
         AtisLetterChanged?.Invoke(this, EventArgs.Empty);
     }
 

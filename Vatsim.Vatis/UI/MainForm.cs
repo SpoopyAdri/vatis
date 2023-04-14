@@ -240,7 +240,10 @@ public partial class MainForm : Form
                 tab.Connection.Frequency = composite.AtisFrequency;
                 tab.CompositeMeta.BindPresets(composite.Presets.Select(x => x.Name).ToList());
                 if (!composite.Connection.IsConnected)
-                    tab.CompositeMeta.AtisLetter = composite.CodeRange.Low.ToString();
+                {
+                    composite.AtisLetter = composite.CodeRange.Low.ToString();
+                    tab.CompositeMeta.SyncAtisLetter();
+                }
                 atisTabs.Invalidate();
             }
             else
@@ -252,6 +255,7 @@ public partial class MainForm : Form
 
                 composite.Connection = connection;
                 composite.AtisCallsign = connection.Callsign;
+                composite.AtisLetter = composite.CodeRange.Low.ToString();
 
                 var cancellationToken = new CancellationTokenSource();
 
@@ -411,7 +415,7 @@ public partial class MainForm : Form
                         return;
 
                     composite.DecodedMetarUpdated?.Invoke(this, EventArgs.Empty);
-                    composite.NewAtisUpdate?.Invoke(this, new ClientEventArgs<string>(tabPage.CompositeMeta.AtisLetter)); // update mini display
+                    composite.NewAtisUpdate?.Invoke(this, new ClientEventArgs<string>(tabPage.Composite.AtisLetter)); // update mini display
 
                     if (composite.AtisVoice.UseTextToSpeech)
                     {
