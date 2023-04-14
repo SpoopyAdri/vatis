@@ -38,13 +38,13 @@ namespace Vatsim.Vatis.UI.Startup
             EventBus.Register(this);
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(pevent);
+            base.OnPaint(e);
             Rectangle rect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, 
                 ClientRectangle.Width - 1, ClientRectangle.Height - 1);
             using Pen pen = new Pen(Color.FromArgb(0, 0, 0));
-            pevent.Graphics.DrawRectangle(pen, rect);
+            e.Graphics.DrawRectangle(pen, rect);
         }
 
         protected override async void OnShown(EventArgs e)

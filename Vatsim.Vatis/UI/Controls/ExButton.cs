@@ -60,24 +60,24 @@ public class ExButton : Button
 		base.OnClick(e);
 	}
 
-	protected override void OnMouseDown(MouseEventArgs e)
+	protected override void OnMouseDown(MouseEventArgs mevent)
 	{
-		if (e.Button == MouseButtons.Left)
+		if (mevent.Button == MouseButtons.Left)
 		{
 			mPushed = true;
 			Focus();
 		}
-		base.OnMouseDown(e);
+		base.OnMouseDown(mevent);
 		Invalidate();
 	}
 
-	protected override void OnMouseUp(MouseEventArgs e)
+	protected override void OnMouseUp(MouseEventArgs mevent)
 	{
-		if (e.Button == MouseButtons.Left)
+		if (mevent.Button == MouseButtons.Left)
 		{
 			mPushed = false;
 		}
-		base.OnMouseUp(e);
+		base.OnMouseUp(mevent);
 		Invalidate();
 	}
 
@@ -93,24 +93,24 @@ public class ExButton : Button
 		Invalidate();
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
+	protected override void OnPaint(PaintEventArgs pevent)
 	{
 		// Fill the background.
 		using (Brush backgroundBrush = new SolidBrush(mPushed ? PushedColor : mClicked ? ClickedColor : BackColor))
 		{
-			e.Graphics.FillRectangle(backgroundBrush, 0, 0, ClientSize.Width, ClientSize.Height);
+			pevent.Graphics.FillRectangle(backgroundBrush, 0, 0, ClientSize.Width, ClientSize.Height);
 		}
 
 		if (Image != null)
 		{
 			var x = (ClientSize.Width - Image.Width) / 2;
 			var y = (ClientSize.Height - Image.Height) / 2;
-			e.Graphics.DrawImage(Image, x, y);
+			pevent.Graphics.DrawImage(Image, x, y);
 		}
 
 		// Draw the border.
 		Rectangle borderRect = new Rectangle(0, 0, ClientSize.Width - 1, ClientSize.Height - 1);
-		using (Pen borderPen = new Pen(BorderColor)) e.Graphics.DrawRectangle(borderPen, borderRect);
+		using (Pen borderPen = new Pen(BorderColor)) pevent.Graphics.DrawRectangle(borderPen, borderRect);
 
 		// Draw the text, if any.
 		if (Text != "")
@@ -120,7 +120,7 @@ public class ExButton : Button
 				StringFormat fmt = new StringFormat();
 				fmt.Alignment = StringAlignment.Center;
 				fmt.LineAlignment = StringAlignment.Center;
-				e.Graphics.DrawString(Text, Font, textBrush, ClientRectangle, fmt);
+				pevent.Graphics.DrawString(Text, Font, textBrush, ClientRectangle, fmt);
 				fmt.Dispose();
 			}
 		}

@@ -77,14 +77,14 @@ public partial class MainForm : Form
         }
     }
 
-    protected override void OnPaint(PaintEventArgs pevent)
+    protected override void OnPaint(PaintEventArgs e)
     {
-        base.OnPaint(pevent);
+        base.OnPaint(e);
         Rectangle rect = new Rectangle(base.ClientRectangle.Left, base.ClientRectangle.Top,
             base.ClientRectangle.Width - 1, base.ClientRectangle.Height - 1);
         using (Pen pen = new Pen(Color.FromArgb(0, 0, 0)))
         {
-            pevent.Graphics.DrawRectangle(pen, rect);
+            e.Graphics.DrawRectangle(pen, rect);
         }
     }
 
