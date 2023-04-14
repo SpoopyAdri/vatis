@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Ninject;
 using Serilog;
 using Vatsim.Vatis.Config;
@@ -62,10 +63,20 @@ internal static class Program
 
         PathProvider.SetInstallPath(installPath);
 
+        DefaultContractResolver contractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new CamelCaseNamingStrategy
+            {
+                ProcessDictionaryKeys = false
+            }
+        };
+
         JsonConvert.DefaultSettings = () => new JsonSerializerSettings
         {
-            Formatting = Formatting.Indented,
+            Formatting = Formatting.None,
             TypeNameHandling = TypeNameHandling.Auto,
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = contractResolver,
             Converters = new List<JsonConverter>
             {
                 new StringEnumConverter()

@@ -5,7 +5,7 @@ namespace Vatsim.Vatis.Atis;
 
 public static class NodeParser
 {
-    public static ParsedResult Parse<T>(Metar metar, Composite composite) where T : AtisNode, new()
+    public static ParsedResult Parse<T, U>(Metar metar, Composite composite) where T : BaseNode<U>, new()
     {
         T obj = new T();
         obj.Composite = composite;
@@ -14,8 +14,7 @@ public static class NodeParser
         return new ParsedResult
         {
             TextAtis = obj.TextAtis,
-            VoiceAtis = $"{obj.VoiceAtis}.",
-            Node = obj.Node
+            VoiceAtis = $"{obj.VoiceAtis}."
         };
     }
 }

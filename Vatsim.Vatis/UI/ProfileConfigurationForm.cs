@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
@@ -12,6 +13,7 @@ using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Profiles;
+using Vatsim.Vatis.Profiles.AtisFormat;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
@@ -29,27 +31,8 @@ public partial class ProfileConfigurationForm : Form
     private Composite mCurrentComposite = null;
     private Preset mCurrentPreset = null;
 
-    private bool mFrequencyChanged = false;
-    private bool mAtisTypeChanged = false;
-    private bool mCodeRangeLowChanged = false;
-    private bool mCodeRangeHighChanged = false;
-    private bool mFaaFormatChanged = false;
-    private bool mAutoIncludeClosingStatementChanged = false;
-    private bool mObservationTimeChanged = false;
-    private bool mMagneticVariationChanged = false;
-    private bool mVoiceOptionsChanged = false;
-    private bool mIdsEndpointChanged = false;
-    private bool mContractionsChanged = false;
-    private bool mTransitionLevelsChanged = false;
-    private bool mExternalAtisGeneratorChanged = false;
-    private bool mPrefixNotamsChanged = false;
-    private bool mTransitionLevelPrefixChanged = false;
-    private bool mConvertMetricChanged = false;
-    private bool mSurfaceWindPrefixChanged = false;
-    private bool mVisibilitySuffixChanged = false;
-    private bool mUseDecimalTerminologyChanged = false;
-    private bool mUseTemperaturePlusPrefixChanged = false;
-    private bool mUseZuluTimeSuffixChanged = false;
+    private List<Tuple<BaseFormat, string>> mPendingVoiceTemplateChanges = new();
+    private List<Tuple<BaseFormat, string>> mPendingTextTemplateChanges = new();
 
     public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
         INavaidDatabase navaidDatabase)
@@ -61,7 +44,6 @@ public partial class ProfileConfigurationForm : Form
         mNavaidDatabase = navaidDatabase;
 
         RefreshCompositeList();
-
         LoadVoiceList();
     }
 
@@ -184,13 +166,13 @@ public partial class ProfileConfigurationForm : Form
             btnApply.Enabled = false;
             if (mAppConfig.CurrentProfile != null)
             {
-                var composite = TreeMenu.SelectedNode.Tag as Composite;
-
-                if (composite == null)
+                if (TreeMenu.SelectedNode.Tag is not Composite composite)
                     return;
 
                 mCurrentComposite = mAppConfig.CurrentProfile.Composites
                     .FirstOrDefault(x => x.Id == composite.Id);
+
+                pageTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
 
                 LoadComposite();
                 RefreshPresetList();
@@ -200,6 +182,9 @@ public partial class ProfileConfigurationForm : Form
 
     private void LoadComposite()
     {
+        chkNotamPrefix.Checked = mCurrentComposite.UseNotamPrefix;
+        chkNotamPrefix.Text = mCurrentComposite.IsFaaAtis ? "Prefix spoken NOTAMs with \"Notices to Air Missions\"" : "Prefix spoken NOTAMs with \"Notices to Air Men\"";
+
         vhfFrequency.Text = ((mCurrentComposite.AtisFrequency + 100000) / 1000.0).ToString("000.000");
 
         switch (mCurrentComposite.AtisType)
@@ -224,24 +209,6 @@ public partial class ProfileConfigurationForm : Form
         txtCodeRangeLow.Text = mCurrentComposite.CodeRange.Low.ToString();
         txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
-        chkFaaFormat.Checked = mCurrentComposite.UseFaaFormat;
-        chkAutoIncludeClosingStatement.Checked = mCurrentComposite.AutoIncludeClosingStatement;
-        chkPrefixNotams.Checked = mCurrentComposite.UseNotamPrefix;
-        chkTransitionLevelPrefix.Checked = mCurrentComposite.UseTransitionLevelPrefix;
-        chkConvertMetric.Checked = mCurrentComposite.UseMetricUnits;
-        chkVisibilitySuffix.Checked = mCurrentComposite.UseVisibilitySuffix;
-        chkSurfaceWindPrefix.Checked = mCurrentComposite.UseSurfaceWindPrefix;
-        chkDecimalTerminology.Checked = mCurrentComposite.UseDecimalTerminology;
-        chkPrefixTemperature.Checked = mCurrentComposite.UseTemperaturePlusPrefix;
-        chkAppendZulu.Checked = mCurrentComposite.UseZuluTimeSuffix;
-
-        if (mCurrentComposite.ObservationTime != null)
-        {
-            chkObservationTime.Checked = mCurrentComposite.ObservationTime.Enabled;
-            observationTime.Value = mCurrentComposite.ObservationTime.Time;
-            observationTime.Enabled = chkObservationTime.Checked;
-        }
-
         if (mCurrentComposite.MagneticVariation != null)
         {
             chkMagneticVar.Checked = mCurrentComposite.MagneticVariation.Enabled;
@@ -253,15 +220,15 @@ public partial class ProfileConfigurationForm : Form
 
         if (mCurrentComposite.AtisVoice != null)
         {
-            radioTextToSpeech.Checked = mCurrentComposite.AtisVoice.UseTextToSpeech == true;
-            radioVoiceRecorded.Checked = mCurrentComposite.AtisVoice.UseTextToSpeech == false;
+            radioTextToSpeech.Checked = mCurrentComposite.AtisVoice.UseTextToSpeech;
+            radioVoiceRecorded.Checked = !mCurrentComposite.AtisVoice.UseTextToSpeech;
 
             if (radioTextToSpeech.Checked)
             {
                 ddlVoices.Enabled = true;
 
                 var voices = ddlVoices.DataSource as List<VoiceMetaData>;
-                if(!voices.Any(n => n.Name == mCurrentComposite.AtisVoice.Voice))
+                if (!voices.Any(n => n.Name == mCurrentComposite.AtisVoice.Voice))
                 {
                     ddlVoices.SelectedText = "Default";
                 }
@@ -296,40 +263,126 @@ public partial class ProfileConfigurationForm : Form
             mAppConfig.SaveConfig();
         }
 
+        chkUseDecimalTerminology.Checked = mCurrentComposite.UseDecimalTerminology;
         txtIdsEndpoint.Text = mCurrentComposite.IDSEndpoint;
 
         gridContractions.Rows.Clear();
         foreach (var contraction in mCurrentComposite.Contractions)
         {
-            gridContractions.Rows.Add(new object[]
-            {
-                contraction.String,
-                contraction.Spoken
-            });
+            gridContractions.Rows.Add(contraction.String, contraction.Spoken);
         }
 
         gridTransitionLevels.Rows.Clear();
         foreach (var tl in mCurrentComposite.TransitionLevels.OrderByDescending(t => t.Low)
                      .ThenByDescending(t => t.High))
         {
-            gridTransitionLevels.Rows.Add(new object[]
+            gridTransitionLevels.Rows.Add(tl.Low, tl.High, tl.Altitude);
+        }
+
+        templateObservationTime.TextTemplate = mCurrentComposite.AtisFormat.ObservationTime.Template.Text;
+        templateObservationTime.VoiceTemplate = mCurrentComposite.AtisFormat.ObservationTime.Template.Voice;
+        standardObservationTime.Value = mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime;
+
+        chkWindSpeakLeadingZero.Checked = mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero;
+
+        templateWindStandard.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Standard.Template.Text;
+        templateWindStandard.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Standard.Template.Voice;
+
+        templateWindStanardGust.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.StandardGust.Template.Text;
+        templateWindStanardGust.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.StandardGust.Template.Voice;
+
+        templateWindVariable.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Variable.Template.Text;
+        templateWindVariable.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Variable.Template.Voice;
+
+        templateWindVariableGust.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.VariableGust.Template.Text;
+        templateWindVariableGust.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.VariableGust.Template.Voice;
+
+        templateWindVariableDirection.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.VariableDirection.Template.Text;
+        templateWindVariableDirection.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.VariableDirection.Template.Voice;
+
+        templateWindCalm.TextTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Calm.Template.Text;
+        templateWindCalm.VoiceTemplate = mCurrentComposite.AtisFormat.SurfaceWind.Calm.Template.Voice;
+        calmWindSpeed.Value = mCurrentComposite.AtisFormat.SurfaceWind.Calm.CalmWindSpeed;
+
+        templatePresentWeather.TextTemplate = mCurrentComposite.AtisFormat.PresentWeather.Template.Text;
+        templatePresentWeather.VoiceTemplate = mCurrentComposite.AtisFormat.PresentWeather.Template.Voice;
+        wxIntensityLight.Text = mCurrentComposite.AtisFormat.PresentWeather.LightIntensity;
+        wxIntensityModerate.Text = mCurrentComposite.AtisFormat.PresentWeather.ModerateIntensity;
+        wxIntensityHeavy.Text = mCurrentComposite.AtisFormat.PresentWeather.HeavyIntensity;
+        wxProximityVicinity.Text = mCurrentComposite.AtisFormat.PresentWeather.Vicinity;
+
+        templateVisibility.TextTemplate = mCurrentComposite.AtisFormat.Visibility.Template.Text;
+        templateVisibility.VoiceTemplate = mCurrentComposite.AtisFormat.Visibility.Template.Voice;
+
+        templateCloudLayers.TextTemplate = mCurrentComposite.AtisFormat.Clouds.Template.Text;
+        templateCloudLayers.VoiceTemplate = mCurrentComposite.AtisFormat.Clouds.Template.Voice;
+
+        templateTemperature.TextTemplate = mCurrentComposite.AtisFormat.Temperature.Template.Text;
+        templateTemperature.VoiceTemplate = mCurrentComposite.AtisFormat.Temperature.Template.Voice;
+        chkTempPlusPrefix.Checked = mCurrentComposite.AtisFormat.Temperature.UsePlusPrefix;
+        chkTempLeadingZero.Checked = mCurrentComposite.AtisFormat.Temperature.PronounceLeadingZero;
+
+        templateDewpoint.TextTemplate = mCurrentComposite.AtisFormat.Dewpoint.Template.Text;
+        templateDewpoint.VoiceTemplate = mCurrentComposite.AtisFormat.Dewpoint.Template.Voice;
+        chkDewPlusPrefix.Checked = mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix;
+        chkDewLeadingZero.Checked = mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero;
+
+        templateAltimeter.TextTemplate = mCurrentComposite.AtisFormat.Altimeter.Template.Text;
+        templateAltimeter.VoiceTemplate = mCurrentComposite.AtisFormat.Altimeter.Template.Voice;
+        chkVisibilitySuffix.Checked = mCurrentComposite.AtisFormat.Visibility.IncludeVisibilitySuffix;
+        visibilityMetersCutoff.Value = mCurrentComposite.AtisFormat.Visibility.MetersCutoff;
+        visDirNorth.Text = mCurrentComposite.AtisFormat.Visibility.North;
+        visDirNorthEast.Text = mCurrentComposite.AtisFormat.Visibility.NorthEast;
+        visDirEast.Text = mCurrentComposite.AtisFormat.Visibility.East;
+        visDirSouthEast.Text = mCurrentComposite.AtisFormat.Visibility.SouthEast;
+        visDirSouth.Text = mCurrentComposite.AtisFormat.Visibility.South;
+        visDirSouthWest.Text = mCurrentComposite.AtisFormat.Visibility.SouthWest;
+        visDirWest.Text = mCurrentComposite.AtisFormat.Visibility.West;
+        visDirNorthWest.Text = mCurrentComposite.AtisFormat.Visibility.NorthWest;
+        visUnlimited.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibility;
+
+        gridWeatherTypes.Rows.Clear();
+        if (mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes != null)
+        {
+            foreach (var type in mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes)
             {
-                tl.Low,
-                tl.High,
-                tl.Altitude
-            });
+                gridWeatherTypes.Rows.Add(type.Key, type.Value);
+            }
         }
 
-        if (mCurrentComposite.Identifier.StartsWith("K") || mCurrentComposite.Identifier.StartsWith("P"))
+        gridWeatherDescriptors.Rows.Clear();
+        if (mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors != null)
         {
-            pageTransitionLevel.SetVisible(false);
-        }
-        else
-        {
-            pageTransitionLevel.SetVisible(true);
+            foreach (var type in mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors)
+            {
+                gridWeatherDescriptors.Rows.Add(type.Key, type.Value);
+            }
         }
 
-        ToggleNonFaaOptions();
+        chkIdentifyCeilingLayer.Checked = mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer;
+        chkConvertCloudsMetric.Checked = mCurrentComposite.AtisFormat.Clouds.ConvertToMetric;
+
+        gridCloudTypes.Rows.Clear();
+        if (mCurrentComposite.AtisFormat.Clouds.Types != null)
+        {
+            foreach (var type in mCurrentComposite.AtisFormat.Clouds.Types)
+            {
+                gridCloudTypes.Rows.Add(type.Key, type.Value);
+            }
+        }
+
+        gridConvectiveCloudTypes.Rows.Clear();
+        if (mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes != null)
+        {
+            foreach (var type in mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes)
+            {
+                gridConvectiveCloudTypes.Rows.Add(type.Key, type.Value);
+            }
+        }
+
+        chkAutoIncludeClosingStatement.Checked = mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement;
+        templateClosingStatement.TextTemplate = mCurrentComposite.AtisFormat.ClosingStatement.Template.Text;
+        templateClosingStatement.VoiceTemplate = mCurrentComposite.AtisFormat.ClosingStatement.Template.Voice;
     }
 
     private void TreeMenu_DrawNode(object sender, DrawTreeNodeEventArgs e)
@@ -415,8 +468,7 @@ public partial class ProfileConfigurationForm : Form
                 {
                     Identifier = dlg.Identifier,
                     Name = dlg.CompositeName,
-                    AtisType = dlg.Type,
-                    UseFaaFormat = dlg.Identifier.StartsWith("K") || dlg.Identifier.StartsWith("P"),
+                    AtisType = dlg.Type
                 };
 
                 mAppConfig.CurrentProfile.Composites.Add(composite);
@@ -578,13 +630,10 @@ public partial class ProfileConfigurationForm : Form
         ctxExport.Enabled = false;
 
         vhfFrequency.Text = "118.000";
-        observationTime.Value = 0;
+        standardObservationTime.Value = 0;
         magneticVar.Value = 0;
         chkMagneticVar.Checked = false;
-        chkObservationTime.Checked = false;
         txtIdsEndpoint.Text = "";
-
-        pageTransitionLevel.SetVisible(false);
 
         TreeMenu.Nodes.Clear();
         if (mAppConfig.CurrentProfile != null)
@@ -637,157 +686,132 @@ public partial class ProfileConfigurationForm : Form
             MessageBox.Show("IDS endpoint URL is not a valid hyperlink format.");
             return false;
         }
-
-        if (mFrequencyChanged)
-        {
-            if (decimal.TryParse(vhfFrequency.Text, out var frequency))
-            {
-                frequency = frequency.ToVatsimFrequencyFormat();
-                if (frequency < 18000 || frequency > 37000)
-                {
-                    MessageBox.Show(this,
-                        "Invalid frequency range. The accepted frequency range is 118.000-137.000 MHz", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return false;
-                }
-                else
-                {
-                    mCurrentComposite.AtisFrequency = (int)frequency;
-                    mFrequencyChanged = false;
-                }
-            }
-        }
-
-        if (mAtisTypeChanged)
-        {
-            if (typeCombined.Checked)
-            {
-                if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                        x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Combined &&
-                        x != mCurrentComposite))
-                {
-                    MessageBox.Show(this, $"A Combined ATIS already exists for {mCurrentComposite.Identifier}", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return false;
-                }
-                else
-                {
-                    mCurrentComposite.AtisType = AtisType.Combined;
-                    mAtisTypeChanged = false;
-                }
-            }
-            else if (typeDeparture.Checked)
-            {
-                if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                        x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Departure &&
-                        x != mCurrentComposite))
-                {
-                    MessageBox.Show(this, $"A Departure ATIS already exists for {mCurrentComposite.Identifier}",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return false;
-                }
-                else
-                {
-                    mCurrentComposite.AtisType = AtisType.Departure;
-                    mAtisTypeChanged = false;
-                }
-            }
-            else if (typeArrival.Checked)
-            {
-                if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                        x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Arrival &&
-                        x != mCurrentComposite))
-                {
-                    MessageBox.Show(this, $"An Arrival ATIS already exists for {mCurrentComposite.Identifier}", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return false;
-                }
-                else
-                {
-                    mCurrentComposite.AtisType = AtisType.Arrival;
-                    mAtisTypeChanged = false;
-                }
-            }
-        }
-
-        if (mCodeRangeLowChanged || mCodeRangeHighChanged)
-        {
-            char low = char.Parse(txtCodeRangeLow.Text);
-            char high = char.Parse(txtCodeRangeHigh.Text);
-            if (char.ToLower(high) < char.ToLower(low))
-            {
-                MessageBox.Show("ATIS code range must be in alphabetical order.");
-                return false;
-            }
-        }
-
-        if (mCodeRangeLowChanged)
-        {
-            mCurrentComposite.CodeRange.Low = char.Parse(txtCodeRangeLow.Text);
-            mCodeRangeLowChanged = false;
-        }
-
-        if (mCodeRangeHighChanged)
-        {
-            mCurrentComposite.CodeRange.High = char.Parse(txtCodeRangeHigh.Text);
-            mCodeRangeHighChanged = false;
-        }
-
-        if (mFaaFormatChanged)
-        {
-            mCurrentComposite.UseFaaFormat = chkFaaFormat.Checked;
-            mFaaFormatChanged = false;
-        }
-
-        if (mAutoIncludeClosingStatementChanged)
-        {
-            mCurrentComposite.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
-            mAutoIncludeClosingStatementChanged = false;
-        }
-
-        if (mExternalAtisGeneratorChanged)
-        {
-            mCurrentPreset.ExternalGenerator.Enabled = chkExternalAtisGenerator.Checked;
-            mExternalAtisGeneratorChanged = false;
-        }
-
-        if (mObservationTimeChanged)
-        {
-            var meta = new ObservationTimeMeta
-            {
-                Enabled = chkObservationTime.Checked,
-                Time = (uint)observationTime.Value
-            };
-            mCurrentComposite.ObservationTime = meta;
-            mObservationTimeChanged = false;
-        }
-
-        if (mMagneticVariationChanged)
-        {
-            var meta = new MagneticVariationMeta
-            {
-                Enabled = chkMagneticVar.Checked,
-                MagneticDegrees = (int)magneticVar.Value
-            };
-            mCurrentComposite.MagneticVariation = meta;
-            mMagneticVariationChanged = false;
-        }
-
-        if (mIdsEndpointChanged)
+        else
         {
             mCurrentComposite.IDSEndpoint = txtIdsEndpoint.Text;
-            mIdsEndpointChanged = false;
         }
 
-        if (mVoiceOptionsChanged)
+        mCurrentComposite.UseNotamPrefix = chkNotamPrefix.Checked;
+        mCurrentComposite.UseDecimalTerminology = chkUseDecimalTerminology.Checked;
+
+        if (decimal.TryParse(vhfFrequency.Text, out var frequency))
         {
-            var selectedVoice = ddlVoices.SelectedItem as VoiceMetaData;
-            mCurrentComposite.AtisVoice.UseTextToSpeech = radioTextToSpeech.Checked;
-            mCurrentComposite.AtisVoice.Voice = selectedVoice == null ? "Default" : selectedVoice.Name;
-            mVoiceOptionsChanged = false;
+            frequency = frequency.ToVatsimFrequencyFormat();
+            if (frequency < 18000 || frequency > 37000)
+            {
+                MessageBox.Show(this,
+                    "Invalid frequency range. The accepted frequency range is 118.000-137.000 MHz", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
+            else if (frequency != mCurrentComposite.AtisFrequency)
+            {
+                mCurrentComposite.AtisFrequency = (int)frequency;
+            }
         }
 
-        List<string> usedContractions = new List<string>();
+        if (typeCombined.Checked)
+        {
+            if (mAppConfig.CurrentProfile.Composites.Any(x =>
+                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Combined &&
+                    x != mCurrentComposite))
+            {
+                MessageBox.Show(this, $"A Combined ATIS already exists for {mCurrentComposite.Identifier}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
+            else
+            {
+                mCurrentComposite.AtisType = AtisType.Combined;
+            }
+        }
+        else if (typeDeparture.Checked)
+        {
+            if (mAppConfig.CurrentProfile.Composites.Any(x =>
+                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Departure &&
+                    x != mCurrentComposite))
+            {
+                MessageBox.Show(this, $"A Departure ATIS already exists for {mCurrentComposite.Identifier}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
+            else
+            {
+                mCurrentComposite.AtisType = AtisType.Departure;
+            }
+        }
+        else if (typeArrival.Checked)
+        {
+            if (mAppConfig.CurrentProfile.Composites.Any(x =>
+                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Arrival &&
+                    x != mCurrentComposite))
+            {
+                MessageBox.Show(this, $"An Arrival ATIS already exists for {mCurrentComposite.Identifier}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
+            else
+            {
+                mCurrentComposite.AtisType = AtisType.Arrival;
+            }
+        }
+
+        char low = char.Parse(txtCodeRangeLow.Text);
+        char high = char.Parse(txtCodeRangeHigh.Text);
+        if (char.ToLower(high) < char.ToLower(low))
+        {
+            MessageBox.Show("ATIS code range must be in sequential order.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        mCurrentComposite.CodeRange.Low = (typeDeparture.Checked || typeArrival.Checked) ? char.Parse(txtCodeRangeLow.Text) : 'A';
+        mCurrentComposite.CodeRange.High = (typeDeparture.Checked || typeArrival.Checked) ? char.Parse(txtCodeRangeHigh.Text) : 'Z';
+
+        if (mCurrentPreset != null)
+        {
+            mCurrentPreset.ExternalGenerator.Enabled = chkExternalAtisGenerator.Checked;
+        }
+
+        mCurrentComposite.MagneticVariation = new MagneticVariationMeta
+        {
+            Enabled = chkMagneticVar.Checked,
+            MagneticDegrees = (int)magneticVar.Value
+        };
+
+        var selectedVoice = ddlVoices.SelectedItem as VoiceMetaData;
+        mCurrentComposite.AtisVoice.UseTextToSpeech = radioTextToSpeech.Checked;
+        mCurrentComposite.AtisVoice.Voice = selectedVoice == null ? "Default" : selectedVoice.Name;
+
+        // pending ATIS node format changes
+        foreach (var node in mPendingVoiceTemplateChanges.ToList())
+        {
+            node.Item1.Template.Voice = node.Item2;
+            mPendingVoiceTemplateChanges.Remove(node);
+        }
+        foreach (var node in mPendingTextTemplateChanges.ToList())
+        {
+            node.Item1.Template.Text = node.Item2;
+            mPendingTextTemplateChanges.Remove(node);
+        }
+
+        mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = (int)standardObservationTime.Value;
+
+        mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero = chkWindSpeakLeadingZero.Checked;
+        mCurrentComposite.AtisFormat.SurfaceWind.Calm.CalmWindSpeed = (int)calmWindSpeed.Value;
+
+        mCurrentComposite.AtisFormat.Visibility.IncludeVisibilitySuffix = chkVisibilitySuffix.Checked;
+        mCurrentComposite.AtisFormat.Visibility.North = visDirNorth.Text;
+        mCurrentComposite.AtisFormat.Visibility.NorthEast = visDirNorthEast.Text;
+        mCurrentComposite.AtisFormat.Visibility.East = visDirEast.Text;
+        mCurrentComposite.AtisFormat.Visibility.SouthEast = visDirSouthEast.Text;
+        mCurrentComposite.AtisFormat.Visibility.South = visDirSouth.Text;
+        mCurrentComposite.AtisFormat.Visibility.SouthWest = visDirSouthWest.Text;
+        mCurrentComposite.AtisFormat.Visibility.West = visDirWest.Text;
+        mCurrentComposite.AtisFormat.Visibility.NorthWest = visDirNorthWest.Text;
+        mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibility = visUnlimited.Text;
+        mCurrentComposite.AtisFormat.Visibility.MetersCutoff = (int)visibilityMetersCutoff.Value;
+
+        List<string> usedContractions = new();
         foreach (DataGridViewRow row in gridContractions.Rows)
         {
             if (!row.IsNewRow)
@@ -797,142 +821,248 @@ public partial class ProfileConfigurationForm : Form
                     var stringValue = row.Cells[0].Value.ToString();
                     if (usedContractions.Contains(stringValue))
                     {
-                        MessageBox.Show(this, "Duplicate contraction: " + stringValue, "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Hand);
+                        MessageBox.Show(this, "Duplicate contraction: " + stringValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         gridContractions.Focus();
                         return false;
                     }
 
                     usedContractions.Add(stringValue);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
-        if (mContractionsChanged)
-        {
-            mCurrentComposite.Contractions.Clear();
-            foreach (DataGridViewRow row in gridContractions.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                    {
-                        var stringValue = row.Cells[0].Value.ToString();
-                        var spokenValue = row.Cells[1].Value.ToString();
-                        if (!string.IsNullOrEmpty(stringValue) && !string.IsNullOrEmpty(spokenValue))
-                        {
-                            mCurrentComposite.Contractions.Add(new ContractionMeta
-                            {
-                                String = stringValue,
-                                Spoken = spokenValue
-                            });
-                        }
-                    }
-                }
-            }
-        }
-
-        List<Tuple<int, int>> usedTransitionLevels = new List<Tuple<int, int>>();
-        foreach (DataGridViewRow row in gridTransitionLevels.Rows)
+        mCurrentComposite.Contractions.Clear();
+        foreach (DataGridViewRow row in gridContractions.Rows)
         {
             if (!row.IsNewRow)
             {
-                try
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
                 {
-                    var low = int.Parse(row.Cells[0].Value.ToString());
-                    var high = int.Parse(row.Cells[1].Value.ToString());
-                    if (usedTransitionLevels.Any(t => t.Item1 == low && t.Item2 == high))
+                    var stringValue = row.Cells[0].Value.ToString();
+                    var spokenValue = row.Cells[1].Value.ToString();
+                    if (!string.IsNullOrEmpty(stringValue) && !string.IsNullOrEmpty(spokenValue))
                     {
-                        MessageBox.Show(this, $"Duplicate Transition Level: {low}-{high}", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        gridTransitionLevels.Focus();
-                        return false;
-                    }
-
-                    usedTransitionLevels.Add(new Tuple<int, int>(low, high));
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        if (mTransitionLevelsChanged)
-        {
-            mCurrentComposite.TransitionLevels.Clear();
-            foreach (DataGridViewRow row in gridTransitionLevels.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
-                    {
-                        var low = int.Parse(row.Cells[0].Value.ToString());
-                        var high = int.Parse(row.Cells[1].Value.ToString());
-                        var tl = int.Parse(row.Cells[2].Value.ToString());
-                        mCurrentComposite.TransitionLevels.Add(new TransitionLevel
+                        mCurrentComposite.Contractions.Add(new ContractionMeta
                         {
-                            Low = low,
-                            High = high,
-                            Altitude = tl
+                            String = stringValue,
+                            Spoken = spokenValue
                         });
                     }
                 }
             }
         }
 
-        if (mPrefixNotamsChanged)
+        mCurrentComposite.AtisFormat.PresentWeather.LightIntensity = wxIntensityLight.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.ModerateIntensity = wxIntensityModerate.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.HeavyIntensity = wxIntensityHeavy.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.Vicinity = wxProximityVicinity.Text;
+
+        List<string> usedWeatherTypes = new();
+        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
         {
-            mCurrentComposite.UseNotamPrefix = chkPrefixNotams.Checked;
-            mPrefixNotamsChanged = false;
+            if (!row.IsNewRow)
+            {
+                try
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    if (usedWeatherTypes.Contains(acronymValue))
+                    {
+                        MessageBox.Show(this, "Duplicate weather type: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        gridWeatherTypes.Focus();
+                        return false;
+                    }
+
+                    usedWeatherTypes.Add(acronymValue);
+                }
+                catch { }
+            }
         }
 
-        if (mTransitionLevelPrefixChanged)
+        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Clear();
+        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
         {
-            mCurrentComposite.UseTransitionLevelPrefix = chkTransitionLevelPrefix.Checked;
-            mTransitionLevelPrefixChanged = false;
+            if (!row.IsNewRow)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    var spokenValue = row.Cells[1].Value.ToString();
+                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                    {
+                        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Add(acronymValue, spokenValue);
+                    }
+                }
+            }
         }
 
-        if (mConvertMetricChanged)
+        List<string> usedWeatherDescriptors = new();
+        foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
         {
-            mCurrentComposite.UseMetricUnits = chkConvertMetric.Checked;
-            mConvertMetricChanged = false;
+            if (!row.IsNewRow)
+            {
+                try
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    if (usedWeatherDescriptors.Contains(acronymValue))
+                    {
+                        MessageBox.Show(this, "Duplicate weather descriptor: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        gridWeatherDescriptors.Focus();
+                        return false;
+                    }
+
+                    usedWeatherDescriptors.Add(acronymValue);
+                }
+                catch { }
+            }
         }
 
-        if (mSurfaceWindPrefixChanged)
+        mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Clear();
+        foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
         {
-            mCurrentComposite.UseSurfaceWindPrefix = chkSurfaceWindPrefix.Checked;
-            mSurfaceWindPrefixChanged = false;
+            if (!row.IsNewRow)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    var spokenValue = row.Cells[1].Value.ToString();
+                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                    {
+                        mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Add(acronymValue, spokenValue);
+                    }
+                }
+            }
         }
 
-        if (mVisibilitySuffixChanged)
+        mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer = chkIdentifyCeilingLayer.Checked;
+        mCurrentComposite.AtisFormat.Clouds.ConvertToMetric = chkConvertCloudsMetric.Checked;
+
+        List<string> usedCloudTypes = new();
+        foreach (DataGridViewRow row in gridCloudTypes.Rows)
         {
-            mCurrentComposite.UseVisibilitySuffix = chkVisibilitySuffix.Checked;
-            mVisibilitySuffixChanged = false;
+            if (!row.IsNewRow)
+            {
+                try
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    if (usedCloudTypes.Contains(acronymValue))
+                    {
+                        MessageBox.Show(this, "Duplicate cloud type: " + acronymValue, "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Hand);
+                        gridCloudTypes.Focus();
+                        return false;
+                    }
+
+                    usedCloudTypes.Add(acronymValue);
+                }
+                catch { }
+            }
         }
 
-        if (mUseDecimalTerminologyChanged)
+        mCurrentComposite.AtisFormat.Clouds.Types.Clear();
+        foreach (DataGridViewRow row in gridCloudTypes.Rows)
         {
-            mCurrentComposite.UseDecimalTerminology = chkDecimalTerminology.Checked;
-            mUseDecimalTerminologyChanged = false;
+            if (!row.IsNewRow)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    var spokenValue = row.Cells[1].Value.ToString();
+                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                    {
+                        mCurrentComposite.AtisFormat.Clouds.Types.Add(acronymValue, spokenValue);
+                    }
+                }
+            }
         }
 
-        if (mUseTemperaturePlusPrefixChanged)
+        List<string> usedConvectiveCloudTypes = new();
+        foreach (DataGridViewRow row in gridConvectiveCloudTypes.Rows)
         {
-            mCurrentComposite.UseTemperaturePlusPrefix = chkPrefixTemperature.Checked;
-            mUseTemperaturePlusPrefixChanged = false;
+            if (!row.IsNewRow)
+            {
+                try
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    if (usedConvectiveCloudTypes.Contains(acronymValue))
+                    {
+                        MessageBox.Show(this, "Duplicate convective cloud type: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        gridConvectiveCloudTypes.Focus();
+                        return false;
+                    }
+
+                    usedConvectiveCloudTypes.Add(acronymValue);
+                }
+                catch { }
+            }
         }
 
-        if(mUseZuluTimeSuffixChanged)
+        mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Clear();
+        foreach (DataGridViewRow row in gridConvectiveCloudTypes.Rows)
         {
-            mCurrentComposite.UseZuluTimeSuffix = chkAppendZulu.Checked;
-            mUseZuluTimeSuffixChanged = false;
+            if (!row.IsNewRow)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    var acronymValue = row.Cells[0].Value.ToString();
+                    var spokenValue = row.Cells[1].Value.ToString();
+                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                    {
+                        mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Add(acronymValue, spokenValue);
+                    }
+                }
+            }
         }
 
-        mTransitionLevelsChanged = false;
-        mContractionsChanged = false;
+        List<Tuple<int, int>> usedTransitionLevels = new();
+        foreach (DataGridViewRow row in gridTransitionLevels.Rows)
+        {
+            if (!row.IsNewRow)
+            {
+                try
+                {
+                    var trLow = int.Parse(row.Cells[0].Value.ToString());
+                    var trHigh = int.Parse(row.Cells[1].Value.ToString());
+                    if (usedTransitionLevels.Any(t => t.Item1 == trLow && t.Item2 == trHigh))
+                    {
+                        MessageBox.Show(this, $"Duplicate Transition Level: {trLow}-{trHigh}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        gridTransitionLevels.Focus();
+                        return false;
+                    }
+
+                    usedTransitionLevels.Add(new Tuple<int, int>(trLow, trHigh));
+                }
+                catch { }
+            }
+        }
+
+        mCurrentComposite.TransitionLevels.Clear();
+        foreach (DataGridViewRow row in gridTransitionLevels.Rows)
+        {
+            if (!row.IsNewRow)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
+                {
+                    var trLow = int.Parse(row.Cells[0].Value.ToString());
+                    var trHigh = int.Parse(row.Cells[1].Value.ToString());
+                    var tl = int.Parse(row.Cells[2].Value.ToString());
+                    mCurrentComposite.TransitionLevels.Add(new TransitionLevelMeta
+                    {
+                        Low = trLow,
+                        High = trHigh,
+                        Altitude = tl
+                    });
+                }
+            }
+        }
+
+        mCurrentComposite.AtisFormat.Temperature.UsePlusPrefix = chkTempPlusPrefix.Checked;
+        mCurrentComposite.AtisFormat.Temperature.PronounceLeadingZero = chkTempLeadingZero.Checked;
+        mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix = chkDewPlusPrefix.Checked;
+        mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero = chkDewLeadingZero.Checked;
+
+        mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
+
         btnApply.Enabled = false;
         btnOK.Enabled = true;
 
@@ -947,208 +1077,6 @@ public partial class ProfileConfigurationForm : Form
         {
             EventBus.Publish(this, new RefreshCompositesRequested());
             Close();
-        }
-    }
-
-    private void vhfFrequency_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!vhfFrequency.Focused)
-            return;
-
-        if (decimal.TryParse(vhfFrequency.Text, out var frequency))
-        {
-            if (frequency.ToVatsimFrequencyFormat() != mCurrentComposite.AtisFrequency)
-            {
-                mFrequencyChanged = true;
-                btnApply.Enabled = true;
-            }
-            else
-            {
-                mFrequencyChanged = false;
-                btnApply.Enabled = false;
-            }
-        }
-    }
-
-    private void typeCombined_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!typeCombined.Focused)
-            return;
-
-        if (typeCombined.Checked)
-        {
-            txtCodeRangeLow.Enabled = false;
-            txtCodeRangeHigh.Enabled = false;
-        }
-
-        if (typeCombined.Checked && mCurrentComposite.AtisType != AtisType.Combined)
-        {
-            mAtisTypeChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mAtisTypeChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void typeDeparture_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!typeDeparture.Focused)
-            return;
-
-        if (typeDeparture.Checked)
-        {
-            txtCodeRangeLow.Enabled = true;
-            txtCodeRangeHigh.Enabled = true;
-        }
-
-        if (typeDeparture.Checked && mCurrentComposite.AtisType != AtisType.Departure)
-        {
-            mAtisTypeChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mAtisTypeChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void typeArrival_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!typeArrival.Focused)
-            return;
-
-        if (typeArrival.Checked)
-        {
-            txtCodeRangeLow.Enabled = true;
-            txtCodeRangeHigh.Enabled = true;
-        }
-
-        if (typeArrival.Checked && mCurrentComposite.AtisType != AtisType.Arrival)
-        {
-            mAtisTypeChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mAtisTypeChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtCodeRangeLow_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!txtCodeRangeLow.Focused)
-            return;
-
-        if ((txtCodeRangeLow.Text ?? "") != mCurrentComposite.CodeRange.Low.ToString())
-        {
-            mCodeRangeLowChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mCodeRangeLowChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void txtCodeRangeHigh_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!txtCodeRangeHigh.Focused)
-            return;
-
-        if ((txtCodeRangeHigh.Text ?? "") != mCurrentComposite.CodeRange.High.ToString())
-        {
-            mCodeRangeHighChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mCodeRangeHighChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkFaaFormat_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkFaaFormat.Focused)
-            return;
-
-        ToggleNonFaaOptions();
-
-        if (chkFaaFormat.Checked != mCurrentComposite.UseFaaFormat)
-        {
-            mFaaFormatChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkAutoIncludeClosingStatement_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!chkAutoIncludeClosingStatement.Focused)
-            return;
-
-        if (chkAutoIncludeClosingStatement.Checked != mCurrentComposite.AutoIncludeClosingStatement)
-        {
-            mAutoIncludeClosingStatementChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkExternalAtisGenerator_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentPreset == null)
-            return;
-
-        if (!chkExternalAtisGenerator.Focused)
-            return;
-
-        AddDynamicPresetControl();
-
-        if (chkExternalAtisGenerator.Checked != mCurrentPreset.ExternalGenerator.Enabled)
-        {
-            mExternalAtisGeneratorChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            btnApply.Enabled = false;
         }
     }
 
@@ -1195,119 +1123,6 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void chkObservationTime_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkObservationTime.Focused)
-            return;
-
-        observationTime.Enabled = chkObservationTime.Checked;
-
-        if (chkObservationTime.Checked != mCurrentComposite.ObservationTime.Enabled)
-        {
-            mObservationTimeChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void observationTime_ValueChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!observationTime.Focused)
-            return;
-
-        if (observationTime.Value != mCurrentComposite.ObservationTime.Time)
-        {
-            mObservationTimeChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mObservationTimeChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkMagneticVar_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkMagneticVar.Focused)
-            return;
-
-        magneticVar.Enabled = chkMagneticVar.Checked;
-
-        if (chkMagneticVar.Checked != mCurrentComposite.MagneticVariation.Enabled)
-        {
-            mMagneticVariationChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mMagneticVariationChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void magneticVar_ValueChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!magneticVar.Focused)
-            return;
-
-        if (magneticVar.Value != mCurrentComposite.MagneticVariation.MagneticDegrees)
-        {
-            mMagneticVariationChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mMagneticVariationChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void radioVoiceRecorded_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!radioVoiceRecorded.Focused)
-            return;
-
-        ddlVoices.Enabled = !radioVoiceRecorded.Checked;
-
-        if (mCurrentComposite.AtisVoice != null)
-        {
-            if (radioVoiceRecorded.Checked && mCurrentComposite.AtisVoice.UseTextToSpeech)
-            {
-                mVoiceOptionsChanged = true;
-                btnApply.Enabled = true;
-            }
-            else
-            {
-                mVoiceOptionsChanged = false;
-                btnApply.Enabled = false;
-            }
-        }
-        else
-        {
-            mVoiceOptionsChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
     private void radioTextToSpeech_CheckedChanged(object sender, EventArgs e)
     {
         if (mCurrentComposite == null)
@@ -1317,76 +1132,7 @@ public partial class ProfileConfigurationForm : Form
             return;
 
         ddlVoices.Enabled = radioTextToSpeech.Checked;
-
-        if (mCurrentComposite.AtisVoice != null)
-        {
-            if (mCurrentComposite.AtisVoice.UseTextToSpeech == false && radioTextToSpeech.Checked)
-            {
-                mVoiceOptionsChanged = true;
-                btnApply.Enabled = true;
-            }
-            else
-            {
-                mVoiceOptionsChanged = false;
-                btnApply.Enabled = false;
-            }
-        }
-        else
-        {
-            mVoiceOptionsChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void ddlVoices_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!ddlVoices.Focused)
-            return;
-
-        var selected = ddlVoices.SelectedItem as VoiceMetaData;
-
-        if (mCurrentComposite.AtisVoice != null)
-        {
-            if (selected.Name != mCurrentComposite.AtisVoice.Voice)
-            {
-                mVoiceOptionsChanged = true;
-                btnApply.Enabled = true;
-            }
-        }
-        else
-        {
-            mCurrentComposite.AtisVoice = new AtisVoiceMeta
-            {
-                UseTextToSpeech = true,
-                Voice = selected == null ? "Default" : selected.Name,
-            };
-
-            mVoiceOptionsChanged = true;
-            btnApply.Enabled = true;
-        }
-    }
-
-    private void txtIdsEndpoint_TextChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!txtIdsEndpoint.Focused)
-            return;
-
-        if ((txtIdsEndpoint.Text ?? "") != (mCurrentComposite.IDSEndpoint ?? ""))
-        {
-            mIdsEndpointChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mIdsEndpointChanged = false;
-            btnApply.Enabled = false;
-        }
+        btnApply.Enabled = true;
     }
 
     private void btnNewPreset_Click(object sender, EventArgs e)
@@ -1410,8 +1156,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -1457,8 +1202,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     flag = false;
                 }
                 else
@@ -1500,8 +1244,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
@@ -1527,9 +1270,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (ddlPresets.SelectedItem != null)
         {
-            if (MessageBox.Show(this, "Are you sure you want to delete the selected preset?", "Delete Preset",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) ==
-                DialogResult.Yes)
+            if (MessageBox.Show(this, "Are you sure you want to delete the selected preset?", "Delete Preset", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 mCurrentComposite.Presets.RemoveAll(x => x.Name == ddlPresets.SelectedItem.ToString());
                 mAppConfig.SaveConfig();
@@ -1594,7 +1335,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridContractions_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
     {
-        if (base.ActiveControl == btnCancel)
+        if (ActiveControl == btnCancel)
         {
             e.Cancel = true;
             btnCancel_Click(null, EventArgs.Empty);
@@ -1621,7 +1362,6 @@ public partial class ProfileConfigurationForm : Form
             {
                 gridContractions.Rows.RemoveAt(gridContractions.SelectedRows[0].Index);
                 btnApply.Enabled = true;
-                mContractionsChanged = true;
             }
         }
         else
@@ -1638,13 +1378,11 @@ public partial class ProfileConfigurationForm : Form
     private void gridContractions_CellValueChanged(object sender, DataGridViewCellEventArgs e)
     {
         btnApply.Enabled = true;
-        mContractionsChanged = true;
     }
 
     private void gridContractions_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected contraction?", "Confirm Delete",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected contraction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
         {
             e.Cancel = true;
         }
@@ -1653,7 +1391,6 @@ public partial class ProfileConfigurationForm : Form
     private void gridContractions_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
         btnApply.Enabled = true;
-        mContractionsChanged = true;
     }
 
     private void ctxImport_Click(object sender, EventArgs e)
@@ -1677,9 +1414,7 @@ public partial class ProfileConfigurationForm : Form
             {
                 if (dialog.FileNames.Length > Constants.MAX_COMPOSITES)
                 {
-                    MessageBox.Show(this,
-                        $"A maximum of {Constants.MAX_COMPOSITES} composites can be imported into a single profile",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, $"A maximum of {Constants.MAX_COMPOSITES} composites can be imported into a single profile", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
 
@@ -1702,8 +1437,7 @@ public partial class ProfileConfigurationForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "Composite Import Error: " + ex.Message, "Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Hand);
+            MessageBox.Show(this, "Composite Import Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
         }
     }
 
@@ -1726,9 +1460,7 @@ public partial class ProfileConfigurationForm : Form
             {
                 if (mAppConfig.CurrentProfile.Composites.Any(t => t.Identifier == composite.Identifier))
                 {
-                    if (MessageBox.Show(this,
-                            $"A composite already exists for {composite.Identifier}. Do you want to overwrite it?",
-                            "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
+                    if (MessageBox.Show(this, $"A composite already exists for {composite.Identifier}. Do you want to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
                     {
                         mAppConfig.CurrentProfile.Composites.RemoveAll(t => t.Identifier == composite.Identifier);
                         mAppConfig.CurrentProfile.Composites.Add(composite);
@@ -1747,25 +1479,22 @@ public partial class ProfileConfigurationForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "Import Error: " + ex.Message, "Import Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Hand);
+            MessageBox.Show(this, "Import Error: " + ex.Message, "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
         }
     }
 
     private void ImportLegacyProfile(string fullName)
     {
-        FileStream fs = new FileStream(fullName, FileMode.Open, FileAccess.Read);
+        FileStream fs = new(fullName, FileMode.Open, FileAccess.Read);
         using Stream stream = new GZipStream(fs, CompressionMode.Decompress);
-        XmlSerializer xml = new XmlSerializer(typeof(LegacyFacility));
+        XmlSerializer xml = new(typeof(LegacyFacility));
         var profile = (LegacyFacility)xml.Deserialize(stream);
 
         if (mAppConfig.CurrentProfile != null)
         {
             if (mAppConfig.CurrentProfile.Composites.Any(t => t.Identifier == profile.ID))
             {
-                if (MessageBox.Show(this,
-                        "A composite with that identifier already exists. Would you like to overwrite it?",
-                        "Duplicate Composite", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show(this, "A composite with that identifier already exists. Would you like to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     return;
                 }
@@ -1808,12 +1537,6 @@ public partial class ProfileConfigurationForm : Form
                         }
                     }
 
-                    if (profile.MetarObservation != null)
-                    {
-                        existing.ObservationTime.Enabled = profile.MetarObservation.Enable;
-                        existing.ObservationTime.Time = (uint)profile.MetarObservation.ObservationTimeValue;
-                    }
-
                     existing.Contractions.Clear();
                     foreach (var contraction in profile.Contractions)
                     {
@@ -1828,7 +1551,7 @@ public partial class ProfileConfigurationForm : Form
                     existing.AirportConditionDefinitions.Clear();
                     foreach (var condition in profile.AirportConditions)
                     {
-                        existing.AirportConditionDefinitions.Add(new DefinedText
+                        existing.AirportConditionDefinitions.Add(new DefinedTextMeta
                         {
                             Ordinal = idx++,
                             Text = condition.Message,
@@ -1840,7 +1563,7 @@ public partial class ProfileConfigurationForm : Form
                     existing.NotamDefinitions.Clear();
                     foreach (var condition in profile.Notams)
                     {
-                        existing.NotamDefinitions.Add(new DefinedText
+                        existing.NotamDefinitions.Add(new DefinedTextMeta
                         {
                             Ordinal = idx++,
                             Text = condition.Message,
@@ -1903,12 +1626,6 @@ public partial class ProfileConfigurationForm : Form
                     }
                 }
 
-                if (profile.MetarObservation != null)
-                {
-                    composite.ObservationTime.Enabled = profile.MetarObservation.Enable;
-                    composite.ObservationTime.Time = (uint)profile.MetarObservation.ObservationTimeValue;
-                }
-
                 foreach (var contraction in profile.Contractions)
                 {
                     composite.Contractions.Add(new ContractionMeta
@@ -1921,7 +1638,7 @@ public partial class ProfileConfigurationForm : Form
                 int idx = 1;
                 foreach (var condition in profile.AirportConditions)
                 {
-                    composite.AirportConditionDefinitions.Add(new DefinedText
+                    composite.AirportConditionDefinitions.Add(new DefinedTextMeta
                     {
                         Ordinal = idx++,
                         Text = condition.Message,
@@ -1932,7 +1649,7 @@ public partial class ProfileConfigurationForm : Form
                 idx = 1;
                 foreach (var condition in profile.Notams)
                 {
-                    composite.NotamDefinitions.Add(new DefinedText
+                    composite.NotamDefinitions.Add(new DefinedTextMeta
                     {
                         Ordinal = idx++,
                         Text = condition.Message,
@@ -1980,10 +1697,8 @@ public partial class ProfileConfigurationForm : Form
 
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText(saveDialog.FileName,
-                    JsonConvert.SerializeObject(mCurrentComposite, Formatting.Indented));
-                MessageBox.Show(this, "Composite exported successfully.", "Success", MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                File.WriteAllText(saveDialog.FileName, JsonConvert.SerializeObject(mCurrentComposite, Formatting.Indented));
+                MessageBox.Show(this, "Composite exported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
     }
@@ -1995,18 +1710,16 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridTransitionLevels_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
     {
-        if (base.ActiveControl == btnCancel)
+        if (ActiveControl == btnCancel)
         {
             e.Cancel = true;
             btnCancel_Click(null, EventArgs.Empty);
-            return;
         }
     }
 
     private void gridTransitionLevels_CellValueChanged(object sender, DataGridViewCellEventArgs e)
     {
         btnApply.Enabled = true;
-        mTransitionLevelsChanged = true;
     }
 
     private void gridTransitionLevels_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -2028,13 +1741,10 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridTransitionLevels.SelectedRows.Count == 1)
         {
-            if (!gridTransitionLevels.SelectedRows[0].IsNewRow && MessageBox.Show(this,
-                    "Are you sure you want to delete the selected transition level?", "Confirm Delete",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridTransitionLevels.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected transition level?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 gridTransitionLevels.Rows.RemoveAt(gridTransitionLevels.SelectedRows[0].Index);
                 btnApply.Enabled = true;
-                mTransitionLevelsChanged = true;
             }
         }
         else
@@ -2043,207 +1753,319 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void chkPrefixNotams_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkPrefixNotams.Focused)
-            return;
-
-        if (chkPrefixNotams.Checked != mCurrentComposite.UseNotamPrefix)
-        {
-            mPrefixNotamsChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mPrefixNotamsChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkTransitionLevelPrefix_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkTransitionLevelPrefix.Focused)
-            return;
-
-        if (chkTransitionLevelPrefix.Checked != mCurrentComposite.UseTransitionLevelPrefix)
-        {
-            mTransitionLevelPrefixChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mTransitionLevelPrefixChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkConvertMetric_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkConvertMetric.Focused)
-            return;
-
-        if (chkConvertMetric.Checked != mCurrentComposite.UseMetricUnits)
-        {
-            mConvertMetricChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mConvertMetricChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkSurfaceWindPrefix_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkSurfaceWindPrefix.Focused)
-            return;
-
-        if (chkSurfaceWindPrefix.Checked != mCurrentComposite.UseSurfaceWindPrefix)
-        {
-            mSurfaceWindPrefixChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mSurfaceWindPrefixChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkVisibilitySuffix_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkVisibilitySuffix.Focused)
-            return;
-
-        if (chkVisibilitySuffix.Checked != mCurrentComposite.UseVisibilitySuffix)
-        {
-            mVisibilitySuffixChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mVisibilitySuffixChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkDecimalTerminology_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkDecimalTerminology.Focused)
-            return;
-
-        if (chkDecimalTerminology.Checked != mCurrentComposite.UseDecimalTerminology)
-        {
-            mUseDecimalTerminologyChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mUseDecimalTerminologyChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkPrefixTemperature_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkPrefixTemperature.Focused)
-            return;
-
-        if (chkPrefixTemperature.Checked != mCurrentComposite.UseTemperaturePlusPrefix)
-        {
-            mUseTemperaturePlusPrefixChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mUseTemperaturePlusPrefixChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void chkAppendZulu_CheckedChanged(object sender, EventArgs e)
-    {
-        if (mCurrentComposite == null)
-            return;
-
-        if (!chkAppendZulu.Focused)
-            return;
-
-        if (chkAppendZulu.Checked != mCurrentComposite.UseZuluTimeSuffix)
-        {
-            mUseZuluTimeSuffixChanged = true;
-            btnApply.Enabled = true;
-        }
-        else
-        {
-            mUseZuluTimeSuffixChanged = false;
-            btnApply.Enabled = false;
-        }
-    }
-
-    private void ToggleNonFaaOptions()
-    {
-        if (chkFaaFormat.Checked)
-        {
-            chkConvertMetric.Checked = false;
-            chkConvertMetric.Enabled = false;
-            mConvertMetricChanged = true;
-
-            chkTransitionLevelPrefix.Checked = false;
-            chkTransitionLevelPrefix.Enabled = false;
-            mTransitionLevelPrefixChanged = true;
-
-            chkSurfaceWindPrefix.Checked = false;
-            chkSurfaceWindPrefix.Enabled = false;
-            mSurfaceWindPrefixChanged = true;
-
-            chkVisibilitySuffix.Checked = false;
-            chkVisibilitySuffix.Enabled = false;
-            mVisibilitySuffixChanged = true;
-
-            chkDecimalTerminology.Checked = false;
-            chkDecimalTerminology.Enabled = false;
-            mUseDecimalTerminologyChanged = true;
-
-            chkPrefixTemperature.Checked = false;
-            chkPrefixTemperature.Enabled = false;
-            mUseTemperaturePlusPrefixChanged = true;
-        }
-        else
-        {
-            chkConvertMetric.Enabled = true;
-            chkTransitionLevelPrefix.Enabled = true;
-            chkSurfaceWindPrefix.Enabled = true;
-            chkVisibilitySuffix.Enabled = true;
-            chkDecimalTerminology.Enabled = true;
-            chkPrefixTemperature.Enabled = true;
-        }
-    }
-
     private void AlphaOnly(object sender, KeyPressEventArgs e)
     {
         e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+    }
+
+    private void OnVoiceTemplateChanged(object sender, EventArgs e)
+    {
+        var template = (sender as NodeFormatTemplate);
+
+        if (template.NodeType.StartsWith("SurfaceWind"))
+        {
+            var windType = template.NodeType.Split('.')[1];
+            if (mCurrentComposite.AtisFormat.SurfaceWind.GetType().GetProperty(windType)?.GetValue(mCurrentComposite.AtisFormat.SurfaceWind, null) is BaseFormat node)
+            {
+                if (node.Template.Voice != template.VoiceTemplate)
+                {
+                    btnApply.Enabled = true;
+                    mPendingVoiceTemplateChanges.Add(new Tuple<BaseFormat, string>(node, template.VoiceTemplate));
+                }
+            }
+        }
+        else
+        {
+            if (mCurrentComposite.AtisFormat.GetType().GetProperty(template.NodeType)?.GetValue(mCurrentComposite.AtisFormat, null) is BaseFormat node)
+            {
+                if (node.Template.Voice != template.VoiceTemplate)
+                {
+                    btnApply.Enabled = true;
+                    mPendingVoiceTemplateChanges.Add(new Tuple<BaseFormat, string>(node, template.VoiceTemplate));
+                }
+            }
+        }
+    }
+
+    private void OnTextTemplateChanged(object sender, EventArgs e)
+    {
+        var template = (sender as NodeFormatTemplate);
+
+        if (template.NodeType.StartsWith("SurfaceWind"))
+        {
+            var windType = template.NodeType.Split('.')[1];
+            if (mCurrentComposite.AtisFormat.SurfaceWind.GetType().GetProperty(windType)?.GetValue(mCurrentComposite.AtisFormat.SurfaceWind, null) is BaseFormat node)
+            {
+                if (node.Template.Text != template.TextTemplate)
+                {
+                    btnApply.Enabled = true;
+                    mPendingTextTemplateChanges.Add(new Tuple<BaseFormat, string>(node, template.TextTemplate));
+                }
+            }
+        }
+        else
+        {
+            if (mCurrentComposite.AtisFormat.GetType().GetProperty(template.NodeType)?.GetValue(mCurrentComposite.AtisFormat, null) is BaseFormat node)
+            {
+                if (node.Template.Text != template.TextTemplate)
+                {
+                    btnApply.Enabled = true;
+                    mPendingTextTemplateChanges.Add(new Tuple<BaseFormat, string>(node, template.TextTemplate));
+                }
+            }
+        }
+    }
+
+    private void btnDeleteWeatherType_Click(object sender, EventArgs e)
+    {
+        if (gridWeatherTypes.SelectedRows.Count == 1)
+        {
+            if (!gridWeatherTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                gridWeatherTypes.Rows.RemoveAt(gridWeatherTypes.SelectedRows[0].Index);
+                btnApply.Enabled = true;
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, "No weather type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        }
+    }
+
+    private void gridWeatherTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+        gridWeatherTypes.Rows[e.RowIndex].ErrorText = "";
+    }
+
+    private void gridWeatherTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridWeatherTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+    {
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        {
+            e.Cancel = true;
+        }
+    }
+
+    private void gridWeatherTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridWeatherTypes_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+    {
+        if (ActiveControl == btnCancel)
+        {
+            e.Cancel = true;
+            btnCancel_Click(null, EventArgs.Empty);
+        }
+    }
+
+    private void gridWeatherTypes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    {
+        if (e.Control is TextBox textBox)
+        {
+            textBox.CharacterCasing = gridWeatherTypes.CurrentCell.ColumnIndex == 0
+                ? CharacterCasing.Upper
+                : CharacterCasing.Normal;
+        }
+    }
+
+    private void btnDeleteWeatherDescriptor_Click(object sender, EventArgs e)
+    {
+        if (gridWeatherDescriptors.SelectedRows.Count == 1)
+        {
+            if (!gridWeatherDescriptors.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                gridWeatherDescriptors.Rows.RemoveAt(gridWeatherDescriptors.SelectedRows[0].Index);
+                btnApply.Enabled = true;
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, "No weather descriptor selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        }
+    }
+
+    private void gridWeatherDescriptors_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+        gridWeatherDescriptors.Rows[e.RowIndex].ErrorText = "";
+    }
+
+    private void gridWeatherDescriptors_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridWeatherDescriptors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+    {
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        {
+            e.Cancel = true;
+        }
+    }
+
+    private void gridWeatherDescriptors_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridWeatherDescriptors_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+    {
+        if (ActiveControl == btnCancel)
+        {
+            e.Cancel = true;
+            btnCancel_Click(null, EventArgs.Empty);
+        }
+    }
+
+    private void gridWeatherDescriptors_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    {
+        if (e.Control is TextBox textBox)
+        {
+            textBox.CharacterCasing = gridWeatherDescriptors.CurrentCell.ColumnIndex == 0
+                ? CharacterCasing.Upper
+                : CharacterCasing.Normal;
+        }
+    }
+
+    private void btnDeleteCloudType_Click(object sender, EventArgs e)
+    {
+        if (gridCloudTypes.SelectedRows.Count == 1)
+        {
+            if (!gridCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                gridCloudTypes.Rows.RemoveAt(gridCloudTypes.SelectedRows[0].Index);
+                btnApply.Enabled = true;
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, "No cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        }
+    }
+
+    private void gridCloudTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+        gridCloudTypes.Rows[e.RowIndex].ErrorText = "";
+    }
+
+    private void gridCloudTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+    {
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        {
+            e.Cancel = true;
+        }
+    }
+
+    private void gridCloudTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridCloudTypes_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+    {
+        if (ActiveControl == btnCancel)
+        {
+            e.Cancel = true;
+            btnCancel_Click(null, EventArgs.Empty);
+        }
+    }
+
+    private void gridCloudTypes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    {
+        if (e.Control is TextBox textBox)
+        {
+            textBox.CharacterCasing = gridCloudTypes.CurrentCell.ColumnIndex == 0
+                ? CharacterCasing.Upper
+                : CharacterCasing.Normal;
+        }
+    }
+
+    private void btnDeleteConvectiveCloudType_Click(object sender, EventArgs e)
+    {
+        if (gridConvectiveCloudTypes.SelectedRows.Count == 1)
+        {
+            if (!gridConvectiveCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected convective weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                gridConvectiveCloudTypes.Rows.RemoveAt(gridConvectiveCloudTypes.SelectedRows[0].Index);
+                btnApply.Enabled = true;
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, "No convective cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        }
+    }
+
+    private void gridConvectiveCloudTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+        gridConvectiveCloudTypes.Rows[e.RowIndex].ErrorText = "";
+    }
+
+    private void gridConvectiveCloudTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridConvectiveCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+    {
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        {
+            e.Cancel = true;
+        }
+    }
+
+    private void gridConvectiveCloudTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridConvectiveCloudTypes_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+    {
+        if (ActiveControl == btnCancel)
+        {
+            e.Cancel = true;
+            btnCancel_Click(null, EventArgs.Empty);
+        }
+    }
+
+    private void gridConvectiveCloudTypes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    {
+        if (e.Control is TextBox textBox)
+        {
+            textBox.CharacterCasing = gridConvectiveCloudTypes.CurrentCell.ColumnIndex == 0
+                ? CharacterCasing.Upper
+                : CharacterCasing.Normal;
+        }
+    }
+
+    private void HandleControlValueChanged(object sender, EventArgs e)
+    {
+        if (mCurrentComposite == null)
+            return;
+
+        if (!(sender as Control).Focused)
+            return;
+
+        if ((sender as Control).Name == "chkExternalAtisGenerator")
+        {
+            AddDynamicPresetControl();
+        }
+
+        ddlVoices.Enabled = !radioVoiceRecorded.Checked;
+        txtCodeRangeLow.Enabled = typeDeparture.Checked || typeArrival.Checked;
+        txtCodeRangeHigh.Enabled = typeDeparture.Checked || typeArrival.Checked;
+        magneticVar.Enabled = chkMagneticVar.Checked;
+
+        btnApply.Enabled = true;
     }
 }

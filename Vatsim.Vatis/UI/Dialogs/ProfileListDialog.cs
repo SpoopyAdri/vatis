@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.Profiles;
-using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI.Dialogs;
 
@@ -15,7 +14,6 @@ public partial class ProfileListDialog : Form
 {
     private readonly IWindowFactory mWindowFactory;
     private readonly IAppConfig mAppConfig;
-    private bool mInitializing = true;
     private string mPreviousInputValue = "";
 
     public ProfileListDialog(IWindowFactory windowFactory, IAppConfig appConfig)
@@ -27,12 +25,10 @@ public partial class ProfileListDialog : Form
     }
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-    [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern bool ReleaseCapture();
+    private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-    public const int WM_NCLBUTTONDOWN = 0xA1;
-    public const int HT_CAPTION = 0x2;
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern bool ReleaseCapture();
 
     protected override void OnMouseDown(MouseEventArgs e)
     {
@@ -40,17 +36,7 @@ public partial class ProfileListDialog : Form
         if (e.Button == MouseButtons.Left)
         {
             ReleaseCapture();
-            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-        }
-    }
-
-    protected override void OnMove(EventArgs e)
-    {
-        base.OnMove(e);
-
-        if (!mInitializing)
-        {
-            ScreenUtils.SaveWindowProperties(mAppConfig.ProfileListWindowProperties, this);
+            SendMessage(Handle, 0xA1, 0x2, 0);
         }
     }
 
@@ -59,15 +45,6 @@ public partial class ProfileListDialog : Form
         base.OnLoad(e);
 
         EventBus.Register(this);
-
-        if (mAppConfig.ProfileListWindowProperties == null)
-        {
-            mAppConfig.ProfileListWindowProperties = new WindowProperties();
-            mAppConfig.ProfileListWindowProperties.Location = ScreenUtils.CenterOnScreen(this);
-            mAppConfig.SaveConfig();
-        }
-        ScreenUtils.ApplyWindowProperties(mAppConfig.ProfileListWindowProperties, this);
-        mInitializing = false;
 
         lblVersion.Text = $"Version {Application.ProductVersion}";
 
@@ -81,18 +58,18 @@ public partial class ProfileListDialog : Form
         EventBus.Unregister(this);
     }
 
-    protected override void OnPaint(PaintEventArgs pe)
+    protected override void OnPaint(PaintEventArgs e)
     {
-        base.OnPaint(pe);
-        Rectangle rect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, 23);
-        Rectangle rect2 = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
-        Rectangle rect3 = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 24);
-        using Pen pen = new Pen(Color.FromArgb(100, 100, 100));
+        base.OnPaint(e);
+        Rectangle rect = new(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, 23);
+        Rectangle rect2 = new(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+        Rectangle rect3 = new(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 24);
+        using Pen pen = new(Color.FromArgb(100, 100, 100));
         using Brush brush = new SolidBrush(ForeColor);
-        pe.Graphics.DrawRectangle(pen, rect);
-        pe.Graphics.DrawRectangle(pen, rect2);
-        pe.Graphics.DrawRectangle(pen, rect3);
-        pe.Graphics.DrawString(Text, Font, brush, 5f, 5f);
+        e.Graphics.DrawRectangle(pen, rect);
+        e.Graphics.DrawRectangle(pen, rect2);
+        e.Graphics.DrawRectangle(pen, rect3);
+        e.Graphics.DrawString(Text, Font, brush, 5f, 5f);
     }
 
     private void btnExit_Click(object sender, EventArgs e)
@@ -188,8 +165,7 @@ public partial class ProfileListDialog : Form
                             {
                                 if (MessageBox.Show(this, "Another session profile with that name already exists. Would you like to overwrite it?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                                 {
-                                    var duplicate = mAppConfig.Profiles
-                                        .FirstOrDefault(t => t.Name == dlg.Value);
+                                    var duplicate = mAppConfig.Profiles?.FirstOrDefault(t => t.Name == dlg.Value);
 
                                     if (duplicate == profile)
                                     {
@@ -198,14 +174,12 @@ public partial class ProfileListDialog : Form
                                     else
                                     {
                                         mAppConfig.Profiles.Remove(duplicate);
-                                        var current = mAppConfig.Profiles.FirstOrDefault(t => t == profile);
+                                        var current = mAppConfig.Profiles?.FirstOrDefault(t => t == profile);
                                         current.Name = dlg.Value;
                                     }
 
                                     mAppConfig.SaveConfig();
-
                                     RefreshList();
-
                                     return;
                                 }
 
@@ -292,13 +266,10 @@ public partial class ProfileListDialog : Form
 
     private void listProfiles_KeyDown(object sender, KeyEventArgs e)
     {
-        if(listProfiles.SelectedItem != null)
+        if (listProfiles.SelectedItem != null && e.KeyCode == Keys.Return)
         {
-            if(e.KeyCode == Keys.Return)
-            {
-                LoadSessionProfile();
-                e.Handled = true;
-            }
+            LoadSessionProfile();
+            e.Handled = true;
         }
     }
 
@@ -330,7 +301,7 @@ public partial class ProfileListDialog : Form
                     {
                         profile = JsonConvert.DeserializeObject<Profile>(sr.ReadToEnd(), new JsonSerializerSettings
                         {
-                            MissingMemberHandling = MissingMemberHandling.Error
+                            MissingMemberHandling = MissingMemberHandling.Ignore
                         });
                     }
 

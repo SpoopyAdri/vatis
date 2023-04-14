@@ -30,6 +30,11 @@ public static class StringExtensions
         return Regex.Replace(input ?? "", @"\t|\n|\r", "");
     }
 
+    public static string[] Tokenize(this string s)
+    {
+        return s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+
     /// <summary>
     /// Strips away multiple spaces.
     /// </summary>

@@ -221,12 +221,12 @@ public class Connection
                 break;
             case ClientQueryType.ATIS:
                 int num = 0;
-                if (!string.IsNullOrEmpty(Composite.AcarsText))
+                if (!string.IsNullOrEmpty(Composite.TextAtis))
                 {
                     // break up the text into 64 characters per line
-                    var regex = new System.Text.RegularExpressions.Regex(@"(.{1,64})(?:\s|$)");
-                    var collection = regex.Matches(Composite.AcarsText)
-                        .Cast<System.Text.RegularExpressions.Match>()
+                    var regex = new Regex(@"(.{1,64})(?:\s|$)");
+                    var collection = regex.Matches(Composite.TextAtis)
+                        .Cast<Match>()
                         .Select(x => x.Groups[1].Value)
                         .ToList();
                     foreach (var line in collection)

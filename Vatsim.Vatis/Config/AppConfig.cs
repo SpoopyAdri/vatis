@@ -35,29 +35,25 @@ public class AppConfig : IAppConfig
     [JsonIgnore]
     public DateTime AuthTokenGeneratedAt { get; set; }
 
-    public NetworkRating NetworkRating { get; set; }
-
-    public List<NetworkServerInfo> CachedServers { get; set; }
-
     public string Name { get; set; }
+
+    public NetworkRating NetworkRating { get; set; }
 
     public string ServerName { get; set; }
 
     public bool SuppressNotifications { get; set; }
 
-    public WindowProperties WindowProperties { get; set; }
-
-    public WindowProperties ProfileListWindowProperties { get; set; }
-
-    public WindowProperties MiniDisplayWindowProperties { get; set; }
-
-    public List<Profile> Profiles { get; set; }
-
     public string MicrophoneDevice { get; set; }
 
     public string PlaybackDevice { get; set; }
 
+    public WindowProperties WindowProperties { get; set; }
+
+    public List<Profile> Profiles { get; set; }
+
     public List<VoiceMetaData> Voices { get; set; }
+
+    public List<NetworkServerInfo> CachedServers { get; set; }
 
     public AppConfig()
     {
@@ -112,14 +108,6 @@ public class AppConfig : IAppConfig
     {
         foreach (var composite in Profiles.SelectMany(x => x.Composites))
         {
-            if (composite.UseFaaFormat)
-            {
-                composite.UseTransitionLevelPrefix = false;
-                composite.UseMetricUnits = false;
-                composite.UseSurfaceWindPrefix = false;
-                composite.UseVisibilitySuffix = false;
-            }
-
             if (!char.IsLetter(composite.CodeRange.Low))
             {
                 composite.CodeRange.Low = 'A';

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
+using Vatsim.Vatis.Atis.Nodes;
 using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
@@ -19,7 +20,7 @@ using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
 
-public class AtisBuilder : IAtisBuilder 
+public class AtisBuilder : IAtisBuilder
 {
     private readonly INavaidDatabase mNavData;
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
@@ -34,7 +35,7 @@ public class AtisBuilder : IAtisBuilder
         mDownloader = downloader;
     }
 
-    public async Task BuildAtisAsync(Composite composite, CancellationToken cancellationToken)
+    public void BuildTextAtis(Composite composite)
     {
         if (composite == null)
         {
@@ -51,97 +52,212 @@ public class AtisBuilder : IAtisBuilder
             throw new Exception("DecodedMetar is null");
         }
 
-        var airport = mNavData.GetAirport(composite.Identifier);
-        composite.AirportData = airport ?? throw new Exception($"{composite.Identifier} not found in airport database.");
-
-        ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
-
-        var voiceString = new StringBuilder();
-
-        if (composite.CurrentPreset.ExternalGenerator.Enabled)
+        if (composite.AirportData == null)
         {
-            var result = await BuildExternalAtisAsync(composite, metar, variables);
-
-            if (result == null)
-                throw new Exception("Failed to create external ATIS");
-
-            voiceString = new StringBuilder(result);
-            composite.AcarsText = voiceString.ToString().ToUpper();
+            composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new Exception($"{composite.Identifier} not found in airport database.");
         }
-        else
+
+        ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
+
+        var template = composite.CurrentPreset.Template;
+
+        foreach (var variable in variables)
         {
-            GenerateAcarsText(composite);
+            template = template.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
+            template = template.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
 
-            voiceString = new StringBuilder(composite.CurrentPreset.Template);
+            template = template.Replace($"[{variable.Find}]", variable.TextReplace);
+            template = template.Replace($"${variable.Find}", variable.TextReplace);
 
-            foreach (var variable in variables)
+            if (variable.Aliases != null)
             {
-                voiceString.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
-                voiceString.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
-
-                voiceString.Replace($"[{variable.Find}]", variable.VoiceReplace);
-                voiceString.Replace($"${variable.Find}", variable.VoiceReplace);
-
-                if (variable.Aliases != null)
+                foreach (var alias in variable.Aliases)
                 {
-                    foreach (var alias in variable.Aliases)
-                    {
-                        voiceString.Replace($"[{alias}:VOX]", variable.VoiceReplace);
-                        voiceString.Replace($"${alias}:VOX", variable.VoiceReplace);
+                    template = template.Replace($"[{alias}:VOX]", variable.VoiceReplace);
+                    template = template.Replace($"${alias}:VOX", variable.VoiceReplace);
 
-                        voiceString.Replace($"[{alias}]", variable.VoiceReplace);
-                        voiceString.Replace($"${alias}", variable.VoiceReplace);
-                    }
+                    template = template.Replace($"[{alias}]", variable.TextReplace);
+                    template = template.Replace($"${alias}", variable.TextReplace);
                 }
             }
         }
 
-        if(!composite.CurrentPreset.HasClosingVariable && composite.AutoIncludeClosingStatement)
+        template = Regex.Replace(template, @"\s+(?=[.,?!])", ""); // remove extra spaces before punctuation
+        template = Regex.Replace(template, @"\s+", " ");
+        template = Regex.Replace(template, @"(?<=\*)(-?[\,0-9]+)", "$1");
+        template = Regex.Replace(template, @"(?<=\#)(-?[\,0-9]+)", "$1");
+        template = Regex.Replace(template, @"(?<=\+)([A-Z]{3})", "$1");
+        template = Regex.Replace(template, @"(?<=\+)([A-Z]{4})", "$1");
+
+        if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
         {
-            voiceString.Append($"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.");
+            var voiceTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.CurrentAtisLetter);
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter\|word}", atisLetter);
+            template += voiceTemplate;
+        }
+
+        composite.TextAtis = template;
+    }
+
+    public async Task BuildVoiceAtis(Composite composite, CancellationToken cancellationToken)
+    {
+        if (composite == null)
+        {
+            throw new Exception("Composite is null");
+        }
+
+        if (composite.CurrentPreset == null)
+        {
+            throw new Exception("CurrentPreset is null");
+        }
+
+        if (composite.DecodedMetar == null)
+        {
+            throw new Exception("DecodedMetar is null");
+        }
+
+        composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new Exception($"{composite.Identifier} not found in airport database.");
+
+        ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
+
+        // build ATIS using external source
+        if (composite.CurrentPreset.ExternalGenerator.Enabled)
+        {
+            var externalAtis = await BuildAtisFromExternalSource(composite, composite.DecodedMetar, variables);
+
+            if (externalAtis == null)
+            {
+                throw new Exception("Failed to create external ATIS");
+            }
+
+            composite.TextAtis = externalAtis.ToUpper();
+
+            return;
+        }
+
+        // build standard ATIS
+        BuildTextAtis(composite);
+
+        var template = composite.CurrentPreset.Template;
+
+        foreach (var variable in variables)
+        {
+            template = template.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
+            template = template.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
+
+            template = template.Replace($"[{variable.Find}]", variable.VoiceReplace);
+            template = template.Replace($"${variable.Find}", variable.VoiceReplace);
+
+            if (variable.Aliases != null)
+            {
+                foreach (var alias in variable.Aliases)
+                {
+                    template = template.Replace($"[{alias}:VOX]", variable.VoiceReplace);
+                    template = template.Replace($"${alias}:VOX", variable.VoiceReplace);
+
+                    template = template.Replace($"[{alias}]", variable.VoiceReplace);
+                    template = template.Replace($"${alias}", variable.VoiceReplace);
+                }
+            }
+        }
+
+        if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
+        {
+            var voiceTemplate = composite.AtisFormat.ClosingStatement.Template.Voice;
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.CurrentAtisLetter);
+            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter\|word}", atisLetter);
+            template += voiceTemplate;
         }
 
         if (composite.AtisVoice.UseTextToSpeech)
         {
-            var tts = FormatForTextToSpeech(voiceString.ToString().ToUpper(), composite);
+            var text = FormatForTextToSpeech(template.ToUpper(), composite);
+            text = Regex.Replace(text, @"[!?.]*([!?.])", "$1"); // clean up duplicate punctuation one last time
+            text = Regex.Replace(text, "\\s+([.,!\":])", "$1");
 
-            tts = Regex.Replace(tts, @"[!?.]*([!?.])", "$1"); // clean up duplicate punctuation one last time
-            tts = Regex.Replace(tts, "\\s+([.,!\":])", "$1");
+            // catches multiple ATIS letter button presses in quick succession
+            await Task.Delay(5000, cancellationToken);
 
-            System.Diagnostics.Debug.WriteLine(tts);
+            var synthesizedAudio = await mTextToSpeechRequest.RequestSynthesizedText(text, cancellationToken);
 
-            await Task.Delay(5000, cancellationToken); // catches multiple atis letter button presses in quick succession
-
-            var response = await mTextToSpeechRequest.RequestSynthesizedText(tts, cancellationToken);
-
-            if (response != null)
+            if (synthesizedAudio != null)
             {
-                PostIdsUpdate(composite, cancellationToken);
+                await UpdateIds(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(response, composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
+                await mAudioManager.AddOrUpdateBot(synthesizedAudio, composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
         else
         {
-            if (composite.MemoryStream != null)
+            if (composite.RecordedMemoryStream != null)
             {
-                PostIdsUpdate(composite, cancellationToken);
+                await UpdateIds(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(composite.MemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
+                await mAudioManager.AddOrUpdateBot(composite.RecordedMemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
     }
 
-    private async Task<string> BuildExternalAtisAsync(Composite composite, Metar metar, List<Variable> variables)
+    public async Task UpdateIds(Composite composite, CancellationToken cancellationToken)
     {
+        if (Debugger.IsAttached)
+            return;
+
+        if (string.IsNullOrEmpty(composite.IDSEndpoint) || composite.CurrentPreset == null)
+            return;
+
+        var json = new IdsUpdateRequest
+        {
+            Facility = composite.Identifier,
+            Preset = composite.CurrentPreset.Name,
+            AtisLetter = composite.CurrentAtisLetter,
+            AirportConditions = composite.CurrentPreset.AirportConditions.StripNewLineChars(),
+            Notams = composite.CurrentPreset.Notams.StripNewLineChars(),
+            Timestamp = DateTime.UtcNow,
+            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+            AtisType = composite.AtisType.ToString().ToLowerInvariant()
+        };
+
+        try
+        {
+            await mDownloader.PostJsonAsync(composite.IDSEndpoint, json, cancellationToken);
+        }
+        catch (TaskCanceledException) { }
+        catch (HttpRequestException ex)
+        {
+            Log.Error(ex.ToString());
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("PostIdsUpdate Error: " + ex.Message);
+        }
+    }
+
+    private async Task<string> BuildAtisFromExternalSource(Composite composite, Metar metar, List<AtisVariable> variables)
+    {
+        if (composite == null)
+        {
+            throw new Exception("Composite is null");
+        }
+
         if (composite.CurrentPreset == null)
-            return null;
+        {
+            throw new Exception("CurrentPreset is null");
+        }
+
+        if (metar == null)
+        {
+            throw new Exception("Metar is null");
+        }
 
         var preset = composite.CurrentPreset;
         var data = preset.ExternalGenerator;
 
         if (data == null)
-            return null;
+        {
+            throw new Exception("ExternalGenerator is null");
+        }
 
         var url = data.Url;
 
@@ -166,8 +282,6 @@ public class AtisBuilder : IAtisBuilder
                 url = url.Replace("$notams", notams.TextReplace);
             }
 
-            System.Diagnostics.Debug.WriteLine(url);
-
             try
             {
                 var response = await mDownloader.DownloadStringAsync(url);
@@ -184,105 +298,26 @@ public class AtisBuilder : IAtisBuilder
         return null;
     }
 
-    public void GenerateAcarsText(Composite composite)
+    private void ParseNodesFromMetar(Composite composite, out string atisLetter, out List<AtisVariable> variables)
     {
-        if (composite == null)
-        {
-            throw new Exception("Composite is null");
-        }
-
-        if (composite.CurrentPreset == null)
-        {
-            throw new Exception("CurrentPreset is null");
-        }
-
         if (composite.DecodedMetar == null)
         {
-            throw new Exception("DecodedMetar is null");
+            atisLetter = null;
+            variables = null;
+            return;
         }
 
-        var airport = mNavData.GetAirport(composite.Identifier);
-        composite.AirportData = airport ?? throw new Exception($"{composite.Identifier} not found in airport database.");
-
-        ParseMetar(composite, out Metar metar, out string atisLetter, out List<Variable> variables);
-
-        var acarsText = composite.CurrentPreset.Template;
-
-        foreach (var variable in variables)
-        {
-            acarsText = acarsText.Replace($"[{variable.Find}:VOX]", variable.VoiceReplace);
-            acarsText = acarsText.Replace($"${variable.Find}:VOX", variable.VoiceReplace);
-
-            acarsText = acarsText.Replace($"[{variable.Find}]", variable.TextReplace);
-            acarsText = acarsText.Replace($"${variable.Find}", variable.TextReplace);
-
-            if (variable.Aliases != null)
-            {
-                foreach (var alias in variable.Aliases)
-                {
-                    acarsText = acarsText.Replace($"[{alias}:VOX]", variable.VoiceReplace);
-                    acarsText = acarsText.Replace($"${alias}:VOX", variable.VoiceReplace);
-
-                    acarsText = acarsText.Replace($"[{alias}]", variable.TextReplace);
-                    acarsText = acarsText.Replace($"${alias}", variable.TextReplace);
-                }
-            }
-        }
-
-        acarsText = Regex.Replace(acarsText, @"\s+(?=[.,?!])", ""); // remove extra spaces before punctuation
-        acarsText = Regex.Replace(acarsText, @"\s+", " ");
-        acarsText = Regex.Replace(acarsText, @"(?<=\*)(-?[\,0-9]+)", "$1");
-        acarsText = Regex.Replace(acarsText, @"(?<=\#)(-?[\,0-9]+)", "$1");
-        acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{3})", "$1");
-        acarsText = Regex.Replace(acarsText, @"(?<=\+)([A-Z]{4})", "$1");
-
-        if (!composite.CurrentPreset.HasClosingVariable && composite.AutoIncludeClosingStatement)
-        {
-            acarsText += $" ...ADVS YOU HAVE INFO {composite.CurrentAtisLetter}.";
-        }
-
-        composite.AcarsText = acarsText.ToUpper();
-    }
-
-    private void ParseMetar(Composite composite, out Metar metar, out string atisLetter, out List<Variable> variables)
-    {
-        metar = composite.DecodedMetar;
-        var time = NodeParser.Parse<ObservationTimeNode>(metar, composite);
-        var surfaceWind = NodeParser.Parse<SurfaceWindNode>(metar, composite);
-        var rvr = NodeParser.Parse<RunwayVisualRangeNode>(metar, composite);
-        var visibility = NodeParser.Parse<PrevailingVisibilityNode>(metar, composite);
-        var presentWeather = NodeParser.Parse<PresentWeatherNode>(metar, composite);
-        var clouds = NodeParser.Parse<CloudNode>(metar, composite);
-        var temp = NodeParser.Parse<TemperatureNode>(metar, composite);
-        var dew = NodeParser.Parse<DewpointNode>(metar, composite);
-        var pressure = NodeParser.Parse<AltimeterSettingNode>(metar, composite);
-        var trends = NodeParser.Parse<TrendNode>(metar, composite);
-
-        // Altimeter conversion for PRESSURE_INHG and PRESSURE_HPA variables
-        // TODO: refactor this so it can be moved into the NodeParser
-        var pressureNode = pressure.Node as AltimeterSetting;
-        var pressureHpa = 0.0;
-        var pressureInHg = 0.0;
-        var inHgText = "";
-        var inHgVoice = "";
-        var hpaText = "";
-        var hpaVoice = "";
-
-        if (pressureNode.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
-        {
-            pressureInHg = pressureNode.Value / 100.0;
-            pressureHpa = (int)Math.Floor((pressureNode.Value / 100.0) * 33.86);
-        }
-        else
-        {
-            pressureHpa = pressureNode.Value;
-            pressureInHg = (int)Math.Floor((pressureNode.Value * 0.0295) * 100) / 100.0;
-        }
-
-        inHgText = pressureInHg.ToString("00.00");
-        inHgVoice = pressureInHg.ToString("00.00").NumberToSingular(composite.UseDecimalTerminology);
-        hpaText = pressureHpa.ToString();
-        hpaVoice = pressureHpa.NumberToSingular();
+        var metar = composite.DecodedMetar;
+        var time = NodeParser.Parse<ObservationTimeNode, ObservationDayTime>(metar, composite);
+        var surfaceWind = NodeParser.Parse<SurfaceWindNode, SurfaceWind>(metar, composite);
+        var rvr = NodeParser.Parse<RunwayVisualRangeNode, RunwayVisualRange>(metar, composite);
+        var visibility = NodeParser.Parse<PrevailingVisibilityNode, PrevailingVisibility>(metar, composite);
+        var presentWeather = NodeParser.Parse<PresentWeatherNode, WeatherPhenomena>(metar, composite);
+        var clouds = NodeParser.Parse<CloudNode, CloudLayer>(metar, composite);
+        var temp = NodeParser.Parse<TemperatureNode, TemperatureInfo>(metar, composite);
+        var dew = NodeParser.Parse<DewpointNode, TemperatureInfo>(metar, composite);
+        var pressure = NodeParser.Parse<AltimeterSettingNode, AltimeterSetting>(metar, composite);
+        var trends = NodeParser.Parse<TrendNode, Trend>(metar, composite);
 
         atisLetter = char.Parse(composite.CurrentAtisLetter).LetterToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
@@ -310,7 +345,7 @@ public class AtisBuilder : IAtisBuilder
         {
             if (composite.UseNotamPrefix)
             {
-                notamVoice = composite.UseFaaFormat ? "Notices to air missions. " : "Notices to airmen. ";
+                notamVoice = composite.IsFaaAtis ? "Notices to air missions. " : "Notices to airmen. ";
             }
 
             if (composite.NotamsBeforeFreeText)
@@ -330,14 +365,14 @@ public class AtisBuilder : IAtisBuilder
         notamText = Regex.Replace(notamText, @"[!?.]*([!?.])", "$1"); // clean up duplicate punctuation
         notamText = Regex.Replace(notamText, "\\s+([.,!\":])", "$1");
 
-        if (!string.IsNullOrEmpty(notamText) && composite.UseFaaFormat)
+        if (!string.IsNullOrEmpty(notamText) && composite.IsFaaAtis)
         {
             notamText = "NOTAMS... " + notamText;
         }
 
         var transitionLevelVoice = "";
         var transitionLevelText = "";
-        if (!composite.UseFaaFormat)
+        if (!composite.IsFaaAtis)
         {
             transitionLevelText = "TL N/A";
             transitionLevelVoice = "Transition level not determined";
@@ -363,40 +398,53 @@ public class AtisBuilder : IAtisBuilder
             }
         }
 
-        variables = new List<Variable>
+        variables = new List<AtisVariable>
         {
-            new Variable("FACILITY", composite.AirportData.ID, composite.AirportData.Name),
-            new Variable("ATIS_LETTER", composite.CurrentAtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
-            new Variable("TIME", time.TextAtis, time.VoiceAtis, new []{"OBS_TIME","OBSTIME"}),
-            new Variable("WIND", surfaceWind.TextAtis, surfaceWind.VoiceAtis, new[]{"SURFACE_WIND"}),
-            new Variable("RVR", rvr.TextAtis, rvr.VoiceAtis),
-            new Variable("VIS", visibility.TextAtis, visibility.VoiceAtis, new[]{"PREVAILING_VISIBILITY"}),
-            new Variable("PRESENT_WX", presentWeather.TextAtis, presentWeather.VoiceAtis, new[]{"PRESENT_WEATHER"}),
-            new Variable("CLOUDS", clouds.TextAtis, clouds.VoiceAtis),
-            new Variable("TEMP", temp.TextAtis, temp.VoiceAtis),
-            new Variable("DEW", dew.TextAtis, dew.VoiceAtis),
-            new Variable("PRESSURE", pressure.TextAtis, pressure.VoiceAtis, new[]{"QNH"}),
-            new Variable("PRESSURE_INHG", inHgText, inHgVoice),
-            new Variable("PRESSURE_HPA", hpaText, hpaVoice),
-            new Variable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
-            new Variable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
-            new Variable("NOTAMS", notamText, notamVoice),
-            new Variable("TREND", trends.TextAtis, trends.VoiceAtis),
-            new Variable("TL", transitionLevelText, transitionLevelVoice),
-            new Variable("CLOSING", $" ...ADVS YOU HAVE INFO {composite.CurrentAtisLetter }.", $"ADVISE ON INITIAL CONTACT, YOU HAVE INFORMATION {atisLetter}.")
+            new AtisVariable("FACILITY", composite.AirportData.ID, composite.AirportData.Name),
+            new AtisVariable("ATIS_LETTER", composite.CurrentAtisLetter, atisLetter,  new [] {"LETTER","ATIS_CODE","ID"}),
+            new AtisVariable("TIME", time.TextAtis, time.VoiceAtis, new []{"OBS_TIME","OBSTIME"}),
+            new AtisVariable("WIND", surfaceWind.TextAtis, surfaceWind.VoiceAtis, new[]{"SURFACE_WIND"}),
+            new AtisVariable("RVR", rvr.TextAtis, rvr.VoiceAtis),
+            new AtisVariable("VIS", visibility.TextAtis, visibility.VoiceAtis, new[]{"PREVAILING_VISIBILITY"}),
+            new AtisVariable("PRESENT_WX", presentWeather.TextAtis, presentWeather.VoiceAtis, new[]{"PRESENT_WEATHER"}),
+            new AtisVariable("CLOUDS", clouds.TextAtis, clouds.VoiceAtis),
+            new AtisVariable("TEMP", temp.TextAtis, temp.VoiceAtis),
+            new AtisVariable("DEW", dew.TextAtis, dew.VoiceAtis),
+            new AtisVariable("PRESSURE", pressure.TextAtis, pressure.VoiceAtis, new[]{"QNH"}),
+            new AtisVariable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
+            new AtisVariable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
+            new AtisVariable("NOTAMS", notamText, notamVoice),
+            new AtisVariable("TREND", trends.TextAtis, trends.VoiceAtis),
+            new AtisVariable("TL", transitionLevelText, transitionLevelVoice)
         };
+
+        var closingTextTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
+        var closingVoiceTemplate = composite.AtisFormat.ClosingStatement.Template.Voice;
+
+        if (!string.IsNullOrEmpty(closingTextTemplate) && !string.IsNullOrEmpty(closingVoiceTemplate))
+        {
+            closingTextTemplate = Regex.Replace(closingTextTemplate, @"{letter}", composite.CurrentAtisLetter);
+            closingTextTemplate = Regex.Replace(closingTextTemplate, @"{letter\|word}", atisLetter);
+
+            closingVoiceTemplate = Regex.Replace(closingVoiceTemplate, @"{letter}", atisLetter);
+            closingVoiceTemplate = Regex.Replace(closingVoiceTemplate, @"{letter\|word}", atisLetter);
+
+            variables.Add(new AtisVariable("CLOSING", closingTextTemplate, closingVoiceTemplate));
+        }
+        else
+        {
+            variables.Add(new AtisVariable("CLOSING", "", ""));
+        }
     }
 
     private string FormatForTextToSpeech(string input, Composite composite)
     {
-        System.Diagnostics.Debug.WriteLine(input);
-
         // parse zulu times
         input = Regex.Replace(input, @"([0-9])([0-9])([0-9])([0-8])Z",
-            m => string.Format($"{ int.Parse(m.Groups[1].Value).NumberToSingular() } " +
-                               $"{ int.Parse(m.Groups[2].Value).NumberToSingular() } " +
-                               $"{ int.Parse(m.Groups[3].Value).NumberToSingular() } " +
-                               $"{ int.Parse(m.Groups[4].Value).NumberToSingular() } zulu"));
+            m => string.Format($"{int.Parse(m.Groups[1].Value).NumberToSingular()} " +
+                               $"{int.Parse(m.Groups[2].Value).NumberToSingular()} " +
+                               $"{int.Parse(m.Groups[3].Value).NumberToSingular()} " +
+                               $"{int.Parse(m.Groups[4].Value).NumberToSingular()} zulu"));
 
         // vhf frequencies
         input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => m.Groups[1].Value.NumberToSingular(composite.UseDecimalTerminology));
@@ -405,8 +453,8 @@ public class AtisBuilder : IAtisBuilder
         input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => string.Format("{0}", m.Value.ConvertAlphaNumericToWordGroup())).Trim();
 
         // parse taxiways
-        input = Regex.Replace(input, @"\bTWY ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWY { m.Groups[1].Value.ConvertAlphaNumericToWordGroup() }");
-        input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS { m.Groups[1].Value.ConvertAlphaNumericToWordGroup() }");
+        input = Regex.Replace(input, @"\bTWY ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWY {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
+        input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
 
         // parse runways
         input = Regex.Replace(input, @"\b(RY|RWY|RWYS|RUNWAY|RUNWAYS)\s?([0-9]{1,2})([LRC]?)\b", m =>
@@ -414,7 +462,7 @@ public class AtisBuilder : IAtisBuilder
                 prefix: !string.IsNullOrEmpty(m.Groups[1].Value),
                 plural: !string.IsNullOrEmpty(m.Groups[1].Value) &&
                         (m.Groups[1].Value == "RWYS" || m.Groups[1].Value == "RUNWAYS"),
-                leadingZero: !composite.UseFaaFormat));
+                leadingZero: !composite.IsFaaAtis));
 
         // read numbers in group format, prefixed with # or surrounded with {}
         input = Regex.Replace(input, @"\*(-?[\,0-9]+)", m => int.Parse(m.Groups[1].Value.Replace(",", "")).NumbersToWordsGroup());
@@ -439,22 +487,19 @@ public class AtisBuilder : IAtisBuilder
         var navaids = Regex.Matches(input, @"(?<=\+)([A-Z]{3})");
         if (navaids.Count > 0)
         {
-            foreach (Match m in navaids)
+            foreach (var m in navaids.Where(m => m.Success))
             {
-                if (m.Success)
+                try
                 {
-                    try
+                    var find = mNavData.GetNavaid(m.Value);
+                    if (find != null)
                     {
-                        var find = mNavData.GetNavaid(m.Value);
-                        if (find != null)
-                        {
-                            input = Regex
-                                .Replace(input, $@"\b(?<=\+){m.Value}\b", x => find.Name)
-                                .Replace("+", "");
-                        }
+                        input = Regex
+                            .Replace(input, $@"\b(?<=\+){m.Value}\b", x => find.Name)
+                            .Replace("+", "");
                     }
-                    catch { }
                 }
+                catch { }
             }
         }
 
@@ -462,22 +507,19 @@ public class AtisBuilder : IAtisBuilder
         var airports = Regex.Matches(input, @"(?<=\+)([A-Z0-9]{4})");
         if (airports.Count > 0)
         {
-            foreach (Match m in airports)
+            foreach (var m in airports.Where(m => m.Success))
             {
-                if (m.Success)
+                try
                 {
-                    try
+                    var find = mNavData.GetAirport(m.Value);
+                    if (find != null)
                     {
-                        var find = mNavData.GetAirport(m.Value);
-                        if (find != null)
-                        {
-                            input = Regex
-                                .Replace(input, $@"\b(?<=\+){ m.Value }\b", x => find.Name)
-                                .Replace("+", "");
-                        }
+                        input = Regex
+                            .Replace(input, $@"\b(?<=\+){m.Value}\b", x => find.Name)
+                            .Replace("+", "");
                     }
-                    catch { }
                 }
+                catch { }
             }
         }
 
@@ -494,41 +536,6 @@ public class AtisBuilder : IAtisBuilder
         input = Regex.Replace(input, @"\*", "");
 
         return input.ToUpper();
-    }
-
-    private async void PostIdsUpdate(Composite composite, CancellationToken token)
-    {
-        if (Debugger.IsAttached)
-            return;
-
-        if (string.IsNullOrEmpty(composite.IDSEndpoint) || composite.CurrentPreset == null)
-            return;
-
-        var json = new IdsRestRequest
-        {
-            Facility = composite.Identifier,
-            Preset = composite.CurrentPreset.Name,
-            AtisLetter = composite.CurrentAtisLetter,
-            AirportConditions = composite.CurrentPreset.AirportConditions.StripNewLineChars(),
-            Notams = composite.CurrentPreset.Notams.StripNewLineChars(),
-            Timestamp = DateTime.UtcNow,
-            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-            AtisType = composite.AtisType.ToString().ToLowerInvariant()
-        };
-
-        try
-        {
-            await mDownloader.PostJsonAsync(composite.IDSEndpoint, json);
-        }
-        catch (TaskCanceledException) { }
-        catch (HttpRequestException ex)
-        {
-            Log.Error(ex.ToString());
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("PostIdsUpdate Error: " + ex.Message);
-        }
     }
 
     private static Dictionary<string, string> Translations => new Dictionary<string, string>
@@ -721,33 +728,4 @@ public class AtisBuilder : IAtisBuilder
         {"ASDEX", "AS-DEX" },
         {"ASDE-X", "AS-DEX" }
     };
-}
-
-[Serializable]
-internal class IdsRestRequest
-{
-    public string Facility { get; set; }
-    public string Preset { get; set; }
-    public string AtisLetter { get; set; }
-    public string AirportConditions { get; set; }
-    public string Notams { get; set; }
-    public DateTime Timestamp { get; set; }
-    public string Version { get; set; }
-    public string AtisType { get; set; }
-}
-
-internal class Variable
-{
-    public string Find { get; set; }
-    public string TextReplace { get; set; }
-    public string VoiceReplace { get; set; }
-    public string[] Aliases { get; set; }
-
-    public Variable(string find, string textReplace, string voiceReplace, string[] aliases = null)
-    {
-        Find = find;
-        TextReplace = textReplace;
-        VoiceReplace = voiceReplace;
-        Aliases = aliases;
-    }
 }

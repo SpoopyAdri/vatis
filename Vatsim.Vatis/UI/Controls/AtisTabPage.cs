@@ -11,7 +11,7 @@ internal class AtisTabPage : TabPage
 {
     private bool mAlternateColor;
     private bool mIsNewAtis;
-    private System.Timers.Timer mBlinkTimer;
+    private readonly System.Timers.Timer mBlinkTimer;
 
     public Connection Connection { get; private set; }
     public Composite Composite { get; private set; }

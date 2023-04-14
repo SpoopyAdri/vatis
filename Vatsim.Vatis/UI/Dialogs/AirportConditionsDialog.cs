@@ -47,7 +47,7 @@ public partial class AirportConditionsDialog : Form
 
     private void lstConditions_Format(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = (e.ListItem as DefinedText)?.ToString();
+        e.Value = (e.ListItem as DefinedTextMeta)?.ToString();
     }
 
     private void lstConditions_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,7 +77,7 @@ public partial class AirportConditionsDialog : Form
     {
         if (lstConditions.SelectedIndex >= 1)
         {
-            var definition = lstConditions.SelectedItem as DefinedText;
+            var definition = lstConditions.SelectedItem as DefinedTextMeta;
             var newIndex = lstConditions.SelectedIndex - 1;
             if (definition != null)
             {
@@ -88,7 +88,7 @@ public partial class AirportConditionsDialog : Form
 
             var idx = 1;
             mComposite.AirportConditionDefinitions.Clear();
-            foreach (DefinedText condition in lstConditions.Items)
+            foreach (DefinedTextMeta condition in lstConditions.Items)
             {
                 condition.Ordinal = idx++;
                 mComposite.AirportConditionDefinitions.Add(condition);
@@ -100,7 +100,7 @@ public partial class AirportConditionsDialog : Form
     {
         if (lstConditions.SelectedIndex <= lstConditions.Items.Count - 1)
         {
-            var definition = lstConditions.SelectedItem as DefinedText;
+            var definition = lstConditions.SelectedItem as DefinedTextMeta;
             var newIndex = lstConditions.SelectedIndex + 1;
             if (definition != null)
             {
@@ -111,7 +111,7 @@ public partial class AirportConditionsDialog : Form
 
             var idx = 1;
             mComposite.AirportConditionDefinitions.Clear();
-            foreach (DefinedText condition in lstConditions.Items)
+            foreach (DefinedTextMeta condition in lstConditions.Items)
             {
                 condition.Ordinal = idx++;
                 mComposite.AirportConditionDefinitions.Add(condition);
@@ -121,7 +121,7 @@ public partial class AirportConditionsDialog : Form
 
     private void lstConditions_ItemCheck(object sender, ItemCheckEventArgs e)
     {
-        var item = lstConditions.Items[e.Index] as DefinedText;
+        var item = lstConditions.Items[e.Index] as DefinedTextMeta;
         var configDefinition = mComposite.AirportConditionDefinitions.FirstOrDefault(t => t.Text == item.Text);
         if (configDefinition != null)
         {
@@ -137,7 +137,7 @@ public partial class AirportConditionsDialog : Form
                     "Are you sure you want to delete the selected definition? This action cannot be undone.",
                     "Delete Definition", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
             {
-                var item = lstConditions.SelectedItem as DefinedText;
+                var item = lstConditions.SelectedItem as DefinedTextMeta;
                 mComposite.AirportConditionDefinitions.RemoveAll(t => t.Text == item.Text);
                 PopulateList();
             }
@@ -170,7 +170,7 @@ public partial class AirportConditionsDialog : Form
                 }
                 else
                 {
-                    var definition = new DefinedText
+                    var definition = new DefinedTextMeta
                     {
                         Description = dlg.Description,
                         Text = dlg.TextValue,
@@ -188,7 +188,7 @@ public partial class AirportConditionsDialog : Form
         using (var dlg = new TextDefinitionDialog())
         {
             dlg.TopMost = mKeepOnTop;
-            if (lstConditions.SelectedItem is DefinedText selectedDefinition)
+            if (lstConditions.SelectedItem is DefinedTextMeta selectedDefinition)
             {
                 dlg.Description = selectedDefinition.Description;
                 dlg.TextValue = selectedDefinition.Text;

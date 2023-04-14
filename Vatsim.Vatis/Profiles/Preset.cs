@@ -11,7 +11,6 @@ public class Preset : IPreset, ICloneable
     public string Name { get; set; }
     public string AirportConditions { get; set; }
     public string Notams { get; set; }
-    public string ArbitraryText { get; set; }
     public string Template { get; set; }
     public ExternalGenerator ExternalGenerator { get; set; } = new();
 

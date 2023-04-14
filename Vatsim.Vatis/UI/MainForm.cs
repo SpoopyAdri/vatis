@@ -11,10 +11,8 @@ using Vatsim.Vatis.AudioForVatsim;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
-using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Network;
 using Vatsim.Vatis.Profiles;
-using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
 using Vatsim.Vatis.Utils;
@@ -29,12 +27,9 @@ public partial class MainForm : Form
     private readonly IAtisBuilder mAtisBuilder;
     private readonly IConnectionFactory mConnectionFactory;
     private readonly Weather.MetarParser mMetarParser;
-    private readonly SynchronizationContext mSyncContext;
-    private readonly List<Connection> mConnections = new List<Connection>();
+    private readonly List<Connection> mConnections = new();
     private readonly System.Windows.Forms.Timer mUtcClock;
     private bool mInitializing = true;
-    private const int WM_NCLBUTTONDOWN = 0xA1;
-    private const int HT_CAPTION = 0x2;
 
     public MainForm(IWindowFactory windowFactory, IAppConfig appConfig,
         IAtisBuilder atisBuilder, IAudioManager audioManager, IConnectionFactory connectionFactory)
@@ -46,7 +41,6 @@ public partial class MainForm : Form
         mAppConfig = appConfig;
         mAtisBuilder = atisBuilder;
         mAudioManager = audioManager;
-        mSyncContext = SynchronizationContext.Current;
         mMetarParser = new Weather.MetarParser();
 
         utcClock.Text = DateTime.UtcNow.ToString("HH:mm/ss");
@@ -59,10 +53,10 @@ public partial class MainForm : Form
     }
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern bool ReleaseCapture();
+    private static extern bool ReleaseCapture();
 
     protected override CreateParams CreateParams
     {
@@ -80,7 +74,7 @@ public partial class MainForm : Form
         if (e.Button == MouseButtons.Left)
         {
             ReleaseCapture();
-            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            SendMessage(Handle, 0xA1, 0x2, 0);
         }
     }
 
@@ -273,9 +267,7 @@ public partial class MainForm : Form
                     if (connection.IsConnected)
                     {
                         // If there's a previous request, cancel it.
-                        if (cancellationToken != null)
-                            cancellationToken.Cancel();
-
+                        cancellationToken?.Cancel();
                         cancellationToken = new CancellationTokenSource();
 
                         connection.Disconnect();
@@ -330,7 +322,7 @@ public partial class MainForm : Form
                             sound.Play();
                         }
 
-                        mSyncContext.Post(o => { FlashTaskbar.Flash(this); }, null);
+                        FlashTaskbar.FlashWindow();
                     }
                     else
                     {
@@ -339,23 +331,20 @@ public partial class MainForm : Form
                             try
                             {
                                 // If there's a previous request, cancel it.
-                                if (cancellationToken != null)
-                                    cancellationToken.Cancel();
-
+                                cancellationToken?.Cancel();
                                 cancellationToken = new CancellationTokenSource();
 
-                                await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token)
-                                    .ContinueWith(t =>
+                                await mAtisBuilder
+                                .BuildVoiceAtis(composite, cancellationToken.Token)
+                                .ContinueWith(c =>
+                                {
+                                    if (!args.IsUpdated)
                                     {
-                                        if (!args.IsUpdated)
-                                        {
-                                            tabPage.Connection.SendSubscriberNotification();
-                                        }
-                                    }, cancellationToken.Token);
+                                        tabPage.Connection.SendSubscriberNotification();
+                                    }
+                                }, cancellationToken.Token);
                             }
-                            catch (TaskCanceledException)
-                            {
-                            }
+                            catch (TaskCanceledException) { }
                             catch (AggregateException ex)
                             {
                                 tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -370,10 +359,9 @@ public partial class MainForm : Form
                         }
                         else
                         {
-                            mAtisBuilder.GenerateAcarsText(composite);
-                            mSyncContext.Post(
-                                o => { tabPage.CompositeMeta.VoiceRecordEnabled = !composite.AtisVoice.UseTextToSpeech; },
-                                null);
+                            tabPage.CompositeMeta.VoiceRecordEnabled = !composite.AtisVoice.UseTextToSpeech;
+                            mAtisBuilder.BuildTextAtis(composite);
+                            await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                         }
                     }
                 };
@@ -390,16 +378,12 @@ public partial class MainForm : Form
                         try
                         {
                             // If there's a previous request, cancel it.
-                            if (cancellationToken != null)
-                                cancellationToken.Cancel();
-
+                            cancellationToken?.Cancel();
                             cancellationToken = new CancellationTokenSource();
 
-                            await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token);
+                            await mAtisBuilder.BuildVoiceAtis(composite, cancellationToken.Token);
                         }
-                        catch (TaskCanceledException)
-                        {
-                        }
+                        catch (TaskCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -414,7 +398,8 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.GenerateAcarsText(composite);
+                        mAtisBuilder.BuildTextAtis(composite);
+                        await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };
                 tabPage.CompositeMeta.AtisLetterChanged += async (sender, args) =>
@@ -433,14 +418,15 @@ public partial class MainForm : Form
                         try
                         {
                             // If there's a previous request, cancel it.
-                            if (cancellationToken != null)
-                                cancellationToken.Cancel();
-
+                            cancellationToken?.Cancel();
                             cancellationToken = new CancellationTokenSource();
 
-                            await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token)
-                                .ContinueWith(t => { tabPage.Connection.SendSubscriberNotification(); },
-                                    cancellationToken.Token);
+                            await mAtisBuilder
+                            .BuildVoiceAtis(composite, cancellationToken.Token)
+                            .ContinueWith(c =>
+                            {
+                                tabPage.Connection.SendSubscriberNotification();
+                            }, cancellationToken.Token);
                         }
                         catch (TaskCanceledException) { }
                         catch (AggregateException ex)
@@ -457,7 +443,8 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.GenerateAcarsText(composite);
+                        mAtisBuilder.BuildTextAtis(composite);
+                        await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };
                 tabPage.CompositeMeta.GenerateNewAtis += async (sender, args) =>
@@ -470,16 +457,12 @@ public partial class MainForm : Form
                         try
                         {
                             // If there's a previous request, cancel it.
-                            if (cancellationToken != null)
-                                cancellationToken.Cancel();
-
+                            cancellationToken?.Cancel();
                             cancellationToken = new CancellationTokenSource();
 
-                            await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token);
+                            await mAtisBuilder.BuildVoiceAtis(composite, cancellationToken.Token);
                         }
-                        catch (TaskCanceledException)
-                        {
-                        }
+                        catch (TaskCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -494,7 +477,8 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.GenerateAcarsText(composite);
+                        mAtisBuilder.BuildTextAtis(composite);
+                        await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };
                 tabPage.CompositeMeta.RecordedAtisMemoryStreamChanged += async (sender, args) =>
@@ -505,25 +489,20 @@ public partial class MainForm : Form
                     try
                     {
                         // If there's a previous request, cancel it.
-                        if (cancellationToken != null)
-                            cancellationToken.Cancel();
-
+                        cancellationToken?.Cancel();
                         cancellationToken = new CancellationTokenSource();
 
-                        composite.MemoryStream = args.AtisMemoryStream;
+                        composite.RecordedMemoryStream = args.AtisMemoryStream;
 
-                        await mAtisBuilder.BuildAtisAsync(composite, cancellationToken.Token).ContinueWith(t =>
+                        await mAtisBuilder
+                        .BuildVoiceAtis(composite, cancellationToken.Token)
+                        .ContinueWith(t =>
                         {
-                            mSyncContext.Post(o =>
-                            {
-                                tabPage.CompositeMeta.VoiceRecordedAtisActive = true;
-                                tabPage.Connection.SendSubscriberNotification();
-                            }, null);
+                            tabPage.CompositeMeta.VoiceRecordedAtisActive = true;
+                            tabPage.Connection.SendSubscriberNotification();
                         }, cancellationToken.Token);
                     }
-                    catch (TaskCanceledException)
-                    {
-                    }
+                    catch (TaskCanceledException) { }
                     catch (AggregateException ex)
                     {
                         tabPage.CompositeMeta.Error = "Error: " + string.Join(", ", ex.Flatten().InnerExceptions.Select(t => t.Message));
@@ -562,11 +541,8 @@ public partial class MainForm : Form
 
                     EventBus.Publish(this, new UpdateMiniWindowRequested());
 
-                    mSyncContext.Post(o =>
-                    {
-                        tabPage.CompositeMeta.VoiceRecordEnabled = false;
-                        tabPage.CompositeMeta.VoiceRecordedAtisActive = false;
-                    }, null);
+                    tabPage.CompositeMeta.VoiceRecordEnabled = false;
+                    tabPage.CompositeMeta.VoiceRecordedAtisActive = false;
 
                     tabPage.CompositeMeta.Status = ConnectionStatus.Disconnected;
                     tabPage.Parent?.Invalidate();
@@ -581,10 +557,7 @@ public partial class MainForm : Form
 
                     tabPage.CompositeMeta.Error = null;
                     tabPage.CompositeMeta.Status = ConnectionStatus.Connecting;
-                    if (composite.AtisVoice != null)
-                    {
-                        mSyncContext.Post(o => { tabPage.CompositeMeta.VoiceRecordedAtisActive = false; }, null);
-                    }
+                    tabPage.CompositeMeta.VoiceRecordedAtisActive = false;
                 };
                 connection.ChangeServerReceived += (sender, args) =>
                 {

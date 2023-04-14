@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Vatsim.Vatis.Weather.Objects;
 
-namespace Vatsim.Vatis.Atis;
+namespace Vatsim.Vatis.Atis.Nodes;
 
-public class TrendNode : AtisNode
+public class TrendNode : BaseNode<Trend>
 {
     public TrendNode()
     { }
@@ -75,5 +75,15 @@ public class TrendNode : AtisNode
 
         VoiceAtis = string.Join(". ", tts);
         TextAtis = string.Join(" ", acars);
+    }
+
+    public override string ParseTextVariables(Trend node, string format)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override string ParseVoiceVariables(Trend node, string format)
+    {
+        throw new System.NotImplementedException();
     }
 }

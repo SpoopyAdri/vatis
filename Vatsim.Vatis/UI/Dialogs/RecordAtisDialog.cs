@@ -36,7 +36,7 @@ public partial class RecordAtisDialog : Form
 
         AtisMemoryStream = new MemoryStream(20000000);
 
-        txtAtisScript.Text = composite.AcarsText;
+        txtAtisScript.Text = composite.TextAtis;
 
         var inputDevices = ClientAudioUtilities.GetInputDevices().ToArray();
         ddlInputDeviceName.DataSource = inputDevices;
@@ -102,20 +102,12 @@ public partial class RecordAtisDialog : Form
                 AtisMemoryStream.SetLength(0);
                 Close();
             }
-            else
-            {
-                return;
-            }
         }
         else
         {
-            if (HasAtisStream)
+            if (HasAtisStream && MessageBox.Show(this, "Are you sure you want to discard your recorded ATIS?", "Discard ATIS?", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                if (MessageBox.Show(this, "Are you sure you want to discard your recorded ATIS?", "Discard ATIS?",
-                        MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    return;
-                }
+                return;
             }
 
             Close();

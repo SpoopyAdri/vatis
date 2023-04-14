@@ -37,6 +37,7 @@ public static class TabPageExtensions
 
         mHiddenPages.Remove(tabPage);
         tabControl.TabPages.Insert(index, tabPage);
+        tabControl.Invalidate();
     }
 
     public static void HideTabPage(this System.Windows.Forms.TabPage tabPage)
@@ -44,9 +45,12 @@ public static class TabPageExtensions
         var tabControl = (System.Windows.Forms.TabControl)tabPage.Parent;
 
         if (!mHiddenPages.ContainsKey(tabPage))
-            mHiddenPages.Add(tabPage, new object[] { tabControl, tabPage.TabIndex });
+            mHiddenPages.Add(tabPage, new object[] { tabControl, tabPage.TabIndex + 1 });
 
         if (tabControl != null)
+        {
             tabControl.TabPages.Remove(tabPage);
+            tabControl.Invalidate();
+        }
     }
 }

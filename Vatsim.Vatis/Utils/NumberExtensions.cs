@@ -131,8 +131,6 @@ public static class NumberExtensions
     public static string NumberToSingular(this string input, bool useDecimalTerminology = false)
     {
         var group = new List<string>();
-
-        var punctuationMatch = Regex.Match(input, @"[.!?\\-]");
         var numberMatch = Regex.Match(input, @"[0-9]\d*(\.\d+)?");
 
         if (numberMatch.Success)

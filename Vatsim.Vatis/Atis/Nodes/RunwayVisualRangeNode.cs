@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Objects;
 
-namespace Vatsim.Vatis.Atis;
+namespace Vatsim.Vatis.Atis.Nodes;
 
-public class RunwayVisualRangeNode : AtisNode
+public class RunwayVisualRangeNode : BaseNode<RunwayVisualRange>
 {
     public RunwayVisualRangeNode()
     { }
@@ -116,5 +116,15 @@ public class RunwayVisualRangeNode : AtisNode
 
         TextAtis = string.Join(" ", acars);
         VoiceAtis = string.Join(" ", tts).TrimEnd('.');
+    }
+
+    public override string ParseTextVariables(RunwayVisualRange node, string format)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override string ParseVoiceVariables(RunwayVisualRange node, string format)
+    {
+        throw new System.NotImplementedException();
     }
 }

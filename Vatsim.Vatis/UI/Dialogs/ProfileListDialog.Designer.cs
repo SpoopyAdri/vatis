@@ -32,13 +32,13 @@ namespace Vatsim.Vatis.UI.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileListDialog));
             this.lblVersion = new System.Windows.Forms.Label();
-            this.btnExit = new ExButton();
-            this.btnExport = new ExButton();
-            this.btnImport = new ExButton();
-            this.btnDelete = new ExButton();
-            this.btnRename = new ExButton();
-            this.btnNew = new ExButton();
-            this.pnlFacilityList = new HitTestPanel();
+            this.btnExit = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnExport = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnImport = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnDelete = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnRename = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnNew = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.pnlFacilityList = new Vatsim.Vatis.UI.Controls.HitTestPanel();
             this.listProfiles = new System.Windows.Forms.ListBox();
             this.pnlFacilityList.SuspendLayout();
             this.SuspendLayout();
@@ -185,7 +185,7 @@ namespace Vatsim.Vatis.UI.Dialogs
             this.listProfiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listProfiles_KeyDown);
             this.listProfiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listProfiles_MouseDoubleClick);
             // 
-            // ProfileList
+            // ProfileListDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,6 +204,7 @@ namespace Vatsim.Vatis.UI.Dialogs
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProfileListDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "vATIS Profiles";
             this.pnlFacilityList.ResumeLayout(false);
             this.ResumeLayout(false);

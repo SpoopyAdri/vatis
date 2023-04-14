@@ -50,7 +50,7 @@ namespace Vatsim.Vatis.UI
             this.btnRestore.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRestore.ForeColor = System.Drawing.Color.White;
             this.btnRestore.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.Image")));
-            this.btnRestore.Location = new System.Drawing.Point(282, 6);
+            this.btnRestore.Location = new System.Drawing.Point(280, 6);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Pushed = false;
             this.btnRestore.PushedColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));

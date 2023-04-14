@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Reflection;
 using System.Windows.Forms;
 using Vatsim.Vatis.UI;
 
@@ -37,12 +36,6 @@ internal static class ScreenUtils
     {
         form.Location = properties.Location;
         form.TopMost = properties.TopMost;
-
-        if (form.GetType().IsDefined(typeof(ResizableForm)))
-        {
-            form.Size = properties.Size ?? new Size();
-        }
-
         EnsureOnScreen(form);
     }
 
@@ -50,10 +43,5 @@ internal static class ScreenUtils
     {
         properties.Location = form.Location;
         properties.TopMost = form.TopMost;
-
-        if (form.GetType().IsDefined(typeof(ResizableForm)))
-        {
-            properties.Size = form.Size;
-        }
     }
 }

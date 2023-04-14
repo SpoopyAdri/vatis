@@ -128,6 +128,39 @@ namespace Vatsim.Vatis.Weather.Objects
             };
         }
 
+        public int ToKts(int speed)
+        {
+            return WindUnit switch
+            {
+                WindUnit.Knots => speed,
+                WindUnit.KilometersPerHour => (int)(speed * 0.539957),
+                WindUnit.MetersPerSecond => (int)(speed * 1.94384),
+                _ => speed,
+            };
+        }
+
+        public int ToKph(int speed)
+        {
+            return WindUnit switch
+            {
+                WindUnit.Knots => (int)(speed * 1.852),
+                WindUnit.KilometersPerHour => speed,
+                WindUnit.MetersPerSecond => (int)(speed * 3.6),
+                _ => speed,
+            };
+        }
+
+        public int ToMps(int speed)
+        {
+            return WindUnit switch
+            {
+                WindUnit.Knots => (int)(speed * 0.514444),
+                WindUnit.KilometersPerHour => (int)(speed * 0.277778),
+                WindUnit.MetersPerSecond => speed,
+                _ => speed,
+            };
+        }
+
         #endregion
     }
 }

@@ -37,13 +37,13 @@ internal partial class CompositePanel : UserControl
     public bool VoiceRecordEnabled
     {
         get => btnRecord.Enabled;
-        set => btnRecord.Enabled = value;
+        set => mSyncContext.Post(o => btnRecord.Enabled = value, null);
     }
 
     public bool VoiceRecordedAtisActive
     {
         get => btnRecord.Clicked;
-        set => btnRecord.Clicked = value;
+        set => mSyncContext.Post(o => btnRecord.Clicked = value, null);
     }
 
     public string AtisLetter
@@ -52,7 +52,7 @@ internal partial class CompositePanel : UserControl
         set
         {
             mCurrentAtisLetter = value;
-            mSyncContext.Post(o => { atisLetter.Text = mCurrentAtisLetter; }, null);
+            mSyncContext.Post(o => atisLetter.Text = mCurrentAtisLetter, null);
         }
     }
 
@@ -81,13 +81,13 @@ internal partial class CompositePanel : UserControl
     public string Wind
     {
         get => lblWind.Text;
-        set => mSyncContext.Post(o => { lblWind.Text = (value ?? "-----"); }, null);
+        set => mSyncContext.Post(o => lblWind.Text = (value ?? "-----"), null);
     }
 
     public string Altimeter
     {
         get => lblAltimeter.Text;
-        set => mSyncContext.Post(o => { lblAltimeter.Text = (value ?? "-----"); }, null);
+        set => mSyncContext.Post(o => lblAltimeter.Text = (value ?? "-----"), null);
     }
 
     public ConnectionStatus Status

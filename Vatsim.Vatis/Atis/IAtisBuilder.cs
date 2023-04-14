@@ -6,6 +6,7 @@ namespace Vatsim.Vatis.Atis;
 
 public interface IAtisBuilder
 {
-    Task BuildAtisAsync(Composite composite, CancellationToken cancellationToken);
-    void GenerateAcarsText(Composite composite);
+    Task BuildVoiceAtis(Composite composite, CancellationToken cancellationToken);
+    void BuildTextAtis(Composite composite);
+    Task UpdateIds(Composite composite, CancellationToken cancellationToken);
 }

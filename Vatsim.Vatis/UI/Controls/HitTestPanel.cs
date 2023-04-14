@@ -29,17 +29,15 @@ class HitTestPanel : Panel
         }
     }
 
-    protected override void OnPaint(PaintEventArgs pevent)
+    protected override void OnPaint(PaintEventArgs e)
     {
-        base.OnPaint(pevent);
+        base.OnPaint(e);
 
         if (ShowBorder)
         {
-            Rectangle rect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
-            using (Pen pen = new Pen(BorderColor))
-            {
-                pevent.Graphics.DrawRectangle(pen, rect);
-            }
+            Rectangle rect = new(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+            using Pen pen = new(BorderColor);
+            e.Graphics.DrawRectangle(pen, rect);
         }
     }
 }

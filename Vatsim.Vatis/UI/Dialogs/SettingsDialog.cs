@@ -114,7 +114,7 @@ public partial class SettingsDialog : Form
         MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
     }
 
-    private class ComboBoxItem
+    private sealed class ComboBoxItem
     {
         public string Text { get; set; }
         public object Value { get; set; }

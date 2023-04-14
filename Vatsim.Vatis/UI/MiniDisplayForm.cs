@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.UI.Controls;
-using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 
@@ -14,19 +12,20 @@ public partial class MiniDisplayForm : Form
 {
     private readonly IAppConfig mAppConfig;
     private readonly Timer mUtcClock;
-    private bool mInitializing = true;
     private const int WM_NCLBUTTONDOWN = 0xA1;
     private const int HT_CAPTION = 0x2;
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
-    public static extern bool ReleaseCapture();
+    private static extern bool ReleaseCapture();
 
     public MiniDisplayForm(IAppConfig appConfig)
     {
         InitializeComponent();
+
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
         mAppConfig = appConfig;
 
@@ -51,6 +50,7 @@ public partial class MiniDisplayForm : Form
             return handleParam;
         }
     }
+
     protected override void OnMouseDown(MouseEventArgs e)
     {
         base.OnMouseDown(e);
@@ -67,12 +67,12 @@ public partial class MiniDisplayForm : Form
         RefreshDisplay();
     }
 
-    protected override void OnPaint(PaintEventArgs pevent)
+    protected override void OnPaint(PaintEventArgs e)
     {
-        base.OnPaint(pevent);
-        Rectangle rect = new Rectangle(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+        base.OnPaint(e);
+        Rectangle rect = new(ClientRectangle.Left, ClientRectangle.Top, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
         using Pen pen = new Pen(Color.FromArgb(0, 0, 0));
-        pevent.Graphics.DrawRectangle(pen, rect);
+        e.Graphics.DrawRectangle(pen, rect);
     }
 
     private void btnRestore_Click(object sender, EventArgs e)
@@ -88,37 +88,11 @@ public partial class MiniDisplayForm : Form
         base.OnFormClosing(e);
     }
 
-    protected override void OnMove(EventArgs e)
-    {
-        base.OnMove(e);
-
-        if (!mInitializing)
-        {
-            ScreenUtils.SaveWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
-            mAppConfig.SaveConfig();
-        }
-    }
-
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-
         EventBus.Register(this);
-
-        if (mAppConfig.MiniDisplayWindowProperties == null)
-        {
-            mAppConfig.MiniDisplayWindowProperties = new WindowProperties();
-            mAppConfig.MiniDisplayWindowProperties.Location = ScreenUtils.CenterOnScreen(this);
-            mAppConfig.SaveConfig();
-        }
-
-        if (mAppConfig.MiniDisplayWindowProperties.TopMost != mAppConfig.WindowProperties.TopMost)
-        {
-            mAppConfig.MiniDisplayWindowProperties.TopMost = mAppConfig.WindowProperties.TopMost;
-        }
-
-        ScreenUtils.ApplyWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
-        mInitializing = false;
+        TopMost = mAppConfig.WindowProperties.TopMost;
     }
 
     private void RefreshDisplay()
@@ -167,7 +141,6 @@ public partial class MiniDisplayForm : Form
                     Wind = composite?.DecodedMetar?.SurfaceWind.RawValue ?? "-M-",
                     Altimeter = composite?.DecodedMetar?.AltimeterSetting.RawValue ?? "-M-",
                     Composite = composite,
-                    Margin = new Padding(0, 0, 0, 5),
                     Dock = DockStyle.Fill
                 };
 
@@ -188,16 +161,16 @@ public partial class MiniDisplayForm : Form
                     item.AtisLetter = args.Value;
                 };
 
-                tlpMain.RowCount++;
                 tlpMain.RowStyles.Add(new RowStyle
                 {
-                    SizeType = SizeType.AutoSize
+                    SizeType = SizeType.Percent
                 });
-                tlpMain.Controls.Add(item, 0, tlpMain.RowCount - 1);
+                tlpMain.Controls.Add(item, 0, tlpMain.RowCount);
+                tlpMain.RowCount++;
             }
         }
 
-        Height = (tlpMain.RowCount * 35) + 15;
+        Height = (tlpMain.RowCount * 45);
     }
 
     public void HandleEvent(UpdateMiniWindowRequested evt)
