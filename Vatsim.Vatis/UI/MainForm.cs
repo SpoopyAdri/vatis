@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vatsim.Vatis.Atis;
 using Vatsim.Vatis.AudioForVatsim;
