@@ -39,17 +39,17 @@ public class AtisBuilder : IAtisBuilder
     {
         if (composite == null)
         {
-            throw new Exception("Composite is null");
+            throw new AtisBuilderException("Composite is null");
         }
 
         if (composite.CurrentPreset == null)
         {
-            throw new Exception("CurrentPreset is null");
+            throw new AtisBuilderException("CurrentPreset is null");
         }
 
         if (composite.DecodedMetar == null)
         {
-            throw new Exception("DecodedMetar is null");
+            throw new AtisBuilderException("DecodedMetar is null");
         }
 
         if (composite.AirportData == null)
@@ -104,17 +104,17 @@ public class AtisBuilder : IAtisBuilder
     {
         if (composite == null)
         {
-            throw new Exception("Composite is null");
+            throw new AtisBuilderException("Composite is null");
         }
 
         if (composite.CurrentPreset == null)
         {
-            throw new Exception("CurrentPreset is null");
+            throw new AtisBuilderException("CurrentPreset is null");
         }
 
         if (composite.DecodedMetar == null)
         {
-            throw new Exception("DecodedMetar is null");
+            throw new AtisBuilderException("DecodedMetar is null");
         }
 
         composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new Exception($"{composite.Identifier} not found in airport database.");
@@ -128,7 +128,7 @@ public class AtisBuilder : IAtisBuilder
 
             if (externalAtis == null)
             {
-                throw new Exception("Failed to create external ATIS");
+                throw new AtisBuilderException("Failed to create external ATIS");
             }
 
             composite.TextAtis = externalAtis.ToUpper();
@@ -223,14 +223,14 @@ public class AtisBuilder : IAtisBuilder
         {
             await mDownloader.PostJsonAsync(composite.IDSEndpoint, json, cancellationToken);
         }
-        catch (TaskCanceledException) { }
+        catch (OperationCanceledException) { }
         catch (HttpRequestException ex)
         {
             Log.Error(ex.ToString());
         }
         catch (Exception ex)
         {
-            throw new Exception("PostIdsUpdate Error: " + ex.Message);
+            throw new AtisBuilderException("PostIdsUpdate Error: " + ex.Message);
         }
     }
 

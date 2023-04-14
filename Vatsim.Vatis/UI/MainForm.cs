@@ -348,7 +348,7 @@ public partial class MainForm : Form
                                     }
                                 }, cancellationToken.Token);
                             }
-                            catch (TaskCanceledException) { }
+                            catch (OperationCanceledException) { }
                             catch (AggregateException ex)
                             {
                                 tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -387,7 +387,7 @@ public partial class MainForm : Form
 
                             await mAtisBuilder.BuildVoiceAtis(composite, cancellationToken.Token);
                         }
-                        catch (TaskCanceledException) { }
+                        catch (OperationCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -432,7 +432,7 @@ public partial class MainForm : Form
                                 tabPage.Connection.SendSubscriberNotification();
                             }, cancellationToken.Token);
                         }
-                        catch (TaskCanceledException) { }
+                        catch (OperationCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -466,7 +466,7 @@ public partial class MainForm : Form
 
                             await mAtisBuilder.BuildVoiceAtis(composite, cancellationToken.Token);
                         }
-                        catch (TaskCanceledException) { }
+                        catch (OperationCanceledException) { }
                         catch (AggregateException ex)
                         {
                             tabPage.CompositeMeta.Error = "Error: " + string.Join(", ",
@@ -506,7 +506,7 @@ public partial class MainForm : Form
                             tabPage.Connection.SendSubscriberNotification();
                         }, cancellationToken.Token);
                     }
-                    catch (TaskCanceledException) { }
+                    catch (OperationCanceledException) { }
                     catch (AggregateException ex)
                     {
                         tabPage.CompositeMeta.Error = "Error: " + string.Join(", ", ex.Flatten().InnerExceptions.Select(t => t.Message));

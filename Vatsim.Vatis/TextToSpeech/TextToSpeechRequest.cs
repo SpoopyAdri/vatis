@@ -44,7 +44,6 @@ public class TextToSpeechRequest : ITextToSpeechRequest
                     }
                 }
             }
-            catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
         }
 
@@ -66,7 +65,6 @@ public class TextToSpeechRequest : ITextToSpeechRequest
                 return stream.ToArray();
             }
         }
-        catch (TaskCanceledException) { }
         catch (OperationCanceledException) { }
 
         return null;
