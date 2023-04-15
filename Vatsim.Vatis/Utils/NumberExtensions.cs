@@ -8,37 +8,36 @@ namespace Vatsim.Vatis.Utils;
 public static class NumberExtensions
 {
     /// <summary>
-    /// Translates numeric digit into word string.
-    /// 1,500 = one thousand five hundred.
-    /// 15,000 = fifteen thousand
+    /// Converts the number to group form for added clarity
+    /// Example: 10,000...Ten thousand, 11,500...Eleven thousand five hundred
     /// </summary>
-    /// <param name="number">Numeric digit</param>
-    /// <returns></returns>
-    public static string NumbersToWordsGroup(this int number)
+    /// <param name="number">The number to convert</param>
+    /// <returns>Returns the number in group word form</returns>
+    public static string ToGroupForm(this int number)
     {
         if (number == 0)
             return "zero";
 
         if (number < 0)
-            return "minus " + Math.Abs(number).NumbersToWordsGroup();
+            return "minus " + Math.Abs(number).ToGroupForm();
 
         string words = "";
 
         if (number / 1000000 > 0)
         {
-            words += (number / 1000000).NumbersToWordsGroup() + " million ";
+            words += (number / 1000000).ToGroupForm() + " million ";
             number %= 1000000;
         }
 
         if (number / 1000 > 0)
         {
-            words += (number / 1000).NumbersToWordsGroup() + " thousand ";
+            words += (number / 1000).ToGroupForm() + " thousand ";
             number %= 1000;
         }
 
         if (number / 100 > 0)
         {
-            words += (number / 100).NumbersToWordsGroup() + " hundred ";
+            words += (number / 100).ToGroupForm() + " hundred ";
             number %= 100;
         }
 
@@ -64,14 +63,13 @@ public static class NumberExtensions
     }
 
     /// <summary>
-    /// Translates numeric digit into word string.
-    /// 10,000 = One zero thousand
-    /// 500 = Five hundred
-    /// 9,500 = Niner thousand five hundred
+    /// Converts number into word string. Pronounce each digit in the number of hundreds 
+    /// or thousands followed by the word "hundred" or "thousand", as appropriate.
+    /// For example, 5,000...Five thousand, 11,500...One one thousand five hundred
     /// </summary>
-    /// <param name="number">Integer number</param>
-    /// <returns></returns>
-    public static string NumbersToWords(this int number)
+    /// <param name="number">The number to be converted</param>
+    /// <returns>Returns the number in group word form</returns>
+    public static string ToWordString(this int number)
     {
         bool isNegative = number < 0;
 
@@ -81,25 +79,25 @@ public static class NumberExtensions
             return "zero";
 
         if (isNegative)
-            return "minus " + Math.Abs(number).NumbersToWords();
+            return "minus " + Math.Abs(number).ToWordString();
 
         string words = "";
 
         if (number / 1000000 > 0)
         {
-            words += (number / 1000000).NumbersToWords() + " million ";
+            words += (number / 1000000).ToWordString() + " million ";
             number %= 1000000;
         }
 
         if (number / 1000 > 0)
         {
-            words += (number / 1000).NumbersToWords() + " thousand ";
+            words += (number / 1000).ToWordString() + " thousand ";
             number %= 1000;
         }
 
         if (number / 100 > 0)
         {
-            words += (number / 100).NumbersToWords() + " hundred ";
+            words += (number / 100).ToWordString() + " hundred ";
             number %= 100;
         }
 
@@ -122,13 +120,13 @@ public static class NumberExtensions
     }
 
     /// <summary>
-    /// Translates whole number (from string) into a single word.
-    /// 1500 = One Five Zero Zero
-    /// 100 = One Zero Zero
+    /// Converts number to serial numbers (separate digits)
+    /// For example, 1500...One Five Zero Zero
     /// </summary>
-    /// <param name="number">String number</param>
-    /// <returns></returns>
-    public static string NumberToSingular(this string input, bool useDecimalTerminology = false)
+    /// <param name="input">Number to be converted</param>
+    /// <param name="useDecimalTerminology">Whether or not to use "decimal" terminology for deciaml number</param>
+    /// <returns>Returns the serial formatted word string</returns>
+    public static string ToSerialForm(this string input, bool useDecimalTerminology = false)
     {
         var group = new List<string>();
         var numberMatch = Regex.Match(input, @"[0-9]\d*(\.\d+)?");
@@ -140,7 +138,7 @@ public static class NumberExtensions
                 var temp = new List<string>();
                 foreach (var digit in number.ToString().Select(q => new string(q, 1)).ToArray())
                 {
-                    temp.Add(int.Parse(digit).NumbersToWords());
+                    temp.Add(int.Parse(digit).ToWordString());
                 }
                 group.Add(string.Join(" ", temp).Trim(' '));
             }
@@ -151,75 +149,15 @@ public static class NumberExtensions
         return input;
     }
 
-    /// <summary>
-    /// Translates whole number (from integer) into a single word.
-    /// 1500 = One Five Zero Zero
-    /// 100 = One Zero Zero
-    /// </summary>
-    /// <param name="number">Integer number</param>
-    /// <returns></returns>
-    public static string NumberToSingular(this int number)
+    public static string ToSerialForm(this int number)
     {
         bool isNegative = number < 0;
-        List<string> temp = new List<string>();
+        List<string> temp = new();
         foreach (var x in Math.Abs(number).ToString().Select(q => new string(q, 1)).ToArray())
         {
-            temp.Add(int.Parse(x).NumbersToWords());
+            temp.Add(int.Parse(x).ToWordString());
         }
         return $"{(isNegative ? "minus " : "")}{string.Join(" ", temp)}";
-    }
-
-    /// <summary>
-    /// Translates whole number (from integer) into a single word.
-    /// 1500 = One Five Zero Zero
-    /// 100 = One Zero Zero
-    /// </summary>
-    /// <param name="number">Integer number</param>
-    /// <returns></returns>
-    public static string NumberToSingular(this double number)
-    {
-        List<string> temp = new List<string>();
-        foreach (var x in number.ToString().Select(q => new string(q, 1)).ToArray())
-        {
-            if (int.TryParse(x, out int i))
-            {
-                temp.Add(i.NumbersToWords());
-            }
-        }
-        return string.Join(" ", temp);
-    }
-
-    /// <summary>
-    /// Convert number to proper meters or kilos conversion
-    /// </summary>
-    /// <param name="number"></param>
-    /// <returns></returns>
-    public static string MetricToString(this double number)
-    {
-        if (number > 5000)
-        {
-            return $"{Convert.ToInt32(Math.Round(number / 1000)).NumbersToWordsGroup()} kilometers";
-        }
-        return $"{Convert.ToInt32(number).NumbersToWordsGroup()} meters";
-    }
-
-    /// <summary>
-    /// Normalizes heading degrees
-    /// </summary>
-    /// <param name="heading"></param>
-    /// <returns></returns>
-    public static double NormalizeHeading(this double heading)
-    {
-        if (heading <= 0.0)
-        {
-            heading += 360.0;
-        }
-        else if (heading > 360.0)
-        {
-            heading -= 360.0;
-        }
-
-        return heading;
     }
 
     public static int NormalizeHeading(this int heading)
@@ -235,7 +173,7 @@ public static class NumberExtensions
         return heading;
     }
 
-    public static double ApplyMagVar(this int degrees, int? magvar = null)
+    public static int ApplyMagVar(this int degrees, int? magvar = null)
     {
         if (magvar == null)
             return degrees;
@@ -245,15 +183,17 @@ public static class NumberExtensions
 
         if (magvar > 0)
         {
-            return (degrees += magvar.Value).NormalizeHeading();
+            degrees += magvar.Value;
         }
         else
         {
-            return (degrees -= Math.Abs(magvar.Value)).NormalizeHeading();
+            degrees -= Math.Abs(magvar.Value);
         }
+
+        return degrees.NormalizeHeading();
     }
 
-    public static int ToVatsimFrequencyFormat(this decimal value)
+    public static int ToFsdFrequencyFormat(this decimal value)
     {
         return (int)((value - 100m) * 1000m);
     }

@@ -53,7 +53,7 @@ public class AtisBuilder : IAtisBuilder
 
         if (composite.AirportData == null)
         {
-            composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new Exception($"{composite.Identifier} not found in airport database.");
+            composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
         }
 
         ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
@@ -116,7 +116,7 @@ public class AtisBuilder : IAtisBuilder
             throw new AtisBuilderException("DecodedMetar is null");
         }
 
-        composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new Exception($"{composite.Identifier} not found in airport database.");
+        composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
 
         ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
 
@@ -237,17 +237,17 @@ public class AtisBuilder : IAtisBuilder
     {
         if (composite == null)
         {
-            throw new Exception("Composite is null");
+            throw new AtisBuilderException("Composite is null");
         }
 
         if (composite.CurrentPreset == null)
         {
-            throw new Exception("CurrentPreset is null");
+            throw new AtisBuilderException("CurrentPreset is null");
         }
 
         if (metar == null)
         {
-            throw new Exception("Metar is null");
+            throw new AtisBuilderException("Metar is null");
         }
 
         var preset = composite.CurrentPreset;
@@ -255,7 +255,7 @@ public class AtisBuilder : IAtisBuilder
 
         if (data == null)
         {
-            throw new Exception("ExternalGenerator is null");
+            throw new AtisBuilderException("ExternalGenerator is null");
         }
 
         var url = data.Url;
@@ -290,7 +290,7 @@ public class AtisBuilder : IAtisBuilder
             }
             catch (Exception ex)
             {
-                throw new Exception("External ATIS Error: " + ex.Message);
+                throw new AtisBuilderException("External ATIS Error: " + ex.Message);
             }
         }
 
@@ -327,11 +327,11 @@ public class AtisBuilder : IAtisBuilder
         {
             if (composite.AirportConditionsBeforeFreeText)
             {
-                airportConditions = string.Join(" ", new[] { string.Join(". ", composite.AirportConditionDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.AirportConditions });
+                airportConditions = string.Join(" ", string.Join(". ", composite.AirportConditionDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.AirportConditions);
             }
             else
             {
-                airportConditions = string.Join(" ", new[] { composite.CurrentPreset.AirportConditions, string.Join(". ", composite.AirportConditionDefinitions.Where(t => t.Enabled).Select(t => t.Text)) });
+                airportConditions = string.Join(" ", composite.CurrentPreset.AirportConditions, string.Join(". ", composite.AirportConditionDefinitions.Where(t => t.Enabled).Select(t => t.Text)));
             }
         }
 
@@ -349,13 +349,13 @@ public class AtisBuilder : IAtisBuilder
 
             if (composite.NotamsBeforeFreeText)
             {
-                notamText = string.Join(" ", new[] { string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.Notams });
-                notamVoice += string.Join(" ", new[] { string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.Notams });
+                notamText = string.Join(" ", string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.Notams);
+                notamVoice += string.Join(" ", string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)), composite.CurrentPreset.Notams);
             }
             else
             {
-                notamText = string.Join(". ", new[] { composite.CurrentPreset.Notams, string.Join(" ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)) });
-                notamVoice += string.Join(" ", new[] { composite.CurrentPreset.Notams, string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)) });
+                notamText = string.Join(". ", composite.CurrentPreset.Notams, string.Join(" ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)));
+                notamVoice += string.Join(" ", composite.CurrentPreset.Notams, string.Join(". ", composite.NotamDefinitions.Where(t => t.Enabled).Select(t => t.Text)));
             }
         }
 
@@ -391,8 +391,8 @@ public class AtisBuilder : IAtisBuilder
                                           $"{tlValue.Altitude}";
 
                     transitionLevelVoice = composite.UseTransitionLevelPrefix
-                        ? $"Transition level, flight level {tlValue.Altitude.NumberToSingular()}"
-                        : $"Transition level {tlValue.Altitude.NumberToSingular()}";
+                        ? $"Transition level, flight level {tlValue.Altitude.ToSerialForm()}"
+                        : $"Transition level {tlValue.Altitude.ToSerialForm()}";
                 }
             }
         }
@@ -440,35 +440,35 @@ public class AtisBuilder : IAtisBuilder
     {
         // parse zulu times
         input = Regex.Replace(input, @"([0-9])([0-9])([0-9])([0-8])Z",
-            m => string.Format($"{int.Parse(m.Groups[1].Value).NumberToSingular()} " +
-                               $"{int.Parse(m.Groups[2].Value).NumberToSingular()} " +
-                               $"{int.Parse(m.Groups[3].Value).NumberToSingular()} " +
-                               $"{int.Parse(m.Groups[4].Value).NumberToSingular()} zulu"));
+            m => string.Format($"{int.Parse(m.Groups[1].Value).ToSerialForm()} " +
+                               $"{int.Parse(m.Groups[2].Value).ToSerialForm()} " +
+                               $"{int.Parse(m.Groups[3].Value).ToSerialForm()} " +
+                               $"{int.Parse(m.Groups[4].Value).ToSerialForm()} zulu"));
 
         // vhf frequencies
-        input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => m.Groups[1].Value.NumberToSingular(composite.UseDecimalTerminology));
+        input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => m.Groups[1].Value.ToSerialForm(composite.UseDecimalTerminology));
 
         // letters
-        input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => string.Format("{0}", m.Value.ConvertAlphaNumericToWordGroup())).Trim();
+        input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => m.Value.ConvertAlphaNumericToWordGroup()).Trim();
 
         // parse taxiways
         input = Regex.Replace(input, @"\bTWY ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWY {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
         input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
 
         // parse runways
-        input = Regex.Replace(input, @"\b(RY|RWY|RWYS|RUNWAY|RUNWAYS)\s?([0-9]{1,2})([LRC]?)\b", m =>
-            StringExtensions.RwyNumbersToWords(int.Parse(m.Groups[2].Value), m.Groups[3].Value,
+        input = Regex.Replace(input, @"\b(RY|RWY|RWYS|RUNWAY|RUNWAYS)\s?([0-9]{1,2})([LRC]?)\b",
+            m => StringExtensions.RwyNumbersToWords(int.Parse(m.Groups[2].Value), m.Groups[3].Value,
                 prefix: !string.IsNullOrEmpty(m.Groups[1].Value),
                 plural: !string.IsNullOrEmpty(m.Groups[1].Value) &&
                         (m.Groups[1].Value == "RWYS" || m.Groups[1].Value == "RUNWAYS"),
                 leadingZero: !composite.IsFaaAtis));
 
         // read numbers in group format, prefixed with # or surrounded with {}
-        input = Regex.Replace(input, @"\*(-?[\,0-9]+)", m => int.Parse(m.Groups[1].Value.Replace(",", "")).NumbersToWordsGroup());
-        input = Regex.Replace(input, @"\{(-?[\,0-9]+)\}", m => int.Parse(m.Groups[1].Value.Replace(",", "")).NumbersToWordsGroup());
+        input = Regex.Replace(input, @"\*(-?[\,0-9]+)", m => int.Parse(m.Groups[1].Value.Replace(",", "")).ToGroupForm());
+        input = Regex.Replace(input, @"\{(-?[\,0-9]+)\}", m => int.Parse(m.Groups[1].Value.Replace(",", "")).ToGroupForm());
 
         // read numbers in serial format
-        input = Regex.Replace(input, @"([+-])?([0-9]+\.?[0-9]*|\.[0-9]+)(?![^{]*\})", m => m.Value.NumberToSingular(composite.UseDecimalTerminology));
+        input = Regex.Replace(input, @"([+-])?([0-9]+\.?[0-9]*|\.[0-9]+)(?![^{]*\})", m => m.Value.ToSerialForm(composite.UseDecimalTerminology));
 
         // user defined contractions
         foreach (var x in composite.Contractions)
@@ -486,19 +486,14 @@ public class AtisBuilder : IAtisBuilder
         var navaids = Regex.Matches(input, @"(?<=\+)([A-Z]{3})");
         if (navaids.Count > 0)
         {
-            foreach (var m in navaids.Where(m => m.Success))
+            foreach (var (match, find) in from Match match in navaids
+                                          let find = mNavData.GetNavaid(match.Value)
+                                          where find != null
+                                          select (match, find))
             {
-                try
-                {
-                    var find = mNavData.GetNavaid(m.Value);
-                    if (find != null)
-                    {
-                        input = Regex
-                            .Replace(input, $@"\b(?<=\+){m.Value}\b", x => find.Name)
-                            .Replace("+", "");
-                    }
-                }
-                catch { }
+                input = Regex
+                    .Replace(input, $@"\b(?<=\+){match.Value}\b", x => find.Name)
+                    .Replace("+", "");
             }
         }
 
@@ -506,19 +501,14 @@ public class AtisBuilder : IAtisBuilder
         var airports = Regex.Matches(input, @"(?<=\+)([A-Z0-9]{4})");
         if (airports.Count > 0)
         {
-            foreach (var m in airports.Where(m => m.Success))
+            foreach (var (match, find) in from Match match in airports
+                                          let find = mNavData.GetAirport(match.Value)
+                                          where find != null
+                                          select (match, find))
             {
-                try
-                {
-                    var find = mNavData.GetAirport(m.Value);
-                    if (find != null)
-                    {
-                        input = Regex
-                            .Replace(input, $@"\b(?<=\+){m.Value}\b", x => find.Name)
-                            .Replace("+", "");
-                    }
-                }
-                catch { }
+                input = Regex
+                    .Replace(input, $@"\b(?<=\+){match.Value}\b", x => find.Name)
+                    .Replace("+", "");
             }
         }
 
@@ -537,7 +527,7 @@ public class AtisBuilder : IAtisBuilder
         return input.ToUpper();
     }
 
-    private static Dictionary<string, string> Translations => new Dictionary<string, string>
+    private static Dictionary<string, string> Translations => new()
     {
         {"ACFT", "AIRCRAFT"},
         {"ADVS", "ADVISE"},

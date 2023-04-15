@@ -695,7 +695,7 @@ public partial class ProfileConfigurationForm : Form
 
         if (decimal.TryParse(vhfFrequency.Text, out var frequency))
         {
-            frequency = frequency.ToVatsimFrequencyFormat();
+            frequency = frequency.ToFsdFrequencyFormat();
             if (frequency < 18000 || frequency > 37000)
             {
                 MessageBox.Show(this,

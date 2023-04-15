@@ -83,7 +83,7 @@ public class CloudNode : BaseNode<CloudLayer>
         if (Composite.AtisFormat.Clouds.Types.ContainsKey(cloudType))
         {
             var template = Composite.AtisFormat.Clouds.Types[cloudType];
-            template = Regex.Replace(template, "{altitude}", altitude.NumbersToWords(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "{altitude}", altitude.ToWordString(), RegexOptions.IgnoreCase);
 
             if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
                 && Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))

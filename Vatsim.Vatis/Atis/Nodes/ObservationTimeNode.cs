@@ -46,9 +46,9 @@ public class ObservationTimeNode : BaseNode<ObservationDayTime>
         if (node == null)
             return "";
 
-        format = Regex.Replace(format, "{time}", $"{node.Time.Hours.ToString("00").NumberToSingular()} {node.Time.Minutes.ToString("00").NumberToSingular()}", RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, "{hours}", node.Time.Hours.ToString("00").NumberToSingular(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, "{minutes}", node.Time.Minutes.ToString("00").NumberToSingular(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, "{time}", $"{node.Time.Hours.ToString("00").ToSerialForm()} {node.Time.Minutes.ToString("00").ToSerialForm()}", RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, "{hours}", node.Time.Hours.ToString("00").ToSerialForm(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, "{minutes}", node.Time.Minutes.ToString("00").ToSerialForm(), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, "{special}", mIsSpecialAtis ? SPECIAL_TEXT : "", RegexOptions.IgnoreCase);
 
         return format;

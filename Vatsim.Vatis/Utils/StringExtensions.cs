@@ -61,7 +61,7 @@ public static class StringExtensions
         if (num.Length > 0)
         {
             int.TryParse(num, out numOut);
-            return $"{string.Join(" ", alpha.Select(x => Alphabet[x]).ToArray())} {numOut.NumbersToWordsGroup()}";
+            return $"{string.Join(" ", alpha.Select(x => Alphabet[x]).ToArray())} {numOut.ToGroupForm()}";
         }
         else
         {

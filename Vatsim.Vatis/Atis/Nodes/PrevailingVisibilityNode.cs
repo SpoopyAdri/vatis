@@ -60,28 +60,28 @@ public class PrevailingVisibilityNode : BaseNode<PrevailingVisibility>
                         switch (node.VisibilityInMeters.VisibilityDirection)
                         {
                             case Weather.Enums.VisibilityDirection.North:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.North} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.North} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.NorthEast:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.NorthEast} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.NorthEast} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.East:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.East} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.East} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.SouthEast:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.SouthEast} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.SouthEast} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.South:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.South} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.South} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.SouthWest:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.SouthWest} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.SouthWest} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.West:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.West} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.West} {minVis.ToGroupForm()}");
                                 break;
                             case Weather.Enums.VisibilityDirection.NorthWest:
-                                parsedValue.Add($"{Composite.AtisFormat.Visibility.NorthWest} {minVis.NumbersToWordsGroup()}");
+                                parsedValue.Add($"{Composite.AtisFormat.Visibility.NorthWest} {minVis.ToGroupForm()}");
                                 break;
                         }
 
@@ -105,7 +105,7 @@ public class PrevailingVisibilityNode : BaseNode<PrevailingVisibility>
                         }
                         else
                         {
-                            parsedValue.Add($"{node.VisibilityInMeters.VisibilityValue.NumbersToWords()} {(Composite.AtisFormat.Visibility.IncludeVisibilitySuffix ? "meters" : "")}");
+                            parsedValue.Add($"{node.VisibilityInMeters.VisibilityValue.ToWordString()} {(Composite.AtisFormat.Visibility.IncludeVisibilitySuffix ? "meters" : "")}");
                         }
                     }
                 }

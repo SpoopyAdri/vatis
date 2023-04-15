@@ -44,11 +44,11 @@ public class DewpointNode : BaseNode<TemperatureInfo>
 
         if (node.DewPoint < 0)
         {
-            format = Regex.Replace(format, "{dewpoint}", "minus" + Math.Abs(node.DewPoint.Value).ToString(Composite.AtisFormat.Dewpoint.PronounceLeadingZero ? "00" : "").NumberToSingular(), RegexOptions.IgnoreCase);
+            format = Regex.Replace(format, "{dewpoint}", "minus" + Math.Abs(node.DewPoint.Value).ToString(Composite.AtisFormat.Dewpoint.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
         }
         else
         {
-            format = Regex.Replace(format, "{dewpoint}", (Composite.AtisFormat.Dewpoint.UsePlusPrefix ? "plus" : "") + Math.Abs(node.DewPoint.Value).ToString(Composite.AtisFormat.Dewpoint.PronounceLeadingZero ? "00" : "").NumberToSingular(), RegexOptions.IgnoreCase);
+            format = Regex.Replace(format, "{dewpoint}", (Composite.AtisFormat.Dewpoint.UsePlusPrefix ? "plus" : "") + Math.Abs(node.DewPoint.Value).ToString(Composite.AtisFormat.Dewpoint.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
         }
 
         return format;

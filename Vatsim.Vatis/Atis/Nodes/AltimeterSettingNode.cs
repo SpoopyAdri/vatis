@@ -7,7 +7,7 @@ namespace Vatsim.Vatis.Atis.Nodes;
 
 public class AltimeterSettingNode : BaseNode<AltimeterSetting>
 {
-    private double mPressureHpa;
+    private int mPressureHpa;
     private double mPressureInHg;
 
     public AltimeterSettingNode()
@@ -43,7 +43,7 @@ public class AltimeterSettingNode : BaseNode<AltimeterSetting>
         format = Regex.Replace(format, "{altimeter}", node.Value.ToString(), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, @"{altimeter\|inhg}", mPressureInHg.ToString("00.00"), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, @"{altimeter\|hpa}", mPressureHpa.ToString(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, @"{altimeter\|text}", node.Value.ToString("0000").NumberToSingular().ToUpper(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, @"{altimeter\|text}", node.Value.ToString("0000").ToSerialForm().ToUpper(), RegexOptions.IgnoreCase);
 
         return format;
     }
@@ -53,9 +53,9 @@ public class AltimeterSettingNode : BaseNode<AltimeterSetting>
         if (node == null)
             return "";
 
-        format = Regex.Replace(format, "{altimeter}", node.Value.NumberToSingular(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, @"{altimeter\|inhg}", mPressureInHg.ToString("00.00").NumberToSingular(Composite.AtisFormat.Altimeter.PronounceDecimal), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, @"{altimeter\|hpa}", mPressureHpa.NumberToSingular(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, "{altimeter}", node.Value.ToSerialForm(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, @"{altimeter\|inhg}", mPressureInHg.ToString("00.00").ToSerialForm(Composite.AtisFormat.Altimeter.PronounceDecimal), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, @"{altimeter\|hpa}", mPressureHpa.ToSerialForm(), RegexOptions.IgnoreCase);
 
         return format;
     }

@@ -56,11 +56,11 @@ public class RunwayVisualRangeNode : BaseNode<RunwayVisualRange>
 
                     if (match.Groups[3].Value == "M")
                     {
-                        result.Add($"variable from less than {minVis.NumbersToWordsGroup()} to {maxVis.NumbersToWordsGroup()}");
+                        result.Add($"variable from less than {minVis.ToGroupForm()} to {maxVis.ToGroupForm()}");
                     }
                     else
                     {
-                        result.Add($"variable between {minVis.NumbersToWordsGroup()} and {maxVis.NumbersToWordsGroup()}");
+                        result.Add($"variable between {minVis.ToGroupForm()} and {maxVis.ToGroupForm()}");
                     }
                 }
                 else if (match.Groups[5].Value == "VP")
@@ -70,11 +70,11 @@ public class RunwayVisualRangeNode : BaseNode<RunwayVisualRange>
 
                     if (match.Groups[3].Value == "M")
                     {
-                        result.Add($"variable from less than {minVis.NumbersToWordsGroup()} to greater than{maxVis.NumbersToWordsGroup()}");
+                        result.Add($"variable from less than {minVis.ToGroupForm()} to greater than{maxVis.ToGroupForm()}");
                     }
                     else
                     {
-                        result.Add($"{minVis.NumbersToWordsGroup()} variable to greater than {maxVis.NumbersToWordsGroup()}");
+                        result.Add($"{minVis.ToGroupForm()} variable to greater than {maxVis.ToGroupForm()}");
                     }
                 }
                 else
@@ -83,15 +83,15 @@ public class RunwayVisualRangeNode : BaseNode<RunwayVisualRange>
 
                     if (match.Groups[3].Value == "M")
                     {
-                        result.Add($"less than {vis.NumbersToWordsGroup()}");
+                        result.Add($"less than {vis.ToGroupForm()}");
                     }
                     else if (match.Groups[3].Value == "P")
                     {
-                        result.Add($"more than {vis.NumbersToWordsGroup()}");
+                        result.Add($"more than {vis.ToGroupForm()}");
                     }
                     else
                     {
-                        result.Add(vis.NumbersToWordsGroup());
+                        result.Add(vis.ToGroupForm());
                     }
                 }
 
@@ -110,7 +110,7 @@ public class RunwayVisualRangeNode : BaseNode<RunwayVisualRange>
                     result.Add(tendency);
                 }
 
-                tts.Add($"Runway {rwyNumber.NumberToSingular()} {rwyDesignator} R-V-R {string.Join(" ", result)}");
+                tts.Add($"Runway {rwyNumber.ToSerialForm()} {rwyDesignator} R-V-R {string.Join(" ", result)}");
             }
         }
 
