@@ -318,7 +318,7 @@ public class AtisBuilder : IAtisBuilder
         var pressure = NodeParser.Parse<AltimeterSettingNode, AltimeterSetting>(metar, composite);
         var trends = NodeParser.Parse<TrendNode, Trend>(metar, composite);
 
-        atisLetter = char.Parse(composite.AtisLetter).LetterToPhonetic();
+        atisLetter = char.Parse(composite.AtisLetter).ToPhonetic();
         var completeWxStringVoice = $"{surfaceWind.VoiceAtis} {visibility.VoiceAtis} {rvr.VoiceAtis} {presentWeather.VoiceAtis} {clouds.VoiceAtis} {temp.VoiceAtis} {dew.VoiceAtis} {pressure.VoiceAtis}";
         var completeWxStringAcars = $"{surfaceWind.TextAtis} {visibility.TextAtis} {rvr.TextAtis} {presentWeather.TextAtis} {clouds.TextAtis} {temp.TextAtis}{(!string.IsNullOrEmpty(temp.TextAtis) || !string.IsNullOrEmpty(dew.TextAtis) ? "/" : "")}{dew.TextAtis} {pressure.TextAtis}";
 
@@ -449,11 +449,11 @@ public class AtisBuilder : IAtisBuilder
         input = Regex.Replace(input, @"(1\d\d\.\d\d?\d?)", m => m.Groups[1].Value.ToSerialForm(composite.UseDecimalTerminology));
 
         // letters
-        input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => m.Value.ConvertAlphaNumericToWordGroup()).Trim();
+        input = Regex.Replace(input, @"\*([A-Z]{1,2}[0-9]{0,2})", m => m.Value.ToAlphaNumericWordGroup()).Trim();
 
         // parse taxiways
-        input = Regex.Replace(input, @"\bTWY ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWY {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
-        input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS {m.Groups[1].Value.ConvertAlphaNumericToWordGroup()}");
+        input = Regex.Replace(input, @"\bTWY ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWY {m.Groups[1].Value.ToAlphaNumericWordGroup()}");
+        input = Regex.Replace(input, @"\bTWYS ([A-Z]{1,2}[0-9]{0,2})\b", m => $"TWYS {m.Groups[1].Value.ToAlphaNumericWordGroup()}");
 
         // parse runways
         input = Regex.Replace(input, @"\b(RY|RWY|RWYS|RUNWAY|RUNWAYS)\s?([0-9]{1,2})([LRC]?)\b",

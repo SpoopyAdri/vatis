@@ -30,38 +30,22 @@ public static class StringExtensions
         return Regex.Replace(input ?? "", @"\t|\n|\r", "");
     }
 
-    public static string[] Tokenize(this string s)
-    {
-        return s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-    }
-
     /// <summary>
-    /// Strips away multiple spaces.
+    /// Converts alphanumeric strings to human readable format. Useful for translating taxiways.
     /// </summary>
-    /// <param name="input">String that needs extra spaces stripped.</param>
-    /// <returns></returns>
-    public static string RemoveExtraSpaces(this string input)
+    public static string ToAlphaNumericWordGroup(this string s)
     {
-        Regex trim = new Regex(@"\s+");
-        return trim.Replace(input, " ");
-    }
-
-    /// <summary>
-    /// Converts alphanumeric strings to human readable format. Useful for translating
-    /// taxiways.
-    /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
-    public static string ConvertAlphaNumericToWordGroup(this string s)
-    {
-        var alpha = new string(s.Where(x => char.IsLetter(x)).ToArray());
-        var num = new string(s.Where(x => char.IsNumber(x)).ToArray());
-        int numOut;
-
+        var alpha = new string(s.Where(char.IsLetter).ToArray());
+        var num = new string(s.Where(char.IsNumber).ToArray());
         if (num.Length > 0)
         {
-            int.TryParse(num, out numOut);
-            return $"{string.Join(" ", alpha.Select(x => Alphabet[x]).ToArray())} {numOut.ToGroupForm()}";
+            int numOut;
+            if (int.TryParse(num, out numOut))
+            {
+                return $"{string.Join(" ", alpha.Select(x => Alphabet[x]).ToArray())} {numOut.ToGroupForm()}";
+            }
+
+            return "";
         }
         else
         {
@@ -71,11 +55,10 @@ public static class StringExtensions
 
     /// <summary>
     /// Translates single letter to phonetic alphabet variant.
-    /// For example, the character C would translate to Charlie.
+    /// For example, the character "C" would return "Charlie".
     /// </summary>
     /// <param name="x">Single alpha character A-Z</param>
-    /// <returns></returns>
-    public static string LetterToPhonetic(this char x)
+    public static string ToPhonetic(this char x)
     {
         if (Alphabet.ContainsKey(x))
         {
@@ -149,24 +132,6 @@ public static class StringExtensions
         return Regex.Replace(input, textToFind, replace);
     }
 
-    /// <summary>
-    /// Normalizes frequency to 25Khz format for AFV
-    /// </summary>
-    /// <param name="freq"></param>
-    /// <returns></returns>
-    public static uint Normalize25KhzFrequency(this string freq)
-    {
-        uint freqint = Convert.ToUInt32(Convert.ToDouble(freq) * 1000000);
-        freqint /= 1000;
-
-        if (freqint % 100 == 20 || freqint % 100 == 70)
-        {
-            freqint += 5;
-        }
-
-        return freqint * 1000;
-    }
-
     public static string RandomLetter()
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -183,7 +148,7 @@ public static class StringExtensions
     /// <summary>
     /// Phoentic Alphabet
     /// </summary>
-    private static Dictionary<char, string> Alphabet => new Dictionary<char, string>
+    private static Dictionary<char, string> Alphabet => new()
     {
         { 'A', "Alpha" },
         { 'B', "Bravo" },
