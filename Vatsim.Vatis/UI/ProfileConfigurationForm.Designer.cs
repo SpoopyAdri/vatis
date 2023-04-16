@@ -97,9 +97,7 @@ namespace Vatsim.Vatis.UI
             this.label15 = new System.Windows.Forms.Label();
             this.txtCodeRangeHigh = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.magneticVar = new System.Windows.Forms.NumericUpDown();
             this.txtCodeRangeLow = new System.Windows.Forms.TextBox();
-            this.chkMagneticVar = new System.Windows.Forms.CheckBox();
             this.groupVoiceOption = new System.Windows.Forms.Panel();
             this.radioTextToSpeech = new System.Windows.Forms.RadioButton();
             this.ddlVoices = new System.Windows.Forms.ComboBox();
@@ -120,6 +118,8 @@ namespace Vatsim.Vatis.UI
             this.label5 = new System.Windows.Forms.Label();
             this.standardObservationTime = new System.Windows.Forms.NumericUpDown();
             this.tabSurfaceWind = new System.Windows.Forms.TabPage();
+            this.magneticVar = new System.Windows.Forms.NumericUpDown();
+            this.chkMagneticVar = new System.Windows.Forms.CheckBox();
             this.chkWindSpeakLeadingZero = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.windStandard = new System.Windows.Forms.TabPage();
@@ -273,7 +273,6 @@ namespace Vatsim.Vatis.UI
             this.tableLayoutPanel1.SuspendLayout();
             this.mainTabControl.SuspendLayout();
             this.pageGen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).BeginInit();
             this.groupVoiceOption.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.pageFormatting.SuspendLayout();
@@ -281,6 +280,7 @@ namespace Vatsim.Vatis.UI
             this.tabObservationTime.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.standardObservationTime)).BeginInit();
             this.tabSurfaceWind.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.windStandard.SuspendLayout();
             this.windStandardGust.SuspendLayout();
@@ -395,9 +395,7 @@ namespace Vatsim.Vatis.UI
             this.pageGen.Controls.Add(this.label15);
             this.pageGen.Controls.Add(this.txtCodeRangeHigh);
             this.pageGen.Controls.Add(this.label14);
-            this.pageGen.Controls.Add(this.magneticVar);
             this.pageGen.Controls.Add(this.txtCodeRangeLow);
-            this.pageGen.Controls.Add(this.chkMagneticVar);
             this.pageGen.Controls.Add(this.groupVoiceOption);
             this.pageGen.Controls.Add(this.label2);
             this.pageGen.Controls.Add(this.label3);
@@ -417,7 +415,7 @@ namespace Vatsim.Vatis.UI
             // chkNotamPrefix
             // 
             this.chkNotamPrefix.AutoSize = true;
-            this.chkNotamPrefix.Location = new System.Drawing.Point(105, 207);
+            this.chkNotamPrefix.Location = new System.Drawing.Point(105, 191);
             this.chkNotamPrefix.Name = "chkNotamPrefix";
             this.chkNotamPrefix.Size = new System.Drawing.Size(306, 19);
             this.chkNotamPrefix.TabIndex = 44;
@@ -428,7 +426,7 @@ namespace Vatsim.Vatis.UI
             // chkUseDecimalTerminology
             // 
             this.chkUseDecimalTerminology.AutoSize = true;
-            this.chkUseDecimalTerminology.Location = new System.Drawing.Point(105, 166);
+            this.chkUseDecimalTerminology.Location = new System.Drawing.Point(105, 142);
             this.chkUseDecimalTerminology.Name = "chkUseDecimalTerminology";
             this.chkUseDecimalTerminology.Size = new System.Drawing.Size(245, 19);
             this.chkUseDecimalTerminology.TabIndex = 43;
@@ -441,7 +439,7 @@ namespace Vatsim.Vatis.UI
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(549, 88);
+            this.label15.Location = new System.Drawing.Point(549, 97);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(18, 15);
             this.label15.TabIndex = 42;
@@ -450,7 +448,7 @@ namespace Vatsim.Vatis.UI
             // txtCodeRangeHigh
             // 
             this.txtCodeRangeHigh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCodeRangeHigh.Location = new System.Drawing.Point(569, 84);
+            this.txtCodeRangeHigh.Location = new System.Drawing.Point(569, 93);
             this.txtCodeRangeHigh.Name = "txtCodeRangeHigh";
             this.txtCodeRangeHigh.Size = new System.Drawing.Size(45, 23);
             this.txtCodeRangeHigh.TabIndex = 41;
@@ -460,62 +458,28 @@ namespace Vatsim.Vatis.UI
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(422, 88);
+            this.label14.Location = new System.Drawing.Point(422, 97);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 15);
             this.label14.TabIndex = 40;
             this.label14.Text = "Code Range:";
             // 
-            // magneticVar
-            // 
-            this.magneticVar.Enabled = false;
-            this.magneticVar.Location = new System.Drawing.Point(240, 123);
-            this.magneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.magneticVar.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.magneticVar.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.magneticVar.Name = "magneticVar";
-            this.magneticVar.Size = new System.Drawing.Size(79, 23);
-            this.magneticVar.TabIndex = 1;
-            this.magneticVar.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.magneticVar.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
-            // 
             // txtCodeRangeLow
             // 
             this.txtCodeRangeLow.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCodeRangeLow.Location = new System.Drawing.Point(502, 84);
+            this.txtCodeRangeLow.Location = new System.Drawing.Point(502, 93);
             this.txtCodeRangeLow.Name = "txtCodeRangeLow";
             this.txtCodeRangeLow.Size = new System.Drawing.Size(45, 23);
             this.txtCodeRangeLow.TabIndex = 39;
             this.txtCodeRangeLow.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
             this.txtCodeRangeLow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AlphaOnly);
             // 
-            // chkMagneticVar
-            // 
-            this.chkMagneticVar.AutoSize = true;
-            this.chkMagneticVar.Location = new System.Drawing.Point(105, 125);
-            this.chkMagneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkMagneticVar.Name = "chkMagneticVar";
-            this.chkMagneticVar.Size = new System.Drawing.Size(128, 19);
-            this.chkMagneticVar.TabIndex = 4;
-            this.chkMagneticVar.Text = "Magnetic Variation:";
-            this.compositeTooltip.SetToolTip(this.chkMagneticVar, "Add or subtract the specified number of degrees from the wind direction.");
-            this.chkMagneticVar.UseVisualStyleBackColor = true;
-            this.chkMagneticVar.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
-            // 
             // groupVoiceOption
             // 
             this.groupVoiceOption.Controls.Add(this.radioTextToSpeech);
             this.groupVoiceOption.Controls.Add(this.ddlVoices);
             this.groupVoiceOption.Controls.Add(this.radioVoiceRecorded);
-            this.groupVoiceOption.Location = new System.Drawing.Point(102, 248);
+            this.groupVoiceOption.Location = new System.Drawing.Point(102, 240);
             this.groupVoiceOption.Name = "groupVoiceOption";
             this.groupVoiceOption.Size = new System.Drawing.Size(534, 25);
             this.groupVoiceOption.TabIndex = 38;
@@ -574,7 +538,7 @@ namespace Vatsim.Vatis.UI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(102, 51);
+            this.label3.Location = new System.Drawing.Point(102, 52);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 15);
@@ -584,7 +548,7 @@ namespace Vatsim.Vatis.UI
             // 
             // txtIdsEndpoint
             // 
-            this.txtIdsEndpoint.Location = new System.Drawing.Point(196, 292);
+            this.txtIdsEndpoint.Location = new System.Drawing.Point(196, 291);
             this.txtIdsEndpoint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtIdsEndpoint.Name = "txtIdsEndpoint";
             this.txtIdsEndpoint.Size = new System.Drawing.Size(438, 23);
@@ -593,7 +557,7 @@ namespace Vatsim.Vatis.UI
             // 
             // vhfFrequency
             // 
-            this.vhfFrequency.Location = new System.Drawing.Point(174, 47);
+            this.vhfFrequency.Location = new System.Drawing.Point(174, 48);
             this.vhfFrequency.Mask = "000.000";
             this.vhfFrequency.Name = "vhfFrequency";
             this.vhfFrequency.PromptChar = '#';
@@ -606,7 +570,7 @@ namespace Vatsim.Vatis.UI
             this.flowLayoutPanel2.Controls.Add(this.typeCombined);
             this.flowLayoutPanel2.Controls.Add(this.typeDeparture);
             this.flowLayoutPanel2.Controls.Add(this.typeArrival);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(174, 84);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(174, 93);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(235, 23);
             this.flowLayoutPanel2.TabIndex = 37;
@@ -650,7 +614,7 @@ namespace Vatsim.Vatis.UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(102, 88);
+            this.label4.Location = new System.Drawing.Point(102, 97);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
@@ -752,6 +716,8 @@ namespace Vatsim.Vatis.UI
             // 
             // tabSurfaceWind
             // 
+            this.tabSurfaceWind.Controls.Add(this.magneticVar);
+            this.tabSurfaceWind.Controls.Add(this.chkMagneticVar);
             this.tabSurfaceWind.Controls.Add(this.chkWindSpeakLeadingZero);
             this.tabSurfaceWind.Controls.Add(this.tabControl1);
             this.tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
@@ -761,6 +727,40 @@ namespace Vatsim.Vatis.UI
             this.tabSurfaceWind.TabIndex = 1;
             this.tabSurfaceWind.Text = "Surface Wind";
             this.tabSurfaceWind.UseVisualStyleBackColor = true;
+            // 
+            // magneticVar
+            // 
+            this.magneticVar.Enabled = false;
+            this.magneticVar.Location = new System.Drawing.Point(370, 12);
+            this.magneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.magneticVar.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.magneticVar.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.magneticVar.Name = "magneticVar";
+            this.magneticVar.Size = new System.Drawing.Size(79, 23);
+            this.magneticVar.TabIndex = 5;
+            this.magneticVar.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            this.magneticVar.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
+            // 
+            // chkMagneticVar
+            // 
+            this.chkMagneticVar.AutoSize = true;
+            this.chkMagneticVar.Location = new System.Drawing.Point(235, 14);
+            this.chkMagneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chkMagneticVar.Name = "chkMagneticVar";
+            this.chkMagneticVar.Size = new System.Drawing.Size(128, 19);
+            this.chkMagneticVar.TabIndex = 6;
+            this.chkMagneticVar.Text = "Magnetic Variation:";
+            this.compositeTooltip.SetToolTip(this.chkMagneticVar, "Add or subtract the specified number of degrees from the wind direction.");
+            this.chkMagneticVar.UseVisualStyleBackColor = true;
+            this.chkMagneticVar.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
             // 
             // chkWindSpeakLeadingZero
             // 
@@ -2018,7 +2018,7 @@ namespace Vatsim.Vatis.UI
             this.tabDewpoint.Location = new System.Drawing.Point(4, 24);
             this.tabDewpoint.Name = "tabDewpoint";
             this.tabDewpoint.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDewpoint.Size = new System.Drawing.Size(706, 310);
+            this.tabDewpoint.Size = new System.Drawing.Size(192, 72);
             this.tabDewpoint.TabIndex = 6;
             this.tabDewpoint.Text = "Dewpoint";
             this.tabDewpoint.UseVisualStyleBackColor = true;
@@ -2682,7 +2682,6 @@ namespace Vatsim.Vatis.UI
             this.mainTabControl.ResumeLayout(false);
             this.pageGen.ResumeLayout(false);
             this.pageGen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).EndInit();
             this.groupVoiceOption.ResumeLayout(false);
             this.groupVoiceOption.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -2694,6 +2693,7 @@ namespace Vatsim.Vatis.UI
             ((System.ComponentModel.ISupportInitialize)(this.standardObservationTime)).EndInit();
             this.tabSurfaceWind.ResumeLayout(false);
             this.tabSurfaceWind.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.windStandard.ResumeLayout(false);
             this.windStandardGust.ResumeLayout(false);
@@ -2809,8 +2809,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.ComboBox ddlVoices;
         private System.Windows.Forms.TextBox txtIdsEndpoint;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chkMagneticVar;
-        private System.Windows.Forms.NumericUpDown magneticVar;
         private System.Windows.Forms.TabPage pageTransitionLevel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button btnDeleteTransitionLevel;
@@ -2946,5 +2944,7 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkAutoIncludeClosingStatement;
         private NodeFormatTemplate templateClosingStatement;
         private System.Windows.Forms.CheckBox chkNotamPrefix;
+        private System.Windows.Forms.NumericUpDown magneticVar;
+        private System.Windows.Forms.CheckBox chkMagneticVar;
     }
 }

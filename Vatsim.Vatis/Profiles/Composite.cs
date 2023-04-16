@@ -25,7 +25,6 @@ public class Composite : IComposite, ICloneable
     public bool UseDecimalTerminology { get; set; }
     public bool AirportConditionsBeforeFreeText { get; set; }
     public bool NotamsBeforeFreeText { get; set; }
-    public MagneticVariationMeta MagneticVariation { get; set; } = new MagneticVariationMeta();
     public List<Preset> Presets { get; set; } = new List<Preset>();
     public List<ContractionMeta> Contractions { get; set; } = new List<ContractionMeta>();
     public List<DefinedTextMeta> AirportConditionDefinitions { get; set; } = new List<DefinedTextMeta>();
@@ -36,6 +35,15 @@ public class Composite : IComposite, ICloneable
     // Legacy 
     [JsonProperty] private int AtisFrequency { set => Frequency = (uint)((value + 100000) * 1000); }
     [JsonProperty] private dynamic ObservationTime { set => AtisFormat.ObservationTime.StandardUpdateTime = value.Time; }
+    [JsonProperty]
+    private MagneticVariationMeta MagneticVariation
+    {
+        set
+        {
+            AtisFormat.SurfaceWind.MagneticVariation.Enabled = value.Enabled;
+            AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = value.MagneticDegrees;
+        }
+    }
 
     public object Clone()
     {

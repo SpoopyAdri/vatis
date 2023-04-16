@@ -3,6 +3,8 @@ public class SurfaceWind
 {
     public bool SpeakLeadingZero { get; set; }
 
+    public MagneticVariationMeta MagneticVariation { get; set; } = new();
+
     public BaseFormat Standard { get; set; } = new BaseFormat()
     {
         Template = new Template

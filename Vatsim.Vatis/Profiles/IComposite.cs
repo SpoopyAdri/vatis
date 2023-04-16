@@ -16,7 +16,6 @@ public interface IComposite
     bool NotamsBeforeFreeText { get; set; }
     List<TransitionLevelMeta> TransitionLevels { get; set; }
     uint Frequency { get; set; }
-    MagneticVariationMeta MagneticVariation { get; set; }
     AtisVoiceMeta AtisVoice { get; set; }
     string IDSEndpoint { get; set; }
     List<Preset> Presets { get; set; }

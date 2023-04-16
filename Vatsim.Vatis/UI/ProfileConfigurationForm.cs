@@ -211,10 +211,10 @@ public partial class ProfileConfigurationForm : Form
         txtCodeRangeLow.Text = mCurrentComposite.CodeRange.Low.ToString();
         txtCodeRangeHigh.Text = mCurrentComposite.CodeRange.High.ToString();
 
-        if (mCurrentComposite.MagneticVariation != null)
+        if (mCurrentComposite.AtisFormat.SurfaceWind.MagneticVariation != null)
         {
-            chkMagneticVar.Checked = mCurrentComposite.MagneticVariation.Enabled;
-            magneticVar.Value = mCurrentComposite.MagneticVariation.MagneticDegrees;
+            chkMagneticVar.Checked = mCurrentComposite.AtisFormat.SurfaceWind.MagneticVariation.Enabled;
+            magneticVar.Value = mCurrentComposite.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees;
             magneticVar.Enabled = chkMagneticVar.Checked;
         }
 
@@ -759,11 +759,8 @@ public partial class ProfileConfigurationForm : Form
             mCurrentPreset.ExternalGenerator.Enabled = chkExternalAtisGenerator.Checked;
         }
 
-        mCurrentComposite.MagneticVariation = new MagneticVariationMeta
-        {
-            Enabled = chkMagneticVar.Checked,
-            MagneticDegrees = (int)magneticVar.Value
-        };
+        mCurrentComposite.AtisFormat.SurfaceWind.MagneticVariation.Enabled = chkMagneticVar.Checked;
+        mCurrentComposite.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = (int)magneticVar.Value;
 
         var selectedVoice = ddlVoices.SelectedItem as VoiceMetaData;
         mCurrentComposite.AtisVoice.UseTextToSpeech = radioTextToSpeech.Checked;
@@ -1505,18 +1502,16 @@ public partial class ProfileConfigurationForm : Form
                         if (profile.MagneticVariation.Option !=
                             LegacyMagneticVariation.LegacyMagneticVariationOption.None)
                         {
-                            existing.MagneticVariation.Enabled = true;
+                            existing.AtisFormat.SurfaceWind.MagneticVariation.Enabled = true;
                         }
 
                         switch (profile.MagneticVariation.Option)
                         {
                             case LegacyMagneticVariation.LegacyMagneticVariationOption.Add:
-                                existing.MagneticVariation.MagneticDegrees =
-                                    Math.Abs(profile.MagneticVariation.MagneticVariationValue);
+                                existing.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = Math.Abs(profile.MagneticVariation.MagneticVariationValue);
                                 break;
                             case LegacyMagneticVariation.LegacyMagneticVariationOption.Subtract:
-                                existing.MagneticVariation.MagneticDegrees =
-                                    profile.MagneticVariation.MagneticVariationValue * -1;
+                                existing.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = profile.MagneticVariation.MagneticVariationValue * -1;
                                 break;
                         }
                     }
@@ -1599,18 +1594,16 @@ public partial class ProfileConfigurationForm : Form
                 {
                     if (profile.MagneticVariation.Option != LegacyMagneticVariation.LegacyMagneticVariationOption.None)
                     {
-                        composite.MagneticVariation.Enabled = true;
+                        composite.AtisFormat.SurfaceWind.MagneticVariation.Enabled = true;
                     }
 
                     switch (profile.MagneticVariation.Option)
                     {
                         case LegacyMagneticVariation.LegacyMagneticVariationOption.Add:
-                            composite.MagneticVariation.MagneticDegrees =
-                                Math.Abs(profile.MagneticVariation.MagneticVariationValue);
+                            composite.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = Math.Abs(profile.MagneticVariation.MagneticVariationValue);
                             break;
                         case LegacyMagneticVariation.LegacyMagneticVariationOption.Subtract:
-                            composite.MagneticVariation.MagneticDegrees =
-                                profile.MagneticVariation.MagneticVariationValue * -1;
+                            composite.AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = profile.MagneticVariation.MagneticVariationValue * -1;
                             break;
                     }
                 }

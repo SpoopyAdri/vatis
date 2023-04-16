@@ -127,7 +127,7 @@ public class SurfaceWindNode : BaseNode<SurfaceWind>
         if (node == null)
             return "";
 
-        var magVarDeg = Composite.MagneticVariation?.MagneticDegrees ?? null;
+        var magVarDeg = Composite.AtisFormat.SurfaceWind.MagneticVariation?.MagneticDegrees ?? null;
         var leadingZero = Composite.AtisFormat.SurfaceWind.SpeakLeadingZero ? "00" : "";
 
         format = Regex.Replace(format, "{wind_dir}", node.Direction.ApplyMagVar(magVarDeg).ToSerialForm(), RegexOptions.IgnoreCase);
@@ -149,7 +149,7 @@ public class SurfaceWindNode : BaseNode<SurfaceWind>
         if (node == null)
             return "";
 
-        var magVarDeg = Composite.MagneticVariation?.MagneticDegrees ?? null;
+        var magVarDeg = Composite.AtisFormat.SurfaceWind.MagneticVariation?.MagneticDegrees ?? null;
 
         format = Regex.Replace(format, "{wind_dir}", node.Direction.ApplyMagVar(magVarDeg).ToString("000"));
         format = Regex.Replace(format, "{wind_spd}", node.Speed.ToString("00"));
