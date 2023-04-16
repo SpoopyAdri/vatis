@@ -15,7 +15,7 @@ public interface IComposite
     List<DefinedTextMeta> NotamDefinitions { get; set; }
     bool NotamsBeforeFreeText { get; set; }
     List<TransitionLevelMeta> TransitionLevels { get; set; }
-    int AtisFrequency { get; set; }
+    uint Frequency { get; set; }
     MagneticVariationMeta MagneticVariation { get; set; }
     AtisVoiceMeta AtisVoice { get; set; }
     string IDSEndpoint { get; set; }

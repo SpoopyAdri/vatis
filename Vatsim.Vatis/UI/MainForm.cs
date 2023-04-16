@@ -236,7 +236,6 @@ public partial class MainForm : Form
             if (tab != null)
             {
                 tab.Text = tabId;
-                tab.Connection.Frequency = composite.AtisFrequency;
                 tab.CompositeMeta.BindPresets(composite.Presets.Select(x => x.Name).ToList());
                 if (!composite.Connection.IsConnected)
                 {
@@ -248,7 +247,6 @@ public partial class MainForm : Form
             else
             {
                 var connection = mConnectionFactory.CreateConnection();
-                connection.Frequency = composite.AtisFrequency;
                 connection.AirportIcao = composite.Identifier;
                 connection.Composite = composite;
 

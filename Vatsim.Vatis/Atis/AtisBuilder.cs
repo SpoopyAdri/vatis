@@ -184,7 +184,7 @@ public class AtisBuilder : IAtisBuilder
             {
                 await UpdateIds(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(synthesizedAudio, composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
+                await mAudioManager.AddOrUpdateBot(synthesizedAudio, composite.AtisCallsign, composite.Frequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
         else
@@ -193,7 +193,7 @@ public class AtisBuilder : IAtisBuilder
             {
                 await UpdateIds(composite, cancellationToken);
 
-                await mAudioManager.AddOrUpdateBot(composite.RecordedMemoryStream.ToArray(), composite.AtisCallsign, composite.AfvFrequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
+                await mAudioManager.AddOrUpdateBot(composite.RecordedMemoryStream.ToArray(), composite.AtisCallsign, composite.Frequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
     }

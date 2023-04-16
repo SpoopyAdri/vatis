@@ -184,7 +184,7 @@ public partial class ProfileConfigurationForm : Form
         chkNotamPrefix.Checked = mCurrentComposite.UseNotamPrefix;
         chkNotamPrefix.Text = mCurrentComposite.IsFaaAtis ? "Prefix spoken NOTAMs with \"Notices to Air Missions\"" : "Prefix spoken NOTAMs with \"Notices to Air Men\"";
 
-        vhfFrequency.Text = ((mCurrentComposite.AtisFrequency + 100000) / 1000.0).ToString("000.000");
+        vhfFrequency.Text = (mCurrentComposite.Frequency / 1000.0).ToString("000.000");
 
         switch (mCurrentComposite.AtisType)
         {
@@ -411,7 +411,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (mAppConfig.CurrentProfile.Composites.Count >= Constants.MAX_COMPOSITES)
         {
-            MessageBox.Show("The maximum ATIS composite count has been exceeded for this profile.", "Error");
+            MessageBox.Show("The maximum ATIS composite count has been exceeded for this profile.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -438,27 +438,21 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mNavaidDatabase.GetAirport(dlg.Identifier) == null)
                 {
-                    if (MessageBox.Show(this, $"ICAO identifier not found: {dlg.Identifier}", "Invalid Identifier",
-                            MessageBoxButtons.OK, MessageBoxIcon.Hand) == DialogResult.OK)
+                    if (MessageBox.Show(this, $"ICAO identifier not found: {dlg.Identifier}", "Invalid Identifier", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.OK)
                     {
                         continue;
                     }
                 }
 
-                if (mAppConfig.CurrentProfile != null
-                    && mAppConfig.CurrentProfile.Composites.Any(x => x.Identifier == dlg.Identifier
-                                                                     && x.AtisType == dlg.Type))
+                if (mAppConfig.CurrentProfile != null && mAppConfig.CurrentProfile.Composites.Any(x => x.Identifier == dlg.Identifier && x.AtisType == dlg.Type))
                 {
-                    if (MessageBox.Show(this,
-                            $"{dlg.Identifier} ({dlg.Type}) already exists. Would you like to overwrite it?",
-                            "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.No)
+                    if (MessageBox.Show(this, $"{dlg.Identifier} ({dlg.Type}) already exists. Would you like to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     {
                         continue;
                     }
                     else
                     {
-                        mAppConfig.CurrentProfile.Composites.RemoveAll(x =>
-                            x.Identifier == dlg.Identifier && x.AtisType == dlg.Type);
+                        mAppConfig.CurrentProfile.Composites.RemoveAll(x => x.Identifier == dlg.Identifier && x.AtisType == dlg.Type);
                         mAppConfig.SaveConfig();
                     }
                 }
@@ -486,7 +480,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (mAppConfig.CurrentProfile.Composites.Count >= Constants.MAX_COMPOSITES)
         {
-            MessageBox.Show("The maximum ATIS composite count has been exceeded for this profile.", "Error");
+            MessageBox.Show("The maximum ATIS composite count has been exceeded for this profile.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -516,19 +510,16 @@ public partial class ProfileConfigurationForm : Form
 
                     if (mNavaidDatabase.GetAirport(dlg.Identifier) == null)
                     {
-                        if (MessageBox.Show(this, $"ICAO identifier not found: {dlg.Identifier}", "Invalid Identifier",
-                                MessageBoxButtons.OK, MessageBoxIcon.Hand) == DialogResult.OK)
+                        if (MessageBox.Show(this, $"ICAO identifier not found: {dlg.Identifier}", "Invalid Identifier", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.OK)
                         {
                             continue;
                         }
                     }
 
-                    if (mAppConfig.CurrentProfile != null
-                        && mAppConfig.CurrentProfile.Composites.Any(x => x.Identifier == dlg.Identifier
-                                                                         && x.AtisType == dlg.Type))
+                    if (mAppConfig.CurrentProfile != null && mAppConfig.CurrentProfile.Composites
+                        .Any(x => x.Identifier == dlg.Identifier && x.AtisType == dlg.Type))
                     {
-                        if (MessageBox.Show(this, $"{dlg.Identifier} ({dlg.Type}) already exists.",
-                                "Duplicate Composite", MessageBoxButtons.OK, MessageBoxIcon.Hand) == DialogResult.OK)
+                        if (MessageBox.Show(this, $"{dlg.Identifier} ({dlg.Type}) already exists.", "Duplicate Composite", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.OK)
                         {
                             continue;
                         }
@@ -605,11 +596,7 @@ public partial class ProfileConfigurationForm : Form
         {
             var composite = TreeMenu.SelectedNode.Tag as Composite;
 
-            if (MessageBox.Show(this,
-                    string.Format(
-                        $"Are you sure you want to delete the selected ATIS Composite? This action will also delete all associated ATIS presets.\r\n\r\n{composite.Identifier} {composite.AtisType}"),
-                    "Delete ATIS Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (MessageBox.Show(this, $"Are you sure you want to delete the selected ATIS Composite? This action will also delete all associated ATIS presets.\r\n\r\n{composite.Identifier} {composite.AtisType}", "Delete ATIS Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 EventBus.Publish(this, new AtisCompositeDeleted(composite.Id));
 
@@ -660,9 +647,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (btnApply.Enabled)
         {
-            if (MessageBox.Show(this, "You have unsaved changes. Are you sure you want to cancel?", "Unsaved Changes",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) ==
-                DialogResult.Yes)
+            if (MessageBox.Show(this, "You have unsaved changes. Are you sure you want to cancel?", "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 Close();
             }
@@ -682,7 +667,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (!string.IsNullOrEmpty(txtIdsEndpoint.Text) && !txtIdsEndpoint.Text.IsValidUrl())
         {
-            MessageBox.Show("IDS endpoint URL is not a valid hyperlink format.");
+            MessageBox.Show(this, "IDS endpoint URL is not a valid hyperlink format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
         else
@@ -693,30 +678,30 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.UseNotamPrefix = chkNotamPrefix.Checked;
         mCurrentComposite.UseDecimalTerminology = chkUseDecimalTerminology.Checked;
 
-        if (decimal.TryParse(vhfFrequency.Text, out var frequency))
+        if (double.TryParse(vhfFrequency.Text, out var frequency))
         {
-            frequency = frequency.ToFsdFrequencyFormat();
-            if (frequency < 18000 || frequency > 37000)
+            frequency = frequency * 1000 * 1000;
+
+            if ((frequency < 118000000) || (frequency > 137000000))
             {
-                MessageBox.Show(this,
-                    "Invalid frequency range. The accepted frequency range is 118.000-137.000 MHz", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(this, "Invalid frequency range. The accepted frequency range is 118.000-137.000 MHz", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (frequency != mCurrentComposite.AtisFrequency)
+
+            if (frequency != mCurrentComposite.Frequency)
             {
-                mCurrentComposite.AtisFrequency = (int)frequency;
+                mCurrentComposite.Frequency = (uint)frequency;
             }
         }
 
         if (typeCombined.Checked)
         {
-            if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Combined &&
-                    x != mCurrentComposite))
+            if (mAppConfig.CurrentProfile.Composites
+                .Any(x => x.Identifier == mCurrentComposite.Identifier
+                && x.AtisType == AtisType.Combined
+                && x != mCurrentComposite))
             {
-                MessageBox.Show(this, $"A Combined ATIS already exists for {mCurrentComposite.Identifier}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(this, $"A Combined ATIS already exists for {mCurrentComposite.Identifier}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else
@@ -726,12 +711,12 @@ public partial class ProfileConfigurationForm : Form
         }
         else if (typeDeparture.Checked)
         {
-            if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Departure &&
-                    x != mCurrentComposite))
+            if (mAppConfig.CurrentProfile.Composites
+                .Any(x => x.Identifier == mCurrentComposite.Identifier
+                && x.AtisType == AtisType.Departure
+                && x != mCurrentComposite))
             {
-                MessageBox.Show(this, $"A Departure ATIS already exists for {mCurrentComposite.Identifier}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(this, $"A Departure ATIS already exists for {mCurrentComposite.Identifier}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else
@@ -741,12 +726,12 @@ public partial class ProfileConfigurationForm : Form
         }
         else if (typeArrival.Checked)
         {
-            if (mAppConfig.CurrentProfile.Composites.Any(x =>
-                    x.Identifier == mCurrentComposite.Identifier && x.AtisType == AtisType.Arrival &&
-                    x != mCurrentComposite))
+            if (mAppConfig.CurrentProfile.Composites
+                .Any(x => x.Identifier == mCurrentComposite.Identifier
+                && x.AtisType == AtisType.Arrival
+                && x != mCurrentComposite))
             {
-                MessageBox.Show(this, $"An Arrival ATIS already exists for {mCurrentComposite.Identifier}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(this, $"An Arrival ATIS already exists for {mCurrentComposite.Identifier}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else
@@ -755,9 +740,9 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
-        char low = char.Parse(txtCodeRangeLow.Text);
-        char high = char.Parse(txtCodeRangeHigh.Text);
-        if (char.ToLower(high) < char.ToLower(low))
+        char codeRangeLow = char.Parse(txtCodeRangeLow.Text);
+        char codeRangeHigh = char.Parse(txtCodeRangeHigh.Text);
+        if (char.ToLower(codeRangeHigh) < char.ToLower(codeRangeLow))
         {
             MessageBox.Show("ATIS code range must be in sequential order.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
@@ -820,7 +805,7 @@ public partial class ProfileConfigurationForm : Form
                     var stringValue = row.Cells[0].Value.ToString();
                     if (usedContractions.Contains(stringValue))
                     {
-                        MessageBox.Show(this, "Duplicate contraction: " + stringValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate contraction: {stringValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridContractions.Focus();
                         return false;
                     }
@@ -867,7 +852,7 @@ public partial class ProfileConfigurationForm : Form
                     var acronymValue = row.Cells[0].Value.ToString();
                     if (usedWeatherTypes.Contains(acronymValue))
                     {
-                        MessageBox.Show(this, "Duplicate weather type: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate weather type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridWeatherTypes.Focus();
                         return false;
                     }
@@ -905,7 +890,7 @@ public partial class ProfileConfigurationForm : Form
                     var acronymValue = row.Cells[0].Value.ToString();
                     if (usedWeatherDescriptors.Contains(acronymValue))
                     {
-                        MessageBox.Show(this, "Duplicate weather descriptor: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate weather descriptor: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridWeatherDescriptors.Focus();
                         return false;
                     }
@@ -946,8 +931,7 @@ public partial class ProfileConfigurationForm : Form
                     var acronymValue = row.Cells[0].Value.ToString();
                     if (usedCloudTypes.Contains(acronymValue))
                     {
-                        MessageBox.Show(this, "Duplicate cloud type: " + acronymValue, "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate cloud type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridCloudTypes.Focus();
                         return false;
                     }
@@ -985,7 +969,7 @@ public partial class ProfileConfigurationForm : Form
                     var acronymValue = row.Cells[0].Value.ToString();
                     if (usedConvectiveCloudTypes.Contains(acronymValue))
                     {
-                        MessageBox.Show(this, "Duplicate convective cloud type: " + acronymValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate convective cloud type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridConvectiveCloudTypes.Focus();
                         return false;
                     }
@@ -1024,7 +1008,7 @@ public partial class ProfileConfigurationForm : Form
                     var trHigh = int.Parse(row.Cells[1].Value.ToString());
                     if (usedTransitionLevels.Any(t => t.Item1 == trLow && t.Item2 == trHigh))
                     {
-                        MessageBox.Show(this, $"Duplicate Transition Level: {trLow}-{trHigh}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        MessageBox.Show(this, $"Duplicate Transition Level: {trLow}-{trHigh}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         gridTransitionLevels.Focus();
                         return false;
                     }
@@ -1155,7 +1139,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose a new name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -1201,7 +1185,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose a new name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     flag = false;
                 }
                 else
@@ -1243,7 +1227,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (mCurrentComposite.Presets.Any(x => x.Name == dlg.Value))
                 {
-                    MessageBox.Show(this, "Another profile already exists with that name. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, "Another profile already exists with that name. Please choose a new name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -1269,7 +1253,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (ddlPresets.SelectedItem != null)
         {
-            if (MessageBox.Show(this, "Are you sure you want to delete the selected preset?", "Delete Preset", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (MessageBox.Show(this, "Are you sure you want to delete the selected preset?", "Delete Preset", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 mCurrentComposite.Presets.RemoveAll(x => x.Name == ddlPresets.SelectedItem.ToString());
                 mAppConfig.SaveConfig();
@@ -1355,9 +1339,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridContractions.SelectedRows.Count == 1)
         {
-            if (!gridContractions.SelectedRows[0].IsNewRow && MessageBox.Show(this,
-                    "Are you sure you want to delete the selected contraction?", "Confirm Delete",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridContractions.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected contraction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridContractions.Rows.RemoveAt(gridContractions.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -1365,7 +1347,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No contraction selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No contraction selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1381,7 +1363,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridContractions_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected contraction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected contraction?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
         {
             e.Cancel = true;
         }
@@ -1413,7 +1395,7 @@ public partial class ProfileConfigurationForm : Form
             {
                 if (dialog.FileNames.Length > Constants.MAX_COMPOSITES)
                 {
-                    MessageBox.Show(this, $"A maximum of {Constants.MAX_COMPOSITES} composites can be imported into a single profile", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, $"A maximum of {Constants.MAX_COMPOSITES} composites can be imported into a single profile", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -1436,7 +1418,7 @@ public partial class ProfileConfigurationForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "Composite Import Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, $"Composite Import Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1459,7 +1441,7 @@ public partial class ProfileConfigurationForm : Form
             {
                 if (mAppConfig.CurrentProfile.Composites.Any(t => t.Identifier == composite.Identifier))
                 {
-                    if (MessageBox.Show(this, $"A composite already exists for {composite.Identifier}. Do you want to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
+                    if (MessageBox.Show(this, $"A composite already exists for {composite.Identifier}. Do you want to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         mAppConfig.CurrentProfile.Composites.RemoveAll(t => t.Identifier == composite.Identifier);
                         mAppConfig.CurrentProfile.Composites.Add(composite);
@@ -1478,7 +1460,7 @@ public partial class ProfileConfigurationForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "Import Error: " + ex.Message, "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, $"Import Error: {ex.Message}", "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1493,7 +1475,7 @@ public partial class ProfileConfigurationForm : Form
         {
             if (mAppConfig.CurrentProfile.Composites.Any(t => t.Identifier == profile.ID))
             {
-                if (MessageBox.Show(this, "A composite with that identifier already exists. Would you like to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show(this, "A composite with that identifier already exists. Would you like to overwrite it?", "Duplicate Composite", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     return;
                 }
@@ -1505,11 +1487,11 @@ public partial class ProfileConfigurationForm : Form
                     existing.Identifier = profile.ID;
                     if (!string.IsNullOrEmpty(profile.AtisFrequency))
                     {
-                        existing.AtisFrequency = (int)(double.Parse(profile.AtisFrequency) * 1000) - 100000;
+                        existing.Frequency = (uint)(double.Parse(profile.AtisFrequency) * 1000);
                     }
                     else
                     {
-                        existing.AtisFrequency = profile.Frequency;
+                        existing.Frequency = (uint)(profile.Frequency + 100000) * 1000;
                     }
 
                     existing.IDSEndpoint = profile.InformationDisplaySystemEndpoint;
@@ -1595,11 +1577,11 @@ public partial class ProfileConfigurationForm : Form
                 composite.Identifier = profile.ID;
                 if (!string.IsNullOrEmpty(profile.AtisFrequency))
                 {
-                    composite.AtisFrequency = (int)(double.Parse(profile.AtisFrequency) * 1000) - 100000;
+                    composite.Frequency = (uint)(double.Parse(profile.AtisFrequency) * 1000);
                 }
                 else
                 {
-                    composite.AtisFrequency = profile.Frequency;
+                    composite.Frequency = (uint)(profile.Frequency + 100000) * 1000;
                 }
 
                 composite.IDSEndpoint = profile.InformationDisplaySystemEndpoint;
@@ -1697,7 +1679,7 @@ public partial class ProfileConfigurationForm : Form
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(saveDialog.FileName, JsonConvert.SerializeObject(mCurrentComposite, Formatting.Indented));
-                MessageBox.Show(this, "Composite exported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(this, "Composite exported successfully.", "Success", MessageBoxButtons.OK);
             }
         }
     }
@@ -1740,7 +1722,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridTransitionLevels.SelectedRows.Count == 1)
         {
-            if (!gridTransitionLevels.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected transition level?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridTransitionLevels.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected transition level?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridTransitionLevels.Rows.RemoveAt(gridTransitionLevels.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -1748,7 +1730,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No transition level selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No transition level selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1819,7 +1801,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridWeatherTypes.SelectedRows.Count == 1)
         {
-            if (!gridWeatherTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridWeatherTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridWeatherTypes.Rows.RemoveAt(gridWeatherTypes.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -1827,7 +1809,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No weather type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No weather type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1843,7 +1825,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridWeatherTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
         {
             e.Cancel = true;
         }
@@ -1877,7 +1859,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridWeatherDescriptors.SelectedRows.Count == 1)
         {
-            if (!gridWeatherDescriptors.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridWeatherDescriptors.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridWeatherDescriptors.Rows.RemoveAt(gridWeatherDescriptors.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -1885,7 +1867,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No weather descriptor selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No weather descriptor selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1901,7 +1883,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridWeatherDescriptors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
         {
             e.Cancel = true;
         }
@@ -1935,7 +1917,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridCloudTypes.SelectedRows.Count == 1)
         {
-            if (!gridCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridCloudTypes.Rows.RemoveAt(gridCloudTypes.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -1943,7 +1925,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -1959,7 +1941,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
         {
             e.Cancel = true;
         }
@@ -1993,7 +1975,7 @@ public partial class ProfileConfigurationForm : Form
     {
         if (gridConvectiveCloudTypes.SelectedRows.Count == 1)
         {
-            if (!gridConvectiveCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected convective weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (!gridConvectiveCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 gridConvectiveCloudTypes.Rows.RemoveAt(gridConvectiveCloudTypes.SelectedRows[0].Index);
                 btnApply.Enabled = true;
@@ -2001,7 +1983,7 @@ public partial class ProfileConfigurationForm : Form
         }
         else
         {
-            MessageBox.Show(this, "No convective cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(this, "No convective cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -2017,7 +1999,7 @@ public partial class ProfileConfigurationForm : Form
 
     private void gridConvectiveCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
         {
             e.Cancel = true;
         }

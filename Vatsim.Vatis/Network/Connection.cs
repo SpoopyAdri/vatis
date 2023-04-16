@@ -20,7 +20,7 @@ namespace Vatsim.Vatis.Network;
 public class Connection
 {
     public string AirportIcao { get; set; }
-    public int Frequency { get; set; }
+    public int Frequency => (int)((Composite.Frequency / 1000) - 100000);
     public string Callsign => Composite.AtisType switch
     {
         AtisType.Departure => $"{AirportIcao}_D_ATIS",

@@ -17,7 +17,7 @@ public class Composite : IComposite, ICloneable
     public string Identifier { get; set; }
     public AtisType AtisType { get; set; }
     public CodeRangeMeta CodeRange { get; set; } = new CodeRangeMeta('A', 'Z');
-    public int AtisFrequency { get; set; } = 18000;
+    public uint Frequency { get; set; } = 118000000;
     public AtisVoiceMeta AtisVoice { get; set; } = new AtisVoiceMeta();
     public string IDSEndpoint { get; set; }
     public bool UseNotamPrefix { get; set; } = true;
@@ -33,6 +33,9 @@ public class Composite : IComposite, ICloneable
     public List<TransitionLevelMeta> TransitionLevels { get; set; } = new List<TransitionLevelMeta>();
     public AtisFormat.AtisFormat AtisFormat { get; set; } = new();
 
+    // Legacy 
+    [JsonProperty] private int AtisFrequency { set => Frequency = (uint)((value + 100000) * 1000); }
+
     public object Clone()
     {
         var composite = (Composite)MemberwiseClone();
@@ -46,7 +49,6 @@ public class Composite : IComposite, ICloneable
     [JsonIgnore] public Preset CurrentPreset { get; set; }
     [JsonIgnore] public string AtisLetter { get; set; }
     [JsonIgnore] public string TextAtis { get; set; }
-    [JsonIgnore] public uint AfvFrequency => ((uint)AtisFrequency + 100000) * 1000;
     [JsonIgnore] public string AtisCallsign { get; set; }
     [JsonIgnore] public MemoryStream RecordedMemoryStream { get; set; }
     [JsonIgnore] public Connection Connection { get; set; }
