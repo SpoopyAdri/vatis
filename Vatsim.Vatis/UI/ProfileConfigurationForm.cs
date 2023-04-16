@@ -171,6 +171,9 @@ public partial class ProfileConfigurationForm : Form
                 mCurrentComposite = mAppConfig.CurrentProfile.Composites
                     .FirstOrDefault(x => x.Id == composite.Id);
 
+                if (mCurrentComposite == null)
+                    return;
+
                 pageTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
 
                 LoadComposite();
