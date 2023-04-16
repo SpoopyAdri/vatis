@@ -1521,6 +1521,11 @@ public partial class ProfileConfigurationForm : Form
                         }
                     }
 
+                    if (profile.MetarObservation != null)
+                    {
+                        existing.AtisFormat.ObservationTime.StandardUpdateTime = profile.MetarObservation.ObservationTimeValue;
+                    }
+
                     existing.Contractions.Clear();
                     foreach (var contraction in profile.Contractions)
                     {
@@ -1608,6 +1613,11 @@ public partial class ProfileConfigurationForm : Form
                                 profile.MagneticVariation.MagneticVariationValue * -1;
                             break;
                     }
+                }
+
+                if (profile.MetarObservation != null)
+                {
+                    composite.AtisFormat.ObservationTime.StandardUpdateTime = profile.MetarObservation.ObservationTimeValue;
                 }
 
                 foreach (var contraction in profile.Contractions)

@@ -35,6 +35,7 @@ public class Composite : IComposite, ICloneable
 
     // Legacy 
     [JsonProperty] private int AtisFrequency { set => Frequency = (uint)((value + 100000) * 1000); }
+    [JsonProperty] private dynamic ObservationTime { set => AtisFormat.ObservationTime.StandardUpdateTime = value.Time; }
 
     public object Clone()
     {
