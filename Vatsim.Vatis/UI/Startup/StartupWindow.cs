@@ -52,7 +52,7 @@ namespace Vatsim.Vatis.UI.Startup
             UpdateStatusLabel("Checking for new version...");
             if (await CheckForClientUpdates())
             {
-                Application.ExitThread();
+                Application.Exit();
             }
 
             UpdateStatusLabel("Loading NavData...");
