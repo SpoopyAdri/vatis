@@ -199,6 +199,7 @@ namespace Vatsim.Vatis.UI.Dialogs
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.pnlFacilityList);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

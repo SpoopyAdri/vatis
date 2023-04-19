@@ -298,6 +298,7 @@ partial class ExternalAtisGenerator
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
+            this.DoubleBuffered = true;
             this.Name = "ExternalAtisGenerator";
             this.Size = new System.Drawing.Size(710, 279);
             this.groupBox1.ResumeLayout(false);

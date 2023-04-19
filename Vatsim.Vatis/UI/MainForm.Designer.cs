@@ -32,14 +32,14 @@ namespace Vatsim.Vatis.UI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabContainer = new System.Windows.Forms.Panel();
-            this.atisTabs = new Tabs();
-            this.hitTestPanel1 = new HitTestPanel();
-            this.btnMinify = new ExButton();
-            this.btnSettings = new ExButton();
-            this.btnMinimize = new ExButton();
-            this.btnManageProfile = new ExButton();
-            this.utcClock = new HitTestLabel();
-            this.btnClose = new ExButton();
+            this.atisTabs = new Vatsim.Vatis.UI.Controls.Tabs();
+            this.hitTestPanel1 = new Vatsim.Vatis.UI.Controls.HitTestPanel();
+            this.btnMinify = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnSettings = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnMinimize = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.btnManageProfile = new Vatsim.Vatis.UI.Controls.ExButton();
+            this.utcClock = new Vatsim.Vatis.UI.Controls.HitTestLabel();
+            this.btnClose = new Vatsim.Vatis.UI.Controls.ExButton();
             this.tabContainer.SuspendLayout();
             this.hitTestPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -208,6 +208,7 @@ namespace Vatsim.Vatis.UI
             this.ControlBox = false;
             this.Controls.Add(this.tabContainer);
             this.Controls.Add(this.hitTestPanel1);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

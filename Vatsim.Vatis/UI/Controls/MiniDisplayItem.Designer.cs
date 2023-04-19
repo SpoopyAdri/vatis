@@ -123,6 +123,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.Controls.Add(this.tlpMain);
+            this.DoubleBuffered = true;
             this.Name = "MiniDisplayItem";
             this.Size = new System.Drawing.Size(300, 40);
             this.tlpMain.ResumeLayout(false);

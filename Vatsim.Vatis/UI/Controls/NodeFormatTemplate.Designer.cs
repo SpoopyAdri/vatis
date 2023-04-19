@@ -117,6 +117,7 @@ partial class NodeFormatTemplate
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
+            this.DoubleBuffered = true;
             this.Name = "NodeFormatTemplate";
             this.Size = new System.Drawing.Size(615, 210);
             this.groupBox1.ResumeLayout(false);
