@@ -69,6 +69,8 @@
             this.lblAtisLetter.Text = "X";
             this.lblAtisLetter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblAtisLetter.Click += new System.EventHandler(this.txtAtisLetter_Click);
+            this.lblAtisLetter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblAtisLetter_MouseDown);
+            this.lblAtisLetter.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblAtisLetter_MouseUp);
             // 
             // tlpMain
             // 

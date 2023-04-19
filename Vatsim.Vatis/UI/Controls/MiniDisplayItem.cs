@@ -68,4 +68,14 @@ public partial class MiniDisplayItem : UserControl
         IsNewAtis = false;
         AtisUpdateAcknowledged?.Invoke(this, EventArgs.Empty);
     }
+
+    private void lblAtisLetter_MouseDown(object sender, MouseEventArgs e)
+    {
+        lblAtisLetter.BackColor = Color.FromArgb(0, 0, 0);
+    }
+
+    private void lblAtisLetter_MouseUp(object sender, MouseEventArgs e)
+    {
+        lblAtisLetter.BackColor = Color.FromArgb(20, 20, 20);
+    }
 }
