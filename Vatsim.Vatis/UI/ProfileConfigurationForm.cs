@@ -187,7 +187,7 @@ public partial class ProfileConfigurationForm : Form
         chkNotamPrefix.Checked = mCurrentComposite.UseNotamPrefix;
         chkNotamPrefix.Text = mCurrentComposite.IsFaaAtis ? "Prefix spoken NOTAMs with \"Notices to Air Missions\"" : "Prefix spoken NOTAMs with \"Notices to Air Men\"";
 
-        vhfFrequency.Text = (mCurrentComposite.Frequency / 1000.0).ToString("000.000");
+        vhfFrequency.Text = (mCurrentComposite.Frequency / 1000).ToString("000.000");
 
         switch (mCurrentComposite.AtisType)
         {
@@ -681,7 +681,7 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.UseNotamPrefix = chkNotamPrefix.Checked;
         mCurrentComposite.UseDecimalTerminology = chkUseDecimalTerminology.Checked;
 
-        if (double.TryParse(vhfFrequency.Text, out var frequency))
+        if (decimal.TryParse(vhfFrequency.Text, out var frequency))
         {
             frequency = frequency * 1000 * 1000;
 
