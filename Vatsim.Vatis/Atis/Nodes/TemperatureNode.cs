@@ -44,11 +44,11 @@ public class TemperatureNode : BaseNode<TemperatureInfo>
 
         if (node.Temperature < 0)
         {
-            format = Regex.Replace(format, "{temp}", "minus" + Math.Abs(node.Temperature.Value).ToString(Composite.AtisFormat.Temperature.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
+            format = Regex.Replace(format, "{temp}", "minus " + Math.Abs(node.Temperature.Value).ToString(Composite.AtisFormat.Temperature.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
         }
         else
         {
-            format = Regex.Replace(format, "{temp}", (Composite.AtisFormat.Temperature.UsePlusPrefix ? "plus" : "") + Math.Abs(node.Temperature.Value).ToString(Composite.AtisFormat.Temperature.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
+            format = Regex.Replace(format, "{temp}", (Composite.AtisFormat.Temperature.UsePlusPrefix ? "plus " : "") + Math.Abs(node.Temperature.Value).ToString(Composite.AtisFormat.Temperature.PronounceLeadingZero ? "00" : "").ToSerialForm(), RegexOptions.IgnoreCase);
         }
 
         return format;
