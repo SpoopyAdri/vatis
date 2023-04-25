@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Vatsim.Vatis.Weather.Objects;
@@ -40,88 +41,56 @@ public class PresentWeatherNode : BaseNode<WeatherPhenomena>
     {
         var result = new List<string>();
 
-        if (node.Descriptor == "SH" && !string.IsNullOrEmpty(node.Type))
+        var validTypes = new string[] { "RA", "SN", "PL", "GS", "GR" };
+        if (node.Descriptor == "SH" && validTypes.Contains(node.Type))
         {
-            var validTypes = new string[] { "RA", "SN", "PL", "GS", "GS" };
-            if (validTypes.Contains(node.Type))
+            if (node.IntensityProximity == "-")
             {
-                if (node.IntensityProximity == "-")
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.LightIntensity);
-                }
-                else if (node.IntensityProximity == "+")
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.HeavyIntensity);
-                }
-                else
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
-                }
-
-                result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
-                result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
+                result.Add(Composite.AtisFormat.PresentWeather.LightIntensity);
             }
-        }
-        else
-        {
-            var validDescriptors = new string[] { "FZ", "BC", "BL" };
-            if (!string.IsNullOrEmpty(node.Descriptor)
-                && !string.IsNullOrEmpty(node.Type)
-                && validDescriptors.Contains(node.Descriptor))
+            else if (node.IntensityProximity == "+")
             {
-                if (node.IntensityProximity == "-")
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.LightIntensity);
-                }
-                else if (node.IntensityProximity == "+")
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.HeavyIntensity);
-                }
-                else
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
-                }
-
-                result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
-                result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
-
-                if (node.IntensityProximity == "VC")
-                {
-                    result.Add(Composite.AtisFormat.PresentWeather.Vicinity);
-                }
+                result.Add(Composite.AtisFormat.PresentWeather.HeavyIntensity);
             }
             else
             {
-                if (!string.IsNullOrEmpty(node.IntensityProximity))
+                result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
+            }
+
+            result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
+            result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(node.IntensityProximity))
+            {
+                switch (node.IntensityProximity)
                 {
-                    switch (node.IntensityProximity)
-                    {
-                        case "+":
-                            result.Add(Composite.AtisFormat.PresentWeather.HeavyIntensity);
-                            break;
-                        case "-":
-                            result.Add(Composite.AtisFormat.PresentWeather.LightIntensity);
-                            break;
-                        default:
-                            result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
-                            break;
-                    }
-
-                    if (!string.IsNullOrEmpty(node.Descriptor))
-                    {
-                        result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
-                    }
-
-                    if (!string.IsNullOrEmpty(node.Type))
-                    {
-                        result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
-                    }
-
-                    if (node.IntensityProximity == "VC")
-                    {
-                        result.Add(Composite.AtisFormat.PresentWeather.Vicinity);
-                    }
+                    case "+":
+                        result.Add(Composite.AtisFormat.PresentWeather.HeavyIntensity);
+                        break;
+                    case "-":
+                        result.Add(Composite.AtisFormat.PresentWeather.LightIntensity);
+                        break;
+                    default:
+                        result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
+                        break;
                 }
+            }
+
+            if (!string.IsNullOrEmpty(node.Descriptor))
+            {
+                result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
+            }
+
+            if (!string.IsNullOrEmpty(node.Type))
+            {
+                result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
+            }
+
+            if (node.IntensityProximity == "VC")
+            {
+                result.Add(Composite.AtisFormat.PresentWeather.Vicinity);
             }
         }
 
