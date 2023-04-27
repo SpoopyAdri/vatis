@@ -1,4 +1,7 @@
-﻿namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
+﻿using Newtonsoft.Json;
+using System;
+
+namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
 public class Visibility : BaseFormat
 {
     public Visibility()
@@ -17,7 +20,9 @@ public class Visibility : BaseFormat
     public string SouthWest { get; set; } = "to the south-west";
     public string West { get; set; } = "to the west";
     public string NorthWest { get; set; } = "to the north-west";
-    public string UnlimitedVisibility { get; set; } = "visibility 10 kilometers or more";
+    public string UnlimitedVisibilityVoice { get; set; } = "visibility 10 kilometers or more";
+    public string UnlimitedVisibilityText { get; set; } = "VIS 10KM";
     public bool IncludeVisibilitySuffix { get; set; } = true;
     public int MetersCutoff { get; set; } = 5000;
+    [JsonProperty] private string UnlimitedVisibility { set => UnlimitedVisibilityVoice = value; }
 }

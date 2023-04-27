@@ -29,6 +29,11 @@ public class PrevailingVisibilityNode : BaseNode<PrevailingVisibility>
         if (node == null)
             return "";
 
+        if (node.VisibilityInMeters != null && node.VisibilityInMeters.VisibilityValue == 9999)
+        {
+            return Composite.AtisFormat.Visibility.UnlimitedVisibilityText;
+        }
+
         return Regex.Replace(format, "{visibility}", node.RawValue, RegexOptions.IgnoreCase);
     }
 
@@ -49,7 +54,7 @@ public class PrevailingVisibilityNode : BaseNode<PrevailingVisibility>
             {
                 if (node.VisibilityInMeters.VisibilityValue == 9999)
                 {
-                    return Composite.AtisFormat.Visibility.UnlimitedVisibility;
+                    return Composite.AtisFormat.Visibility.UnlimitedVisibilityVoice;
                 }
                 else
                 {

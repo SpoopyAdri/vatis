@@ -28,289 +28,285 @@ partial class ExternalAtisGenerator
     /// </summary>
     private void InitializeComponent()
     {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupTest = new System.Windows.Forms.GroupBox();
-            this.btnFetchMetar = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.txtMetar = new System.Windows.Forms.TextBox();
-            this.txtResponse = new System.Windows.Forms.TextBox();
-            this.tlpVariables = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtExternalDep = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtExternalArr = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtExternalApp = new System.Windows.Forms.TextBox();
-            this.txtExternalRemarks = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtExternalUrl = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.groupTest.SuspendLayout();
-            this.tlpVariables.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(710, 279);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "External ATIS Generator";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.groupTest, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tlpVariables, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 19);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(704, 257);
-            this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // groupTest
-            // 
-            this.groupTest.Controls.Add(this.btnFetchMetar);
-            this.groupTest.Controls.Add(this.label10);
-            this.groupTest.Controls.Add(this.btnTest);
-            this.groupTest.Controls.Add(this.txtMetar);
-            this.groupTest.Controls.Add(this.txtResponse);
-            this.groupTest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupTest.Location = new System.Drawing.Point(3, 119);
-            this.groupTest.Name = "groupTest";
-            this.groupTest.Size = new System.Drawing.Size(698, 135);
-            this.groupTest.TabIndex = 8;
-            this.groupTest.TabStop = false;
-            this.groupTest.Text = "Test URL";
-            // 
-            // btnFetchMetar
-            // 
-            this.btnFetchMetar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFetchMetar.Location = new System.Drawing.Point(542, 20);
-            this.btnFetchMetar.Name = "btnFetchMetar";
-            this.btnFetchMetar.Size = new System.Drawing.Size(61, 23);
-            this.btnFetchMetar.TabIndex = 7;
-            this.btnFetchMetar.Text = "Fetch";
-            this.btnFetchMetar.UseVisualStyleBackColor = true;
-            this.btnFetchMetar.Click += new System.EventHandler(this.btnFetchMetar_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "METAR:";
-            // 
-            // btnTest
-            // 
-            this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTest.Enabled = false;
-            this.btnTest.Location = new System.Drawing.Point(609, 20);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(78, 23);
-            this.btnTest.TabIndex = 3;
-            this.btnTest.Text = "Test URL";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // txtMetar
-            // 
-            this.txtMetar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMetar.Location = new System.Drawing.Point(64, 20);
-            this.txtMetar.Name = "txtMetar";
-            this.txtMetar.Size = new System.Drawing.Size(472, 23);
-            this.txtMetar.TabIndex = 5;
-            this.txtMetar.TextChanged += new System.EventHandler(this.txtMetar_TextChanged);
-            // 
-            // txtResponse
-            // 
-            this.txtResponse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResponse.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtResponse.Location = new System.Drawing.Point(12, 48);
-            this.txtResponse.Multiline = true;
-            this.txtResponse.Name = "txtResponse";
-            this.txtResponse.ReadOnly = true;
-            this.txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResponse.Size = new System.Drawing.Size(675, 75);
-            this.txtResponse.TabIndex = 4;
-            // 
-            // tlpVariables
-            // 
-            this.tlpVariables.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tlpVariables.ColumnCount = 4;
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpVariables.Controls.Add(this.label8, 0, 1);
-            this.tlpVariables.Controls.Add(this.txtExternalDep, 1, 1);
-            this.tlpVariables.Controls.Add(this.label7, 0, 0);
-            this.tlpVariables.Controls.Add(this.txtExternalArr, 1, 0);
-            this.tlpVariables.Controls.Add(this.label9, 2, 0);
-            this.tlpVariables.Controls.Add(this.txtExternalApp, 3, 0);
-            this.tlpVariables.Controls.Add(this.txtExternalRemarks, 3, 1);
-            this.tlpVariables.Controls.Add(this.label12, 2, 1);
-            this.tlpVariables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpVariables.Location = new System.Drawing.Point(3, 42);
-            this.tlpVariables.Name = "tlpVariables";
-            this.tlpVariables.RowCount = 2;
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpVariables.Size = new System.Drawing.Size(698, 71);
-            this.tlpVariables.TabIndex = 3;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(4, 36);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(124, 34);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Departure Runways:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtExternalDep
-            // 
-            this.txtExternalDep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalDep.Location = new System.Drawing.Point(135, 39);
-            this.txtExternalDep.Name = "txtExternalDep";
-            this.txtExternalDep.Size = new System.Drawing.Size(210, 23);
-            this.txtExternalDep.TabIndex = 3;
-            this.txtExternalDep.TextChanged += new System.EventHandler(this.txtExternalDep_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(4, 1);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 34);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Arrival Runways:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtExternalArr
-            // 
-            this.txtExternalArr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalArr.Location = new System.Drawing.Point(135, 4);
-            this.txtExternalArr.Name = "txtExternalArr";
-            this.txtExternalArr.Size = new System.Drawing.Size(210, 23);
-            this.txtExternalArr.TabIndex = 1;
-            this.txtExternalArr.TextChanged += new System.EventHandler(this.txtExternalArr_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(352, 1);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(124, 34);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Approaches in Use:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtExternalApp
-            // 
-            this.txtExternalApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalApp.Location = new System.Drawing.Point(483, 4);
-            this.txtExternalApp.Name = "txtExternalApp";
-            this.txtExternalApp.Size = new System.Drawing.Size(211, 23);
-            this.txtExternalApp.TabIndex = 5;
-            this.txtExternalApp.TextChanged += new System.EventHandler(this.txtExternalApp_TextChanged);
-            // 
-            // txtExternalRemarks
-            // 
-            this.txtExternalRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExternalRemarks.Location = new System.Drawing.Point(483, 39);
-            this.txtExternalRemarks.Name = "txtExternalRemarks";
-            this.txtExternalRemarks.Size = new System.Drawing.Size(211, 23);
-            this.txtExternalRemarks.TabIndex = 7;
-            this.txtExternalRemarks.TextChanged += new System.EventHandler(this.txtExternalRemarks_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(352, 36);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 34);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Remarks:";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtExternalUrl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(704, 39);
-            this.panel1.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "URL:";
-            // 
-            // txtExternalUrl
-            // 
-            this.txtExternalUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtExternalUrl.Location = new System.Drawing.Point(44, 8);
-            this.txtExternalUrl.Name = "txtExternalUrl";
-            this.txtExternalUrl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtExternalUrl.Size = new System.Drawing.Size(655, 23);
-            this.txtExternalUrl.TabIndex = 3;
-            this.txtExternalUrl.TextChanged += new System.EventHandler(this.txtExternalUrl_TextChanged);
-            // 
-            // ExternalAtisGenerator
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
-            this.DoubleBuffered = true;
-            this.Name = "ExternalAtisGenerator";
-            this.Size = new System.Drawing.Size(710, 279);
-            this.groupBox1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupTest.ResumeLayout(false);
-            this.groupTest.PerformLayout();
-            this.tlpVariables.ResumeLayout(false);
-            this.tlpVariables.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-
+        groupBox1 = new System.Windows.Forms.GroupBox();
+        tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+        groupTest = new System.Windows.Forms.GroupBox();
+        btnFetchMetar = new System.Windows.Forms.Button();
+        label10 = new System.Windows.Forms.Label();
+        btnTest = new System.Windows.Forms.Button();
+        txtMetar = new System.Windows.Forms.TextBox();
+        txtResponse = new System.Windows.Forms.TextBox();
+        tlpVariables = new System.Windows.Forms.TableLayoutPanel();
+        label8 = new System.Windows.Forms.Label();
+        txtExternalDep = new System.Windows.Forms.TextBox();
+        label7 = new System.Windows.Forms.Label();
+        txtExternalArr = new System.Windows.Forms.TextBox();
+        label9 = new System.Windows.Forms.Label();
+        txtExternalApp = new System.Windows.Forms.TextBox();
+        txtExternalRemarks = new System.Windows.Forms.TextBox();
+        label12 = new System.Windows.Forms.Label();
+        panel1 = new System.Windows.Forms.Panel();
+        label1 = new System.Windows.Forms.Label();
+        txtExternalUrl = new System.Windows.Forms.TextBox();
+        groupBox1.SuspendLayout();
+        tableLayoutPanel1.SuspendLayout();
+        groupTest.SuspendLayout();
+        tlpVariables.SuspendLayout();
+        panel1.SuspendLayout();
+        SuspendLayout();
+        // 
+        // groupBox1
+        // 
+        groupBox1.Controls.Add(tableLayoutPanel1);
+        groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox1.Location = new System.Drawing.Point(0, 0);
+        groupBox1.Name = "groupBox1";
+        groupBox1.Size = new System.Drawing.Size(710, 279);
+        groupBox1.TabIndex = 0;
+        groupBox1.TabStop = false;
+        groupBox1.Text = "External ATIS Generator";
+        // 
+        // tableLayoutPanel1
+        // 
+        tableLayoutPanel1.ColumnCount = 1;
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        tableLayoutPanel1.Controls.Add(groupTest, 0, 2);
+        tableLayoutPanel1.Controls.Add(tlpVariables, 0, 1);
+        tableLayoutPanel1.Controls.Add(panel1, 0, 0);
+        tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+        tableLayoutPanel1.Location = new System.Drawing.Point(3, 19);
+        tableLayoutPanel1.Name = "tableLayoutPanel1";
+        tableLayoutPanel1.RowCount = 3;
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+        tableLayoutPanel1.Size = new System.Drawing.Size(704, 257);
+        tableLayoutPanel1.TabIndex = 4;
+        // 
+        // groupTest
+        // 
+        groupTest.Controls.Add(btnFetchMetar);
+        groupTest.Controls.Add(label10);
+        groupTest.Controls.Add(btnTest);
+        groupTest.Controls.Add(txtMetar);
+        groupTest.Controls.Add(txtResponse);
+        groupTest.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupTest.Location = new System.Drawing.Point(3, 119);
+        groupTest.Name = "groupTest";
+        groupTest.Size = new System.Drawing.Size(698, 135);
+        groupTest.TabIndex = 8;
+        groupTest.TabStop = false;
+        groupTest.Text = "Test URL";
+        // 
+        // btnFetchMetar
+        // 
+        btnFetchMetar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        btnFetchMetar.Location = new System.Drawing.Point(542, 20);
+        btnFetchMetar.Name = "btnFetchMetar";
+        btnFetchMetar.Size = new System.Drawing.Size(61, 23);
+        btnFetchMetar.TabIndex = 7;
+        btnFetchMetar.Text = "Fetch";
+        btnFetchMetar.UseVisualStyleBackColor = true;
+        btnFetchMetar.Click += btnFetchMetar_Click;
+        // 
+        // label10
+        // 
+        label10.AutoSize = true;
+        label10.Location = new System.Drawing.Point(12, 24);
+        label10.Name = "label10";
+        label10.Size = new System.Drawing.Size(47, 15);
+        label10.TabIndex = 6;
+        label10.Text = "METAR:";
+        // 
+        // btnTest
+        // 
+        btnTest.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        btnTest.Enabled = false;
+        btnTest.Location = new System.Drawing.Point(609, 20);
+        btnTest.Name = "btnTest";
+        btnTest.Size = new System.Drawing.Size(78, 23);
+        btnTest.TabIndex = 3;
+        btnTest.Text = "Test URL";
+        btnTest.UseVisualStyleBackColor = true;
+        btnTest.Click += btnTest_Click;
+        // 
+        // txtMetar
+        // 
+        txtMetar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        txtMetar.Location = new System.Drawing.Point(64, 20);
+        txtMetar.Name = "txtMetar";
+        txtMetar.Size = new System.Drawing.Size(472, 23);
+        txtMetar.TabIndex = 5;
+        txtMetar.TextChanged += txtMetar_TextChanged;
+        // 
+        // txtResponse
+        // 
+        txtResponse.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        txtResponse.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+        txtResponse.Location = new System.Drawing.Point(12, 48);
+        txtResponse.Multiline = true;
+        txtResponse.Name = "txtResponse";
+        txtResponse.ReadOnly = true;
+        txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        txtResponse.Size = new System.Drawing.Size(675, 75);
+        txtResponse.TabIndex = 4;
+        // 
+        // tlpVariables
+        // 
+        tlpVariables.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+        tlpVariables.ColumnCount = 4;
+        tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+        tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+        tlpVariables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tlpVariables.Controls.Add(label8, 0, 1);
+        tlpVariables.Controls.Add(txtExternalDep, 1, 1);
+        tlpVariables.Controls.Add(label7, 0, 0);
+        tlpVariables.Controls.Add(txtExternalArr, 1, 0);
+        tlpVariables.Controls.Add(label9, 2, 0);
+        tlpVariables.Controls.Add(txtExternalApp, 3, 0);
+        tlpVariables.Controls.Add(txtExternalRemarks, 3, 1);
+        tlpVariables.Controls.Add(label12, 2, 1);
+        tlpVariables.Dock = System.Windows.Forms.DockStyle.Fill;
+        tlpVariables.Location = new System.Drawing.Point(3, 42);
+        tlpVariables.Name = "tlpVariables";
+        tlpVariables.RowCount = 2;
+        tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tlpVariables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tlpVariables.Size = new System.Drawing.Size(698, 71);
+        tlpVariables.TabIndex = 3;
+        // 
+        // label8
+        // 
+        label8.AutoSize = true;
+        label8.Dock = System.Windows.Forms.DockStyle.Fill;
+        label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        label8.Location = new System.Drawing.Point(4, 36);
+        label8.Name = "label8";
+        label8.Size = new System.Drawing.Size(124, 34);
+        label8.TabIndex = 2;
+        label8.Text = "Departure Runways:";
+        label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        // 
+        // txtExternalDep
+        // 
+        txtExternalDep.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtExternalDep.Location = new System.Drawing.Point(135, 39);
+        txtExternalDep.Name = "txtExternalDep";
+        txtExternalDep.Size = new System.Drawing.Size(210, 23);
+        txtExternalDep.TabIndex = 3;
+        txtExternalDep.TextChanged += txtExternalDep_TextChanged;
+        // 
+        // label7
+        // 
+        label7.AutoSize = true;
+        label7.Dock = System.Windows.Forms.DockStyle.Fill;
+        label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        label7.Location = new System.Drawing.Point(4, 1);
+        label7.Name = "label7";
+        label7.Size = new System.Drawing.Size(124, 34);
+        label7.TabIndex = 0;
+        label7.Text = "Arrival Runways:";
+        label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        // 
+        // txtExternalArr
+        // 
+        txtExternalArr.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtExternalArr.Location = new System.Drawing.Point(135, 4);
+        txtExternalArr.Name = "txtExternalArr";
+        txtExternalArr.Size = new System.Drawing.Size(210, 23);
+        txtExternalArr.TabIndex = 1;
+        txtExternalArr.TextChanged += txtExternalArr_TextChanged;
+        // 
+        // label9
+        // 
+        label9.AutoSize = true;
+        label9.Dock = System.Windows.Forms.DockStyle.Fill;
+        label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        label9.Location = new System.Drawing.Point(352, 1);
+        label9.Name = "label9";
+        label9.Size = new System.Drawing.Size(124, 34);
+        label9.TabIndex = 4;
+        label9.Text = "Approaches in Use:";
+        label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        // 
+        // txtExternalApp
+        // 
+        txtExternalApp.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtExternalApp.Location = new System.Drawing.Point(483, 4);
+        txtExternalApp.Name = "txtExternalApp";
+        txtExternalApp.Size = new System.Drawing.Size(211, 23);
+        txtExternalApp.TabIndex = 5;
+        txtExternalApp.TextChanged += txtExternalApp_TextChanged;
+        // 
+        // txtExternalRemarks
+        // 
+        txtExternalRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtExternalRemarks.Location = new System.Drawing.Point(483, 39);
+        txtExternalRemarks.Name = "txtExternalRemarks";
+        txtExternalRemarks.Size = new System.Drawing.Size(211, 23);
+        txtExternalRemarks.TabIndex = 7;
+        txtExternalRemarks.TextChanged += txtExternalRemarks_TextChanged;
+        // 
+        // label12
+        // 
+        label12.AutoSize = true;
+        label12.Dock = System.Windows.Forms.DockStyle.Fill;
+        label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        label12.Location = new System.Drawing.Point(352, 36);
+        label12.Name = "label12";
+        label12.Size = new System.Drawing.Size(124, 34);
+        label12.TabIndex = 6;
+        label12.Text = "Remarks:";
+        label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        // 
+        // panel1
+        // 
+        panel1.Controls.Add(label1);
+        panel1.Controls.Add(txtExternalUrl);
+        panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+        panel1.Location = new System.Drawing.Point(0, 0);
+        panel1.Margin = new System.Windows.Forms.Padding(0);
+        panel1.Name = "panel1";
+        panel1.Size = new System.Drawing.Size(704, 39);
+        panel1.TabIndex = 9;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new System.Drawing.Point(7, 12);
+        label1.Name = "label1";
+        label1.Size = new System.Drawing.Size(31, 15);
+        label1.TabIndex = 7;
+        label1.Text = "URL:";
+        // 
+        // txtExternalUrl
+        // 
+        txtExternalUrl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        txtExternalUrl.Location = new System.Drawing.Point(44, 8);
+        txtExternalUrl.Name = "txtExternalUrl";
+        txtExternalUrl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        txtExternalUrl.Size = new System.Drawing.Size(655, 23);
+        txtExternalUrl.TabIndex = 3;
+        txtExternalUrl.TextChanged += txtExternalUrl_TextChanged;
+        // 
+        // ExternalAtisGenerator
+        // 
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        Controls.Add(groupBox1);
+        DoubleBuffered = true;
+        Name = "ExternalAtisGenerator";
+        Size = new System.Drawing.Size(710, 279);
+        groupBox1.ResumeLayout(false);
+        tableLayoutPanel1.ResumeLayout(false);
+        groupTest.ResumeLayout(false);
+        groupTest.PerformLayout();
+        tlpVariables.ResumeLayout(false);
+        tlpVariables.PerformLayout();
+        panel1.ResumeLayout(false);
+        panel1.PerformLayout();
+        ResumeLayout(false);
     }
 
     #endregion

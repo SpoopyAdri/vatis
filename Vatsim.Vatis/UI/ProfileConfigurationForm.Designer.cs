@@ -30,647 +30,647 @@ namespace Vatsim.Vatis.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            Vatsim.Vatis.UI.Controls.Variable variable1 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable2 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable3 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable4 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable5 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable6 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable7 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable8 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable9 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable10 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable11 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable12 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable13 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable14 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable15 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable16 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable17 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable18 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable19 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable20 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable21 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable22 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable23 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable24 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable25 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable26 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable27 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable28 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable29 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable30 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable31 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable32 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable33 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable34 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable35 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable36 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable37 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable38 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable39 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable40 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable41 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable42 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable43 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable44 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable45 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable46 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable47 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable48 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable49 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable50 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable51 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable52 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable53 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable54 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable55 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable56 = new Vatsim.Vatis.UI.Controls.Variable();
-            Vatsim.Vatis.UI.Controls.Variable variable57 = new Vatsim.Vatis.UI.Controls.Variable();
-            this.TlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.mainTabControl = new System.Windows.Forms.TabControl();
-            this.pageGen = new System.Windows.Forms.TabPage();
-            this.chkNotamPrefix = new System.Windows.Forms.CheckBox();
-            this.chkUseDecimalTerminology = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtCodeRangeHigh = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtCodeRangeLow = new System.Windows.Forms.TextBox();
-            this.groupVoiceOption = new System.Windows.Forms.Panel();
-            this.radioTextToSpeech = new System.Windows.Forms.RadioButton();
-            this.ddlVoices = new System.Windows.Forms.ComboBox();
-            this.radioVoiceRecorded = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtIdsEndpoint = new System.Windows.Forms.TextBox();
-            this.vhfFrequency = new System.Windows.Forms.MaskedTextBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.typeCombined = new System.Windows.Forms.RadioButton();
-            this.typeDeparture = new System.Windows.Forms.RadioButton();
-            this.typeArrival = new System.Windows.Forms.RadioButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pageFormatting = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabObservationTime = new System.Windows.Forms.TabPage();
-            this.templateObservationTime = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.label5 = new System.Windows.Forms.Label();
-            this.standardObservationTime = new System.Windows.Forms.NumericUpDown();
-            this.tabSurfaceWind = new System.Windows.Forms.TabPage();
-            this.magneticVar = new System.Windows.Forms.NumericUpDown();
-            this.chkMagneticVar = new System.Windows.Forms.CheckBox();
-            this.chkWindSpeakLeadingZero = new System.Windows.Forms.CheckBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.windStandard = new System.Windows.Forms.TabPage();
-            this.templateWindStandard = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.windStandardGust = new System.Windows.Forms.TabPage();
-            this.templateWindStanardGust = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.windVariable = new System.Windows.Forms.TabPage();
-            this.templateWindVariable = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.windVariableGust = new System.Windows.Forms.TabPage();
-            this.templateWindVariableGust = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.windVariableDirection = new System.Windows.Forms.TabPage();
-            this.templateWindVariableDirection = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.windCalm = new System.Windows.Forms.TabPage();
-            this.templateWindCalm = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.calmWindSpeed = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tabVisibility = new System.Windows.Forms.TabPage();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.templateVisibility = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.visibilityMetersCutoff = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.chkVisibilitySuffix = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.visDirNorth = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.visDirNorthWest = new System.Windows.Forms.TextBox();
-            this.visDirNorthEast = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.visDirWest = new System.Windows.Forms.TextBox();
-            this.visDirEast = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.visDirSouthWest = new System.Windows.Forms.TextBox();
-            this.visDirSouthEast = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.visDirSouth = new System.Windows.Forms.TextBox();
-            this.visUnlimited = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.tabPresentWeather = new System.Windows.Forms.TabPage();
-            this.tabControl4 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.templatePresentWeather = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.wxProximityVicinity = new System.Windows.Forms.TextBox();
-            this.wxIntensityHeavy = new System.Windows.Forms.TextBox();
-            this.wxIntensityModerate = new System.Windows.Forms.TextBox();
-            this.wxIntensityLight = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDeleteWeatherType = new System.Windows.Forms.Button();
-            this.gridWeatherTypes = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDeleteWeatherDescriptor = new System.Windows.Forms.Button();
-            this.gridWeatherDescriptors = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabClouds = new System.Windows.Forms.TabPage();
-            this.tabControl5 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.chkConvertCloudsMetric = new System.Windows.Forms.CheckBox();
-            this.chkIdentifyCeilingLayer = new System.Windows.Forms.CheckBox();
-            this.templateCloudLayers = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.gridCloudTypes = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDeleteCloudType = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDeleteConvectiveCloudType = new System.Windows.Forms.Button();
-            this.gridConvectiveCloudTypes = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabTemperature = new System.Windows.Forms.TabPage();
-            this.chkTempLeadingZero = new System.Windows.Forms.CheckBox();
-            this.chkTempPlusPrefix = new System.Windows.Forms.CheckBox();
-            this.templateTemperature = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabDewpoint = new System.Windows.Forms.TabPage();
-            this.chkDewLeadingZero = new System.Windows.Forms.CheckBox();
-            this.chkDewPlusPrefix = new System.Windows.Forms.CheckBox();
-            this.templateDewpoint = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabAltimeter = new System.Windows.Forms.TabPage();
-            this.templateAltimeter = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.tabClosing = new System.Windows.Forms.TabPage();
-            this.templateClosingStatement = new Vatsim.Vatis.UI.Controls.NodeFormatTemplate();
-            this.chkAutoIncludeClosingStatement = new System.Windows.Forms.CheckBox();
-            this.pagePresets = new System.Windows.Forms.TabPage();
-            this.chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
-            this.dynamicPresetControl = new System.Windows.Forms.Panel();
-            this.btnRenamePreset = new System.Windows.Forms.Button();
-            this.btnDeletePreset = new System.Windows.Forms.Button();
-            this.btnCopyPreset = new System.Windows.Forms.Button();
-            this.btnNewPreset = new System.Windows.Forms.Button();
-            this.ddlPresets = new System.Windows.Forms.ComboBox();
-            this.pageContractions = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDeleteContraction = new System.Windows.Forms.Button();
-            this.gridContractions = new System.Windows.Forms.DataGridView();
-            this.ColumnFind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pageTransitionLevel = new System.Windows.Forms.TabPage();
-            this.chkTransitionLevelPrefix = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.gridTransitionLevels = new System.Windows.Forms.DataGridView();
-            this.low = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.high = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transitionLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.btnDeleteTransitionLevel = new System.Windows.Forms.Button();
-            this.btnManageComposite = new System.Windows.Forms.Button();
-            this.ctxOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctxNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctxRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ctxImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctxExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelCompositeList = new Vatsim.Vatis.UI.Controls.HitTestPanel();
-            this.TreeMenu = new System.Windows.Forms.TreeView();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.compositeTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TlpMain.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.mainTabControl.SuspendLayout();
-            this.pageGen.SuspendLayout();
-            this.groupVoiceOption.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.pageFormatting.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabObservationTime.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.standardObservationTime)).BeginInit();
-            this.tabSurfaceWind.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.windStandard.SuspendLayout();
-            this.windStandardGust.SuspendLayout();
-            this.windVariable.SuspendLayout();
-            this.windVariableGust.SuspendLayout();
-            this.windVariableDirection.SuspendLayout();
-            this.windCalm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.calmWindSpeed)).BeginInit();
-            this.tabVisibility.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.visibilityMetersCutoff)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.tabPresentWeather.SuspendLayout();
-            this.tabControl4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage11.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridWeatherTypes)).BeginInit();
-            this.tabPage10.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridWeatherDescriptors)).BeginInit();
-            this.tabClouds.SuspendLayout();
-            this.tabControl5.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridCloudTypes)).BeginInit();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridConvectiveCloudTypes)).BeginInit();
-            this.tabTemperature.SuspendLayout();
-            this.tabDewpoint.SuspendLayout();
-            this.tabAltimeter.SuspendLayout();
-            this.tabClosing.SuspendLayout();
-            this.pagePresets.SuspendLayout();
-            this.pageContractions.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridContractions)).BeginInit();
-            this.pageTransitionLevel.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridTransitionLevels)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.ctxOptions.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panelCompositeList.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            Variable variable1 = new Variable();
+            Variable variable2 = new Variable();
+            Variable variable3 = new Variable();
+            Variable variable4 = new Variable();
+            Variable variable5 = new Variable();
+            Variable variable6 = new Variable();
+            Variable variable7 = new Variable();
+            Variable variable8 = new Variable();
+            Variable variable9 = new Variable();
+            Variable variable10 = new Variable();
+            Variable variable11 = new Variable();
+            Variable variable12 = new Variable();
+            Variable variable13 = new Variable();
+            Variable variable14 = new Variable();
+            Variable variable15 = new Variable();
+            Variable variable16 = new Variable();
+            Variable variable17 = new Variable();
+            Variable variable18 = new Variable();
+            Variable variable19 = new Variable();
+            Variable variable20 = new Variable();
+            Variable variable21 = new Variable();
+            Variable variable22 = new Variable();
+            Variable variable23 = new Variable();
+            Variable variable24 = new Variable();
+            Variable variable25 = new Variable();
+            Variable variable26 = new Variable();
+            Variable variable27 = new Variable();
+            Variable variable28 = new Variable();
+            Variable variable29 = new Variable();
+            Variable variable30 = new Variable();
+            Variable variable31 = new Variable();
+            Variable variable32 = new Variable();
+            Variable variable33 = new Variable();
+            Variable variable34 = new Variable();
+            Variable variable35 = new Variable();
+            Variable variable36 = new Variable();
+            Variable variable37 = new Variable();
+            Variable variable38 = new Variable();
+            Variable variable39 = new Variable();
+            Variable variable40 = new Variable();
+            Variable variable41 = new Variable();
+            Variable variable42 = new Variable();
+            Variable variable43 = new Variable();
+            Variable variable44 = new Variable();
+            Variable variable45 = new Variable();
+            Variable variable46 = new Variable();
+            Variable variable47 = new Variable();
+            Variable variable48 = new Variable();
+            Variable variable49 = new Variable();
+            Variable variable50 = new Variable();
+            Variable variable51 = new Variable();
+            Variable variable52 = new Variable();
+            Variable variable53 = new Variable();
+            Variable variable54 = new Variable();
+            Variable variable55 = new Variable();
+            Variable variable56 = new Variable();
+            Variable variable57 = new Variable();
+            TlpMain = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            mainTabControl = new System.Windows.Forms.TabControl();
+            pageGen = new System.Windows.Forms.TabPage();
+            chkNotamPrefix = new System.Windows.Forms.CheckBox();
+            chkUseDecimalTerminology = new System.Windows.Forms.CheckBox();
+            label15 = new System.Windows.Forms.Label();
+            txtCodeRangeHigh = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            txtCodeRangeLow = new System.Windows.Forms.TextBox();
+            groupVoiceOption = new System.Windows.Forms.Panel();
+            radioTextToSpeech = new System.Windows.Forms.RadioButton();
+            ddlVoices = new System.Windows.Forms.ComboBox();
+            radioVoiceRecorded = new System.Windows.Forms.RadioButton();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtIdsEndpoint = new System.Windows.Forms.TextBox();
+            vhfFrequency = new System.Windows.Forms.MaskedTextBox();
+            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            typeCombined = new System.Windows.Forms.RadioButton();
+            typeDeparture = new System.Windows.Forms.RadioButton();
+            typeArrival = new System.Windows.Forms.RadioButton();
+            label4 = new System.Windows.Forms.Label();
+            pageFormatting = new System.Windows.Forms.TabPage();
+            tabControl2 = new System.Windows.Forms.TabControl();
+            tabObservationTime = new System.Windows.Forms.TabPage();
+            templateObservationTime = new NodeFormatTemplate();
+            label5 = new System.Windows.Forms.Label();
+            standardObservationTime = new System.Windows.Forms.NumericUpDown();
+            tabSurfaceWind = new System.Windows.Forms.TabPage();
+            magneticVar = new System.Windows.Forms.NumericUpDown();
+            chkMagneticVar = new System.Windows.Forms.CheckBox();
+            chkWindSpeakLeadingZero = new System.Windows.Forms.CheckBox();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            windStandard = new System.Windows.Forms.TabPage();
+            templateWindStandard = new NodeFormatTemplate();
+            windStandardGust = new System.Windows.Forms.TabPage();
+            templateWindStanardGust = new NodeFormatTemplate();
+            windVariable = new System.Windows.Forms.TabPage();
+            templateWindVariable = new NodeFormatTemplate();
+            windVariableGust = new System.Windows.Forms.TabPage();
+            templateWindVariableGust = new NodeFormatTemplate();
+            windVariableDirection = new System.Windows.Forms.TabPage();
+            templateWindVariableDirection = new NodeFormatTemplate();
+            windCalm = new System.Windows.Forms.TabPage();
+            templateWindCalm = new NodeFormatTemplate();
+            calmWindSpeed = new System.Windows.Forms.NumericUpDown();
+            label16 = new System.Windows.Forms.Label();
+            tabVisibility = new System.Windows.Forms.TabPage();
+            tabControl3 = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            templateVisibility = new NodeFormatTemplate();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            label25 = new System.Windows.Forms.Label();
+            txtVis9999Text = new System.Windows.Forms.TextBox();
+            visibilityMetersCutoff = new System.Windows.Forms.NumericUpDown();
+            label6 = new System.Windows.Forms.Label();
+            chkVisibilitySuffix = new System.Windows.Forms.CheckBox();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            label7 = new System.Windows.Forms.Label();
+            visDirNorth = new System.Windows.Forms.TextBox();
+            label8 = new System.Windows.Forms.Label();
+            visDirNorthWest = new System.Windows.Forms.TextBox();
+            visDirNorthEast = new System.Windows.Forms.TextBox();
+            label11 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            visDirWest = new System.Windows.Forms.TextBox();
+            visDirEast = new System.Windows.Forms.TextBox();
+            label12 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            visDirSouthWest = new System.Windows.Forms.TextBox();
+            visDirSouthEast = new System.Windows.Forms.TextBox();
+            label17 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
+            visDirSouth = new System.Windows.Forms.TextBox();
+            txtVis9999Voice = new System.Windows.Forms.TextBox();
+            label19 = new System.Windows.Forms.Label();
+            tabPresentWeather = new System.Windows.Forms.TabPage();
+            tabControl4 = new System.Windows.Forms.TabControl();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            templatePresentWeather = new NodeFormatTemplate();
+            tabPage11 = new System.Windows.Forms.TabPage();
+            wxProximityVicinity = new System.Windows.Forms.TextBox();
+            wxIntensityHeavy = new System.Windows.Forms.TextBox();
+            wxIntensityModerate = new System.Windows.Forms.TextBox();
+            wxIntensityLight = new System.Windows.Forms.TextBox();
+            label23 = new System.Windows.Forms.Label();
+            label22 = new System.Windows.Forms.Label();
+            label21 = new System.Windows.Forms.Label();
+            label20 = new System.Windows.Forms.Label();
+            tabPage9 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            btnDeleteWeatherType = new System.Windows.Forms.Button();
+            gridWeatherTypes = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tabPage10 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            btnDeleteWeatherDescriptor = new System.Windows.Forms.Button();
+            gridWeatherDescriptors = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tabClouds = new System.Windows.Forms.TabPage();
+            tabControl5 = new System.Windows.Forms.TabControl();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            chkConvertCloudsMetric = new System.Windows.Forms.CheckBox();
+            chkIdentifyCeilingLayer = new System.Windows.Forms.CheckBox();
+            templateCloudLayers = new NodeFormatTemplate();
+            tabPage6 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            gridCloudTypes = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            btnDeleteCloudType = new System.Windows.Forms.Button();
+            label24 = new System.Windows.Forms.Label();
+            tabPage7 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            btnDeleteConvectiveCloudType = new System.Windows.Forms.Button();
+            gridConvectiveCloudTypes = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tabTemperature = new System.Windows.Forms.TabPage();
+            chkTempLeadingZero = new System.Windows.Forms.CheckBox();
+            chkTempPlusPrefix = new System.Windows.Forms.CheckBox();
+            templateTemperature = new NodeFormatTemplate();
+            tabDewpoint = new System.Windows.Forms.TabPage();
+            chkDewLeadingZero = new System.Windows.Forms.CheckBox();
+            chkDewPlusPrefix = new System.Windows.Forms.CheckBox();
+            templateDewpoint = new NodeFormatTemplate();
+            tabAltimeter = new System.Windows.Forms.TabPage();
+            templateAltimeter = new NodeFormatTemplate();
+            tabClosing = new System.Windows.Forms.TabPage();
+            templateClosingStatement = new NodeFormatTemplate();
+            chkAutoIncludeClosingStatement = new System.Windows.Forms.CheckBox();
+            pagePresets = new System.Windows.Forms.TabPage();
+            chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
+            dynamicPresetControl = new System.Windows.Forms.Panel();
+            btnRenamePreset = new System.Windows.Forms.Button();
+            btnDeletePreset = new System.Windows.Forms.Button();
+            btnCopyPreset = new System.Windows.Forms.Button();
+            btnNewPreset = new System.Windows.Forms.Button();
+            ddlPresets = new System.Windows.Forms.ComboBox();
+            pageContractions = new System.Windows.Forms.TabPage();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            btnDeleteContraction = new System.Windows.Forms.Button();
+            gridContractions = new System.Windows.Forms.DataGridView();
+            ColumnFind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ColumnReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            pageTransitionLevel = new System.Windows.Forms.TabPage();
+            chkTransitionLevelPrefix = new System.Windows.Forms.CheckBox();
+            tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            gridTransitionLevels = new System.Windows.Forms.DataGridView();
+            low = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            high = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            transitionLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            panel3 = new System.Windows.Forms.Panel();
+            label13 = new System.Windows.Forms.Label();
+            btnDeleteTransitionLevel = new System.Windows.Forms.Button();
+            btnManageComposite = new System.Windows.Forms.Button();
+            ctxOptions = new System.Windows.Forms.ContextMenuStrip(components);
+            ctxNew = new System.Windows.Forms.ToolStripMenuItem();
+            ctxCopy = new System.Windows.Forms.ToolStripMenuItem();
+            ctxRename = new System.Windows.Forms.ToolStripMenuItem();
+            ctxDelete = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            ctxImport = new System.Windows.Forms.ToolStripMenuItem();
+            ctxExport = new System.Windows.Forms.ToolStripMenuItem();
+            panel1 = new System.Windows.Forms.Panel();
+            label1 = new System.Windows.Forms.Label();
+            panelCompositeList = new HitTestPanel();
+            TreeMenu = new System.Windows.Forms.TreeView();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnApply = new System.Windows.Forms.Button();
+            btnOK = new System.Windows.Forms.Button();
+            compositeTooltip = new System.Windows.Forms.ToolTip(components);
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            button1 = new System.Windows.Forms.Button();
+            dataGridView1 = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            TlpMain.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            mainTabControl.SuspendLayout();
+            pageGen.SuspendLayout();
+            groupVoiceOption.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
+            pageFormatting.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabObservationTime.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)standardObservationTime).BeginInit();
+            tabSurfaceWind.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)magneticVar).BeginInit();
+            tabControl1.SuspendLayout();
+            windStandard.SuspendLayout();
+            windStandardGust.SuspendLayout();
+            windVariable.SuspendLayout();
+            windVariableGust.SuspendLayout();
+            windVariableDirection.SuspendLayout();
+            windCalm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)calmWindSpeed).BeginInit();
+            tabVisibility.SuspendLayout();
+            tabControl3.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)visibilityMetersCutoff).BeginInit();
+            groupBox1.SuspendLayout();
+            tabPresentWeather.SuspendLayout();
+            tabControl4.SuspendLayout();
+            tabPage3.SuspendLayout();
+            tabPage11.SuspendLayout();
+            tabPage9.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridWeatherTypes).BeginInit();
+            tabPage10.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridWeatherDescriptors).BeginInit();
+            tabClouds.SuspendLayout();
+            tabControl5.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage6.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridCloudTypes).BeginInit();
+            tableLayoutPanel9.SuspendLayout();
+            tabPage7.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridConvectiveCloudTypes).BeginInit();
+            tabTemperature.SuspendLayout();
+            tabDewpoint.SuspendLayout();
+            tabAltimeter.SuspendLayout();
+            tabClosing.SuspendLayout();
+            pagePresets.SuspendLayout();
+            pageContractions.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridContractions).BeginInit();
+            pageTransitionLevel.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).BeginInit();
+            panel3.SuspendLayout();
+            ctxOptions.SuspendLayout();
+            panel1.SuspendLayout();
+            panelCompositeList.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            SuspendLayout();
             // 
             // TlpMain
             // 
-            this.TlpMain.ColumnCount = 3;
-            this.TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 754F));
-            this.TlpMain.Controls.Add(this.tableLayoutPanel1, 2, 0);
-            this.TlpMain.Controls.Add(this.btnManageComposite, 1, 1);
-            this.TlpMain.Controls.Add(this.panel1, 1, 0);
-            this.TlpMain.Controls.Add(this.flowLayoutPanel1, 2, 1);
-            this.TlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TlpMain.Location = new System.Drawing.Point(15, 15);
-            this.TlpMain.Margin = new System.Windows.Forms.Padding(0);
-            this.TlpMain.Name = "TlpMain";
-            this.TlpMain.RowCount = 2;
-            this.TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.TlpMain.Size = new System.Drawing.Size(954, 431);
-            this.TlpMain.TabIndex = 0;
+            TlpMain.ColumnCount = 3;
+            TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 754F));
+            TlpMain.Controls.Add(tableLayoutPanel1, 2, 0);
+            TlpMain.Controls.Add(btnManageComposite, 1, 1);
+            TlpMain.Controls.Add(panel1, 1, 0);
+            TlpMain.Controls.Add(flowLayoutPanel1, 2, 1);
+            TlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            TlpMain.Location = new System.Drawing.Point(15, 15);
+            TlpMain.Margin = new System.Windows.Forms.Padding(0);
+            TlpMain.Name = "TlpMain";
+            TlpMain.RowCount = 2;
+            TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            TlpMain.Size = new System.Drawing.Size(954, 431);
+            TlpMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.mainTabControl, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(204, 3);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(746, 390);
-            this.tableLayoutPanel1.TabIndex = 1;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(mainTabControl, 0, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(204, 3);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(746, 390);
+            tableLayoutPanel1.TabIndex = 1;
             // 
             // mainTabControl
             // 
-            this.mainTabControl.Controls.Add(this.pageGen);
-            this.mainTabControl.Controls.Add(this.pageFormatting);
-            this.mainTabControl.Controls.Add(this.pagePresets);
-            this.mainTabControl.Controls.Add(this.pageContractions);
-            this.mainTabControl.Controls.Add(this.pageTransitionLevel);
-            this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainTabControl.Enabled = false;
-            this.mainTabControl.Location = new System.Drawing.Point(0, 0);
-            this.mainTabControl.Margin = new System.Windows.Forms.Padding(0);
-            this.mainTabControl.Name = "mainTabControl";
-            this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(746, 390);
-            this.mainTabControl.TabIndex = 1;
+            mainTabControl.Controls.Add(pageGen);
+            mainTabControl.Controls.Add(pageFormatting);
+            mainTabControl.Controls.Add(pagePresets);
+            mainTabControl.Controls.Add(pageContractions);
+            mainTabControl.Controls.Add(pageTransitionLevel);
+            mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainTabControl.Enabled = false;
+            mainTabControl.Location = new System.Drawing.Point(0, 0);
+            mainTabControl.Margin = new System.Windows.Forms.Padding(0);
+            mainTabControl.Name = "mainTabControl";
+            mainTabControl.SelectedIndex = 0;
+            mainTabControl.Size = new System.Drawing.Size(746, 390);
+            mainTabControl.TabIndex = 1;
             // 
             // pageGen
             // 
-            this.pageGen.Controls.Add(this.chkNotamPrefix);
-            this.pageGen.Controls.Add(this.chkUseDecimalTerminology);
-            this.pageGen.Controls.Add(this.label15);
-            this.pageGen.Controls.Add(this.txtCodeRangeHigh);
-            this.pageGen.Controls.Add(this.label14);
-            this.pageGen.Controls.Add(this.txtCodeRangeLow);
-            this.pageGen.Controls.Add(this.groupVoiceOption);
-            this.pageGen.Controls.Add(this.label2);
-            this.pageGen.Controls.Add(this.label3);
-            this.pageGen.Controls.Add(this.txtIdsEndpoint);
-            this.pageGen.Controls.Add(this.vhfFrequency);
-            this.pageGen.Controls.Add(this.flowLayoutPanel2);
-            this.pageGen.Controls.Add(this.label4);
-            this.pageGen.Location = new System.Drawing.Point(4, 24);
-            this.pageGen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pageGen.Name = "pageGen";
-            this.pageGen.Padding = new System.Windows.Forms.Padding(15);
-            this.pageGen.Size = new System.Drawing.Size(738, 362);
-            this.pageGen.TabIndex = 2;
-            this.pageGen.Text = "General";
-            this.pageGen.UseVisualStyleBackColor = true;
+            pageGen.Controls.Add(chkNotamPrefix);
+            pageGen.Controls.Add(chkUseDecimalTerminology);
+            pageGen.Controls.Add(label15);
+            pageGen.Controls.Add(txtCodeRangeHigh);
+            pageGen.Controls.Add(label14);
+            pageGen.Controls.Add(txtCodeRangeLow);
+            pageGen.Controls.Add(groupVoiceOption);
+            pageGen.Controls.Add(label2);
+            pageGen.Controls.Add(label3);
+            pageGen.Controls.Add(txtIdsEndpoint);
+            pageGen.Controls.Add(vhfFrequency);
+            pageGen.Controls.Add(flowLayoutPanel2);
+            pageGen.Controls.Add(label4);
+            pageGen.Location = new System.Drawing.Point(4, 24);
+            pageGen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pageGen.Name = "pageGen";
+            pageGen.Padding = new System.Windows.Forms.Padding(15);
+            pageGen.Size = new System.Drawing.Size(738, 362);
+            pageGen.TabIndex = 2;
+            pageGen.Text = "General";
+            pageGen.UseVisualStyleBackColor = true;
             // 
             // chkNotamPrefix
             // 
-            this.chkNotamPrefix.AutoSize = true;
-            this.chkNotamPrefix.Location = new System.Drawing.Point(105, 191);
-            this.chkNotamPrefix.Name = "chkNotamPrefix";
-            this.chkNotamPrefix.Size = new System.Drawing.Size(306, 19);
-            this.chkNotamPrefix.TabIndex = 44;
-            this.chkNotamPrefix.Text = "Prefix spoken NOTAMs with \"Notices to Air Missions\"";
-            this.chkNotamPrefix.UseVisualStyleBackColor = true;
-            this.chkNotamPrefix.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkNotamPrefix.AutoSize = true;
+            chkNotamPrefix.Location = new System.Drawing.Point(105, 191);
+            chkNotamPrefix.Name = "chkNotamPrefix";
+            chkNotamPrefix.Size = new System.Drawing.Size(306, 19);
+            chkNotamPrefix.TabIndex = 44;
+            chkNotamPrefix.Text = "Prefix spoken NOTAMs with \"Notices to Air Missions\"";
+            chkNotamPrefix.UseVisualStyleBackColor = true;
+            chkNotamPrefix.CheckedChanged += HandleControlValueChanged;
             // 
             // chkUseDecimalTerminology
             // 
-            this.chkUseDecimalTerminology.AutoSize = true;
-            this.chkUseDecimalTerminology.Location = new System.Drawing.Point(105, 142);
-            this.chkUseDecimalTerminology.Name = "chkUseDecimalTerminology";
-            this.chkUseDecimalTerminology.Size = new System.Drawing.Size(245, 19);
-            this.chkUseDecimalTerminology.TabIndex = 43;
-            this.chkUseDecimalTerminology.Text = "Use \"decimal\" terminology in spoken text";
-            this.compositeTooltip.SetToolTip(this.chkUseDecimalTerminology, "Spoken decimal numbers will be read using \"decimal\" instead of \"point\" (e.g. \"one" +
-        " two one decimal three five\")");
-            this.chkUseDecimalTerminology.UseVisualStyleBackColor = true;
-            this.chkUseDecimalTerminology.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkUseDecimalTerminology.AutoSize = true;
+            chkUseDecimalTerminology.Location = new System.Drawing.Point(105, 142);
+            chkUseDecimalTerminology.Name = "chkUseDecimalTerminology";
+            chkUseDecimalTerminology.Size = new System.Drawing.Size(245, 19);
+            chkUseDecimalTerminology.TabIndex = 43;
+            chkUseDecimalTerminology.Text = "Use \"decimal\" terminology in spoken text";
+            compositeTooltip.SetToolTip(chkUseDecimalTerminology, "Spoken decimal numbers will be read using \"decimal\" instead of \"point\" (e.g. \"one two one decimal three five\")");
+            chkUseDecimalTerminology.UseVisualStyleBackColor = true;
+            chkUseDecimalTerminology.CheckedChanged += HandleControlValueChanged;
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(549, 97);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(18, 15);
-            this.label15.TabIndex = 42;
-            this.label15.Text = "to";
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(549, 97);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(18, 15);
+            label15.TabIndex = 42;
+            label15.Text = "to";
             // 
             // txtCodeRangeHigh
             // 
-            this.txtCodeRangeHigh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCodeRangeHigh.Location = new System.Drawing.Point(569, 93);
-            this.txtCodeRangeHigh.Name = "txtCodeRangeHigh";
-            this.txtCodeRangeHigh.Size = new System.Drawing.Size(45, 23);
-            this.txtCodeRangeHigh.TabIndex = 41;
-            this.txtCodeRangeHigh.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.txtCodeRangeHigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AlphaOnly);
+            txtCodeRangeHigh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtCodeRangeHigh.Location = new System.Drawing.Point(569, 93);
+            txtCodeRangeHigh.Name = "txtCodeRangeHigh";
+            txtCodeRangeHigh.Size = new System.Drawing.Size(45, 23);
+            txtCodeRangeHigh.TabIndex = 41;
+            txtCodeRangeHigh.TextChanged += HandleControlValueChanged;
+            txtCodeRangeHigh.KeyPress += AlphaOnly;
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(422, 97);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 15);
-            this.label14.TabIndex = 40;
-            this.label14.Text = "Code Range:";
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(422, 97);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(74, 15);
+            label14.TabIndex = 40;
+            label14.Text = "Code Range:";
             // 
             // txtCodeRangeLow
             // 
-            this.txtCodeRangeLow.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCodeRangeLow.Location = new System.Drawing.Point(502, 93);
-            this.txtCodeRangeLow.Name = "txtCodeRangeLow";
-            this.txtCodeRangeLow.Size = new System.Drawing.Size(45, 23);
-            this.txtCodeRangeLow.TabIndex = 39;
-            this.txtCodeRangeLow.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.txtCodeRangeLow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AlphaOnly);
+            txtCodeRangeLow.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtCodeRangeLow.Location = new System.Drawing.Point(502, 93);
+            txtCodeRangeLow.Name = "txtCodeRangeLow";
+            txtCodeRangeLow.Size = new System.Drawing.Size(45, 23);
+            txtCodeRangeLow.TabIndex = 39;
+            txtCodeRangeLow.TextChanged += HandleControlValueChanged;
+            txtCodeRangeLow.KeyPress += AlphaOnly;
             // 
             // groupVoiceOption
             // 
-            this.groupVoiceOption.Controls.Add(this.radioTextToSpeech);
-            this.groupVoiceOption.Controls.Add(this.ddlVoices);
-            this.groupVoiceOption.Controls.Add(this.radioVoiceRecorded);
-            this.groupVoiceOption.Location = new System.Drawing.Point(102, 240);
-            this.groupVoiceOption.Name = "groupVoiceOption";
-            this.groupVoiceOption.Size = new System.Drawing.Size(534, 25);
-            this.groupVoiceOption.TabIndex = 38;
+            groupVoiceOption.Controls.Add(radioTextToSpeech);
+            groupVoiceOption.Controls.Add(ddlVoices);
+            groupVoiceOption.Controls.Add(radioVoiceRecorded);
+            groupVoiceOption.Location = new System.Drawing.Point(102, 240);
+            groupVoiceOption.Name = "groupVoiceOption";
+            groupVoiceOption.Size = new System.Drawing.Size(534, 25);
+            groupVoiceOption.TabIndex = 38;
             // 
             // radioTextToSpeech
             // 
-            this.radioTextToSpeech.AutoSize = true;
-            this.radioTextToSpeech.Checked = true;
-            this.radioTextToSpeech.Location = new System.Drawing.Point(4, 3);
-            this.radioTextToSpeech.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.radioTextToSpeech.Name = "radioTextToSpeech";
-            this.radioTextToSpeech.Size = new System.Drawing.Size(104, 19);
-            this.radioTextToSpeech.TabIndex = 10;
-            this.radioTextToSpeech.TabStop = true;
-            this.radioTextToSpeech.Text = "Text to Speech:";
-            this.compositeTooltip.SetToolTip(this.radioTextToSpeech, "Use synthesized text to speech to generate the ATIS voice.");
-            this.radioTextToSpeech.UseVisualStyleBackColor = true;
-            this.radioTextToSpeech.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            radioTextToSpeech.AutoSize = true;
+            radioTextToSpeech.Checked = true;
+            radioTextToSpeech.Location = new System.Drawing.Point(4, 3);
+            radioTextToSpeech.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radioTextToSpeech.Name = "radioTextToSpeech";
+            radioTextToSpeech.Size = new System.Drawing.Size(104, 19);
+            radioTextToSpeech.TabIndex = 10;
+            radioTextToSpeech.TabStop = true;
+            radioTextToSpeech.Text = "Text to Speech:";
+            compositeTooltip.SetToolTip(radioTextToSpeech, "Use synthesized text to speech to generate the ATIS voice.");
+            radioTextToSpeech.UseVisualStyleBackColor = true;
+            radioTextToSpeech.CheckedChanged += HandleControlValueChanged;
             // 
             // ddlVoices
             // 
-            this.ddlVoices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlVoices.FormattingEnabled = true;
-            this.ddlVoices.Location = new System.Drawing.Point(130, 1);
-            this.ddlVoices.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ddlVoices.Name = "ddlVoices";
-            this.ddlVoices.Size = new System.Drawing.Size(264, 23);
-            this.ddlVoices.TabIndex = 9;
-            this.ddlVoices.SelectedIndexChanged += new System.EventHandler(this.HandleControlValueChanged);
+            ddlVoices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ddlVoices.FormattingEnabled = true;
+            ddlVoices.Location = new System.Drawing.Point(130, 1);
+            ddlVoices.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ddlVoices.Name = "ddlVoices";
+            ddlVoices.Size = new System.Drawing.Size(264, 23);
+            ddlVoices.TabIndex = 9;
+            ddlVoices.SelectedIndexChanged += HandleControlValueChanged;
             // 
             // radioVoiceRecorded
             // 
-            this.radioVoiceRecorded.AutoSize = true;
-            this.radioVoiceRecorded.Location = new System.Drawing.Point(416, 3);
-            this.radioVoiceRecorded.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.radioVoiceRecorded.Name = "radioVoiceRecorded";
-            this.radioVoiceRecorded.Size = new System.Drawing.Size(106, 19);
-            this.radioVoiceRecorded.TabIndex = 11;
-            this.radioVoiceRecorded.Text = "Voice Recorded";
-            this.compositeTooltip.SetToolTip(this.radioVoiceRecorded, "Manually voice record the ATIS using a microphone device.");
-            this.radioVoiceRecorded.UseVisualStyleBackColor = true;
-            this.radioVoiceRecorded.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            radioVoiceRecorded.AutoSize = true;
+            radioVoiceRecorded.Location = new System.Drawing.Point(416, 3);
+            radioVoiceRecorded.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radioVoiceRecorded.Name = "radioVoiceRecorded";
+            radioVoiceRecorded.Size = new System.Drawing.Size(106, 19);
+            radioVoiceRecorded.TabIndex = 11;
+            radioVoiceRecorded.Text = "Voice Recorded";
+            compositeTooltip.SetToolTip(radioVoiceRecorded, "Manually voice record the ATIS using a microphone device.");
+            radioVoiceRecorded.UseVisualStyleBackColor = true;
+            radioVoiceRecorded.CheckedChanged += HandleControlValueChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(102, 295);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "IDS Endpoint:";
-            this.compositeTooltip.SetToolTip(this.label2, "Specify the URL endpoint of an IDS. \r\nWhen an ATIS update occurs, vATIS will post" +
-        " the update to the IDS to automatically update it.");
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(102, 295);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(78, 15);
+            label2.TabIndex = 6;
+            label2.Text = "IDS Endpoint:";
+            compositeTooltip.SetToolTip(label2, "Specify the URL endpoint of an IDS. \r\nWhen an ATIS update occurs, vATIS will post the update to the IDS to automatically update it.");
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(102, 52);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 15);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Frequency:";
-            this.compositeTooltip.SetToolTip(this.label3, "The VHF frequency of the ATIS station.");
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(102, 52);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(65, 15);
+            label3.TabIndex = 14;
+            label3.Text = "Frequency:";
+            compositeTooltip.SetToolTip(label3, "The VHF frequency of the ATIS station.");
             // 
             // txtIdsEndpoint
             // 
-            this.txtIdsEndpoint.Location = new System.Drawing.Point(196, 291);
-            this.txtIdsEndpoint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtIdsEndpoint.Name = "txtIdsEndpoint";
-            this.txtIdsEndpoint.Size = new System.Drawing.Size(438, 23);
-            this.txtIdsEndpoint.TabIndex = 7;
-            this.txtIdsEndpoint.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            txtIdsEndpoint.Location = new System.Drawing.Point(196, 291);
+            txtIdsEndpoint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtIdsEndpoint.Name = "txtIdsEndpoint";
+            txtIdsEndpoint.Size = new System.Drawing.Size(438, 23);
+            txtIdsEndpoint.TabIndex = 7;
+            txtIdsEndpoint.TextChanged += HandleControlValueChanged;
             // 
             // vhfFrequency
             // 
-            this.vhfFrequency.Location = new System.Drawing.Point(174, 48);
-            this.vhfFrequency.Mask = "000.000";
-            this.vhfFrequency.Name = "vhfFrequency";
-            this.vhfFrequency.PromptChar = '#';
-            this.vhfFrequency.Size = new System.Drawing.Size(114, 23);
-            this.vhfFrequency.TabIndex = 16;
-            this.vhfFrequency.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            vhfFrequency.Location = new System.Drawing.Point(174, 48);
+            vhfFrequency.Mask = "000.000";
+            vhfFrequency.Name = "vhfFrequency";
+            vhfFrequency.PromptChar = '#';
+            vhfFrequency.Size = new System.Drawing.Size(114, 23);
+            vhfFrequency.TabIndex = 16;
+            vhfFrequency.TextChanged += HandleControlValueChanged;
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.typeCombined);
-            this.flowLayoutPanel2.Controls.Add(this.typeDeparture);
-            this.flowLayoutPanel2.Controls.Add(this.typeArrival);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(174, 93);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(235, 23);
-            this.flowLayoutPanel2.TabIndex = 37;
+            flowLayoutPanel2.Controls.Add(typeCombined);
+            flowLayoutPanel2.Controls.Add(typeDeparture);
+            flowLayoutPanel2.Controls.Add(typeArrival);
+            flowLayoutPanel2.Location = new System.Drawing.Point(174, 93);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new System.Drawing.Size(235, 23);
+            flowLayoutPanel2.TabIndex = 37;
             // 
             // typeCombined
             // 
-            this.typeCombined.AutoSize = true;
-            this.typeCombined.Location = new System.Drawing.Point(3, 3);
-            this.typeCombined.Name = "typeCombined";
-            this.typeCombined.Size = new System.Drawing.Size(81, 19);
-            this.typeCombined.TabIndex = 32;
-            this.typeCombined.TabStop = true;
-            this.typeCombined.Text = "Combined";
-            this.typeCombined.UseVisualStyleBackColor = true;
-            this.typeCombined.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            typeCombined.AutoSize = true;
+            typeCombined.Location = new System.Drawing.Point(3, 3);
+            typeCombined.Name = "typeCombined";
+            typeCombined.Size = new System.Drawing.Size(81, 19);
+            typeCombined.TabIndex = 32;
+            typeCombined.TabStop = true;
+            typeCombined.Text = "Combined";
+            typeCombined.UseVisualStyleBackColor = true;
+            typeCombined.CheckedChanged += HandleControlValueChanged;
             // 
             // typeDeparture
             // 
-            this.typeDeparture.AutoSize = true;
-            this.typeDeparture.Location = new System.Drawing.Point(90, 3);
-            this.typeDeparture.Name = "typeDeparture";
-            this.typeDeparture.Size = new System.Drawing.Size(77, 19);
-            this.typeDeparture.TabIndex = 33;
-            this.typeDeparture.TabStop = true;
-            this.typeDeparture.Text = "Departure";
-            this.typeDeparture.UseVisualStyleBackColor = true;
-            this.typeDeparture.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            typeDeparture.AutoSize = true;
+            typeDeparture.Location = new System.Drawing.Point(90, 3);
+            typeDeparture.Name = "typeDeparture";
+            typeDeparture.Size = new System.Drawing.Size(77, 19);
+            typeDeparture.TabIndex = 33;
+            typeDeparture.TabStop = true;
+            typeDeparture.Text = "Departure";
+            typeDeparture.UseVisualStyleBackColor = true;
+            typeDeparture.CheckedChanged += HandleControlValueChanged;
             // 
             // typeArrival
             // 
-            this.typeArrival.AutoSize = true;
-            this.typeArrival.Location = new System.Drawing.Point(173, 3);
-            this.typeArrival.Name = "typeArrival";
-            this.typeArrival.Size = new System.Drawing.Size(59, 19);
-            this.typeArrival.TabIndex = 34;
-            this.typeArrival.TabStop = true;
-            this.typeArrival.Text = "Arrival";
-            this.typeArrival.UseVisualStyleBackColor = true;
-            this.typeArrival.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            typeArrival.AutoSize = true;
+            typeArrival.Location = new System.Drawing.Point(173, 3);
+            typeArrival.Name = "typeArrival";
+            typeArrival.Size = new System.Drawing.Size(59, 19);
+            typeArrival.TabIndex = 34;
+            typeArrival.TabStop = true;
+            typeArrival.Text = "Arrival";
+            typeArrival.UseVisualStyleBackColor = true;
+            typeArrival.CheckedChanged += HandleControlValueChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(102, 97);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 15);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "ATIS Type:";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(102, 97);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(59, 15);
+            label4.TabIndex = 35;
+            label4.Text = "ATIS Type:";
             // 
             // pageFormatting
             // 
-            this.pageFormatting.Controls.Add(this.tabControl2);
-            this.pageFormatting.Location = new System.Drawing.Point(4, 24);
-            this.pageFormatting.Name = "pageFormatting";
-            this.pageFormatting.Padding = new System.Windows.Forms.Padding(12);
-            this.pageFormatting.Size = new System.Drawing.Size(738, 362);
-            this.pageFormatting.TabIndex = 4;
-            this.pageFormatting.Text = "Formatting";
-            this.pageFormatting.UseVisualStyleBackColor = true;
+            pageFormatting.Controls.Add(tabControl2);
+            pageFormatting.Location = new System.Drawing.Point(4, 24);
+            pageFormatting.Name = "pageFormatting";
+            pageFormatting.Padding = new System.Windows.Forms.Padding(12);
+            pageFormatting.Size = new System.Drawing.Size(738, 362);
+            pageFormatting.TabIndex = 4;
+            pageFormatting.Text = "Formatting";
+            pageFormatting.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabObservationTime);
-            this.tabControl2.Controls.Add(this.tabSurfaceWind);
-            this.tabControl2.Controls.Add(this.tabVisibility);
-            this.tabControl2.Controls.Add(this.tabPresentWeather);
-            this.tabControl2.Controls.Add(this.tabClouds);
-            this.tabControl2.Controls.Add(this.tabTemperature);
-            this.tabControl2.Controls.Add(this.tabDewpoint);
-            this.tabControl2.Controls.Add(this.tabAltimeter);
-            this.tabControl2.Controls.Add(this.tabClosing);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.Location = new System.Drawing.Point(12, 12);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(714, 338);
-            this.tabControl2.TabIndex = 0;
+            tabControl2.Controls.Add(tabObservationTime);
+            tabControl2.Controls.Add(tabSurfaceWind);
+            tabControl2.Controls.Add(tabVisibility);
+            tabControl2.Controls.Add(tabPresentWeather);
+            tabControl2.Controls.Add(tabClouds);
+            tabControl2.Controls.Add(tabTemperature);
+            tabControl2.Controls.Add(tabDewpoint);
+            tabControl2.Controls.Add(tabAltimeter);
+            tabControl2.Controls.Add(tabClosing);
+            tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl2.Location = new System.Drawing.Point(12, 12);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new System.Drawing.Size(714, 338);
+            tabControl2.TabIndex = 0;
             // 
             // tabObservationTime
             // 
-            this.tabObservationTime.Controls.Add(this.templateObservationTime);
-            this.tabObservationTime.Controls.Add(this.label5);
-            this.tabObservationTime.Controls.Add(this.standardObservationTime);
-            this.tabObservationTime.Location = new System.Drawing.Point(4, 24);
-            this.tabObservationTime.Name = "tabObservationTime";
-            this.tabObservationTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabObservationTime.Size = new System.Drawing.Size(706, 310);
-            this.tabObservationTime.TabIndex = 0;
-            this.tabObservationTime.Text = "Observation Time";
-            this.tabObservationTime.UseVisualStyleBackColor = true;
+            tabObservationTime.Controls.Add(templateObservationTime);
+            tabObservationTime.Controls.Add(label5);
+            tabObservationTime.Controls.Add(standardObservationTime);
+            tabObservationTime.Location = new System.Drawing.Point(4, 24);
+            tabObservationTime.Name = "tabObservationTime";
+            tabObservationTime.Padding = new System.Windows.Forms.Padding(3);
+            tabObservationTime.Size = new System.Drawing.Size(706, 310);
+            tabObservationTime.TabIndex = 0;
+            tabObservationTime.Text = "Observation Time";
+            tabObservationTime.UseVisualStyleBackColor = true;
             // 
             // templateObservationTime
             // 
-            this.templateObservationTime.Location = new System.Drawing.Point(32, 81);
-            this.templateObservationTime.Name = "templateObservationTime";
-            this.templateObservationTime.NodeType = "ObservationTime";
-            this.templateObservationTime.Size = new System.Drawing.Size(615, 190);
-            this.templateObservationTime.TabIndex = 18;
-            this.templateObservationTime.TextTemplate = "";
+            templateObservationTime.Location = new System.Drawing.Point(32, 81);
+            templateObservationTime.Name = "templateObservationTime";
+            templateObservationTime.NodeType = "ObservationTime";
+            templateObservationTime.Size = new System.Drawing.Size(615, 190);
+            templateObservationTime.TabIndex = 18;
+            templateObservationTime.TextTemplate = "";
             variable1.Text = "time";
             variable1.ToolTip = "The METAR observation time (e.g. \"0153\").";
             variable2.Text = "hour";
@@ -678,2089 +678,2015 @@ namespace Vatsim.Vatis.UI
             variable3.Text = "minute";
             variable3.ToolTip = "The minute portion of the METAR observation time (e.g. \"53\").";
             variable4.Text = "special";
-            variable4.ToolTip = "Inserts the word \"SPECIAL\" if the METAR observation time is different than the ro" +
-    "utine observation time.";
-            this.templateObservationTime.Variables.Add(variable1);
-            this.templateObservationTime.Variables.Add(variable2);
-            this.templateObservationTime.Variables.Add(variable3);
-            this.templateObservationTime.Variables.Add(variable4);
-            this.templateObservationTime.VoiceTemplate = "";
-            this.templateObservationTime.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateObservationTime.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable4.ToolTip = "Inserts the word \"SPECIAL\" if the METAR observation time is different than the routine observation time.";
+            templateObservationTime.Variables.Add(variable1);
+            templateObservationTime.Variables.Add(variable2);
+            templateObservationTime.Variables.Add(variable3);
+            templateObservationTime.Variables.Add(variable4);
+            templateObservationTime.VoiceTemplate = "";
+            templateObservationTime.TextTemplateChanged += OnTextTemplateChanged;
+            templateObservationTime.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 44);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(147, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Routine Observation Time:\r\n";
-            this.compositeTooltip.SetToolTip(this.label5, "The routine observation time (minutes) of this METAR station. For example, if the" +
-        " METAR is normally updated at 53 minutes past the hour, enter 53.");
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(32, 44);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(147, 15);
+            label5.TabIndex = 16;
+            label5.Text = "Routine Observation Time:\r\n";
+            compositeTooltip.SetToolTip(label5, "The routine observation time (minutes) of this METAR station. For example, if the METAR is normally updated at 53 minutes past the hour, enter 53.");
             // 
             // standardObservationTime
             // 
-            this.standardObservationTime.Location = new System.Drawing.Point(186, 40);
-            this.standardObservationTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.standardObservationTime.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.standardObservationTime.Name = "standardObservationTime";
-            this.standardObservationTime.Size = new System.Drawing.Size(74, 23);
-            this.standardObservationTime.TabIndex = 15;
-            this.standardObservationTime.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.standardObservationTime.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
+            standardObservationTime.Location = new System.Drawing.Point(186, 40);
+            standardObservationTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            standardObservationTime.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
+            standardObservationTime.Name = "standardObservationTime";
+            standardObservationTime.Size = new System.Drawing.Size(74, 23);
+            standardObservationTime.TabIndex = 15;
+            standardObservationTime.TextChanged += HandleControlValueChanged;
+            standardObservationTime.ValueChanged += HandleControlValueChanged;
             // 
             // tabSurfaceWind
             // 
-            this.tabSurfaceWind.Controls.Add(this.magneticVar);
-            this.tabSurfaceWind.Controls.Add(this.chkMagneticVar);
-            this.tabSurfaceWind.Controls.Add(this.chkWindSpeakLeadingZero);
-            this.tabSurfaceWind.Controls.Add(this.tabControl1);
-            this.tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
-            this.tabSurfaceWind.Name = "tabSurfaceWind";
-            this.tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
-            this.tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
-            this.tabSurfaceWind.TabIndex = 1;
-            this.tabSurfaceWind.Text = "Surface Wind";
-            this.tabSurfaceWind.UseVisualStyleBackColor = true;
+            tabSurfaceWind.Controls.Add(magneticVar);
+            tabSurfaceWind.Controls.Add(chkMagneticVar);
+            tabSurfaceWind.Controls.Add(chkWindSpeakLeadingZero);
+            tabSurfaceWind.Controls.Add(tabControl1);
+            tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
+            tabSurfaceWind.Name = "tabSurfaceWind";
+            tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
+            tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
+            tabSurfaceWind.TabIndex = 1;
+            tabSurfaceWind.Text = "Surface Wind";
+            tabSurfaceWind.UseVisualStyleBackColor = true;
             // 
             // magneticVar
             // 
-            this.magneticVar.Enabled = false;
-            this.magneticVar.Location = new System.Drawing.Point(370, 12);
-            this.magneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.magneticVar.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.magneticVar.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.magneticVar.Name = "magneticVar";
-            this.magneticVar.Size = new System.Drawing.Size(79, 23);
-            this.magneticVar.TabIndex = 5;
-            this.magneticVar.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.magneticVar.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
+            magneticVar.Enabled = false;
+            magneticVar.Location = new System.Drawing.Point(370, 12);
+            magneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            magneticVar.Maximum = new decimal(new int[] { 360, 0, 0, 0 });
+            magneticVar.Minimum = new decimal(new int[] { 360, 0, 0, int.MinValue });
+            magneticVar.Name = "magneticVar";
+            magneticVar.Size = new System.Drawing.Size(79, 23);
+            magneticVar.TabIndex = 5;
+            magneticVar.TextChanged += HandleControlValueChanged;
+            magneticVar.ValueChanged += HandleControlValueChanged;
             // 
             // chkMagneticVar
             // 
-            this.chkMagneticVar.AutoSize = true;
-            this.chkMagneticVar.Location = new System.Drawing.Point(235, 14);
-            this.chkMagneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkMagneticVar.Name = "chkMagneticVar";
-            this.chkMagneticVar.Size = new System.Drawing.Size(128, 19);
-            this.chkMagneticVar.TabIndex = 6;
-            this.chkMagneticVar.Text = "Magnetic Variation:";
-            this.compositeTooltip.SetToolTip(this.chkMagneticVar, "Add or subtract the specified number of degrees from the wind direction.");
-            this.chkMagneticVar.UseVisualStyleBackColor = true;
-            this.chkMagneticVar.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkMagneticVar.AutoSize = true;
+            chkMagneticVar.Location = new System.Drawing.Point(235, 14);
+            chkMagneticVar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            chkMagneticVar.Name = "chkMagneticVar";
+            chkMagneticVar.Size = new System.Drawing.Size(128, 19);
+            chkMagneticVar.TabIndex = 6;
+            chkMagneticVar.Text = "Magnetic Variation:";
+            compositeTooltip.SetToolTip(chkMagneticVar, "Add or subtract the specified number of degrees from the wind direction.");
+            chkMagneticVar.UseVisualStyleBackColor = true;
+            chkMagneticVar.CheckedChanged += HandleControlValueChanged;
             // 
             // chkWindSpeakLeadingZero
             // 
-            this.chkWindSpeakLeadingZero.AutoSize = true;
-            this.chkWindSpeakLeadingZero.Location = new System.Drawing.Point(14, 14);
-            this.chkWindSpeakLeadingZero.Name = "chkWindSpeakLeadingZero";
-            this.chkWindSpeakLeadingZero.Size = new System.Drawing.Size(204, 19);
-            this.chkWindSpeakLeadingZero.TabIndex = 3;
-            this.chkWindSpeakLeadingZero.Text = "Speak leading zero on wind speed";
-            this.compositeTooltip.SetToolTip(this.chkWindSpeakLeadingZero, "If enabled, the leading zero on wind speed/wind gust will spoken.");
-            this.chkWindSpeakLeadingZero.UseVisualStyleBackColor = true;
-            this.chkWindSpeakLeadingZero.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkWindSpeakLeadingZero.AutoSize = true;
+            chkWindSpeakLeadingZero.Location = new System.Drawing.Point(14, 14);
+            chkWindSpeakLeadingZero.Name = "chkWindSpeakLeadingZero";
+            chkWindSpeakLeadingZero.Size = new System.Drawing.Size(204, 19);
+            chkWindSpeakLeadingZero.TabIndex = 3;
+            chkWindSpeakLeadingZero.Text = "Speak leading zero on wind speed";
+            compositeTooltip.SetToolTip(chkWindSpeakLeadingZero, "If enabled, the leading zero on wind speed/wind gust will spoken.");
+            chkWindSpeakLeadingZero.UseVisualStyleBackColor = true;
+            chkWindSpeakLeadingZero.CheckedChanged += HandleControlValueChanged;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.windStandard);
-            this.tabControl1.Controls.Add(this.windStandardGust);
-            this.tabControl1.Controls.Add(this.windVariable);
-            this.tabControl1.Controls.Add(this.windVariableGust);
-            this.tabControl1.Controls.Add(this.windVariableDirection);
-            this.tabControl1.Controls.Add(this.windCalm);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(12, -195);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(168, 255);
-            this.tabControl1.TabIndex = 2;
+            tabControl1.Controls.Add(windStandard);
+            tabControl1.Controls.Add(windStandardGust);
+            tabControl1.Controls.Add(windVariable);
+            tabControl1.Controls.Add(windVariableGust);
+            tabControl1.Controls.Add(windVariableDirection);
+            tabControl1.Controls.Add(windCalm);
+            tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            tabControl1.Location = new System.Drawing.Point(12, -195);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(168, 255);
+            tabControl1.TabIndex = 2;
             // 
             // windStandard
             // 
-            this.windStandard.Controls.Add(this.templateWindStandard);
-            this.windStandard.Location = new System.Drawing.Point(4, 24);
-            this.windStandard.Name = "windStandard";
-            this.windStandard.Padding = new System.Windows.Forms.Padding(3);
-            this.windStandard.Size = new System.Drawing.Size(160, 227);
-            this.windStandard.TabIndex = 0;
-            this.windStandard.Text = "Standard";
-            this.windStandard.UseVisualStyleBackColor = true;
+            windStandard.Controls.Add(templateWindStandard);
+            windStandard.Location = new System.Drawing.Point(4, 24);
+            windStandard.Name = "windStandard";
+            windStandard.Padding = new System.Windows.Forms.Padding(3);
+            windStandard.Size = new System.Drawing.Size(160, 227);
+            windStandard.TabIndex = 0;
+            windStandard.Text = "Standard";
+            windStandard.UseVisualStyleBackColor = true;
             // 
             // templateWindStandard
             // 
-            this.templateWindStandard.Location = new System.Drawing.Point(16, 18);
-            this.templateWindStandard.Name = "templateWindStandard";
-            this.templateWindStandard.NodeType = "SurfaceWind.Standard";
-            this.templateWindStandard.Size = new System.Drawing.Size(615, 195);
-            this.templateWindStandard.TabIndex = 19;
-            this.templateWindStandard.TextTemplate = "";
+            templateWindStandard.Location = new System.Drawing.Point(16, 18);
+            templateWindStandard.Name = "templateWindStandard";
+            templateWindStandard.NodeType = "SurfaceWind.Standard";
+            templateWindStandard.Size = new System.Drawing.Size(615, 195);
+            templateWindStandard.TabIndex = 19;
+            templateWindStandard.TextTemplate = "";
             variable5.Text = "wind";
             variable5.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable6.Text = "wind_dir";
-            variable6.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable6.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable7.Text = "wind_spd";
-            variable7.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable7.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable8.Text = "wind_gust";
-            variable8.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable8.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable9.Text = "wind_vmin";
-            variable9.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable9.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable10.Text = "wind_vmax";
-            variable10.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable10.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable11.Text = "wind_unit";
-            variable11.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindStandard.Variables.Add(variable5);
-            this.templateWindStandard.Variables.Add(variable6);
-            this.templateWindStandard.Variables.Add(variable7);
-            this.templateWindStandard.Variables.Add(variable8);
-            this.templateWindStandard.Variables.Add(variable9);
-            this.templateWindStandard.Variables.Add(variable10);
-            this.templateWindStandard.Variables.Add(variable11);
-            this.templateWindStandard.VoiceTemplate = "";
-            this.templateWindStandard.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindStandard.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable11.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindStandard.Variables.Add(variable5);
+            templateWindStandard.Variables.Add(variable6);
+            templateWindStandard.Variables.Add(variable7);
+            templateWindStandard.Variables.Add(variable8);
+            templateWindStandard.Variables.Add(variable9);
+            templateWindStandard.Variables.Add(variable10);
+            templateWindStandard.Variables.Add(variable11);
+            templateWindStandard.VoiceTemplate = "";
+            templateWindStandard.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindStandard.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // windStandardGust
             // 
-            this.windStandardGust.Controls.Add(this.templateWindStanardGust);
-            this.windStandardGust.Location = new System.Drawing.Point(4, 24);
-            this.windStandardGust.Name = "windStandardGust";
-            this.windStandardGust.Padding = new System.Windows.Forms.Padding(3);
-            this.windStandardGust.Size = new System.Drawing.Size(192, 72);
-            this.windStandardGust.TabIndex = 1;
-            this.windStandardGust.Text = "Standard Gust";
-            this.windStandardGust.UseVisualStyleBackColor = true;
+            windStandardGust.Controls.Add(templateWindStanardGust);
+            windStandardGust.Location = new System.Drawing.Point(4, 24);
+            windStandardGust.Name = "windStandardGust";
+            windStandardGust.Padding = new System.Windows.Forms.Padding(3);
+            windStandardGust.Size = new System.Drawing.Size(192, 72);
+            windStandardGust.TabIndex = 1;
+            windStandardGust.Text = "Standard Gust";
+            windStandardGust.UseVisualStyleBackColor = true;
             // 
             // templateWindStanardGust
             // 
-            this.templateWindStanardGust.Location = new System.Drawing.Point(16, 18);
-            this.templateWindStanardGust.Name = "templateWindStanardGust";
-            this.templateWindStanardGust.NodeType = "SurfaceWind.StandardGust";
-            this.templateWindStanardGust.Size = new System.Drawing.Size(615, 195);
-            this.templateWindStanardGust.TabIndex = 20;
-            this.templateWindStanardGust.TextTemplate = "";
+            templateWindStanardGust.Location = new System.Drawing.Point(16, 18);
+            templateWindStanardGust.Name = "templateWindStanardGust";
+            templateWindStanardGust.NodeType = "SurfaceWind.StandardGust";
+            templateWindStanardGust.Size = new System.Drawing.Size(615, 195);
+            templateWindStanardGust.TabIndex = 20;
+            templateWindStanardGust.TextTemplate = "";
             variable12.Text = "wind";
             variable12.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable13.Text = "wind_dir";
-            variable13.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable13.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable14.Text = "wind_spd";
-            variable14.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable14.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable15.Text = "wind_gust";
-            variable15.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable15.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable16.Text = "wind_vmin";
-            variable16.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable16.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable17.Text = "wind_vmax";
-            variable17.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable17.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable18.Text = "wind_unit";
-            variable18.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindStanardGust.Variables.Add(variable12);
-            this.templateWindStanardGust.Variables.Add(variable13);
-            this.templateWindStanardGust.Variables.Add(variable14);
-            this.templateWindStanardGust.Variables.Add(variable15);
-            this.templateWindStanardGust.Variables.Add(variable16);
-            this.templateWindStanardGust.Variables.Add(variable17);
-            this.templateWindStanardGust.Variables.Add(variable18);
-            this.templateWindStanardGust.VoiceTemplate = "";
-            this.templateWindStanardGust.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindStanardGust.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable18.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindStanardGust.Variables.Add(variable12);
+            templateWindStanardGust.Variables.Add(variable13);
+            templateWindStanardGust.Variables.Add(variable14);
+            templateWindStanardGust.Variables.Add(variable15);
+            templateWindStanardGust.Variables.Add(variable16);
+            templateWindStanardGust.Variables.Add(variable17);
+            templateWindStanardGust.Variables.Add(variable18);
+            templateWindStanardGust.VoiceTemplate = "";
+            templateWindStanardGust.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindStanardGust.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // windVariable
             // 
-            this.windVariable.Controls.Add(this.templateWindVariable);
-            this.windVariable.Location = new System.Drawing.Point(4, 24);
-            this.windVariable.Name = "windVariable";
-            this.windVariable.Size = new System.Drawing.Size(192, 72);
-            this.windVariable.TabIndex = 2;
-            this.windVariable.Text = "Variable";
-            this.windVariable.UseVisualStyleBackColor = true;
+            windVariable.Controls.Add(templateWindVariable);
+            windVariable.Location = new System.Drawing.Point(4, 24);
+            windVariable.Name = "windVariable";
+            windVariable.Size = new System.Drawing.Size(192, 72);
+            windVariable.TabIndex = 2;
+            windVariable.Text = "Variable";
+            windVariable.UseVisualStyleBackColor = true;
             // 
             // templateWindVariable
             // 
-            this.templateWindVariable.Location = new System.Drawing.Point(16, 18);
-            this.templateWindVariable.Name = "templateWindVariable";
-            this.templateWindVariable.NodeType = "SurfaceWind.Variable";
-            this.templateWindVariable.Size = new System.Drawing.Size(615, 195);
-            this.templateWindVariable.TabIndex = 20;
-            this.templateWindVariable.TextTemplate = "";
+            templateWindVariable.Location = new System.Drawing.Point(16, 18);
+            templateWindVariable.Name = "templateWindVariable";
+            templateWindVariable.NodeType = "SurfaceWind.Variable";
+            templateWindVariable.Size = new System.Drawing.Size(615, 195);
+            templateWindVariable.TabIndex = 20;
+            templateWindVariable.TextTemplate = "";
             variable19.Text = "wind";
             variable19.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable20.Text = "wind_dir";
-            variable20.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable20.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable21.Text = "wind_spd";
-            variable21.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable21.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable22.Text = "wind_gust";
-            variable22.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable22.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable23.Text = "wind_vmin";
-            variable23.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable23.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable24.Text = "wind_vmax";
-            variable24.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable24.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable25.Text = "wind_unit";
-            variable25.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindVariable.Variables.Add(variable19);
-            this.templateWindVariable.Variables.Add(variable20);
-            this.templateWindVariable.Variables.Add(variable21);
-            this.templateWindVariable.Variables.Add(variable22);
-            this.templateWindVariable.Variables.Add(variable23);
-            this.templateWindVariable.Variables.Add(variable24);
-            this.templateWindVariable.Variables.Add(variable25);
-            this.templateWindVariable.VoiceTemplate = "";
-            this.templateWindVariable.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindVariable.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable25.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariable.Variables.Add(variable19);
+            templateWindVariable.Variables.Add(variable20);
+            templateWindVariable.Variables.Add(variable21);
+            templateWindVariable.Variables.Add(variable22);
+            templateWindVariable.Variables.Add(variable23);
+            templateWindVariable.Variables.Add(variable24);
+            templateWindVariable.Variables.Add(variable25);
+            templateWindVariable.VoiceTemplate = "";
+            templateWindVariable.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindVariable.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // windVariableGust
             // 
-            this.windVariableGust.Controls.Add(this.templateWindVariableGust);
-            this.windVariableGust.Location = new System.Drawing.Point(4, 24);
-            this.windVariableGust.Name = "windVariableGust";
-            this.windVariableGust.Size = new System.Drawing.Size(192, 72);
-            this.windVariableGust.TabIndex = 3;
-            this.windVariableGust.Text = "Variable Gust";
-            this.windVariableGust.UseVisualStyleBackColor = true;
+            windVariableGust.Controls.Add(templateWindVariableGust);
+            windVariableGust.Location = new System.Drawing.Point(4, 24);
+            windVariableGust.Name = "windVariableGust";
+            windVariableGust.Size = new System.Drawing.Size(192, 72);
+            windVariableGust.TabIndex = 3;
+            windVariableGust.Text = "Variable Gust";
+            windVariableGust.UseVisualStyleBackColor = true;
             // 
             // templateWindVariableGust
             // 
-            this.templateWindVariableGust.Location = new System.Drawing.Point(16, 18);
-            this.templateWindVariableGust.Name = "templateWindVariableGust";
-            this.templateWindVariableGust.NodeType = "SurfaceWind.VariableGust";
-            this.templateWindVariableGust.Size = new System.Drawing.Size(615, 195);
-            this.templateWindVariableGust.TabIndex = 20;
-            this.templateWindVariableGust.TextTemplate = "";
+            templateWindVariableGust.Location = new System.Drawing.Point(16, 18);
+            templateWindVariableGust.Name = "templateWindVariableGust";
+            templateWindVariableGust.NodeType = "SurfaceWind.VariableGust";
+            templateWindVariableGust.Size = new System.Drawing.Size(615, 195);
+            templateWindVariableGust.TabIndex = 20;
+            templateWindVariableGust.TextTemplate = "";
             variable26.Text = "wind";
             variable26.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable27.Text = "wind_dir";
-            variable27.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable27.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable28.Text = "wind_spd";
-            variable28.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable28.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable29.Text = "wind_gust";
-            variable29.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable29.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable30.Text = "wind_vmin";
-            variable30.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable30.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable31.Text = "wind_vmax";
-            variable31.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable31.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable32.Text = "wind_unit";
-            variable32.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindVariableGust.Variables.Add(variable26);
-            this.templateWindVariableGust.Variables.Add(variable27);
-            this.templateWindVariableGust.Variables.Add(variable28);
-            this.templateWindVariableGust.Variables.Add(variable29);
-            this.templateWindVariableGust.Variables.Add(variable30);
-            this.templateWindVariableGust.Variables.Add(variable31);
-            this.templateWindVariableGust.Variables.Add(variable32);
-            this.templateWindVariableGust.VoiceTemplate = "";
-            this.templateWindVariableGust.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindVariableGust.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable32.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariableGust.Variables.Add(variable26);
+            templateWindVariableGust.Variables.Add(variable27);
+            templateWindVariableGust.Variables.Add(variable28);
+            templateWindVariableGust.Variables.Add(variable29);
+            templateWindVariableGust.Variables.Add(variable30);
+            templateWindVariableGust.Variables.Add(variable31);
+            templateWindVariableGust.Variables.Add(variable32);
+            templateWindVariableGust.VoiceTemplate = "";
+            templateWindVariableGust.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindVariableGust.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // windVariableDirection
             // 
-            this.windVariableDirection.Controls.Add(this.templateWindVariableDirection);
-            this.windVariableDirection.Location = new System.Drawing.Point(4, 24);
-            this.windVariableDirection.Name = "windVariableDirection";
-            this.windVariableDirection.Size = new System.Drawing.Size(192, 72);
-            this.windVariableDirection.TabIndex = 4;
-            this.windVariableDirection.Text = "Variable Direction";
-            this.windVariableDirection.UseVisualStyleBackColor = true;
+            windVariableDirection.Controls.Add(templateWindVariableDirection);
+            windVariableDirection.Location = new System.Drawing.Point(4, 24);
+            windVariableDirection.Name = "windVariableDirection";
+            windVariableDirection.Size = new System.Drawing.Size(192, 72);
+            windVariableDirection.TabIndex = 4;
+            windVariableDirection.Text = "Variable Direction";
+            windVariableDirection.UseVisualStyleBackColor = true;
             // 
             // templateWindVariableDirection
             // 
-            this.templateWindVariableDirection.Location = new System.Drawing.Point(16, 18);
-            this.templateWindVariableDirection.Name = "templateWindVariableDirection";
-            this.templateWindVariableDirection.NodeType = "SurfaceWind.VariableDirection";
-            this.templateWindVariableDirection.Size = new System.Drawing.Size(615, 195);
-            this.templateWindVariableDirection.TabIndex = 20;
-            this.templateWindVariableDirection.TextTemplate = "";
+            templateWindVariableDirection.Location = new System.Drawing.Point(16, 18);
+            templateWindVariableDirection.Name = "templateWindVariableDirection";
+            templateWindVariableDirection.NodeType = "SurfaceWind.VariableDirection";
+            templateWindVariableDirection.Size = new System.Drawing.Size(615, 195);
+            templateWindVariableDirection.TabIndex = 20;
+            templateWindVariableDirection.TextTemplate = "";
             variable33.Text = "wind";
             variable33.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable34.Text = "wind_dir";
-            variable34.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable34.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable35.Text = "wind_spd";
-            variable35.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable35.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable36.Text = "wind_gust";
-            variable36.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable36.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable37.Text = "wind_vmin";
-            variable37.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable37.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable38.Text = "wind_vmax";
-            variable38.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable38.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable39.Text = "wind_unit";
-            variable39.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindVariableDirection.Variables.Add(variable33);
-            this.templateWindVariableDirection.Variables.Add(variable34);
-            this.templateWindVariableDirection.Variables.Add(variable35);
-            this.templateWindVariableDirection.Variables.Add(variable36);
-            this.templateWindVariableDirection.Variables.Add(variable37);
-            this.templateWindVariableDirection.Variables.Add(variable38);
-            this.templateWindVariableDirection.Variables.Add(variable39);
-            this.templateWindVariableDirection.VoiceTemplate = "";
-            this.templateWindVariableDirection.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindVariableDirection.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable39.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariableDirection.Variables.Add(variable33);
+            templateWindVariableDirection.Variables.Add(variable34);
+            templateWindVariableDirection.Variables.Add(variable35);
+            templateWindVariableDirection.Variables.Add(variable36);
+            templateWindVariableDirection.Variables.Add(variable37);
+            templateWindVariableDirection.Variables.Add(variable38);
+            templateWindVariableDirection.Variables.Add(variable39);
+            templateWindVariableDirection.VoiceTemplate = "";
+            templateWindVariableDirection.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindVariableDirection.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // windCalm
             // 
-            this.windCalm.Controls.Add(this.templateWindCalm);
-            this.windCalm.Controls.Add(this.calmWindSpeed);
-            this.windCalm.Controls.Add(this.label16);
-            this.windCalm.Location = new System.Drawing.Point(4, 24);
-            this.windCalm.Name = "windCalm";
-            this.windCalm.Size = new System.Drawing.Size(192, 72);
-            this.windCalm.TabIndex = 5;
-            this.windCalm.Text = "Calm";
-            this.windCalm.UseVisualStyleBackColor = true;
+            windCalm.Controls.Add(templateWindCalm);
+            windCalm.Controls.Add(calmWindSpeed);
+            windCalm.Controls.Add(label16);
+            windCalm.Location = new System.Drawing.Point(4, 24);
+            windCalm.Name = "windCalm";
+            windCalm.Size = new System.Drawing.Size(192, 72);
+            windCalm.TabIndex = 5;
+            windCalm.Text = "Calm";
+            windCalm.UseVisualStyleBackColor = true;
             // 
             // templateWindCalm
             // 
-            this.templateWindCalm.Location = new System.Drawing.Point(16, 34);
-            this.templateWindCalm.Name = "templateWindCalm";
-            this.templateWindCalm.NodeType = "SurfaceWind.Calm";
-            this.templateWindCalm.Size = new System.Drawing.Size(615, 185);
-            this.templateWindCalm.TabIndex = 20;
-            this.templateWindCalm.TextTemplate = "";
+            templateWindCalm.Location = new System.Drawing.Point(16, 34);
+            templateWindCalm.Name = "templateWindCalm";
+            templateWindCalm.NodeType = "SurfaceWind.Calm";
+            templateWindCalm.Size = new System.Drawing.Size(615, 185);
+            templateWindCalm.TabIndex = 20;
+            templateWindCalm.TextTemplate = "";
             variable40.Text = "wind";
             variable40.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
             variable41.Text = "wind_dir";
-            variable41.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation " +
-    "is applied.";
+            variable41.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
             variable42.Text = "wind_spd";
-            variable42.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally" +
-    " be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable42.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
             variable43.Text = "wind_gust";
-            variable43.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can op" +
-    "tionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}" +
-    "\".";
+            variable43.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
             variable44.Text = "wind_vmin";
-            variable44.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). M" +
-    "agnetic variation is applied.";
+            variable44.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
             variable45.Text = "wind_vmax";
-            variable45.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Ma" +
-    "gnetic variation is applied.";
+            variable45.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
             variable46.Text = "wind_unit";
-            variable46.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoke" +
-    "n value would be \"knots\"). ";
-            this.templateWindCalm.Variables.Add(variable40);
-            this.templateWindCalm.Variables.Add(variable41);
-            this.templateWindCalm.Variables.Add(variable42);
-            this.templateWindCalm.Variables.Add(variable43);
-            this.templateWindCalm.Variables.Add(variable44);
-            this.templateWindCalm.Variables.Add(variable45);
-            this.templateWindCalm.Variables.Add(variable46);
-            this.templateWindCalm.VoiceTemplate = "";
-            this.templateWindCalm.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateWindCalm.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            variable46.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindCalm.Variables.Add(variable40);
+            templateWindCalm.Variables.Add(variable41);
+            templateWindCalm.Variables.Add(variable42);
+            templateWindCalm.Variables.Add(variable43);
+            templateWindCalm.Variables.Add(variable44);
+            templateWindCalm.Variables.Add(variable45);
+            templateWindCalm.Variables.Add(variable46);
+            templateWindCalm.VoiceTemplate = "";
+            templateWindCalm.TextTemplateChanged += OnTextTemplateChanged;
+            templateWindCalm.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // calmWindSpeed
             // 
-            this.calmWindSpeed.Location = new System.Drawing.Point(127, 8);
-            this.calmWindSpeed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.calmWindSpeed.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.calmWindSpeed.Name = "calmWindSpeed";
-            this.calmWindSpeed.Size = new System.Drawing.Size(74, 23);
-            this.calmWindSpeed.TabIndex = 18;
-            this.calmWindSpeed.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.calmWindSpeed.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
+            calmWindSpeed.Location = new System.Drawing.Point(127, 8);
+            calmWindSpeed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            calmWindSpeed.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            calmWindSpeed.Name = "calmWindSpeed";
+            calmWindSpeed.Size = new System.Drawing.Size(74, 23);
+            calmWindSpeed.TabIndex = 18;
+            calmWindSpeed.TextChanged += HandleControlValueChanged;
+            calmWindSpeed.ValueChanged += HandleControlValueChanged;
             // 
             // label16
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 12);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(104, 15);
-            this.label16.TabIndex = 17;
-            this.label16.Text = "Calm Wind Speed:";
-            this.compositeTooltip.SetToolTip(this.label16, "The minimum wind speed before it is considered \"calm wind\".");
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(16, 12);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(104, 15);
+            label16.TabIndex = 17;
+            label16.Text = "Calm Wind Speed:";
+            compositeTooltip.SetToolTip(label16, "The minimum wind speed before it is considered \"calm wind\".");
             // 
             // tabVisibility
             // 
-            this.tabVisibility.Controls.Add(this.tabControl3);
-            this.tabVisibility.Location = new System.Drawing.Point(4, 24);
-            this.tabVisibility.Name = "tabVisibility";
-            this.tabVisibility.Padding = new System.Windows.Forms.Padding(12);
-            this.tabVisibility.Size = new System.Drawing.Size(192, 72);
-            this.tabVisibility.TabIndex = 2;
-            this.tabVisibility.Text = "Visibility";
-            this.tabVisibility.UseVisualStyleBackColor = true;
+            tabVisibility.Controls.Add(tabControl3);
+            tabVisibility.Location = new System.Drawing.Point(4, 24);
+            tabVisibility.Name = "tabVisibility";
+            tabVisibility.Padding = new System.Windows.Forms.Padding(12);
+            tabVisibility.Size = new System.Drawing.Size(706, 310);
+            tabVisibility.TabIndex = 2;
+            tabVisibility.Text = "Visibility";
+            tabVisibility.UseVisualStyleBackColor = true;
             // 
             // tabControl3
             // 
-            this.tabControl3.Controls.Add(this.tabPage1);
-            this.tabControl3.Controls.Add(this.tabPage2);
-            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl3.Location = new System.Drawing.Point(12, 12);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(168, 48);
-            this.tabControl3.TabIndex = 20;
+            tabControl3.Controls.Add(tabPage1);
+            tabControl3.Controls.Add(tabPage2);
+            tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl3.Location = new System.Drawing.Point(12, 12);
+            tabControl3.Name = "tabControl3";
+            tabControl3.SelectedIndex = 0;
+            tabControl3.Size = new System.Drawing.Size(682, 286);
+            tabControl3.TabIndex = 20;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.templateVisibility);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(160, 20);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Template";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(templateVisibility);
+            tabPage1.Location = new System.Drawing.Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            tabPage1.Size = new System.Drawing.Size(674, 258);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Template";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // templateVisibility
             // 
-            this.templateVisibility.Location = new System.Drawing.Point(16, 34);
-            this.templateVisibility.Name = "templateVisibility";
-            this.templateVisibility.NodeType = "Visibility";
-            this.templateVisibility.Size = new System.Drawing.Size(615, 190);
-            this.templateVisibility.TabIndex = 19;
-            this.templateVisibility.TextTemplate = "";
+            templateVisibility.Location = new System.Drawing.Point(16, 34);
+            templateVisibility.Name = "templateVisibility";
+            templateVisibility.NodeType = "Visibility";
+            templateVisibility.Size = new System.Drawing.Size(615, 190);
+            templateVisibility.TabIndex = 19;
+            templateVisibility.TextTemplate = "";
             variable47.Text = "visibility";
             variable47.ToolTip = "The prevailing visibility (e.g. \"5SM\" or \"5000\")";
-            this.templateVisibility.Variables.Add(variable47);
-            this.templateVisibility.VoiceTemplate = "";
-            this.templateVisibility.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateVisibility.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateVisibility.Variables.Add(variable47);
+            templateVisibility.VoiceTemplate = "";
+            templateVisibility.TextTemplateChanged += OnTextTemplateChanged;
+            templateVisibility.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.visibilityMetersCutoff);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.chkVisibilitySuffix);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.visUnlimited);
-            this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(12);
-            this.tabPage2.Size = new System.Drawing.Size(192, 72);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ICAO Formatting";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(label25);
+            tabPage2.Controls.Add(txtVis9999Text);
+            tabPage2.Controls.Add(visibilityMetersCutoff);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(chkVisibilitySuffix);
+            tabPage2.Controls.Add(groupBox1);
+            tabPage2.Controls.Add(txtVis9999Voice);
+            tabPage2.Controls.Add(label19);
+            tabPage2.Location = new System.Drawing.Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(12);
+            tabPage2.Size = new System.Drawing.Size(674, 258);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "ICAO Formatting";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new System.Drawing.Point(347, 227);
+            label25.Name = "label25";
+            label25.Size = new System.Drawing.Size(66, 15);
+            label25.TabIndex = 28;
+            label25.Text = "9999 (Text):";
+            compositeTooltip.SetToolTip(label25, "The text ATIS string if the visibility is 9999");
+            // 
+            // txtVis9999Text
+            // 
+            txtVis9999Text.Location = new System.Drawing.Point(419, 223);
+            txtVis9999Text.Name = "txtVis9999Text";
+            txtVis9999Text.Size = new System.Drawing.Size(227, 23);
+            txtVis9999Text.TabIndex = 27;
+            txtVis9999Text.TextChanged += HandleControlValueChanged;
             // 
             // visibilityMetersCutoff
             // 
-            this.visibilityMetersCutoff.Location = new System.Drawing.Point(276, 14);
-            this.visibilityMetersCutoff.Maximum = new decimal(new int[] {
-            9000,
-            0,
-            0,
-            0});
-            this.visibilityMetersCutoff.Name = "visibilityMetersCutoff";
-            this.visibilityMetersCutoff.Size = new System.Drawing.Size(105, 23);
-            this.visibilityMetersCutoff.TabIndex = 25;
-            this.visibilityMetersCutoff.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
-            this.visibilityMetersCutoff.ValueChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visibilityMetersCutoff.Location = new System.Drawing.Point(290, 12);
+            visibilityMetersCutoff.Maximum = new decimal(new int[] { 9000, 0, 0, 0 });
+            visibilityMetersCutoff.Name = "visibilityMetersCutoff";
+            visibilityMetersCutoff.Size = new System.Drawing.Size(105, 23);
+            visibilityMetersCutoff.TabIndex = 25;
+            visibilityMetersCutoff.TextChanged += HandleControlValueChanged;
+            visibilityMetersCutoff.ValueChanged += HandleControlValueChanged;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(187, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 15);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Meters Cutoff:";
-            this.compositeTooltip.SetToolTip(this.label6, "The cutoff value for when to transition to \"kilometers\" suffix instead of \"meters" +
-        "\"");
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(201, 16);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(83, 15);
+            label6.TabIndex = 24;
+            label6.Text = "Meters Cutoff:";
+            compositeTooltip.SetToolTip(label6, "The cutoff value for when to transition to \"kilometers\" suffix instead of \"meters\"");
             // 
             // chkVisibilitySuffix
             // 
-            this.chkVisibilitySuffix.AutoSize = true;
-            this.chkVisibilitySuffix.Location = new System.Drawing.Point(12, 16);
-            this.chkVisibilitySuffix.Name = "chkVisibilitySuffix";
-            this.chkVisibilitySuffix.Size = new System.Drawing.Size(167, 19);
-            this.chkVisibilitySuffix.TabIndex = 23;
-            this.chkVisibilitySuffix.Text = "Include visibility unit suffix";
-            this.compositeTooltip.SetToolTip(this.chkVisibilitySuffix, "If enabled, the visibility unit type will be appended to the visibility value (e." +
-        "g. \"5000 meters\" or \"8 kilometers\")");
-            this.chkVisibilitySuffix.UseVisualStyleBackColor = true;
-            this.chkVisibilitySuffix.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkVisibilitySuffix.AutoSize = true;
+            chkVisibilitySuffix.Location = new System.Drawing.Point(26, 14);
+            chkVisibilitySuffix.Name = "chkVisibilitySuffix";
+            chkVisibilitySuffix.Size = new System.Drawing.Size(167, 19);
+            chkVisibilitySuffix.TabIndex = 23;
+            chkVisibilitySuffix.Text = "Include visibility unit suffix";
+            compositeTooltip.SetToolTip(chkVisibilitySuffix, "If enabled, the visibility unit type will be appended to the visibility value (e.g. \"5000 meters\" or \"8 kilometers\")");
+            chkVisibilitySuffix.UseVisualStyleBackColor = true;
+            chkVisibilitySuffix.CheckedChanged += HandleControlValueChanged;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.visDirNorth);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.visDirNorthWest);
-            this.groupBox1.Controls.Add(this.visDirNorthEast);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.visDirWest);
-            this.groupBox1.Controls.Add(this.visDirEast);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.visDirSouthWest);
-            this.groupBox1.Controls.Add(this.visDirSouthEast);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.visDirSouth);
-            this.groupBox1.Location = new System.Drawing.Point(12, 41);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(622, 170);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Visibility Direction";
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(visDirNorth);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(visDirNorthWest);
+            groupBox1.Controls.Add(visDirNorthEast);
+            groupBox1.Controls.Add(label11);
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(visDirWest);
+            groupBox1.Controls.Add(visDirEast);
+            groupBox1.Controls.Add(label12);
+            groupBox1.Controls.Add(label10);
+            groupBox1.Controls.Add(visDirSouthWest);
+            groupBox1.Controls.Add(visDirSouthEast);
+            groupBox1.Controls.Add(label17);
+            groupBox1.Controls.Add(label18);
+            groupBox1.Controls.Add(visDirSouth);
+            groupBox1.Location = new System.Drawing.Point(26, 39);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(622, 170);
+            groupBox1.TabIndex = 18;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Visibility Direction";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(41, 32);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 15);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "North:";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(41, 32);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(41, 15);
+            label7.TabIndex = 0;
+            label7.Text = "North:";
             // 
             // visDirNorth
             // 
-            this.visDirNorth.Location = new System.Drawing.Point(87, 28);
-            this.visDirNorth.Name = "visDirNorth";
-            this.visDirNorth.Size = new System.Drawing.Size(214, 23);
-            this.visDirNorth.TabIndex = 1;
-            this.visDirNorth.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirNorth.Location = new System.Drawing.Point(87, 28);
+            visDirNorth.Name = "visDirNorth";
+            visDirNorth.Size = new System.Drawing.Size(214, 23);
+            visDirNorth.TabIndex = 1;
+            visDirNorth.TextChanged += HandleControlValueChanged;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 66);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 15);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "North East:";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(17, 66);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(65, 15);
+            label8.TabIndex = 2;
+            label8.Text = "North East:";
             // 
             // visDirNorthWest
             // 
-            this.visDirNorthWest.Location = new System.Drawing.Point(392, 130);
-            this.visDirNorthWest.Name = "visDirNorthWest";
-            this.visDirNorthWest.Size = new System.Drawing.Size(214, 23);
-            this.visDirNorthWest.TabIndex = 15;
-            this.visDirNorthWest.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirNorthWest.Location = new System.Drawing.Point(392, 130);
+            visDirNorthWest.Name = "visDirNorthWest";
+            visDirNorthWest.Size = new System.Drawing.Size(214, 23);
+            visDirNorthWest.TabIndex = 15;
+            visDirNorthWest.TextChanged += HandleControlValueChanged;
             // 
             // visDirNorthEast
             // 
-            this.visDirNorthEast.Location = new System.Drawing.Point(87, 62);
-            this.visDirNorthEast.Name = "visDirNorthEast";
-            this.visDirNorthEast.Size = new System.Drawing.Size(214, 23);
-            this.visDirNorthEast.TabIndex = 3;
-            this.visDirNorthEast.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirNorthEast.Location = new System.Drawing.Point(87, 62);
+            visDirNorthEast.Name = "visDirNorthEast";
+            visDirNorthEast.Size = new System.Drawing.Size(214, 23);
+            visDirNorthEast.TabIndex = 3;
+            visDirNorthEast.TextChanged += HandleControlValueChanged;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(317, 134);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(70, 15);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "North West:";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(317, 134);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(70, 15);
+            label11.TabIndex = 14;
+            label11.Text = "North West:";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(51, 100);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 15);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "East:";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(51, 100);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(31, 15);
+            label9.TabIndex = 4;
+            label9.Text = "East:";
             // 
             // visDirWest
             // 
-            this.visDirWest.Location = new System.Drawing.Point(392, 96);
-            this.visDirWest.Name = "visDirWest";
-            this.visDirWest.Size = new System.Drawing.Size(214, 23);
-            this.visDirWest.TabIndex = 13;
-            this.visDirWest.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirWest.Location = new System.Drawing.Point(392, 96);
+            visDirWest.Name = "visDirWest";
+            visDirWest.Size = new System.Drawing.Size(214, 23);
+            visDirWest.TabIndex = 13;
+            visDirWest.TextChanged += HandleControlValueChanged;
             // 
             // visDirEast
             // 
-            this.visDirEast.Location = new System.Drawing.Point(87, 96);
-            this.visDirEast.Name = "visDirEast";
-            this.visDirEast.Size = new System.Drawing.Size(214, 23);
-            this.visDirEast.TabIndex = 5;
-            this.visDirEast.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirEast.Location = new System.Drawing.Point(87, 96);
+            visDirEast.Name = "visDirEast";
+            visDirEast.Size = new System.Drawing.Size(214, 23);
+            visDirEast.TabIndex = 5;
+            visDirEast.TextChanged += HandleControlValueChanged;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(351, 100);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(36, 15);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "West:";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(351, 100);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(36, 15);
+            label12.TabIndex = 12;
+            label12.Text = "West:";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 134);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "South East:";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(17, 134);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(65, 15);
+            label10.TabIndex = 6;
+            label10.Text = "South East:";
             // 
             // visDirSouthWest
             // 
-            this.visDirSouthWest.Location = new System.Drawing.Point(392, 62);
-            this.visDirSouthWest.Name = "visDirSouthWest";
-            this.visDirSouthWest.Size = new System.Drawing.Size(214, 23);
-            this.visDirSouthWest.TabIndex = 11;
-            this.visDirSouthWest.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirSouthWest.Location = new System.Drawing.Point(392, 62);
+            visDirSouthWest.Name = "visDirSouthWest";
+            visDirSouthWest.Size = new System.Drawing.Size(214, 23);
+            visDirSouthWest.TabIndex = 11;
+            visDirSouthWest.TextChanged += HandleControlValueChanged;
             // 
             // visDirSouthEast
             // 
-            this.visDirSouthEast.Location = new System.Drawing.Point(87, 130);
-            this.visDirSouthEast.Name = "visDirSouthEast";
-            this.visDirSouthEast.Size = new System.Drawing.Size(214, 23);
-            this.visDirSouthEast.TabIndex = 7;
-            this.visDirSouthEast.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirSouthEast.Location = new System.Drawing.Point(87, 130);
+            visDirSouthEast.Name = "visDirSouthEast";
+            visDirSouthEast.Size = new System.Drawing.Size(214, 23);
+            visDirSouthEast.TabIndex = 7;
+            visDirSouthEast.TextChanged += HandleControlValueChanged;
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(317, 66);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 15);
-            this.label17.TabIndex = 10;
-            this.label17.Text = "South West:";
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(317, 66);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(70, 15);
+            label17.TabIndex = 10;
+            label17.Text = "South West:";
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(346, 32);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 15);
-            this.label18.TabIndex = 8;
-            this.label18.Text = "South:";
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(346, 32);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(41, 15);
+            label18.TabIndex = 8;
+            label18.Text = "South:";
             // 
             // visDirSouth
             // 
-            this.visDirSouth.Location = new System.Drawing.Point(392, 28);
-            this.visDirSouth.Name = "visDirSouth";
-            this.visDirSouth.Size = new System.Drawing.Size(214, 23);
-            this.visDirSouth.TabIndex = 9;
-            this.visDirSouth.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            visDirSouth.Location = new System.Drawing.Point(392, 28);
+            visDirSouth.Name = "visDirSouth";
+            visDirSouth.Size = new System.Drawing.Size(214, 23);
+            visDirSouth.TabIndex = 9;
+            visDirSouth.TextChanged += HandleControlValueChanged;
             // 
-            // visUnlimited
+            // txtVis9999Voice
             // 
-            this.visUnlimited.Location = new System.Drawing.Point(127, 222);
-            this.visUnlimited.Name = "visUnlimited";
-            this.visUnlimited.Size = new System.Drawing.Size(507, 23);
-            this.visUnlimited.TabIndex = 17;
-            this.visUnlimited.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            txtVis9999Voice.Location = new System.Drawing.Point(110, 223);
+            txtVis9999Voice.Name = "txtVis9999Voice";
+            txtVis9999Voice.Size = new System.Drawing.Size(227, 23);
+            txtVis9999Voice.TabIndex = 17;
+            txtVis9999Voice.TextChanged += HandleControlValueChanged;
             // 
             // label19
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 228);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(109, 15);
-            this.label19.TabIndex = 16;
-            this.label19.Text = "Unlimited Visibility:";
-            this.compositeTooltip.SetToolTip(this.label19, "If defined, this text will be used if the visibility value equals 9999.\r\n");
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(29, 227);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(73, 15);
+            label19.TabIndex = 16;
+            label19.Text = "9999 (Voice):";
+            compositeTooltip.SetToolTip(label19, "The spoken text if the visibility is 9999");
             // 
             // tabPresentWeather
             // 
-            this.tabPresentWeather.Controls.Add(this.tabControl4);
-            this.tabPresentWeather.Location = new System.Drawing.Point(4, 24);
-            this.tabPresentWeather.Name = "tabPresentWeather";
-            this.tabPresentWeather.Padding = new System.Windows.Forms.Padding(12);
-            this.tabPresentWeather.Size = new System.Drawing.Size(192, 72);
-            this.tabPresentWeather.TabIndex = 3;
-            this.tabPresentWeather.Text = "Present Weather";
-            this.tabPresentWeather.UseVisualStyleBackColor = true;
+            tabPresentWeather.Controls.Add(tabControl4);
+            tabPresentWeather.Location = new System.Drawing.Point(4, 24);
+            tabPresentWeather.Name = "tabPresentWeather";
+            tabPresentWeather.Padding = new System.Windows.Forms.Padding(12);
+            tabPresentWeather.Size = new System.Drawing.Size(192, 72);
+            tabPresentWeather.TabIndex = 3;
+            tabPresentWeather.Text = "Present Weather";
+            tabPresentWeather.UseVisualStyleBackColor = true;
             // 
             // tabControl4
             // 
-            this.tabControl4.Controls.Add(this.tabPage3);
-            this.tabControl4.Controls.Add(this.tabPage11);
-            this.tabControl4.Controls.Add(this.tabPage9);
-            this.tabControl4.Controls.Add(this.tabPage10);
-            this.tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl4.Location = new System.Drawing.Point(12, 12);
-            this.tabControl4.Name = "tabControl4";
-            this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(168, 48);
-            this.tabControl4.TabIndex = 3;
+            tabControl4.Controls.Add(tabPage3);
+            tabControl4.Controls.Add(tabPage11);
+            tabControl4.Controls.Add(tabPage9);
+            tabControl4.Controls.Add(tabPage10);
+            tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl4.Location = new System.Drawing.Point(12, 12);
+            tabControl4.Name = "tabControl4";
+            tabControl4.SelectedIndex = 0;
+            tabControl4.Size = new System.Drawing.Size(168, 48);
+            tabControl4.TabIndex = 3;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.templatePresentWeather);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(160, 20);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Template";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(templatePresentWeather);
+            tabPage3.Location = new System.Drawing.Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            tabPage3.Size = new System.Drawing.Size(160, 20);
+            tabPage3.TabIndex = 0;
+            tabPage3.Text = "Template";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // templatePresentWeather
             // 
-            this.templatePresentWeather.Location = new System.Drawing.Point(16, 39);
-            this.templatePresentWeather.Name = "templatePresentWeather";
-            this.templatePresentWeather.NodeType = "PresentWeather";
-            this.templatePresentWeather.Size = new System.Drawing.Size(615, 180);
-            this.templatePresentWeather.TabIndex = 19;
-            this.templatePresentWeather.TextTemplate = "";
+            templatePresentWeather.Location = new System.Drawing.Point(16, 39);
+            templatePresentWeather.Name = "templatePresentWeather";
+            templatePresentWeather.NodeType = "PresentWeather";
+            templatePresentWeather.Size = new System.Drawing.Size(615, 180);
+            templatePresentWeather.TabIndex = 19;
+            templatePresentWeather.TextTemplate = "";
             variable48.Text = "weather";
             variable48.ToolTip = "The present weather groups from the METAR report (e.g. \"SHRA BR\")";
-            this.templatePresentWeather.Variables.Add(variable48);
-            this.templatePresentWeather.VoiceTemplate = "";
-            this.templatePresentWeather.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templatePresentWeather.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templatePresentWeather.Variables.Add(variable48);
+            templatePresentWeather.VoiceTemplate = "";
+            templatePresentWeather.TextTemplateChanged += OnTextTemplateChanged;
+            templatePresentWeather.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabPage11
             // 
-            this.tabPage11.Controls.Add(this.wxProximityVicinity);
-            this.tabPage11.Controls.Add(this.wxIntensityHeavy);
-            this.tabPage11.Controls.Add(this.wxIntensityModerate);
-            this.tabPage11.Controls.Add(this.wxIntensityLight);
-            this.tabPage11.Controls.Add(this.label23);
-            this.tabPage11.Controls.Add(this.label22);
-            this.tabPage11.Controls.Add(this.label21);
-            this.tabPage11.Controls.Add(this.label20);
-            this.tabPage11.Location = new System.Drawing.Point(4, 24);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(5);
-            this.tabPage11.Size = new System.Drawing.Size(192, 72);
-            this.tabPage11.TabIndex = 3;
-            this.tabPage11.Text = "Intensity/Proximity Descriptors";
-            this.tabPage11.UseVisualStyleBackColor = true;
+            tabPage11.Controls.Add(wxProximityVicinity);
+            tabPage11.Controls.Add(wxIntensityHeavy);
+            tabPage11.Controls.Add(wxIntensityModerate);
+            tabPage11.Controls.Add(wxIntensityLight);
+            tabPage11.Controls.Add(label23);
+            tabPage11.Controls.Add(label22);
+            tabPage11.Controls.Add(label21);
+            tabPage11.Controls.Add(label20);
+            tabPage11.Location = new System.Drawing.Point(4, 24);
+            tabPage11.Name = "tabPage11";
+            tabPage11.Padding = new System.Windows.Forms.Padding(5);
+            tabPage11.Size = new System.Drawing.Size(192, 72);
+            tabPage11.TabIndex = 3;
+            tabPage11.Text = "Intensity/Proximity Descriptors";
+            tabPage11.UseVisualStyleBackColor = true;
             // 
             // wxProximityVicinity
             // 
-            this.wxProximityVicinity.Location = new System.Drawing.Point(155, 185);
-            this.wxProximityVicinity.Name = "wxProximityVicinity";
-            this.wxProximityVicinity.Size = new System.Drawing.Size(197, 23);
-            this.wxProximityVicinity.TabIndex = 7;
-            this.wxProximityVicinity.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            wxProximityVicinity.Location = new System.Drawing.Point(155, 185);
+            wxProximityVicinity.Name = "wxProximityVicinity";
+            wxProximityVicinity.Size = new System.Drawing.Size(197, 23);
+            wxProximityVicinity.TabIndex = 7;
+            wxProximityVicinity.TextChanged += HandleControlValueChanged;
             // 
             // wxIntensityHeavy
             // 
-            this.wxIntensityHeavy.Location = new System.Drawing.Point(155, 140);
-            this.wxIntensityHeavy.Name = "wxIntensityHeavy";
-            this.wxIntensityHeavy.Size = new System.Drawing.Size(197, 23);
-            this.wxIntensityHeavy.TabIndex = 6;
-            this.wxIntensityHeavy.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            wxIntensityHeavy.Location = new System.Drawing.Point(155, 140);
+            wxIntensityHeavy.Name = "wxIntensityHeavy";
+            wxIntensityHeavy.Size = new System.Drawing.Size(197, 23);
+            wxIntensityHeavy.TabIndex = 6;
+            wxIntensityHeavy.TextChanged += HandleControlValueChanged;
             // 
             // wxIntensityModerate
             // 
-            this.wxIntensityModerate.Location = new System.Drawing.Point(155, 95);
-            this.wxIntensityModerate.Name = "wxIntensityModerate";
-            this.wxIntensityModerate.Size = new System.Drawing.Size(197, 23);
-            this.wxIntensityModerate.TabIndex = 5;
-            this.wxIntensityModerate.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            wxIntensityModerate.Location = new System.Drawing.Point(155, 95);
+            wxIntensityModerate.Name = "wxIntensityModerate";
+            wxIntensityModerate.Size = new System.Drawing.Size(197, 23);
+            wxIntensityModerate.TabIndex = 5;
+            wxIntensityModerate.TextChanged += HandleControlValueChanged;
             // 
             // wxIntensityLight
             // 
-            this.wxIntensityLight.Location = new System.Drawing.Point(155, 50);
-            this.wxIntensityLight.Name = "wxIntensityLight";
-            this.wxIntensityLight.Size = new System.Drawing.Size(197, 23);
-            this.wxIntensityLight.TabIndex = 4;
-            this.wxIntensityLight.TextChanged += new System.EventHandler(this.HandleControlValueChanged);
+            wxIntensityLight.Location = new System.Drawing.Point(155, 50);
+            wxIntensityLight.Name = "wxIntensityLight";
+            wxIntensityLight.Size = new System.Drawing.Size(197, 23);
+            wxIntensityLight.TabIndex = 4;
+            wxIntensityLight.TextChanged += HandleControlValueChanged;
             // 
             // label23
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(92, 189);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(49, 15);
-            this.label23.TabIndex = 3;
-            this.label23.Text = "Vicinity:";
-            this.compositeTooltip.SetToolTip(this.label23, "Spoken text for vicinity proximity designator (VC)\r\n");
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(92, 189);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(49, 15);
+            label23.TabIndex = 3;
+            label23.Text = "Vicinity:";
+            compositeTooltip.SetToolTip(label23, "Spoken text for vicinity proximity designator (VC)\r\n");
             // 
             // label22
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(50, 144);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(91, 15);
-            this.label22.TabIndex = 2;
-            this.label22.Text = "Heavy Intensity:";
-            this.compositeTooltip.SetToolTip(this.label22, "Spoken text for heavy intensity (+)");
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(50, 144);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(91, 15);
+            label22.TabIndex = 2;
+            label22.Text = "Heavy Intensity:";
+            compositeTooltip.SetToolTip(label22, "Spoken text for heavy intensity (+)");
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(32, 99);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(109, 15);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "Moderate Intensity:";
-            this.compositeTooltip.SetToolTip(this.label21, "Spoken text for moderate intensity");
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(32, 99);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(109, 15);
+            label21.TabIndex = 1;
+            label21.Text = "Moderate Intensity:";
+            compositeTooltip.SetToolTip(label21, "Spoken text for moderate intensity");
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(56, 54);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(85, 15);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Light Intensity:";
-            this.compositeTooltip.SetToolTip(this.label20, "Spoken text for light intensity (-)");
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(56, 54);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(85, 15);
+            label20.TabIndex = 0;
+            label20.Text = "Light Intensity:";
+            compositeTooltip.SetToolTip(label20, "Spoken text for light intensity (-)");
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage9.Location = new System.Drawing.Point(4, 24);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage9.Size = new System.Drawing.Size(192, 72);
-            this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "Weather Types";
-            this.tabPage9.UseVisualStyleBackColor = true;
+            tabPage9.Controls.Add(tableLayoutPanel2);
+            tabPage9.Location = new System.Drawing.Point(4, 24);
+            tabPage9.Name = "tabPage9";
+            tabPage9.Padding = new System.Windows.Forms.Padding(10);
+            tabPage9.Size = new System.Drawing.Size(192, 72);
+            tabPage9.TabIndex = 1;
+            tabPage9.Text = "Weather Types";
+            tabPage9.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.btnDeleteWeatherType, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.gridWeatherTypes, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 10);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(172, 52);
-            this.tableLayoutPanel2.TabIndex = 3;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(btnDeleteWeatherType, 0, 1);
+            tableLayoutPanel2.Controls.Add(gridWeatherTypes, 0, 0);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(10, 10);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel2.TabIndex = 3;
             // 
             // btnDeleteWeatherType
             // 
-            this.btnDeleteWeatherType.Location = new System.Drawing.Point(48, 20);
-            this.btnDeleteWeatherType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDeleteWeatherType.Name = "btnDeleteWeatherType";
-            this.btnDeleteWeatherType.Size = new System.Drawing.Size(120, 27);
-            this.btnDeleteWeatherType.TabIndex = 1;
-            this.btnDeleteWeatherType.Text = "Delete Selected";
-            this.btnDeleteWeatherType.UseVisualStyleBackColor = true;
-            this.btnDeleteWeatherType.Click += new System.EventHandler(this.btnDeleteWeatherType_Click);
+            btnDeleteWeatherType.Location = new System.Drawing.Point(48, 20);
+            btnDeleteWeatherType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeleteWeatherType.Name = "btnDeleteWeatherType";
+            btnDeleteWeatherType.Size = new System.Drawing.Size(120, 27);
+            btnDeleteWeatherType.TabIndex = 1;
+            btnDeleteWeatherType.Text = "Delete Selected";
+            btnDeleteWeatherType.UseVisualStyleBackColor = true;
+            btnDeleteWeatherType.Click += btnDeleteWeatherType_Click;
             // 
             // gridWeatherTypes
             // 
-            this.gridWeatherTypes.AllowUserToResizeColumns = false;
-            this.gridWeatherTypes.AllowUserToResizeRows = false;
-            this.gridWeatherTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridWeatherTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridWeatherTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-            this.gridWeatherTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridWeatherTypes.Location = new System.Drawing.Point(4, 3);
-            this.gridWeatherTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridWeatherTypes.Name = "gridWeatherTypes";
-            this.gridWeatherTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridWeatherTypes.RowHeadersVisible = false;
-            this.gridWeatherTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridWeatherTypes.Size = new System.Drawing.Size(164, 11);
-            this.gridWeatherTypes.TabIndex = 2;
-            this.gridWeatherTypes.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridWeatherTypes_CellEndEdit);
-            this.gridWeatherTypes.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridWeatherTypes_CellValidating);
-            this.gridWeatherTypes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridWeatherTypes_CellValueChanged);
-            this.gridWeatherTypes.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridWeatherTypes_EditingControlShowing);
-            this.gridWeatherTypes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridWeatherTypes_UserDeletedRow);
-            this.gridWeatherTypes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridWeatherTypes_UserDeletingRow);
+            gridWeatherTypes.AllowUserToResizeColumns = false;
+            gridWeatherTypes.AllowUserToResizeRows = false;
+            gridWeatherTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridWeatherTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridWeatherTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            gridWeatherTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridWeatherTypes.Location = new System.Drawing.Point(4, 3);
+            gridWeatherTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridWeatherTypes.Name = "gridWeatherTypes";
+            gridWeatherTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridWeatherTypes.RowHeadersVisible = false;
+            gridWeatherTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridWeatherTypes.Size = new System.Drawing.Size(164, 11);
+            gridWeatherTypes.TabIndex = 2;
+            gridWeatherTypes.CellEndEdit += gridWeatherTypes_CellEndEdit;
+            gridWeatherTypes.CellValidating += gridWeatherTypes_CellValidating;
+            gridWeatherTypes.CellValueChanged += gridWeatherTypes_CellValueChanged;
+            gridWeatherTypes.EditingControlShowing += gridWeatherTypes_EditingControlShowing;
+            gridWeatherTypes.UserDeletedRow += gridWeatherTypes_UserDeletedRow;
+            gridWeatherTypes.UserDeletingRow += gridWeatherTypes_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Acronym";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.HeaderText = "Acronym";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Spoken";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.HeaderText = "Spoken";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage10.Location = new System.Drawing.Point(4, 24);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage10.Size = new System.Drawing.Size(192, 72);
-            this.tabPage10.TabIndex = 2;
-            this.tabPage10.Text = "Weather Descriptors";
-            this.tabPage10.UseVisualStyleBackColor = true;
+            tabPage10.Controls.Add(tableLayoutPanel6);
+            tabPage10.Location = new System.Drawing.Point(4, 24);
+            tabPage10.Name = "tabPage10";
+            tabPage10.Padding = new System.Windows.Forms.Padding(10);
+            tabPage10.Size = new System.Drawing.Size(192, 72);
+            tabPage10.TabIndex = 2;
+            tabPage10.Text = "Weather Descriptors";
+            tabPage10.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.btnDeleteWeatherDescriptor, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.gridWeatherDescriptors, 0, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(10, 10);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(172, 52);
-            this.tableLayoutPanel6.TabIndex = 4;
+            tableLayoutPanel6.ColumnCount = 1;
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel6.Controls.Add(btnDeleteWeatherDescriptor, 0, 1);
+            tableLayoutPanel6.Controls.Add(gridWeatherDescriptors, 0, 0);
+            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel6.Location = new System.Drawing.Point(10, 10);
+            tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel6.RowCount = 2;
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel6.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel6.TabIndex = 4;
             // 
             // btnDeleteWeatherDescriptor
             // 
-            this.btnDeleteWeatherDescriptor.Location = new System.Drawing.Point(48, 20);
-            this.btnDeleteWeatherDescriptor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDeleteWeatherDescriptor.Name = "btnDeleteWeatherDescriptor";
-            this.btnDeleteWeatherDescriptor.Size = new System.Drawing.Size(120, 27);
-            this.btnDeleteWeatherDescriptor.TabIndex = 1;
-            this.btnDeleteWeatherDescriptor.Text = "Delete Selected";
-            this.btnDeleteWeatherDescriptor.UseVisualStyleBackColor = true;
-            this.btnDeleteWeatherDescriptor.Click += new System.EventHandler(this.btnDeleteWeatherDescriptor_Click);
+            btnDeleteWeatherDescriptor.Location = new System.Drawing.Point(48, 20);
+            btnDeleteWeatherDescriptor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeleteWeatherDescriptor.Name = "btnDeleteWeatherDescriptor";
+            btnDeleteWeatherDescriptor.Size = new System.Drawing.Size(120, 27);
+            btnDeleteWeatherDescriptor.TabIndex = 1;
+            btnDeleteWeatherDescriptor.Text = "Delete Selected";
+            btnDeleteWeatherDescriptor.UseVisualStyleBackColor = true;
+            btnDeleteWeatherDescriptor.Click += btnDeleteWeatherDescriptor_Click;
             // 
             // gridWeatherDescriptors
             // 
-            this.gridWeatherDescriptors.AllowUserToResizeColumns = false;
-            this.gridWeatherDescriptors.AllowUserToResizeRows = false;
-            this.gridWeatherDescriptors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridWeatherDescriptors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridWeatherDescriptors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.gridWeatherDescriptors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridWeatherDescriptors.Location = new System.Drawing.Point(4, 3);
-            this.gridWeatherDescriptors.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridWeatherDescriptors.Name = "gridWeatherDescriptors";
-            this.gridWeatherDescriptors.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridWeatherDescriptors.RowHeadersVisible = false;
-            this.gridWeatherDescriptors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridWeatherDescriptors.Size = new System.Drawing.Size(164, 11);
-            this.gridWeatherDescriptors.TabIndex = 2;
-            this.gridWeatherDescriptors.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridWeatherDescriptors_CellEndEdit);
-            this.gridWeatherDescriptors.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridWeatherDescriptors_CellValidating);
-            this.gridWeatherDescriptors.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridWeatherDescriptors_CellValueChanged);
-            this.gridWeatherDescriptors.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridWeatherDescriptors_EditingControlShowing);
-            this.gridWeatherDescriptors.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridWeatherDescriptors_UserDeletedRow);
-            this.gridWeatherDescriptors.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridWeatherDescriptors_UserDeletingRow);
+            gridWeatherDescriptors.AllowUserToResizeColumns = false;
+            gridWeatherDescriptors.AllowUserToResizeRows = false;
+            gridWeatherDescriptors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridWeatherDescriptors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridWeatherDescriptors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
+            gridWeatherDescriptors.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridWeatherDescriptors.Location = new System.Drawing.Point(4, 3);
+            gridWeatherDescriptors.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridWeatherDescriptors.Name = "gridWeatherDescriptors";
+            gridWeatherDescriptors.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridWeatherDescriptors.RowHeadersVisible = false;
+            gridWeatherDescriptors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridWeatherDescriptors.Size = new System.Drawing.Size(164, 11);
+            gridWeatherDescriptors.TabIndex = 2;
+            gridWeatherDescriptors.CellEndEdit += gridWeatherDescriptors_CellEndEdit;
+            gridWeatherDescriptors.CellValidating += gridWeatherDescriptors_CellValidating;
+            gridWeatherDescriptors.CellValueChanged += gridWeatherDescriptors_CellValueChanged;
+            gridWeatherDescriptors.EditingControlShowing += gridWeatherDescriptors_EditingControlShowing;
+            gridWeatherDescriptors.UserDeletedRow += gridWeatherDescriptors_UserDeletedRow;
+            gridWeatherDescriptors.UserDeletingRow += gridWeatherDescriptors_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Acronym";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.HeaderText = "Acronym";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Spoken";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.HeaderText = "Spoken";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // tabClouds
             // 
-            this.tabClouds.Controls.Add(this.tabControl5);
-            this.tabClouds.Location = new System.Drawing.Point(4, 24);
-            this.tabClouds.Name = "tabClouds";
-            this.tabClouds.Padding = new System.Windows.Forms.Padding(12);
-            this.tabClouds.Size = new System.Drawing.Size(192, 72);
-            this.tabClouds.TabIndex = 4;
-            this.tabClouds.Text = "Clouds";
-            this.tabClouds.UseVisualStyleBackColor = true;
+            tabClouds.Controls.Add(tabControl5);
+            tabClouds.Location = new System.Drawing.Point(4, 24);
+            tabClouds.Name = "tabClouds";
+            tabClouds.Padding = new System.Windows.Forms.Padding(12);
+            tabClouds.Size = new System.Drawing.Size(192, 72);
+            tabClouds.TabIndex = 4;
+            tabClouds.Text = "Clouds";
+            tabClouds.UseVisualStyleBackColor = true;
             // 
             // tabControl5
             // 
-            this.tabControl5.Controls.Add(this.tabPage4);
-            this.tabControl5.Controls.Add(this.tabPage6);
-            this.tabControl5.Controls.Add(this.tabPage7);
-            this.tabControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl5.Location = new System.Drawing.Point(12, 12);
-            this.tabControl5.Name = "tabControl5";
-            this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(168, 48);
-            this.tabControl5.TabIndex = 4;
+            tabControl5.Controls.Add(tabPage4);
+            tabControl5.Controls.Add(tabPage6);
+            tabControl5.Controls.Add(tabPage7);
+            tabControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl5.Location = new System.Drawing.Point(12, 12);
+            tabControl5.Name = "tabControl5";
+            tabControl5.SelectedIndex = 0;
+            tabControl5.Size = new System.Drawing.Size(168, 48);
+            tabControl5.TabIndex = 4;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.chkConvertCloudsMetric);
-            this.tabPage4.Controls.Add(this.chkIdentifyCeilingLayer);
-            this.tabPage4.Controls.Add(this.templateCloudLayers);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(160, 20);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "Template";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            tabPage4.Controls.Add(chkConvertCloudsMetric);
+            tabPage4.Controls.Add(chkIdentifyCeilingLayer);
+            tabPage4.Controls.Add(templateCloudLayers);
+            tabPage4.Location = new System.Drawing.Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            tabPage4.Size = new System.Drawing.Size(160, 20);
+            tabPage4.TabIndex = 0;
+            tabPage4.Text = "Template";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // chkConvertCloudsMetric
             // 
-            this.chkConvertCloudsMetric.AutoSize = true;
-            this.chkConvertCloudsMetric.Location = new System.Drawing.Point(224, 20);
-            this.chkConvertCloudsMetric.Name = "chkConvertCloudsMetric";
-            this.chkConvertCloudsMetric.Size = new System.Drawing.Size(223, 19);
-            this.chkConvertCloudsMetric.TabIndex = 21;
-            this.chkConvertCloudsMetric.Text = "Convert cloud layer altitude to metric";
-            this.compositeTooltip.SetToolTip(this.chkConvertCloudsMetric, "Whether or not to convert cloud layer heights to metric");
-            this.chkConvertCloudsMetric.UseVisualStyleBackColor = true;
-            this.chkConvertCloudsMetric.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkConvertCloudsMetric.AutoSize = true;
+            chkConvertCloudsMetric.Location = new System.Drawing.Point(224, 20);
+            chkConvertCloudsMetric.Name = "chkConvertCloudsMetric";
+            chkConvertCloudsMetric.Size = new System.Drawing.Size(223, 19);
+            chkConvertCloudsMetric.TabIndex = 21;
+            chkConvertCloudsMetric.Text = "Convert cloud layer altitude to metric";
+            compositeTooltip.SetToolTip(chkConvertCloudsMetric, "Whether or not to convert cloud layer heights to metric");
+            chkConvertCloudsMetric.UseVisualStyleBackColor = true;
+            chkConvertCloudsMetric.CheckedChanged += HandleControlValueChanged;
             // 
             // chkIdentifyCeilingLayer
             // 
-            this.chkIdentifyCeilingLayer.AutoSize = true;
-            this.chkIdentifyCeilingLayer.Location = new System.Drawing.Point(17, 20);
-            this.chkIdentifyCeilingLayer.Name = "chkIdentifyCeilingLayer";
-            this.chkIdentifyCeilingLayer.Size = new System.Drawing.Size(201, 19);
-            this.chkIdentifyCeilingLayer.TabIndex = 20;
-            this.chkIdentifyCeilingLayer.Text = "Identify ceiling layer in voice ATIS";
-            this.compositeTooltip.SetToolTip(this.chkIdentifyCeilingLayer, "Prefix the lowest BKN or OVC layer with \"ceiling\" in voice ATIS");
-            this.chkIdentifyCeilingLayer.UseVisualStyleBackColor = true;
-            this.chkIdentifyCeilingLayer.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkIdentifyCeilingLayer.AutoSize = true;
+            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(17, 20);
+            chkIdentifyCeilingLayer.Name = "chkIdentifyCeilingLayer";
+            chkIdentifyCeilingLayer.Size = new System.Drawing.Size(201, 19);
+            chkIdentifyCeilingLayer.TabIndex = 20;
+            chkIdentifyCeilingLayer.Text = "Identify ceiling layer in voice ATIS";
+            compositeTooltip.SetToolTip(chkIdentifyCeilingLayer, "Prefix the lowest BKN or OVC layer with \"ceiling\" in voice ATIS");
+            chkIdentifyCeilingLayer.UseVisualStyleBackColor = true;
+            chkIdentifyCeilingLayer.CheckedChanged += HandleControlValueChanged;
             // 
             // templateCloudLayers
             // 
-            this.templateCloudLayers.Location = new System.Drawing.Point(16, 59);
-            this.templateCloudLayers.Name = "templateCloudLayers";
-            this.templateCloudLayers.NodeType = "Clouds";
-            this.templateCloudLayers.Size = new System.Drawing.Size(615, 180);
-            this.templateCloudLayers.TabIndex = 19;
-            this.templateCloudLayers.TextTemplate = "";
+            templateCloudLayers.Location = new System.Drawing.Point(16, 59);
+            templateCloudLayers.Name = "templateCloudLayers";
+            templateCloudLayers.NodeType = "Clouds";
+            templateCloudLayers.Size = new System.Drawing.Size(615, 180);
+            templateCloudLayers.TabIndex = 19;
+            templateCloudLayers.TextTemplate = "";
             variable49.Text = "clouds";
             variable49.ToolTip = "The cloud layer groups from the METAR report (e.g. \"SCT150 FEW200\")";
-            this.templateCloudLayers.Variables.Add(variable49);
-            this.templateCloudLayers.VoiceTemplate = "";
-            this.templateCloudLayers.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateCloudLayers.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateCloudLayers.Variables.Add(variable49);
+            templateCloudLayers.VoiceTemplate = "";
+            templateCloudLayers.TextTemplateChanged += OnTextTemplateChanged;
+            templateCloudLayers.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.tableLayoutPanel7);
-            this.tabPage6.Location = new System.Drawing.Point(4, 24);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage6.Size = new System.Drawing.Size(192, 72);
-            this.tabPage6.TabIndex = 1;
-            this.tabPage6.Text = "Cloud Types";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            tabPage6.Controls.Add(tableLayoutPanel7);
+            tabPage6.Location = new System.Drawing.Point(4, 24);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new System.Windows.Forms.Padding(10);
+            tabPage6.Size = new System.Drawing.Size(192, 72);
+            tabPage6.TabIndex = 1;
+            tabPage6.Text = "Cloud Types";
+            tabPage6.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.gridCloudTypes, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel9, 0, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(10, 10);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(172, 52);
-            this.tableLayoutPanel7.TabIndex = 3;
+            tableLayoutPanel7.ColumnCount = 1;
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel7.Controls.Add(gridCloudTypes, 0, 0);
+            tableLayoutPanel7.Controls.Add(tableLayoutPanel9, 0, 1);
+            tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel7.Location = new System.Drawing.Point(10, 10);
+            tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel7.RowCount = 2;
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel7.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel7.TabIndex = 3;
             // 
             // gridCloudTypes
             // 
-            this.gridCloudTypes.AllowUserToResizeColumns = false;
-            this.gridCloudTypes.AllowUserToResizeRows = false;
-            this.gridCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridCloudTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8});
-            this.gridCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridCloudTypes.Location = new System.Drawing.Point(4, 3);
-            this.gridCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridCloudTypes.Name = "gridCloudTypes";
-            this.gridCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridCloudTypes.RowHeadersVisible = false;
-            this.gridCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCloudTypes.Size = new System.Drawing.Size(164, 11);
-            this.gridCloudTypes.TabIndex = 2;
-            this.gridCloudTypes.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCloudTypes_CellEndEdit);
-            this.gridCloudTypes.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridCloudTypes_CellValidating);
-            this.gridCloudTypes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCloudTypes_CellValueChanged);
-            this.gridCloudTypes.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridCloudTypes_EditingControlShowing);
-            this.gridCloudTypes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridCloudTypes_UserDeletedRow);
-            this.gridCloudTypes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridCloudTypes_UserDeletingRow);
+            gridCloudTypes.AllowUserToResizeColumns = false;
+            gridCloudTypes.AllowUserToResizeRows = false;
+            gridCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridCloudTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8 });
+            gridCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridCloudTypes.Location = new System.Drawing.Point(4, 3);
+            gridCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridCloudTypes.Name = "gridCloudTypes";
+            gridCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridCloudTypes.RowHeadersVisible = false;
+            gridCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridCloudTypes.Size = new System.Drawing.Size(164, 11);
+            gridCloudTypes.TabIndex = 2;
+            gridCloudTypes.CellEndEdit += gridCloudTypes_CellEndEdit;
+            gridCloudTypes.CellValidating += gridCloudTypes_CellValidating;
+            gridCloudTypes.CellValueChanged += gridCloudTypes_CellValueChanged;
+            gridCloudTypes.EditingControlShowing += gridCloudTypes_EditingControlShowing;
+            gridCloudTypes.UserDeletedRow += gridCloudTypes_UserDeletedRow;
+            gridCloudTypes.UserDeletingRow += gridCloudTypes_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Acronym";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.HeaderText = "Acronym";
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // dataGridViewTextBoxColumn8
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Spoken";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.HeaderText = "Spoken";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
             // tableLayoutPanel9
             // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.96774F));
-            this.tableLayoutPanel9.Controls.Add(this.btnDeleteCloudType, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label24, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
-            this.tableLayoutPanel9.TabIndex = 3;
+            tableLayoutPanel9.ColumnCount = 2;
+            tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
+            tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.96774F));
+            tableLayoutPanel9.Controls.Add(btnDeleteCloudType, 1, 0);
+            tableLayoutPanel9.Controls.Add(label24, 0, 0);
+            tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
+            tableLayoutPanel9.Name = "tableLayoutPanel9";
+            tableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            tableLayoutPanel9.RowCount = 1;
+            tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
+            tableLayoutPanel9.TabIndex = 3;
             // 
             // btnDeleteCloudType
             // 
-            this.btnDeleteCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteCloudType.Location = new System.Drawing.Point(131, 0);
-            this.btnDeleteCloudType.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDeleteCloudType.Name = "btnDeleteCloudType";
-            this.btnDeleteCloudType.Size = new System.Drawing.Size(35, 29);
-            this.btnDeleteCloudType.TabIndex = 1;
-            this.btnDeleteCloudType.Text = "Delete Selected";
-            this.btnDeleteCloudType.UseVisualStyleBackColor = true;
-            this.btnDeleteCloudType.Click += new System.EventHandler(this.btnDeleteCloudType_Click);
+            btnDeleteCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnDeleteCloudType.Location = new System.Drawing.Point(131, 0);
+            btnDeleteCloudType.Margin = new System.Windows.Forms.Padding(0);
+            btnDeleteCloudType.Name = "btnDeleteCloudType";
+            btnDeleteCloudType.Size = new System.Drawing.Size(35, 29);
+            btnDeleteCloudType.TabIndex = 1;
+            btnDeleteCloudType.Text = "Delete Selected";
+            btnDeleteCloudType.UseVisualStyleBackColor = true;
+            btnDeleteCloudType.Click += btnDeleteCloudType_Click;
             // 
             // label24
             // 
-            this.label24.AutoSize = true;
-            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(0, 0);
-            this.label24.Margin = new System.Windows.Forms.Padding(0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(131, 29);
-            this.label24.TabIndex = 2;
-            this.label24.Text = "Available Variables: {altitude} and {convective}";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.compositeTooltip.SetToolTip(this.label24, "{altitude} inserts the cloud layer altitude; {convective} inserts the convective " +
-        "cloud type, if applicable.");
+            label24.AutoSize = true;
+            label24.Dock = System.Windows.Forms.DockStyle.Fill;
+            label24.Location = new System.Drawing.Point(0, 0);
+            label24.Margin = new System.Windows.Forms.Padding(0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(131, 29);
+            label24.TabIndex = 2;
+            label24.Text = "Available Variables: {altitude} and {convective}";
+            label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            compositeTooltip.SetToolTip(label24, "{altitude} inserts the cloud layer altitude; {convective} inserts the convective cloud type, if applicable.");
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.tableLayoutPanel8);
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage7.Size = new System.Drawing.Size(192, 72);
-            this.tabPage7.TabIndex = 2;
-            this.tabPage7.Text = "Convective Cloud Types";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            tabPage7.Controls.Add(tableLayoutPanel8);
+            tabPage7.Location = new System.Drawing.Point(4, 24);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new System.Windows.Forms.Padding(10);
+            tabPage7.Size = new System.Drawing.Size(192, 72);
+            tabPage7.TabIndex = 2;
+            tabPage7.Text = "Convective Cloud Types";
+            tabPage7.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel10, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.gridConvectiveCloudTypes, 0, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(10, 10);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(172, 52);
-            this.tableLayoutPanel8.TabIndex = 4;
+            tableLayoutPanel8.ColumnCount = 1;
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel8.Controls.Add(tableLayoutPanel10, 0, 1);
+            tableLayoutPanel8.Controls.Add(gridConvectiveCloudTypes, 0, 0);
+            tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel8.Location = new System.Drawing.Point(10, 10);
+            tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel8.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel8.TabIndex = 4;
             // 
             // tableLayoutPanel10
             // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.19355F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.80645F));
-            this.tableLayoutPanel10.Controls.Add(this.btnDeleteConvectiveCloudType, 1, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 20);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(166, 29);
-            this.tableLayoutPanel10.TabIndex = 4;
+            tableLayoutPanel10.ColumnCount = 2;
+            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.19355F));
+            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.80645F));
+            tableLayoutPanel10.Controls.Add(btnDeleteConvectiveCloudType, 1, 0);
+            tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel10.Location = new System.Drawing.Point(3, 20);
+            tableLayoutPanel10.Name = "tableLayoutPanel10";
+            tableLayoutPanel10.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            tableLayoutPanel10.RowCount = 1;
+            tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel10.Size = new System.Drawing.Size(166, 29);
+            tableLayoutPanel10.TabIndex = 4;
             // 
             // btnDeleteConvectiveCloudType
             // 
-            this.btnDeleteConvectiveCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteConvectiveCloudType.Location = new System.Drawing.Point(131, 0);
-            this.btnDeleteConvectiveCloudType.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDeleteConvectiveCloudType.Name = "btnDeleteConvectiveCloudType";
-            this.btnDeleteConvectiveCloudType.Size = new System.Drawing.Size(35, 29);
-            this.btnDeleteConvectiveCloudType.TabIndex = 1;
-            this.btnDeleteConvectiveCloudType.Text = "Delete Selected";
-            this.btnDeleteConvectiveCloudType.UseVisualStyleBackColor = true;
-            this.btnDeleteConvectiveCloudType.Click += new System.EventHandler(this.btnDeleteConvectiveCloudType_Click);
+            btnDeleteConvectiveCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnDeleteConvectiveCloudType.Location = new System.Drawing.Point(131, 0);
+            btnDeleteConvectiveCloudType.Margin = new System.Windows.Forms.Padding(0);
+            btnDeleteConvectiveCloudType.Name = "btnDeleteConvectiveCloudType";
+            btnDeleteConvectiveCloudType.Size = new System.Drawing.Size(35, 29);
+            btnDeleteConvectiveCloudType.TabIndex = 1;
+            btnDeleteConvectiveCloudType.Text = "Delete Selected";
+            btnDeleteConvectiveCloudType.UseVisualStyleBackColor = true;
+            btnDeleteConvectiveCloudType.Click += btnDeleteConvectiveCloudType_Click;
             // 
             // gridConvectiveCloudTypes
             // 
-            this.gridConvectiveCloudTypes.AllowUserToResizeColumns = false;
-            this.gridConvectiveCloudTypes.AllowUserToResizeRows = false;
-            this.gridConvectiveCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridConvectiveCloudTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridConvectiveCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
-            this.gridConvectiveCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridConvectiveCloudTypes.Location = new System.Drawing.Point(4, 3);
-            this.gridConvectiveCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridConvectiveCloudTypes.Name = "gridConvectiveCloudTypes";
-            this.gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridConvectiveCloudTypes.RowHeadersVisible = false;
-            this.gridConvectiveCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridConvectiveCloudTypes.Size = new System.Drawing.Size(164, 11);
-            this.gridConvectiveCloudTypes.TabIndex = 2;
-            this.gridConvectiveCloudTypes.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConvectiveCloudTypes_CellEndEdit);
-            this.gridConvectiveCloudTypes.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridConvectiveCloudTypes_CellValidating);
-            this.gridConvectiveCloudTypes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConvectiveCloudTypes_CellValueChanged);
-            this.gridConvectiveCloudTypes.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridConvectiveCloudTypes_EditingControlShowing);
-            this.gridConvectiveCloudTypes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridConvectiveCloudTypes_UserDeletedRow);
-            this.gridConvectiveCloudTypes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConvectiveCloudTypes_UserDeletingRow);
+            gridConvectiveCloudTypes.AllowUserToResizeColumns = false;
+            gridConvectiveCloudTypes.AllowUserToResizeRows = false;
+            gridConvectiveCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridConvectiveCloudTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridConvectiveCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10 });
+            gridConvectiveCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridConvectiveCloudTypes.Location = new System.Drawing.Point(4, 3);
+            gridConvectiveCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridConvectiveCloudTypes.Name = "gridConvectiveCloudTypes";
+            gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridConvectiveCloudTypes.RowHeadersVisible = false;
+            gridConvectiveCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridConvectiveCloudTypes.Size = new System.Drawing.Size(164, 11);
+            gridConvectiveCloudTypes.TabIndex = 2;
+            gridConvectiveCloudTypes.CellEndEdit += gridConvectiveCloudTypes_CellEndEdit;
+            gridConvectiveCloudTypes.CellValidating += gridConvectiveCloudTypes_CellValidating;
+            gridConvectiveCloudTypes.CellValueChanged += gridConvectiveCloudTypes_CellValueChanged;
+            gridConvectiveCloudTypes.EditingControlShowing += gridConvectiveCloudTypes_EditingControlShowing;
+            gridConvectiveCloudTypes.UserDeletedRow += gridConvectiveCloudTypes_UserDeletedRow;
+            gridConvectiveCloudTypes.UserDeletingRow += gridConvectiveCloudTypes_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn9
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Acronym";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.HeaderText = "Acronym";
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
             // dataGridViewTextBoxColumn10
             // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Spoken";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.HeaderText = "Spoken";
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
             // tabTemperature
             // 
-            this.tabTemperature.Controls.Add(this.chkTempLeadingZero);
-            this.tabTemperature.Controls.Add(this.chkTempPlusPrefix);
-            this.tabTemperature.Controls.Add(this.templateTemperature);
-            this.tabTemperature.Location = new System.Drawing.Point(4, 24);
-            this.tabTemperature.Name = "tabTemperature";
-            this.tabTemperature.Padding = new System.Windows.Forms.Padding(12);
-            this.tabTemperature.Size = new System.Drawing.Size(192, 72);
-            this.tabTemperature.TabIndex = 5;
-            this.tabTemperature.Text = "Temperature";
-            this.tabTemperature.UseVisualStyleBackColor = true;
+            tabTemperature.Controls.Add(chkTempLeadingZero);
+            tabTemperature.Controls.Add(chkTempPlusPrefix);
+            tabTemperature.Controls.Add(templateTemperature);
+            tabTemperature.Location = new System.Drawing.Point(4, 24);
+            tabTemperature.Name = "tabTemperature";
+            tabTemperature.Padding = new System.Windows.Forms.Padding(12);
+            tabTemperature.Size = new System.Drawing.Size(192, 72);
+            tabTemperature.TabIndex = 5;
+            tabTemperature.Text = "Temperature";
+            tabTemperature.UseVisualStyleBackColor = true;
             // 
             // chkTempLeadingZero
             // 
-            this.chkTempLeadingZero.AutoSize = true;
-            this.chkTempLeadingZero.Location = new System.Drawing.Point(34, 60);
-            this.chkTempLeadingZero.Name = "chkTempLeadingZero";
-            this.chkTempLeadingZero.Size = new System.Drawing.Size(193, 19);
-            this.chkTempLeadingZero.TabIndex = 21;
-            this.chkTempLeadingZero.Text = "Speak leading zero in voice ATIS";
-            this.compositeTooltip.SetToolTip(this.chkTempLeadingZero, "If checked, the leading zero will be spoken (e.g. \"TEMPERATURE ZERO SIX\")");
-            this.chkTempLeadingZero.UseVisualStyleBackColor = true;
-            this.chkTempLeadingZero.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkTempLeadingZero.AutoSize = true;
+            chkTempLeadingZero.Location = new System.Drawing.Point(34, 60);
+            chkTempLeadingZero.Name = "chkTempLeadingZero";
+            chkTempLeadingZero.Size = new System.Drawing.Size(193, 19);
+            chkTempLeadingZero.TabIndex = 21;
+            chkTempLeadingZero.Text = "Speak leading zero in voice ATIS";
+            compositeTooltip.SetToolTip(chkTempLeadingZero, "If checked, the leading zero will be spoken (e.g. \"TEMPERATURE ZERO SIX\")");
+            chkTempLeadingZero.UseVisualStyleBackColor = true;
+            chkTempLeadingZero.CheckedChanged += HandleControlValueChanged;
             // 
             // chkTempPlusPrefix
             // 
-            this.chkTempPlusPrefix.AutoSize = true;
-            this.chkTempPlusPrefix.Location = new System.Drawing.Point(34, 28);
-            this.chkTempPlusPrefix.Name = "chkTempPlusPrefix";
-            this.chkTempPlusPrefix.Size = new System.Drawing.Size(298, 19);
-            this.chkTempPlusPrefix.TabIndex = 20;
-            this.chkTempPlusPrefix.Text = "Prefix positive temperature with \"plus\" in voice ATIS";
-            this.compositeTooltip.SetToolTip(this.chkTempPlusPrefix, "If checked, positive temperatures will be prefixed with the word \"plus\" in the vo" +
-        "ice ATIS (e.g. \"TEMPERATURE PLUS TWO FIVE\")");
-            this.chkTempPlusPrefix.UseVisualStyleBackColor = true;
-            this.chkTempPlusPrefix.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkTempPlusPrefix.AutoSize = true;
+            chkTempPlusPrefix.Location = new System.Drawing.Point(34, 28);
+            chkTempPlusPrefix.Name = "chkTempPlusPrefix";
+            chkTempPlusPrefix.Size = new System.Drawing.Size(298, 19);
+            chkTempPlusPrefix.TabIndex = 20;
+            chkTempPlusPrefix.Text = "Prefix positive temperature with \"plus\" in voice ATIS";
+            compositeTooltip.SetToolTip(chkTempPlusPrefix, "If checked, positive temperatures will be prefixed with the word \"plus\" in the voice ATIS (e.g. \"TEMPERATURE PLUS TWO FIVE\")");
+            chkTempPlusPrefix.UseVisualStyleBackColor = true;
+            chkTempPlusPrefix.CheckedChanged += HandleControlValueChanged;
             // 
             // templateTemperature
             // 
-            this.templateTemperature.Location = new System.Drawing.Point(32, 92);
-            this.templateTemperature.Name = "templateTemperature";
-            this.templateTemperature.NodeType = "Temperature";
-            this.templateTemperature.Size = new System.Drawing.Size(615, 190);
-            this.templateTemperature.TabIndex = 19;
-            this.templateTemperature.TextTemplate = "";
+            templateTemperature.Location = new System.Drawing.Point(32, 92);
+            templateTemperature.Name = "templateTemperature";
+            templateTemperature.NodeType = "Temperature";
+            templateTemperature.Size = new System.Drawing.Size(615, 190);
+            templateTemperature.TabIndex = 19;
+            templateTemperature.TextTemplate = "";
             variable50.Text = "temp";
             variable50.ToolTip = "The temperature value from the METAR (e.g. \"05\")";
-            this.templateTemperature.Variables.Add(variable50);
-            this.templateTemperature.VoiceTemplate = "";
-            this.templateTemperature.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateTemperature.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateTemperature.Variables.Add(variable50);
+            templateTemperature.VoiceTemplate = "";
+            templateTemperature.TextTemplateChanged += OnTextTemplateChanged;
+            templateTemperature.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabDewpoint
             // 
-            this.tabDewpoint.Controls.Add(this.chkDewLeadingZero);
-            this.tabDewpoint.Controls.Add(this.chkDewPlusPrefix);
-            this.tabDewpoint.Controls.Add(this.templateDewpoint);
-            this.tabDewpoint.Location = new System.Drawing.Point(4, 24);
-            this.tabDewpoint.Name = "tabDewpoint";
-            this.tabDewpoint.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDewpoint.Size = new System.Drawing.Size(192, 72);
-            this.tabDewpoint.TabIndex = 6;
-            this.tabDewpoint.Text = "Dewpoint";
-            this.tabDewpoint.UseVisualStyleBackColor = true;
+            tabDewpoint.Controls.Add(chkDewLeadingZero);
+            tabDewpoint.Controls.Add(chkDewPlusPrefix);
+            tabDewpoint.Controls.Add(templateDewpoint);
+            tabDewpoint.Location = new System.Drawing.Point(4, 24);
+            tabDewpoint.Name = "tabDewpoint";
+            tabDewpoint.Padding = new System.Windows.Forms.Padding(12);
+            tabDewpoint.Size = new System.Drawing.Size(192, 72);
+            tabDewpoint.TabIndex = 6;
+            tabDewpoint.Text = "Dewpoint";
+            tabDewpoint.UseVisualStyleBackColor = true;
             // 
             // chkDewLeadingZero
             // 
-            this.chkDewLeadingZero.AutoSize = true;
-            this.chkDewLeadingZero.Location = new System.Drawing.Point(34, 60);
-            this.chkDewLeadingZero.Name = "chkDewLeadingZero";
-            this.chkDewLeadingZero.Size = new System.Drawing.Size(193, 19);
-            this.chkDewLeadingZero.TabIndex = 24;
-            this.chkDewLeadingZero.Text = "Speak leading zero in voice ATIS";
-            this.compositeTooltip.SetToolTip(this.chkDewLeadingZero, "If checked, the leading zero will be spoken (e.g. \"DEWPOINT ZERO SIX\")");
-            this.chkDewLeadingZero.UseVisualStyleBackColor = true;
-            this.chkDewLeadingZero.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkDewLeadingZero.AutoSize = true;
+            chkDewLeadingZero.Location = new System.Drawing.Point(34, 60);
+            chkDewLeadingZero.Name = "chkDewLeadingZero";
+            chkDewLeadingZero.Size = new System.Drawing.Size(193, 19);
+            chkDewLeadingZero.TabIndex = 24;
+            chkDewLeadingZero.Text = "Speak leading zero in voice ATIS";
+            compositeTooltip.SetToolTip(chkDewLeadingZero, "If checked, the leading zero will be spoken (e.g. \"DEWPOINT ZERO SIX\")");
+            chkDewLeadingZero.UseVisualStyleBackColor = true;
+            chkDewLeadingZero.CheckedChanged += HandleControlValueChanged;
             // 
             // chkDewPlusPrefix
             // 
-            this.chkDewPlusPrefix.AutoSize = true;
-            this.chkDewPlusPrefix.Location = new System.Drawing.Point(34, 28);
-            this.chkDewPlusPrefix.Name = "chkDewPlusPrefix";
-            this.chkDewPlusPrefix.Size = new System.Drawing.Size(283, 19);
-            this.chkDewPlusPrefix.TabIndex = 23;
-            this.chkDewPlusPrefix.Text = "Prefix positive dewpoint with \"plus\" in voice ATIS";
-            this.compositeTooltip.SetToolTip(this.chkDewPlusPrefix, "If checked, positive dewpoint will be prefixed with the word \"plus\" in the voice " +
-        "ATIS (e.g. \"DEWPOINT PLUS TWO FIVE\")");
-            this.chkDewPlusPrefix.UseVisualStyleBackColor = true;
-            this.chkDewPlusPrefix.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkDewPlusPrefix.AutoSize = true;
+            chkDewPlusPrefix.Location = new System.Drawing.Point(34, 28);
+            chkDewPlusPrefix.Name = "chkDewPlusPrefix";
+            chkDewPlusPrefix.Size = new System.Drawing.Size(283, 19);
+            chkDewPlusPrefix.TabIndex = 23;
+            chkDewPlusPrefix.Text = "Prefix positive dewpoint with \"plus\" in voice ATIS";
+            compositeTooltip.SetToolTip(chkDewPlusPrefix, "If checked, positive dewpoint will be prefixed with the word \"plus\" in the voice ATIS (e.g. \"DEWPOINT PLUS TWO FIVE\")");
+            chkDewPlusPrefix.UseVisualStyleBackColor = true;
+            chkDewPlusPrefix.CheckedChanged += HandleControlValueChanged;
             // 
             // templateDewpoint
             // 
-            this.templateDewpoint.Location = new System.Drawing.Point(32, 92);
-            this.templateDewpoint.Name = "templateDewpoint";
-            this.templateDewpoint.NodeType = "Dewpoint";
-            this.templateDewpoint.Size = new System.Drawing.Size(615, 190);
-            this.templateDewpoint.TabIndex = 22;
-            this.templateDewpoint.TextTemplate = "";
+            templateDewpoint.Location = new System.Drawing.Point(32, 92);
+            templateDewpoint.Name = "templateDewpoint";
+            templateDewpoint.NodeType = "Dewpoint";
+            templateDewpoint.Size = new System.Drawing.Size(615, 190);
+            templateDewpoint.TabIndex = 22;
+            templateDewpoint.TextTemplate = "";
             variable51.Text = "dewpoint";
             variable51.ToolTip = "The dewpoint temperature value from the METAR (e.g. \"05\")";
-            this.templateDewpoint.Variables.Add(variable51);
-            this.templateDewpoint.VoiceTemplate = "";
-            this.templateDewpoint.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateDewpoint.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateDewpoint.Variables.Add(variable51);
+            templateDewpoint.VoiceTemplate = "";
+            templateDewpoint.TextTemplateChanged += OnTextTemplateChanged;
+            templateDewpoint.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabAltimeter
             // 
-            this.tabAltimeter.Controls.Add(this.templateAltimeter);
-            this.tabAltimeter.Location = new System.Drawing.Point(4, 24);
-            this.tabAltimeter.Name = "tabAltimeter";
-            this.tabAltimeter.Padding = new System.Windows.Forms.Padding(12);
-            this.tabAltimeter.Size = new System.Drawing.Size(192, 72);
-            this.tabAltimeter.TabIndex = 7;
-            this.tabAltimeter.Text = "Altimeter";
-            this.tabAltimeter.UseVisualStyleBackColor = true;
+            tabAltimeter.Controls.Add(templateAltimeter);
+            tabAltimeter.Location = new System.Drawing.Point(4, 24);
+            tabAltimeter.Name = "tabAltimeter";
+            tabAltimeter.Padding = new System.Windows.Forms.Padding(12);
+            tabAltimeter.Size = new System.Drawing.Size(192, 72);
+            tabAltimeter.TabIndex = 7;
+            tabAltimeter.Text = "Altimeter";
+            tabAltimeter.UseVisualStyleBackColor = true;
             // 
             // templateAltimeter
             // 
-            this.templateAltimeter.Location = new System.Drawing.Point(32, 60);
-            this.templateAltimeter.Name = "templateAltimeter";
-            this.templateAltimeter.NodeType = "Altimeter";
-            this.templateAltimeter.Size = new System.Drawing.Size(615, 190);
-            this.templateAltimeter.TabIndex = 25;
-            this.templateAltimeter.TextTemplate = "";
+            templateAltimeter.Location = new System.Drawing.Point(32, 60);
+            templateAltimeter.Name = "templateAltimeter";
+            templateAltimeter.NodeType = "Altimeter";
+            templateAltimeter.Size = new System.Drawing.Size(615, 190);
+            templateAltimeter.TabIndex = 25;
+            templateAltimeter.TextTemplate = "";
             variable52.Text = "altimeter";
             variable52.ToolTip = "The altimeter value from the METAR report (e.g. \"2992\" or \"1013\").";
             variable53.Text = "altimeter|text";
             variable53.ToolTip = "Encodes the altimeter value into numeric word form (e.g. \"TWO NINER NINER TWO\")";
             variable54.Text = "altimeter|inhg";
-            variable54.ToolTip = "Encodes the altimeter value to inHg (inches mercury) and includes the decimal poi" +
-    "nt (e.g. Text: \"29.92\", Spoken: \"TWO NINER POINT NINER TWO\")";
+            variable54.ToolTip = "Encodes the altimeter value to inHg (inches mercury) and includes the decimal point (e.g. Text: \"29.92\", Spoken: \"TWO NINER POINT NINER TWO\")";
             variable55.Text = "altimeter|hpa";
             variable55.ToolTip = "Encodes the altimeter value in hPa (hectopascal)";
-            this.templateAltimeter.Variables.Add(variable52);
-            this.templateAltimeter.Variables.Add(variable53);
-            this.templateAltimeter.Variables.Add(variable54);
-            this.templateAltimeter.Variables.Add(variable55);
-            this.templateAltimeter.VoiceTemplate = "";
-            this.templateAltimeter.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateAltimeter.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateAltimeter.Variables.Add(variable52);
+            templateAltimeter.Variables.Add(variable53);
+            templateAltimeter.Variables.Add(variable54);
+            templateAltimeter.Variables.Add(variable55);
+            templateAltimeter.VoiceTemplate = "";
+            templateAltimeter.TextTemplateChanged += OnTextTemplateChanged;
+            templateAltimeter.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // tabClosing
             // 
-            this.tabClosing.Controls.Add(this.templateClosingStatement);
-            this.tabClosing.Controls.Add(this.chkAutoIncludeClosingStatement);
-            this.tabClosing.Location = new System.Drawing.Point(4, 24);
-            this.tabClosing.Name = "tabClosing";
-            this.tabClosing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabClosing.Size = new System.Drawing.Size(192, 72);
-            this.tabClosing.TabIndex = 8;
-            this.tabClosing.Text = "Closing Statement";
-            this.tabClosing.UseVisualStyleBackColor = true;
+            tabClosing.Controls.Add(templateClosingStatement);
+            tabClosing.Controls.Add(chkAutoIncludeClosingStatement);
+            tabClosing.Location = new System.Drawing.Point(4, 24);
+            tabClosing.Name = "tabClosing";
+            tabClosing.Padding = new System.Windows.Forms.Padding(3);
+            tabClosing.Size = new System.Drawing.Size(192, 72);
+            tabClosing.TabIndex = 8;
+            tabClosing.Text = "Closing Statement";
+            tabClosing.UseVisualStyleBackColor = true;
             // 
             // templateClosingStatement
             // 
-            this.templateClosingStatement.Location = new System.Drawing.Point(46, 70);
-            this.templateClosingStatement.Name = "templateClosingStatement";
-            this.templateClosingStatement.NodeType = "ClosingStatement";
-            this.templateClosingStatement.Size = new System.Drawing.Size(615, 210);
-            this.templateClosingStatement.TabIndex = 1;
-            this.templateClosingStatement.TextTemplate = "";
+            templateClosingStatement.Location = new System.Drawing.Point(46, 70);
+            templateClosingStatement.Name = "templateClosingStatement";
+            templateClosingStatement.NodeType = "ClosingStatement";
+            templateClosingStatement.Size = new System.Drawing.Size(615, 210);
+            templateClosingStatement.TabIndex = 1;
+            templateClosingStatement.TextTemplate = "";
             variable56.Text = "letter";
             variable56.ToolTip = "The current ATIS letter (e.g. \"A\")";
             variable57.Text = "letter|word";
             variable57.ToolTip = "The current ATIS letter in word form (e.g. \"ALPHA\")";
-            this.templateClosingStatement.Variables.Add(variable56);
-            this.templateClosingStatement.Variables.Add(variable57);
-            this.templateClosingStatement.VoiceTemplate = "";
-            this.templateClosingStatement.TextTemplateChanged += new System.EventHandler(this.OnTextTemplateChanged);
-            this.templateClosingStatement.VoiceTemplateChanged += new System.EventHandler(this.OnVoiceTemplateChanged);
+            templateClosingStatement.Variables.Add(variable56);
+            templateClosingStatement.Variables.Add(variable57);
+            templateClosingStatement.VoiceTemplate = "";
+            templateClosingStatement.TextTemplateChanged += OnTextTemplateChanged;
+            templateClosingStatement.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
             // chkAutoIncludeClosingStatement
             // 
-            this.chkAutoIncludeClosingStatement.AutoSize = true;
-            this.chkAutoIncludeClosingStatement.Location = new System.Drawing.Point(46, 31);
-            this.chkAutoIncludeClosingStatement.Name = "chkAutoIncludeClosingStatement";
-            this.chkAutoIncludeClosingStatement.Size = new System.Drawing.Size(354, 19);
-            this.chkAutoIncludeClosingStatement.TabIndex = 0;
-            this.chkAutoIncludeClosingStatement.Text = "Automatically include closing statement at the end of the ATIS";
-            this.compositeTooltip.SetToolTip(this.chkAutoIncludeClosingStatement, "If checked, the closing statement will be automatically appended to the end of th" +
-        "e ATIS without requring the [CLOSING] variable in the ATIS template.");
-            this.chkAutoIncludeClosingStatement.UseVisualStyleBackColor = true;
-            this.chkAutoIncludeClosingStatement.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkAutoIncludeClosingStatement.AutoSize = true;
+            chkAutoIncludeClosingStatement.Location = new System.Drawing.Point(46, 31);
+            chkAutoIncludeClosingStatement.Name = "chkAutoIncludeClosingStatement";
+            chkAutoIncludeClosingStatement.Size = new System.Drawing.Size(354, 19);
+            chkAutoIncludeClosingStatement.TabIndex = 0;
+            chkAutoIncludeClosingStatement.Text = "Automatically include closing statement at the end of the ATIS";
+            compositeTooltip.SetToolTip(chkAutoIncludeClosingStatement, "If checked, the closing statement will be automatically appended to the end of the ATIS without requring the [CLOSING] variable in the ATIS template.");
+            chkAutoIncludeClosingStatement.UseVisualStyleBackColor = true;
+            chkAutoIncludeClosingStatement.CheckedChanged += HandleControlValueChanged;
             // 
             // pagePresets
             // 
-            this.pagePresets.Controls.Add(this.chkExternalAtisGenerator);
-            this.pagePresets.Controls.Add(this.dynamicPresetControl);
-            this.pagePresets.Controls.Add(this.btnRenamePreset);
-            this.pagePresets.Controls.Add(this.btnDeletePreset);
-            this.pagePresets.Controls.Add(this.btnCopyPreset);
-            this.pagePresets.Controls.Add(this.btnNewPreset);
-            this.pagePresets.Controls.Add(this.ddlPresets);
-            this.pagePresets.Location = new System.Drawing.Point(4, 24);
-            this.pagePresets.Name = "pagePresets";
-            this.pagePresets.Padding = new System.Windows.Forms.Padding(10);
-            this.pagePresets.Size = new System.Drawing.Size(738, 362);
-            this.pagePresets.TabIndex = 0;
-            this.pagePresets.Text = "Presets";
-            this.pagePresets.UseVisualStyleBackColor = true;
+            pagePresets.Controls.Add(chkExternalAtisGenerator);
+            pagePresets.Controls.Add(dynamicPresetControl);
+            pagePresets.Controls.Add(btnRenamePreset);
+            pagePresets.Controls.Add(btnDeletePreset);
+            pagePresets.Controls.Add(btnCopyPreset);
+            pagePresets.Controls.Add(btnNewPreset);
+            pagePresets.Controls.Add(ddlPresets);
+            pagePresets.Location = new System.Drawing.Point(4, 24);
+            pagePresets.Name = "pagePresets";
+            pagePresets.Padding = new System.Windows.Forms.Padding(10);
+            pagePresets.Size = new System.Drawing.Size(738, 362);
+            pagePresets.TabIndex = 0;
+            pagePresets.Text = "Presets";
+            pagePresets.UseVisualStyleBackColor = true;
             // 
             // chkExternalAtisGenerator
             // 
-            this.chkExternalAtisGenerator.AutoSize = true;
-            this.chkExternalAtisGenerator.Enabled = false;
-            this.chkExternalAtisGenerator.Location = new System.Drawing.Point(15, 41);
-            this.chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
-            this.chkExternalAtisGenerator.Size = new System.Drawing.Size(242, 19);
-            this.chkExternalAtisGenerator.TabIndex = 7;
-            this.chkExternalAtisGenerator.Text = "Use external ATIS generator (e.g. UniATIS)";
-            this.chkExternalAtisGenerator.UseVisualStyleBackColor = true;
-            this.chkExternalAtisGenerator.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkExternalAtisGenerator.AutoSize = true;
+            chkExternalAtisGenerator.Enabled = false;
+            chkExternalAtisGenerator.Location = new System.Drawing.Point(15, 41);
+            chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
+            chkExternalAtisGenerator.Size = new System.Drawing.Size(242, 19);
+            chkExternalAtisGenerator.TabIndex = 7;
+            chkExternalAtisGenerator.Text = "Use external ATIS generator (e.g. UniATIS)";
+            chkExternalAtisGenerator.UseVisualStyleBackColor = true;
+            chkExternalAtisGenerator.CheckedChanged += HandleControlValueChanged;
             // 
             // dynamicPresetControl
             // 
-            this.dynamicPresetControl.Location = new System.Drawing.Point(15, 64);
-            this.dynamicPresetControl.Name = "dynamicPresetControl";
-            this.dynamicPresetControl.Size = new System.Drawing.Size(681, 286);
-            this.dynamicPresetControl.TabIndex = 6;
+            dynamicPresetControl.Location = new System.Drawing.Point(15, 64);
+            dynamicPresetControl.Name = "dynamicPresetControl";
+            dynamicPresetControl.Size = new System.Drawing.Size(681, 286);
+            dynamicPresetControl.TabIndex = 6;
             // 
             // btnRenamePreset
             // 
-            this.btnRenamePreset.Enabled = false;
-            this.btnRenamePreset.Location = new System.Drawing.Point(565, 13);
-            this.btnRenamePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnRenamePreset.Name = "btnRenamePreset";
-            this.btnRenamePreset.Size = new System.Drawing.Size(64, 24);
-            this.btnRenamePreset.TabIndex = 5;
-            this.btnRenamePreset.Text = "Rename";
-            this.btnRenamePreset.UseVisualStyleBackColor = true;
-            this.btnRenamePreset.Click += new System.EventHandler(this.btnRenamePreset_Click);
+            btnRenamePreset.Enabled = false;
+            btnRenamePreset.Location = new System.Drawing.Point(565, 13);
+            btnRenamePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRenamePreset.Name = "btnRenamePreset";
+            btnRenamePreset.Size = new System.Drawing.Size(64, 24);
+            btnRenamePreset.TabIndex = 5;
+            btnRenamePreset.Text = "Rename";
+            btnRenamePreset.UseVisualStyleBackColor = true;
+            btnRenamePreset.Click += btnRenamePreset_Click;
             // 
             // btnDeletePreset
             // 
-            this.btnDeletePreset.Enabled = false;
-            this.btnDeletePreset.Location = new System.Drawing.Point(632, 13);
-            this.btnDeletePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDeletePreset.Name = "btnDeletePreset";
-            this.btnDeletePreset.Size = new System.Drawing.Size(64, 24);
-            this.btnDeletePreset.TabIndex = 3;
-            this.btnDeletePreset.Text = "Delete";
-            this.btnDeletePreset.UseVisualStyleBackColor = true;
-            this.btnDeletePreset.Click += new System.EventHandler(this.btnDeletePreset_Click);
+            btnDeletePreset.Enabled = false;
+            btnDeletePreset.Location = new System.Drawing.Point(632, 13);
+            btnDeletePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeletePreset.Name = "btnDeletePreset";
+            btnDeletePreset.Size = new System.Drawing.Size(64, 24);
+            btnDeletePreset.TabIndex = 3;
+            btnDeletePreset.Text = "Delete";
+            btnDeletePreset.UseVisualStyleBackColor = true;
+            btnDeletePreset.Click += btnDeletePreset_Click;
             // 
             // btnCopyPreset
             // 
-            this.btnCopyPreset.Enabled = false;
-            this.btnCopyPreset.Location = new System.Drawing.Point(497, 13);
-            this.btnCopyPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCopyPreset.Name = "btnCopyPreset";
-            this.btnCopyPreset.Size = new System.Drawing.Size(64, 24);
-            this.btnCopyPreset.TabIndex = 2;
-            this.btnCopyPreset.Text = "Copy";
-            this.btnCopyPreset.UseVisualStyleBackColor = true;
-            this.btnCopyPreset.Click += new System.EventHandler(this.btnCopyPreset_Click);
+            btnCopyPreset.Enabled = false;
+            btnCopyPreset.Location = new System.Drawing.Point(497, 13);
+            btnCopyPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCopyPreset.Name = "btnCopyPreset";
+            btnCopyPreset.Size = new System.Drawing.Size(64, 24);
+            btnCopyPreset.TabIndex = 2;
+            btnCopyPreset.Text = "Copy";
+            btnCopyPreset.UseVisualStyleBackColor = true;
+            btnCopyPreset.Click += btnCopyPreset_Click;
             // 
             // btnNewPreset
             // 
-            this.btnNewPreset.Location = new System.Drawing.Point(429, 13);
-            this.btnNewPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnNewPreset.Name = "btnNewPreset";
-            this.btnNewPreset.Size = new System.Drawing.Size(64, 24);
-            this.btnNewPreset.TabIndex = 1;
-            this.btnNewPreset.Text = "New";
-            this.btnNewPreset.UseVisualStyleBackColor = true;
-            this.btnNewPreset.Click += new System.EventHandler(this.btnNewPreset_Click);
+            btnNewPreset.Location = new System.Drawing.Point(429, 13);
+            btnNewPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnNewPreset.Name = "btnNewPreset";
+            btnNewPreset.Size = new System.Drawing.Size(64, 24);
+            btnNewPreset.TabIndex = 1;
+            btnNewPreset.Text = "New";
+            btnNewPreset.UseVisualStyleBackColor = true;
+            btnNewPreset.Click += btnNewPreset_Click;
             // 
             // ddlPresets
             // 
-            this.ddlPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlPresets.FormattingEnabled = true;
-            this.ddlPresets.Location = new System.Drawing.Point(15, 14);
-            this.ddlPresets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ddlPresets.Name = "ddlPresets";
-            this.ddlPresets.Size = new System.Drawing.Size(408, 23);
-            this.ddlPresets.TabIndex = 0;
-            this.ddlPresets.SelectedIndexChanged += new System.EventHandler(this.ddlPresets_SelectedIndexChanged);
+            ddlPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ddlPresets.FormattingEnabled = true;
+            ddlPresets.Location = new System.Drawing.Point(15, 14);
+            ddlPresets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ddlPresets.Name = "ddlPresets";
+            ddlPresets.Size = new System.Drawing.Size(408, 23);
+            ddlPresets.TabIndex = 0;
+            ddlPresets.SelectedIndexChanged += ddlPresets_SelectedIndexChanged;
             // 
             // pageContractions
             // 
-            this.pageContractions.Controls.Add(this.tableLayoutPanel3);
-            this.pageContractions.Location = new System.Drawing.Point(4, 24);
-            this.pageContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pageContractions.Name = "pageContractions";
-            this.pageContractions.Padding = new System.Windows.Forms.Padding(12);
-            this.pageContractions.Size = new System.Drawing.Size(738, 362);
-            this.pageContractions.TabIndex = 1;
-            this.pageContractions.Text = "Contractions";
-            this.pageContractions.UseVisualStyleBackColor = true;
+            pageContractions.Controls.Add(tableLayoutPanel3);
+            pageContractions.Location = new System.Drawing.Point(4, 24);
+            pageContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pageContractions.Name = "pageContractions";
+            pageContractions.Padding = new System.Windows.Forms.Padding(12);
+            pageContractions.Size = new System.Drawing.Size(738, 362);
+            pageContractions.TabIndex = 1;
+            pageContractions.Text = "Contractions";
+            pageContractions.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.btnDeleteContraction, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.gridContractions, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(714, 338);
-            this.tableLayoutPanel3.TabIndex = 2;
+            tableLayoutPanel3.ColumnCount = 1;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(btnDeleteContraction, 0, 1);
+            tableLayoutPanel3.Controls.Add(gridContractions, 0, 0);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(12, 12);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(714, 338);
+            tableLayoutPanel3.TabIndex = 2;
             // 
             // btnDeleteContraction
             // 
-            this.btnDeleteContraction.Location = new System.Drawing.Point(590, 306);
-            this.btnDeleteContraction.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDeleteContraction.Name = "btnDeleteContraction";
-            this.btnDeleteContraction.Size = new System.Drawing.Size(120, 27);
-            this.btnDeleteContraction.TabIndex = 1;
-            this.btnDeleteContraction.Text = "Delete Selected";
-            this.btnDeleteContraction.UseVisualStyleBackColor = true;
-            this.btnDeleteContraction.Click += new System.EventHandler(this.btnDeleteContraction_Click);
+            btnDeleteContraction.Location = new System.Drawing.Point(590, 306);
+            btnDeleteContraction.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeleteContraction.Name = "btnDeleteContraction";
+            btnDeleteContraction.Size = new System.Drawing.Size(120, 27);
+            btnDeleteContraction.TabIndex = 1;
+            btnDeleteContraction.Text = "Delete Selected";
+            btnDeleteContraction.UseVisualStyleBackColor = true;
+            btnDeleteContraction.Click += btnDeleteContraction_Click;
             // 
             // gridContractions
             // 
-            this.gridContractions.AllowUserToResizeColumns = false;
-            this.gridContractions.AllowUserToResizeRows = false;
-            this.gridContractions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridContractions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridContractions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridContractions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnFind,
-            this.ColumnReplace});
-            this.gridContractions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridContractions.Location = new System.Drawing.Point(4, 3);
-            this.gridContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridContractions.Name = "gridContractions";
-            this.gridContractions.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridContractions.RowHeadersVisible = false;
-            this.gridContractions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridContractions.Size = new System.Drawing.Size(706, 297);
-            this.gridContractions.TabIndex = 2;
-            this.gridContractions.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridContractions_CellEndEdit);
-            this.gridContractions.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridContractions_CellValidating);
-            this.gridContractions.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridContractions_CellValueChanged);
-            this.gridContractions.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridContractions_EditingControlShowing);
-            this.gridContractions.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridContractions_UserDeletedRow);
-            this.gridContractions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridContractions_UserDeletingRow);
+            gridContractions.AllowUserToResizeColumns = false;
+            gridContractions.AllowUserToResizeRows = false;
+            gridContractions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridContractions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            gridContractions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridContractions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ColumnFind, ColumnReplace });
+            gridContractions.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridContractions.Location = new System.Drawing.Point(4, 3);
+            gridContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridContractions.Name = "gridContractions";
+            gridContractions.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridContractions.RowHeadersVisible = false;
+            gridContractions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridContractions.Size = new System.Drawing.Size(706, 297);
+            gridContractions.TabIndex = 2;
+            gridContractions.CellEndEdit += gridContractions_CellEndEdit;
+            gridContractions.CellValidating += gridContractions_CellValidating;
+            gridContractions.CellValueChanged += gridContractions_CellValueChanged;
+            gridContractions.EditingControlShowing += gridContractions_EditingControlShowing;
+            gridContractions.UserDeletedRow += gridContractions_UserDeletedRow;
+            gridContractions.UserDeletingRow += gridContractions_UserDeletingRow;
             // 
             // ColumnFind
             // 
-            this.ColumnFind.HeaderText = "String";
-            this.ColumnFind.Name = "ColumnFind";
+            ColumnFind.HeaderText = "String";
+            ColumnFind.Name = "ColumnFind";
             // 
             // ColumnReplace
             // 
-            this.ColumnReplace.HeaderText = "Spoken";
-            this.ColumnReplace.Name = "ColumnReplace";
+            ColumnReplace.HeaderText = "Spoken";
+            ColumnReplace.Name = "ColumnReplace";
             // 
             // pageTransitionLevel
             // 
-            this.pageTransitionLevel.Controls.Add(this.chkTransitionLevelPrefix);
-            this.pageTransitionLevel.Controls.Add(this.tableLayoutPanel5);
-            this.pageTransitionLevel.Location = new System.Drawing.Point(4, 24);
-            this.pageTransitionLevel.Name = "pageTransitionLevel";
-            this.pageTransitionLevel.Padding = new System.Windows.Forms.Padding(12);
-            this.pageTransitionLevel.Size = new System.Drawing.Size(738, 362);
-            this.pageTransitionLevel.TabIndex = 3;
-            this.pageTransitionLevel.Text = "Transition Level";
-            this.pageTransitionLevel.UseVisualStyleBackColor = true;
+            pageTransitionLevel.Controls.Add(chkTransitionLevelPrefix);
+            pageTransitionLevel.Controls.Add(tableLayoutPanel5);
+            pageTransitionLevel.Location = new System.Drawing.Point(4, 24);
+            pageTransitionLevel.Name = "pageTransitionLevel";
+            pageTransitionLevel.Padding = new System.Windows.Forms.Padding(12);
+            pageTransitionLevel.Size = new System.Drawing.Size(738, 362);
+            pageTransitionLevel.TabIndex = 3;
+            pageTransitionLevel.Text = "Transition Level";
+            pageTransitionLevel.UseVisualStyleBackColor = true;
             // 
             // chkTransitionLevelPrefix
             // 
-            this.chkTransitionLevelPrefix.AutoSize = true;
-            this.chkTransitionLevelPrefix.Location = new System.Drawing.Point(13, 14);
-            this.chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
-            this.chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
-            this.chkTransitionLevelPrefix.TabIndex = 4;
-            this.chkTransitionLevelPrefix.Text = "Prepend \"flight level\" to spoken transition level altitude";
-            this.chkTransitionLevelPrefix.UseVisualStyleBackColor = true;
-            this.chkTransitionLevelPrefix.CheckedChanged += new System.EventHandler(this.HandleControlValueChanged);
+            chkTransitionLevelPrefix.AutoSize = true;
+            chkTransitionLevelPrefix.Location = new System.Drawing.Point(13, 14);
+            chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
+            chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
+            chkTransitionLevelPrefix.TabIndex = 4;
+            chkTransitionLevelPrefix.Text = "Prepend \"flight level\" to spoken transition level altitude";
+            chkTransitionLevelPrefix.UseVisualStyleBackColor = true;
+            chkTransitionLevelPrefix.CheckedChanged += HandleControlValueChanged;
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.gridTransitionLevels, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.panel3, 0, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(12, 43);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 99.99999F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(714, 307);
-            this.tableLayoutPanel5.TabIndex = 3;
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel5.Controls.Add(gridTransitionLevels, 0, 0);
+            tableLayoutPanel5.Controls.Add(panel3, 0, 1);
+            tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            tableLayoutPanel5.Location = new System.Drawing.Point(12, 43);
+            tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel5.RowCount = 2;
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 99.99999F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel5.Size = new System.Drawing.Size(714, 307);
+            tableLayoutPanel5.TabIndex = 3;
             // 
             // gridTransitionLevels
             // 
-            this.gridTransitionLevels.AllowUserToResizeColumns = false;
-            this.gridTransitionLevels.AllowUserToResizeRows = false;
-            this.gridTransitionLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridTransitionLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridTransitionLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridTransitionLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.low,
-            this.high,
-            this.transitionLevel});
-            this.gridTransitionLevels.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridTransitionLevels.Location = new System.Drawing.Point(4, 3);
-            this.gridTransitionLevels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridTransitionLevels.Name = "gridTransitionLevels";
-            this.gridTransitionLevels.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridTransitionLevels.RowHeadersVisible = false;
-            this.gridTransitionLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridTransitionLevels.Size = new System.Drawing.Size(706, 266);
-            this.gridTransitionLevels.TabIndex = 2;
-            this.gridTransitionLevels.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTransitionLevels_CellEndEdit);
-            this.gridTransitionLevels.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridTransitionLevels_CellValidating);
-            this.gridTransitionLevels.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridTransitionLevels_CellValueChanged);
-            this.gridTransitionLevels.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridTransitionLevels_EditingControlShowing);
+            gridTransitionLevels.AllowUserToResizeColumns = false;
+            gridTransitionLevels.AllowUserToResizeRows = false;
+            gridTransitionLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridTransitionLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            gridTransitionLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridTransitionLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { low, high, transitionLevel });
+            gridTransitionLevels.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridTransitionLevels.Location = new System.Drawing.Point(4, 3);
+            gridTransitionLevels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridTransitionLevels.Name = "gridTransitionLevels";
+            gridTransitionLevels.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridTransitionLevels.RowHeadersVisible = false;
+            gridTransitionLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridTransitionLevels.Size = new System.Drawing.Size(706, 266);
+            gridTransitionLevels.TabIndex = 2;
+            gridTransitionLevels.CellEndEdit += gridTransitionLevels_CellEndEdit;
+            gridTransitionLevels.CellValidating += gridTransitionLevels_CellValidating;
+            gridTransitionLevels.CellValueChanged += gridTransitionLevels_CellValueChanged;
+            gridTransitionLevels.EditingControlShowing += gridTransitionLevels_EditingControlShowing;
             // 
             // low
             // 
-            this.low.HeaderText = "QNH Low";
-            this.low.Name = "low";
+            low.HeaderText = "QNH Low";
+            low.Name = "low";
             // 
             // high
             // 
-            this.high.HeaderText = "QNH High";
-            this.high.Name = "high";
+            high.HeaderText = "QNH High";
+            high.Name = "high";
             // 
             // transitionLevel
             // 
-            this.transitionLevel.HeaderText = "Transition Level";
-            this.transitionLevel.Name = "transitionLevel";
+            transitionLevel.HeaderText = "Transition Level";
+            transitionLevel.Name = "transitionLevel";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Controls.Add(this.btnDeleteTransitionLevel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 272);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel3.Size = new System.Drawing.Size(714, 35);
-            this.panel3.TabIndex = 3;
+            panel3.Controls.Add(label13);
+            panel3.Controls.Add(btnDeleteTransitionLevel);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 272);
+            panel3.Margin = new System.Windows.Forms.Padding(0);
+            panel3.Name = "panel3";
+            panel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            panel3.Size = new System.Drawing.Size(714, 35);
+            panel3.TabIndex = 3;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(4, 10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(216, 15);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Low and High QNH values are required.\r\n";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(4, 10);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(216, 15);
+            label13.TabIndex = 2;
+            label13.Text = "Low and High QNH values are required.\r\n";
             // 
             // btnDeleteTransitionLevel
             // 
-            this.btnDeleteTransitionLevel.Location = new System.Drawing.Point(590, 4);
-            this.btnDeleteTransitionLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDeleteTransitionLevel.Name = "btnDeleteTransitionLevel";
-            this.btnDeleteTransitionLevel.Size = new System.Drawing.Size(120, 27);
-            this.btnDeleteTransitionLevel.TabIndex = 1;
-            this.btnDeleteTransitionLevel.Text = "Delete Selected";
-            this.btnDeleteTransitionLevel.UseVisualStyleBackColor = true;
-            this.btnDeleteTransitionLevel.Click += new System.EventHandler(this.btnDeleteTransitionLevel_Click);
+            btnDeleteTransitionLevel.Location = new System.Drawing.Point(590, 4);
+            btnDeleteTransitionLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeleteTransitionLevel.Name = "btnDeleteTransitionLevel";
+            btnDeleteTransitionLevel.Size = new System.Drawing.Size(120, 27);
+            btnDeleteTransitionLevel.TabIndex = 1;
+            btnDeleteTransitionLevel.Text = "Delete Selected";
+            btnDeleteTransitionLevel.UseVisualStyleBackColor = true;
+            btnDeleteTransitionLevel.Click += btnDeleteTransitionLevel_Click;
             // 
             // btnManageComposite
             // 
-            this.btnManageComposite.AutoSize = true;
-            this.btnManageComposite.ContextMenuStrip = this.ctxOptions;
-            this.btnManageComposite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnManageComposite.Location = new System.Drawing.Point(4, 399);
-            this.btnManageComposite.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
-            this.btnManageComposite.Name = "btnManageComposite";
-            this.btnManageComposite.Size = new System.Drawing.Size(193, 29);
-            this.btnManageComposite.TabIndex = 2;
-            this.btnManageComposite.Text = "Manage Composite...";
-            this.btnManageComposite.UseVisualStyleBackColor = true;
-            this.btnManageComposite.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnManageComposite_MouseClick);
+            btnManageComposite.AutoSize = true;
+            btnManageComposite.ContextMenuStrip = ctxOptions;
+            btnManageComposite.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnManageComposite.Location = new System.Drawing.Point(4, 399);
+            btnManageComposite.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
+            btnManageComposite.Name = "btnManageComposite";
+            btnManageComposite.Size = new System.Drawing.Size(193, 29);
+            btnManageComposite.TabIndex = 2;
+            btnManageComposite.Text = "Manage Composite...";
+            btnManageComposite.UseVisualStyleBackColor = true;
+            btnManageComposite.MouseClick += btnManageComposite_MouseClick;
             // 
             // ctxOptions
             // 
-            this.ctxOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctxNew,
-            this.ctxCopy,
-            this.ctxRename,
-            this.ctxDelete,
-            this.toolStripSeparator1,
-            this.ctxImport,
-            this.ctxExport});
-            this.ctxOptions.Name = "ctxOptions";
-            this.ctxOptions.Size = new System.Drawing.Size(120, 142);
+            ctxOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ctxNew, ctxCopy, ctxRename, ctxDelete, toolStripSeparator1, ctxImport, ctxExport });
+            ctxOptions.Name = "ctxOptions";
+            ctxOptions.Size = new System.Drawing.Size(120, 142);
             // 
             // ctxNew
             // 
-            this.ctxNew.Name = "ctxNew";
-            this.ctxNew.Size = new System.Drawing.Size(119, 22);
-            this.ctxNew.Text = "New";
-            this.ctxNew.Click += new System.EventHandler(this.ctxNew_Click);
+            ctxNew.Name = "ctxNew";
+            ctxNew.Size = new System.Drawing.Size(119, 22);
+            ctxNew.Text = "New";
+            ctxNew.Click += ctxNew_Click;
             // 
             // ctxCopy
             // 
-            this.ctxCopy.Enabled = false;
-            this.ctxCopy.Name = "ctxCopy";
-            this.ctxCopy.Size = new System.Drawing.Size(119, 22);
-            this.ctxCopy.Text = "Copy";
-            this.ctxCopy.Click += new System.EventHandler(this.ctxCopy_Click);
+            ctxCopy.Enabled = false;
+            ctxCopy.Name = "ctxCopy";
+            ctxCopy.Size = new System.Drawing.Size(119, 22);
+            ctxCopy.Text = "Copy";
+            ctxCopy.Click += ctxCopy_Click;
             // 
             // ctxRename
             // 
-            this.ctxRename.Enabled = false;
-            this.ctxRename.Name = "ctxRename";
-            this.ctxRename.Size = new System.Drawing.Size(119, 22);
-            this.ctxRename.Text = "Rename";
-            this.ctxRename.Click += new System.EventHandler(this.ctxRename_Click);
+            ctxRename.Enabled = false;
+            ctxRename.Name = "ctxRename";
+            ctxRename.Size = new System.Drawing.Size(119, 22);
+            ctxRename.Text = "Rename";
+            ctxRename.Click += ctxRename_Click;
             // 
             // ctxDelete
             // 
-            this.ctxDelete.Enabled = false;
-            this.ctxDelete.Name = "ctxDelete";
-            this.ctxDelete.Size = new System.Drawing.Size(119, 22);
-            this.ctxDelete.Text = "Delete";
-            this.ctxDelete.Click += new System.EventHandler(this.ctxDelete_Click);
+            ctxDelete.Enabled = false;
+            ctxDelete.Name = "ctxDelete";
+            ctxDelete.Size = new System.Drawing.Size(119, 22);
+            ctxDelete.Text = "Delete";
+            ctxDelete.Click += ctxDelete_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
             // 
             // ctxImport
             // 
-            this.ctxImport.Name = "ctxImport";
-            this.ctxImport.Size = new System.Drawing.Size(119, 22);
-            this.ctxImport.Text = "Import...";
-            this.ctxImport.Click += new System.EventHandler(this.ctxImport_Click);
+            ctxImport.Name = "ctxImport";
+            ctxImport.Size = new System.Drawing.Size(119, 22);
+            ctxImport.Text = "Import...";
+            ctxImport.Click += ctxImport_Click;
             // 
             // ctxExport
             // 
-            this.ctxExport.Enabled = false;
-            this.ctxExport.Name = "ctxExport";
-            this.ctxExport.Size = new System.Drawing.Size(119, 22);
-            this.ctxExport.Text = "Export...";
-            this.ctxExport.Click += new System.EventHandler(this.ctxExport_Click);
+            ctxExport.Enabled = false;
+            ctxExport.Name = "ctxExport";
+            ctxExport.Size = new System.Drawing.Size(119, 22);
+            ctxExport.Text = "Export...";
+            ctxExport.Click += ctxExport_Click;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.panelCompositeList);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(194, 390);
-            this.panel1.TabIndex = 3;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(panelCompositeList);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(194, 390);
+            panel1.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 24);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Composites";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            label1.Location = new System.Drawing.Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(194, 24);
+            label1.TabIndex = 3;
+            label1.Text = "Composites";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelCompositeList
             // 
-            this.panelCompositeList.BackColor = System.Drawing.Color.White;
-            this.panelCompositeList.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.panelCompositeList.Controls.Add(this.TreeMenu);
-            this.panelCompositeList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelCompositeList.Location = new System.Drawing.Point(0, 24);
-            this.panelCompositeList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panelCompositeList.Name = "panelCompositeList";
-            this.panelCompositeList.Padding = new System.Windows.Forms.Padding(6);
-            this.panelCompositeList.ShowBorder = true;
-            this.panelCompositeList.Size = new System.Drawing.Size(194, 366);
-            this.panelCompositeList.TabIndex = 2;
+            panelCompositeList.BackColor = System.Drawing.Color.White;
+            panelCompositeList.BorderColor = System.Drawing.Color.FromArgb(217, 217, 217);
+            panelCompositeList.Controls.Add(TreeMenu);
+            panelCompositeList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelCompositeList.Location = new System.Drawing.Point(0, 24);
+            panelCompositeList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelCompositeList.Name = "panelCompositeList";
+            panelCompositeList.Padding = new System.Windows.Forms.Padding(6);
+            panelCompositeList.ShowBorder = true;
+            panelCompositeList.Size = new System.Drawing.Size(194, 366);
+            panelCompositeList.TabIndex = 2;
             // 
             // TreeMenu
             // 
-            this.TreeMenu.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TreeMenu.ContextMenuStrip = this.ctxOptions;
-            this.TreeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TreeMenu.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.TreeMenu.FullRowSelect = true;
-            this.TreeMenu.HideSelection = false;
-            this.TreeMenu.Indent = 5;
-            this.TreeMenu.Location = new System.Drawing.Point(6, 6);
-            this.TreeMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.TreeMenu.Name = "TreeMenu";
-            this.TreeMenu.ShowLines = false;
-            this.TreeMenu.Size = new System.Drawing.Size(182, 354);
-            this.TreeMenu.TabIndex = 0;
-            this.TreeMenu.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.TreeMenu_DrawNode);
-            this.TreeMenu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeMenu_AfterSelect);
+            TreeMenu.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            TreeMenu.ContextMenuStrip = ctxOptions;
+            TreeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            TreeMenu.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            TreeMenu.FullRowSelect = true;
+            TreeMenu.HideSelection = false;
+            TreeMenu.Indent = 5;
+            TreeMenu.Location = new System.Drawing.Point(6, 6);
+            TreeMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            TreeMenu.Name = "TreeMenu";
+            TreeMenu.ShowLines = false;
+            TreeMenu.Size = new System.Drawing.Size(182, 354);
+            TreeMenu.TabIndex = 0;
+            TreeMenu.DrawNode += TreeMenu_DrawNode;
+            TreeMenu.AfterSelect += TreeMenu_AfterSelect;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnApply);
-            this.flowLayoutPanel1.Controls.Add(this.btnOK);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(200, 396);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(751, 35);
-            this.flowLayoutPanel1.TabIndex = 4;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnApply);
+            flowLayoutPanel1.Controls.Add(btnOK);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(200, 396);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(751, 35);
+            flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(660, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(88, 29);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            btnCancel.Location = new System.Drawing.Point(660, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(88, 29);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnApply
             // 
-            this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(584, 3);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(70, 29);
-            this.btnApply.TabIndex = 1;
-            this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            btnApply.Enabled = false;
+            btnApply.Location = new System.Drawing.Point(584, 3);
+            btnApply.Name = "btnApply";
+            btnApply.Size = new System.Drawing.Size(70, 29);
+            btnApply.TabIndex = 1;
+            btnApply.Text = "Apply";
+            btnApply.UseVisualStyleBackColor = true;
+            btnApply.Click += btnApply_Click;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(508, 3);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(70, 29);
-            this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            btnOK.Location = new System.Drawing.Point(508, 3);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new System.Drawing.Size(70, 29);
+            btnOK.TabIndex = 2;
+            btnOK.Text = "OK";
+            btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
             // compositeTooltip
             // 
-            this.compositeTooltip.AutomaticDelay = 250;
-            this.compositeTooltip.AutoPopDelay = 10000;
-            this.compositeTooltip.InitialDelay = 250;
-            this.compositeTooltip.ReshowDelay = 50;
+            compositeTooltip.AutomaticDelay = 250;
+            compositeTooltip.AutoPopDelay = 10000;
+            compositeTooltip.InitialDelay = 250;
+            compositeTooltip.ReshowDelay = 50;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 100);
-            this.tableLayoutPanel4.TabIndex = 0;
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel4.Controls.Add(button1, 0, 1);
+            tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.Size = new System.Drawing.Size(200, 100);
+            tableLayoutPanel4.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(4, 3);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(192, 27);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Delete Selected Contraction";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new System.Drawing.Point(4, 3);
+            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(192, 27);
+            button1.TabIndex = 1;
+            button1.Text = "Delete Selected Contraction";
+            button1.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 3);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(192, 290);
-            this.dataGridView1.TabIndex = 2;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2 });
+            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView1.Location = new System.Drawing.Point(4, 3);
+            dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new System.Drawing.Size(192, 290);
+            dataGridView1.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "String";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.HeaderText = "String";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Spoken";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.HeaderText = "Spoken";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // ProfileConfigurationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 461);
-            this.ControlBox = false;
-            this.Controls.Add(this.TlpMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ProfileConfigurationForm";
-            this.Padding = new System.Windows.Forms.Padding(15);
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Profile Configuration";
-            this.TlpMain.ResumeLayout(false);
-            this.TlpMain.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.mainTabControl.ResumeLayout(false);
-            this.pageGen.ResumeLayout(false);
-            this.pageGen.PerformLayout();
-            this.groupVoiceOption.ResumeLayout(false);
-            this.groupVoiceOption.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.pageFormatting.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabObservationTime.ResumeLayout(false);
-            this.tabObservationTime.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.standardObservationTime)).EndInit();
-            this.tabSurfaceWind.ResumeLayout(false);
-            this.tabSurfaceWind.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.magneticVar)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.windStandard.ResumeLayout(false);
-            this.windStandardGust.ResumeLayout(false);
-            this.windVariable.ResumeLayout(false);
-            this.windVariableGust.ResumeLayout(false);
-            this.windVariableDirection.ResumeLayout(false);
-            this.windCalm.ResumeLayout(false);
-            this.windCalm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.calmWindSpeed)).EndInit();
-            this.tabVisibility.ResumeLayout(false);
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.visibilityMetersCutoff)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPresentWeather.ResumeLayout(false);
-            this.tabControl4.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridWeatherTypes)).EndInit();
-            this.tabPage10.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridWeatherDescriptors)).EndInit();
-            this.tabClouds.ResumeLayout(false);
-            this.tabControl5.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridCloudTypes)).EndInit();
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridConvectiveCloudTypes)).EndInit();
-            this.tabTemperature.ResumeLayout(false);
-            this.tabTemperature.PerformLayout();
-            this.tabDewpoint.ResumeLayout(false);
-            this.tabDewpoint.PerformLayout();
-            this.tabAltimeter.ResumeLayout(false);
-            this.tabClosing.ResumeLayout(false);
-            this.tabClosing.PerformLayout();
-            this.pagePresets.ResumeLayout(false);
-            this.pagePresets.PerformLayout();
-            this.pageContractions.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridContractions)).EndInit();
-            this.pageTransitionLevel.ResumeLayout(false);
-            this.pageTransitionLevel.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridTransitionLevels)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.ctxOptions.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panelCompositeList.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(984, 461);
+            ControlBox = false;
+            Controls.Add(TlpMain);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ProfileConfigurationForm";
+            Padding = new System.Windows.Forms.Padding(15);
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "Profile Configuration";
+            TlpMain.ResumeLayout(false);
+            TlpMain.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            mainTabControl.ResumeLayout(false);
+            pageGen.ResumeLayout(false);
+            pageGen.PerformLayout();
+            groupVoiceOption.ResumeLayout(false);
+            groupVoiceOption.PerformLayout();
+            flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel2.PerformLayout();
+            pageFormatting.ResumeLayout(false);
+            tabControl2.ResumeLayout(false);
+            tabObservationTime.ResumeLayout(false);
+            tabObservationTime.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)standardObservationTime).EndInit();
+            tabSurfaceWind.ResumeLayout(false);
+            tabSurfaceWind.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)magneticVar).EndInit();
+            tabControl1.ResumeLayout(false);
+            windStandard.ResumeLayout(false);
+            windStandardGust.ResumeLayout(false);
+            windVariable.ResumeLayout(false);
+            windVariableGust.ResumeLayout(false);
+            windVariableDirection.ResumeLayout(false);
+            windCalm.ResumeLayout(false);
+            windCalm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)calmWindSpeed).EndInit();
+            tabVisibility.ResumeLayout(false);
+            tabControl3.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)visibilityMetersCutoff).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            tabPresentWeather.ResumeLayout(false);
+            tabControl4.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage11.ResumeLayout(false);
+            tabPage11.PerformLayout();
+            tabPage9.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridWeatherTypes).EndInit();
+            tabPage10.ResumeLayout(false);
+            tableLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridWeatherDescriptors).EndInit();
+            tabClouds.ResumeLayout(false);
+            tabControl5.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            tabPage6.ResumeLayout(false);
+            tableLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridCloudTypes).EndInit();
+            tableLayoutPanel9.ResumeLayout(false);
+            tableLayoutPanel9.PerformLayout();
+            tabPage7.ResumeLayout(false);
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridConvectiveCloudTypes).EndInit();
+            tabTemperature.ResumeLayout(false);
+            tabTemperature.PerformLayout();
+            tabDewpoint.ResumeLayout(false);
+            tabDewpoint.PerformLayout();
+            tabAltimeter.ResumeLayout(false);
+            tabClosing.ResumeLayout(false);
+            tabClosing.PerformLayout();
+            pagePresets.ResumeLayout(false);
+            pagePresets.PerformLayout();
+            pageContractions.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridContractions).EndInit();
+            pageTransitionLevel.ResumeLayout(false);
+            pageTransitionLevel.PerformLayout();
+            tableLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ctxOptions.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panelCompositeList.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -2882,7 +2808,7 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TextBox visDirNorth;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox visUnlimited;
+        private System.Windows.Forms.TextBox txtVis9999Voice;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown visibilityMetersCutoff;
         private System.Windows.Forms.Label label6;
@@ -2946,5 +2872,7 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkNotamPrefix;
         private System.Windows.Forms.NumericUpDown magneticVar;
         private System.Windows.Forms.CheckBox chkMagneticVar;
+        private System.Windows.Forms.TextBox txtVis9999Text;
+        private System.Windows.Forms.Label label25;
     }
 }

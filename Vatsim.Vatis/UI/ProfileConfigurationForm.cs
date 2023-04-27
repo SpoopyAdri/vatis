@@ -341,7 +341,8 @@ public partial class ProfileConfigurationForm : Form
         visDirSouthWest.Text = mCurrentComposite.AtisFormat.Visibility.SouthWest;
         visDirWest.Text = mCurrentComposite.AtisFormat.Visibility.West;
         visDirNorthWest.Text = mCurrentComposite.AtisFormat.Visibility.NorthWest;
-        visUnlimited.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibility;
+        txtVis9999Voice.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityVoice;
+        txtVis9999Text.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityText;
 
         gridWeatherTypes.Rows.Clear();
         if (mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes != null)
@@ -792,7 +793,8 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.AtisFormat.Visibility.SouthWest = visDirSouthWest.Text;
         mCurrentComposite.AtisFormat.Visibility.West = visDirWest.Text;
         mCurrentComposite.AtisFormat.Visibility.NorthWest = visDirNorthWest.Text;
-        mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibility = visUnlimited.Text;
+        mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityVoice = txtVis9999Voice.Text;
+        mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityText = txtVis9999Text.Text;
         mCurrentComposite.AtisFormat.Visibility.MetersCutoff = (int)visibilityMetersCutoff.Value;
 
         List<string> usedContractions = new();
