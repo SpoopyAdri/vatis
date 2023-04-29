@@ -31,63 +31,63 @@ namespace Vatsim.Vatis.UI
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Variable variable115 = new Variable();
-            Variable variable116 = new Variable();
-            Variable variable117 = new Variable();
-            Variable variable118 = new Variable();
-            Variable variable119 = new Variable();
-            Variable variable120 = new Variable();
-            Variable variable121 = new Variable();
-            Variable variable122 = new Variable();
-            Variable variable123 = new Variable();
-            Variable variable124 = new Variable();
-            Variable variable125 = new Variable();
-            Variable variable126 = new Variable();
-            Variable variable127 = new Variable();
-            Variable variable128 = new Variable();
-            Variable variable129 = new Variable();
-            Variable variable130 = new Variable();
-            Variable variable131 = new Variable();
-            Variable variable132 = new Variable();
-            Variable variable133 = new Variable();
-            Variable variable134 = new Variable();
-            Variable variable135 = new Variable();
-            Variable variable136 = new Variable();
-            Variable variable137 = new Variable();
-            Variable variable138 = new Variable();
-            Variable variable139 = new Variable();
-            Variable variable140 = new Variable();
-            Variable variable141 = new Variable();
-            Variable variable142 = new Variable();
-            Variable variable143 = new Variable();
-            Variable variable144 = new Variable();
-            Variable variable145 = new Variable();
-            Variable variable146 = new Variable();
-            Variable variable147 = new Variable();
-            Variable variable148 = new Variable();
-            Variable variable149 = new Variable();
-            Variable variable150 = new Variable();
-            Variable variable151 = new Variable();
-            Variable variable152 = new Variable();
-            Variable variable153 = new Variable();
-            Variable variable154 = new Variable();
-            Variable variable155 = new Variable();
-            Variable variable156 = new Variable();
-            Variable variable157 = new Variable();
-            Variable variable158 = new Variable();
-            Variable variable159 = new Variable();
-            Variable variable160 = new Variable();
-            Variable variable161 = new Variable();
-            Variable variable162 = new Variable();
-            Variable variable163 = new Variable();
-            Variable variable164 = new Variable();
-            Variable variable165 = new Variable();
-            Variable variable166 = new Variable();
-            Variable variable167 = new Variable();
-            Variable variable168 = new Variable();
-            Variable variable169 = new Variable();
-            Variable variable170 = new Variable();
-            Variable variable171 = new Variable();
+            Variable variable1 = new Variable();
+            Variable variable2 = new Variable();
+            Variable variable3 = new Variable();
+            Variable variable4 = new Variable();
+            Variable variable5 = new Variable();
+            Variable variable6 = new Variable();
+            Variable variable7 = new Variable();
+            Variable variable8 = new Variable();
+            Variable variable9 = new Variable();
+            Variable variable10 = new Variable();
+            Variable variable11 = new Variable();
+            Variable variable12 = new Variable();
+            Variable variable13 = new Variable();
+            Variable variable14 = new Variable();
+            Variable variable15 = new Variable();
+            Variable variable16 = new Variable();
+            Variable variable17 = new Variable();
+            Variable variable18 = new Variable();
+            Variable variable19 = new Variable();
+            Variable variable20 = new Variable();
+            Variable variable21 = new Variable();
+            Variable variable22 = new Variable();
+            Variable variable23 = new Variable();
+            Variable variable24 = new Variable();
+            Variable variable25 = new Variable();
+            Variable variable26 = new Variable();
+            Variable variable27 = new Variable();
+            Variable variable28 = new Variable();
+            Variable variable29 = new Variable();
+            Variable variable30 = new Variable();
+            Variable variable31 = new Variable();
+            Variable variable32 = new Variable();
+            Variable variable33 = new Variable();
+            Variable variable34 = new Variable();
+            Variable variable35 = new Variable();
+            Variable variable36 = new Variable();
+            Variable variable37 = new Variable();
+            Variable variable38 = new Variable();
+            Variable variable39 = new Variable();
+            Variable variable40 = new Variable();
+            Variable variable41 = new Variable();
+            Variable variable42 = new Variable();
+            Variable variable43 = new Variable();
+            Variable variable44 = new Variable();
+            Variable variable45 = new Variable();
+            Variable variable46 = new Variable();
+            Variable variable47 = new Variable();
+            Variable variable48 = new Variable();
+            Variable variable49 = new Variable();
+            Variable variable50 = new Variable();
+            Variable variable51 = new Variable();
+            Variable variable52 = new Variable();
+            Variable variable53 = new Variable();
+            Variable variable54 = new Variable();
+            Variable variable55 = new Variable();
+            Variable variable56 = new Variable();
+            Variable variable57 = new Variable();
             TlpMain = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             mainTabControl = new System.Windows.Forms.TabControl();
@@ -666,18 +666,18 @@ namespace Vatsim.Vatis.UI
             templateObservationTime.Size = new System.Drawing.Size(615, 190);
             templateObservationTime.TabIndex = 18;
             templateObservationTime.TextTemplate = "";
-            variable115.Text = "time";
-            variable115.ToolTip = "The METAR observation time (e.g. \"0153\").";
-            variable116.Text = "hour";
-            variable116.ToolTip = "The hour portion of the METAR observation time (e.g \"01\").";
-            variable117.Text = "minute";
-            variable117.ToolTip = "The minute portion of the METAR observation time (e.g. \"53\").";
-            variable118.Text = "special";
-            variable118.ToolTip = "Inserts the word \"SPECIAL\" if the METAR observation time is different than the routine observation time.";
-            templateObservationTime.Variables.Add(variable115);
-            templateObservationTime.Variables.Add(variable116);
-            templateObservationTime.Variables.Add(variable117);
-            templateObservationTime.Variables.Add(variable118);
+            variable1.Text = "time";
+            variable1.ToolTip = "The METAR observation time (e.g. \"0153\").";
+            variable2.Text = "hour";
+            variable2.ToolTip = "The hour portion of the METAR observation time (e.g \"01\").";
+            variable3.Text = "minute";
+            variable3.ToolTip = "The minute portion of the METAR observation time (e.g. \"53\").";
+            variable4.Text = "special";
+            variable4.ToolTip = "Inserts the word \"SPECIAL\" if the METAR observation time is different than the routine observation time.";
+            templateObservationTime.Variables.Add(variable1);
+            templateObservationTime.Variables.Add(variable2);
+            templateObservationTime.Variables.Add(variable3);
+            templateObservationTime.Variables.Add(variable4);
             templateObservationTime.VoiceTemplate = "";
             templateObservationTime.TextTemplateChanged += OnTextTemplateChanged;
             templateObservationTime.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -712,7 +712,7 @@ namespace Vatsim.Vatis.UI
             tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
             tabSurfaceWind.Name = "tabSurfaceWind";
             tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
-            tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
+            tabSurfaceWind.Size = new System.Drawing.Size(706, 310);
             tabSurfaceWind.TabIndex = 1;
             tabSurfaceWind.Text = "Surface Wind";
             tabSurfaceWind.UseVisualStyleBackColor = true;
@@ -764,10 +764,10 @@ namespace Vatsim.Vatis.UI
             tabControl1.Controls.Add(windVariableDirection);
             tabControl1.Controls.Add(windCalm);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tabControl1.Location = new System.Drawing.Point(12, -195);
+            tabControl1.Location = new System.Drawing.Point(12, 43);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(168, 255);
+            tabControl1.Size = new System.Drawing.Size(682, 255);
             tabControl1.TabIndex = 2;
             // 
             // windStandard
@@ -776,40 +776,40 @@ namespace Vatsim.Vatis.UI
             windStandard.Location = new System.Drawing.Point(4, 24);
             windStandard.Name = "windStandard";
             windStandard.Padding = new System.Windows.Forms.Padding(3);
-            windStandard.Size = new System.Drawing.Size(160, 227);
+            windStandard.Size = new System.Drawing.Size(674, 227);
             windStandard.TabIndex = 0;
             windStandard.Text = "Standard";
             windStandard.UseVisualStyleBackColor = true;
             // 
             // templateWindStandard
             // 
-            templateWindStandard.Location = new System.Drawing.Point(16, 18);
+            templateWindStandard.Location = new System.Drawing.Point(30, 16);
             templateWindStandard.Name = "templateWindStandard";
             templateWindStandard.NodeType = "SurfaceWind.Standard";
             templateWindStandard.Size = new System.Drawing.Size(615, 195);
             templateWindStandard.TabIndex = 19;
             templateWindStandard.TextTemplate = "";
-            variable119.Text = "wind";
-            variable119.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable120.Text = "wind_dir";
-            variable120.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable121.Text = "wind_spd";
-            variable121.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable122.Text = "wind_gust";
-            variable122.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable123.Text = "wind_vmin";
-            variable123.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable124.Text = "wind_vmax";
-            variable124.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable125.Text = "wind_unit";
-            variable125.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindStandard.Variables.Add(variable119);
-            templateWindStandard.Variables.Add(variable120);
-            templateWindStandard.Variables.Add(variable121);
-            templateWindStandard.Variables.Add(variable122);
-            templateWindStandard.Variables.Add(variable123);
-            templateWindStandard.Variables.Add(variable124);
-            templateWindStandard.Variables.Add(variable125);
+            variable5.Text = "wind";
+            variable5.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable6.Text = "wind_dir";
+            variable6.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable7.Text = "wind_spd";
+            variable7.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable8.Text = "wind_gust";
+            variable8.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable9.Text = "wind_vmin";
+            variable9.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable10.Text = "wind_vmax";
+            variable10.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable11.Text = "wind_unit";
+            variable11.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindStandard.Variables.Add(variable5);
+            templateWindStandard.Variables.Add(variable6);
+            templateWindStandard.Variables.Add(variable7);
+            templateWindStandard.Variables.Add(variable8);
+            templateWindStandard.Variables.Add(variable9);
+            templateWindStandard.Variables.Add(variable10);
+            templateWindStandard.Variables.Add(variable11);
             templateWindStandard.VoiceTemplate = "";
             templateWindStandard.TextTemplateChanged += OnTextTemplateChanged;
             templateWindStandard.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -820,40 +820,40 @@ namespace Vatsim.Vatis.UI
             windStandardGust.Location = new System.Drawing.Point(4, 24);
             windStandardGust.Name = "windStandardGust";
             windStandardGust.Padding = new System.Windows.Forms.Padding(3);
-            windStandardGust.Size = new System.Drawing.Size(192, 72);
+            windStandardGust.Size = new System.Drawing.Size(674, 227);
             windStandardGust.TabIndex = 1;
             windStandardGust.Text = "Standard Gust";
             windStandardGust.UseVisualStyleBackColor = true;
             // 
             // templateWindStanardGust
             // 
-            templateWindStanardGust.Location = new System.Drawing.Point(16, 18);
+            templateWindStanardGust.Location = new System.Drawing.Point(30, 16);
             templateWindStanardGust.Name = "templateWindStanardGust";
             templateWindStanardGust.NodeType = "SurfaceWind.StandardGust";
             templateWindStanardGust.Size = new System.Drawing.Size(615, 195);
             templateWindStanardGust.TabIndex = 20;
             templateWindStanardGust.TextTemplate = "";
-            variable126.Text = "wind";
-            variable126.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable127.Text = "wind_dir";
-            variable127.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable128.Text = "wind_spd";
-            variable128.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable129.Text = "wind_gust";
-            variable129.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable130.Text = "wind_vmin";
-            variable130.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable131.Text = "wind_vmax";
-            variable131.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable132.Text = "wind_unit";
-            variable132.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindStanardGust.Variables.Add(variable126);
-            templateWindStanardGust.Variables.Add(variable127);
-            templateWindStanardGust.Variables.Add(variable128);
-            templateWindStanardGust.Variables.Add(variable129);
-            templateWindStanardGust.Variables.Add(variable130);
-            templateWindStanardGust.Variables.Add(variable131);
-            templateWindStanardGust.Variables.Add(variable132);
+            variable12.Text = "wind";
+            variable12.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable13.Text = "wind_dir";
+            variable13.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable14.Text = "wind_spd";
+            variable14.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable15.Text = "wind_gust";
+            variable15.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable16.Text = "wind_vmin";
+            variable16.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable17.Text = "wind_vmax";
+            variable17.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable18.Text = "wind_unit";
+            variable18.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindStanardGust.Variables.Add(variable12);
+            templateWindStanardGust.Variables.Add(variable13);
+            templateWindStanardGust.Variables.Add(variable14);
+            templateWindStanardGust.Variables.Add(variable15);
+            templateWindStanardGust.Variables.Add(variable16);
+            templateWindStanardGust.Variables.Add(variable17);
+            templateWindStanardGust.Variables.Add(variable18);
             templateWindStanardGust.VoiceTemplate = "";
             templateWindStanardGust.TextTemplateChanged += OnTextTemplateChanged;
             templateWindStanardGust.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -863,40 +863,40 @@ namespace Vatsim.Vatis.UI
             windVariable.Controls.Add(templateWindVariable);
             windVariable.Location = new System.Drawing.Point(4, 24);
             windVariable.Name = "windVariable";
-            windVariable.Size = new System.Drawing.Size(192, 72);
+            windVariable.Size = new System.Drawing.Size(674, 227);
             windVariable.TabIndex = 2;
             windVariable.Text = "Variable";
             windVariable.UseVisualStyleBackColor = true;
             // 
             // templateWindVariable
             // 
-            templateWindVariable.Location = new System.Drawing.Point(16, 18);
+            templateWindVariable.Location = new System.Drawing.Point(30, 16);
             templateWindVariable.Name = "templateWindVariable";
             templateWindVariable.NodeType = "SurfaceWind.Variable";
             templateWindVariable.Size = new System.Drawing.Size(615, 195);
             templateWindVariable.TabIndex = 20;
             templateWindVariable.TextTemplate = "";
-            variable133.Text = "wind";
-            variable133.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable134.Text = "wind_dir";
-            variable134.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable135.Text = "wind_spd";
-            variable135.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable136.Text = "wind_gust";
-            variable136.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable137.Text = "wind_vmin";
-            variable137.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable138.Text = "wind_vmax";
-            variable138.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable139.Text = "wind_unit";
-            variable139.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindVariable.Variables.Add(variable133);
-            templateWindVariable.Variables.Add(variable134);
-            templateWindVariable.Variables.Add(variable135);
-            templateWindVariable.Variables.Add(variable136);
-            templateWindVariable.Variables.Add(variable137);
-            templateWindVariable.Variables.Add(variable138);
-            templateWindVariable.Variables.Add(variable139);
+            variable19.Text = "wind";
+            variable19.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable20.Text = "wind_dir";
+            variable20.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable21.Text = "wind_spd";
+            variable21.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable22.Text = "wind_gust";
+            variable22.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable23.Text = "wind_vmin";
+            variable23.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable24.Text = "wind_vmax";
+            variable24.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable25.Text = "wind_unit";
+            variable25.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariable.Variables.Add(variable19);
+            templateWindVariable.Variables.Add(variable20);
+            templateWindVariable.Variables.Add(variable21);
+            templateWindVariable.Variables.Add(variable22);
+            templateWindVariable.Variables.Add(variable23);
+            templateWindVariable.Variables.Add(variable24);
+            templateWindVariable.Variables.Add(variable25);
             templateWindVariable.VoiceTemplate = "";
             templateWindVariable.TextTemplateChanged += OnTextTemplateChanged;
             templateWindVariable.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -906,40 +906,40 @@ namespace Vatsim.Vatis.UI
             windVariableGust.Controls.Add(templateWindVariableGust);
             windVariableGust.Location = new System.Drawing.Point(4, 24);
             windVariableGust.Name = "windVariableGust";
-            windVariableGust.Size = new System.Drawing.Size(192, 72);
+            windVariableGust.Size = new System.Drawing.Size(674, 227);
             windVariableGust.TabIndex = 3;
             windVariableGust.Text = "Variable Gust";
             windVariableGust.UseVisualStyleBackColor = true;
             // 
             // templateWindVariableGust
             // 
-            templateWindVariableGust.Location = new System.Drawing.Point(16, 18);
+            templateWindVariableGust.Location = new System.Drawing.Point(30, 16);
             templateWindVariableGust.Name = "templateWindVariableGust";
             templateWindVariableGust.NodeType = "SurfaceWind.VariableGust";
             templateWindVariableGust.Size = new System.Drawing.Size(615, 195);
             templateWindVariableGust.TabIndex = 20;
             templateWindVariableGust.TextTemplate = "";
-            variable140.Text = "wind";
-            variable140.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable141.Text = "wind_dir";
-            variable141.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable142.Text = "wind_spd";
-            variable142.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable143.Text = "wind_gust";
-            variable143.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable144.Text = "wind_vmin";
-            variable144.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable145.Text = "wind_vmax";
-            variable145.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable146.Text = "wind_unit";
-            variable146.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindVariableGust.Variables.Add(variable140);
-            templateWindVariableGust.Variables.Add(variable141);
-            templateWindVariableGust.Variables.Add(variable142);
-            templateWindVariableGust.Variables.Add(variable143);
-            templateWindVariableGust.Variables.Add(variable144);
-            templateWindVariableGust.Variables.Add(variable145);
-            templateWindVariableGust.Variables.Add(variable146);
+            variable26.Text = "wind";
+            variable26.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable27.Text = "wind_dir";
+            variable27.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable28.Text = "wind_spd";
+            variable28.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable29.Text = "wind_gust";
+            variable29.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable30.Text = "wind_vmin";
+            variable30.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable31.Text = "wind_vmax";
+            variable31.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable32.Text = "wind_unit";
+            variable32.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariableGust.Variables.Add(variable26);
+            templateWindVariableGust.Variables.Add(variable27);
+            templateWindVariableGust.Variables.Add(variable28);
+            templateWindVariableGust.Variables.Add(variable29);
+            templateWindVariableGust.Variables.Add(variable30);
+            templateWindVariableGust.Variables.Add(variable31);
+            templateWindVariableGust.Variables.Add(variable32);
             templateWindVariableGust.VoiceTemplate = "";
             templateWindVariableGust.TextTemplateChanged += OnTextTemplateChanged;
             templateWindVariableGust.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -949,40 +949,40 @@ namespace Vatsim.Vatis.UI
             windVariableDirection.Controls.Add(templateWindVariableDirection);
             windVariableDirection.Location = new System.Drawing.Point(4, 24);
             windVariableDirection.Name = "windVariableDirection";
-            windVariableDirection.Size = new System.Drawing.Size(192, 72);
+            windVariableDirection.Size = new System.Drawing.Size(674, 227);
             windVariableDirection.TabIndex = 4;
             windVariableDirection.Text = "Variable Direction";
             windVariableDirection.UseVisualStyleBackColor = true;
             // 
             // templateWindVariableDirection
             // 
-            templateWindVariableDirection.Location = new System.Drawing.Point(16, 18);
+            templateWindVariableDirection.Location = new System.Drawing.Point(30, 16);
             templateWindVariableDirection.Name = "templateWindVariableDirection";
             templateWindVariableDirection.NodeType = "SurfaceWind.VariableDirection";
             templateWindVariableDirection.Size = new System.Drawing.Size(615, 195);
             templateWindVariableDirection.TabIndex = 20;
             templateWindVariableDirection.TextTemplate = "";
-            variable147.Text = "wind";
-            variable147.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable148.Text = "wind_dir";
-            variable148.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable149.Text = "wind_spd";
-            variable149.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable150.Text = "wind_gust";
-            variable150.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable151.Text = "wind_vmin";
-            variable151.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable152.Text = "wind_vmax";
-            variable152.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable153.Text = "wind_unit";
-            variable153.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindVariableDirection.Variables.Add(variable147);
-            templateWindVariableDirection.Variables.Add(variable148);
-            templateWindVariableDirection.Variables.Add(variable149);
-            templateWindVariableDirection.Variables.Add(variable150);
-            templateWindVariableDirection.Variables.Add(variable151);
-            templateWindVariableDirection.Variables.Add(variable152);
-            templateWindVariableDirection.Variables.Add(variable153);
+            variable33.Text = "wind";
+            variable33.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable34.Text = "wind_dir";
+            variable34.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable35.Text = "wind_spd";
+            variable35.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable36.Text = "wind_gust";
+            variable36.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable37.Text = "wind_vmin";
+            variable37.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable38.Text = "wind_vmax";
+            variable38.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable39.Text = "wind_unit";
+            variable39.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindVariableDirection.Variables.Add(variable33);
+            templateWindVariableDirection.Variables.Add(variable34);
+            templateWindVariableDirection.Variables.Add(variable35);
+            templateWindVariableDirection.Variables.Add(variable36);
+            templateWindVariableDirection.Variables.Add(variable37);
+            templateWindVariableDirection.Variables.Add(variable38);
+            templateWindVariableDirection.Variables.Add(variable39);
             templateWindVariableDirection.VoiceTemplate = "";
             templateWindVariableDirection.TextTemplateChanged += OnTextTemplateChanged;
             templateWindVariableDirection.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -994,40 +994,40 @@ namespace Vatsim.Vatis.UI
             windCalm.Controls.Add(label16);
             windCalm.Location = new System.Drawing.Point(4, 24);
             windCalm.Name = "windCalm";
-            windCalm.Size = new System.Drawing.Size(192, 72);
+            windCalm.Size = new System.Drawing.Size(674, 227);
             windCalm.TabIndex = 5;
             windCalm.Text = "Calm";
             windCalm.UseVisualStyleBackColor = true;
             // 
             // templateWindCalm
             // 
-            templateWindCalm.Location = new System.Drawing.Point(16, 34);
+            templateWindCalm.Location = new System.Drawing.Point(30, 32);
             templateWindCalm.Name = "templateWindCalm";
             templateWindCalm.NodeType = "SurfaceWind.Calm";
             templateWindCalm.Size = new System.Drawing.Size(615, 185);
             templateWindCalm.TabIndex = 20;
             templateWindCalm.TextTemplate = "";
-            variable154.Text = "wind";
-            variable154.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
-            variable155.Text = "wind_dir";
-            variable155.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
-            variable156.Text = "wind_spd";
-            variable156.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
-            variable157.Text = "wind_gust";
-            variable157.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
-            variable158.Text = "wind_vmin";
-            variable158.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
-            variable159.Text = "wind_vmax";
-            variable159.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
-            variable160.Text = "wind_unit";
-            variable160.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
-            templateWindCalm.Variables.Add(variable154);
-            templateWindCalm.Variables.Add(variable155);
-            templateWindCalm.Variables.Add(variable156);
-            templateWindCalm.Variables.Add(variable157);
-            templateWindCalm.Variables.Add(variable158);
-            templateWindCalm.Variables.Add(variable159);
-            templateWindCalm.Variables.Add(variable160);
+            variable40.Text = "wind";
+            variable40.ToolTip = "The complete wind string (e.g. \"25010KT\"). Only available as a text variable.";
+            variable41.Text = "wind_dir";
+            variable41.ToolTip = "The direction of the wind (e.g. \"25010KT\" would yield \"250\"). Magnetic variation is applied.";
+            variable42.Text = "wind_spd";
+            variable42.ToolTip = "The speed of the wind (e.g. \"25010KT\" would yield \"10\"). The value can optionally be converted to another unit using \"{wind_spd|kt}\" or \"{wind_spd|mps}\".";
+            variable43.Text = "wind_gust";
+            variable43.ToolTip = "The gust speed of the wind (e.g. \"25010G15KT\" would yield \"15\"). The value can optionally be converted to another unit using \"{wind_gust|kt}\" or \"{wind_gust|mps}\".";
+            variable44.Text = "wind_vmin";
+            variable44.ToolTip = "The first extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"250\"). Magnetic variation is applied.";
+            variable45.Text = "wind_vmax";
+            variable45.ToolTip = "The last extreme wind direction (e.g. \"25015G25KT 250V280\" would yield \"280\"). Magnetic variation is applied.";
+            variable46.Text = "wind_unit";
+            variable46.ToolTip = "The wind speed unit of measurement (e.g. \"25010KT\" would yield \"KT\" and the spoken value would be \"knots\"). ";
+            templateWindCalm.Variables.Add(variable40);
+            templateWindCalm.Variables.Add(variable41);
+            templateWindCalm.Variables.Add(variable42);
+            templateWindCalm.Variables.Add(variable43);
+            templateWindCalm.Variables.Add(variable44);
+            templateWindCalm.Variables.Add(variable45);
+            templateWindCalm.Variables.Add(variable46);
             templateWindCalm.VoiceTemplate = "";
             templateWindCalm.TextTemplateChanged += OnTextTemplateChanged;
             templateWindCalm.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1046,7 +1046,7 @@ namespace Vatsim.Vatis.UI
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(16, 12);
+            label16.Location = new System.Drawing.Point(30, 10);
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(104, 15);
             label16.TabIndex = 17;
@@ -1059,7 +1059,7 @@ namespace Vatsim.Vatis.UI
             tabVisibility.Location = new System.Drawing.Point(4, 24);
             tabVisibility.Name = "tabVisibility";
             tabVisibility.Padding = new System.Windows.Forms.Padding(12);
-            tabVisibility.Size = new System.Drawing.Size(192, 72);
+            tabVisibility.Size = new System.Drawing.Size(706, 310);
             tabVisibility.TabIndex = 2;
             tabVisibility.Text = "Visibility";
             tabVisibility.UseVisualStyleBackColor = true;
@@ -1072,7 +1072,7 @@ namespace Vatsim.Vatis.UI
             tabControl3.Location = new System.Drawing.Point(12, 12);
             tabControl3.Name = "tabControl3";
             tabControl3.SelectedIndex = 0;
-            tabControl3.Size = new System.Drawing.Size(168, 48);
+            tabControl3.Size = new System.Drawing.Size(682, 286);
             tabControl3.TabIndex = 20;
             // 
             // tabPage1
@@ -1081,22 +1081,22 @@ namespace Vatsim.Vatis.UI
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(160, 20);
+            tabPage1.Size = new System.Drawing.Size(674, 258);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Template";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // templateVisibility
             // 
-            templateVisibility.Location = new System.Drawing.Point(16, 34);
+            templateVisibility.Location = new System.Drawing.Point(30, 34);
             templateVisibility.Name = "templateVisibility";
             templateVisibility.NodeType = "Visibility";
             templateVisibility.Size = new System.Drawing.Size(615, 190);
             templateVisibility.TabIndex = 19;
             templateVisibility.TextTemplate = "";
-            variable161.Text = "visibility";
-            variable161.ToolTip = "The prevailing visibility (e.g. \"5SM\" or \"5000\")";
-            templateVisibility.Variables.Add(variable161);
+            variable47.Text = "visibility";
+            variable47.ToolTip = "The prevailing visibility (e.g. \"5SM\" or \"5000\")";
+            templateVisibility.Variables.Add(variable47);
             templateVisibility.VoiceTemplate = "";
             templateVisibility.TextTemplateChanged += OnTextTemplateChanged;
             templateVisibility.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1114,7 +1114,7 @@ namespace Vatsim.Vatis.UI
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(12);
-            tabPage2.Size = new System.Drawing.Size(192, 72);
+            tabPage2.Size = new System.Drawing.Size(674, 258);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "ICAO Formatting";
             tabPage2.UseVisualStyleBackColor = true;
@@ -1385,15 +1385,15 @@ namespace Vatsim.Vatis.UI
             // 
             // templatePresentWeather
             // 
-            templatePresentWeather.Location = new System.Drawing.Point(16, 39);
+            templatePresentWeather.Location = new System.Drawing.Point(30, 39);
             templatePresentWeather.Name = "templatePresentWeather";
             templatePresentWeather.NodeType = "PresentWeather";
             templatePresentWeather.Size = new System.Drawing.Size(615, 180);
             templatePresentWeather.TabIndex = 19;
             templatePresentWeather.TextTemplate = "";
-            variable162.Text = "weather";
-            variable162.ToolTip = "The present weather groups from the METAR report (e.g. \"SHRA BR\")";
-            templatePresentWeather.Variables.Add(variable162);
+            variable48.Text = "weather";
+            variable48.ToolTip = "The present weather groups from the METAR report (e.g. \"SHRA BR\")";
+            templatePresentWeather.Variables.Add(variable48);
             templatePresentWeather.VoiceTemplate = "";
             templatePresentWeather.TextTemplateChanged += OnTextTemplateChanged;
             templatePresentWeather.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1526,6 +1526,7 @@ namespace Vatsim.Vatis.UI
             gridWeatherTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             gridWeatherTypes.Location = new System.Drawing.Point(4, 3);
             gridWeatherTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridWeatherTypes.MultiSelect = false;
             gridWeatherTypes.Name = "gridWeatherTypes";
             gridWeatherTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridWeatherTypes.RowHeadersVisible = false;
@@ -1541,6 +1542,7 @@ namespace Vatsim.Vatis.UI
             // 
             dataGridViewTextBoxColumn5.HeaderText = "Acronym";
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -1585,6 +1587,7 @@ namespace Vatsim.Vatis.UI
             gridWeatherDescriptors.Dock = System.Windows.Forms.DockStyle.Fill;
             gridWeatherDescriptors.Location = new System.Drawing.Point(4, 3);
             gridWeatherDescriptors.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridWeatherDescriptors.MultiSelect = false;
             gridWeatherDescriptors.Name = "gridWeatherDescriptors";
             gridWeatherDescriptors.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridWeatherDescriptors.RowHeadersVisible = false;
@@ -1600,6 +1603,7 @@ namespace Vatsim.Vatis.UI
             // 
             dataGridViewTextBoxColumn3.HeaderText = "Acronym";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -1645,7 +1649,7 @@ namespace Vatsim.Vatis.UI
             // chkConvertCloudsMetric
             // 
             chkConvertCloudsMetric.AutoSize = true;
-            chkConvertCloudsMetric.Location = new System.Drawing.Point(224, 20);
+            chkConvertCloudsMetric.Location = new System.Drawing.Point(238, 20);
             chkConvertCloudsMetric.Name = "chkConvertCloudsMetric";
             chkConvertCloudsMetric.Size = new System.Drawing.Size(223, 19);
             chkConvertCloudsMetric.TabIndex = 21;
@@ -1657,7 +1661,7 @@ namespace Vatsim.Vatis.UI
             // chkIdentifyCeilingLayer
             // 
             chkIdentifyCeilingLayer.AutoSize = true;
-            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(17, 20);
+            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(31, 20);
             chkIdentifyCeilingLayer.Name = "chkIdentifyCeilingLayer";
             chkIdentifyCeilingLayer.Size = new System.Drawing.Size(201, 19);
             chkIdentifyCeilingLayer.TabIndex = 20;
@@ -1668,15 +1672,15 @@ namespace Vatsim.Vatis.UI
             // 
             // templateCloudLayers
             // 
-            templateCloudLayers.Location = new System.Drawing.Point(16, 59);
+            templateCloudLayers.Location = new System.Drawing.Point(30, 59);
             templateCloudLayers.Name = "templateCloudLayers";
             templateCloudLayers.NodeType = "Clouds";
             templateCloudLayers.Size = new System.Drawing.Size(615, 180);
             templateCloudLayers.TabIndex = 19;
             templateCloudLayers.TextTemplate = "";
-            variable163.Text = "clouds";
-            variable163.ToolTip = "The cloud layer groups from the METAR report (e.g. \"SCT150 FEW200\")";
-            templateCloudLayers.Variables.Add(variable163);
+            variable49.Text = "clouds";
+            variable49.ToolTip = "The cloud layer groups from the METAR report (e.g. \"SCT150 FEW200\")";
+            templateCloudLayers.Variables.Add(variable49);
             templateCloudLayers.VoiceTemplate = "";
             templateCloudLayers.TextTemplateChanged += OnTextTemplateChanged;
             templateCloudLayers.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1687,7 +1691,7 @@ namespace Vatsim.Vatis.UI
             tabPage6.Location = new System.Drawing.Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new System.Windows.Forms.Padding(10);
-            tabPage6.Size = new System.Drawing.Size(192, 72);
+            tabPage6.Size = new System.Drawing.Size(674, 258);
             tabPage6.TabIndex = 1;
             tabPage6.Text = "Cloud Types";
             tabPage6.UseVisualStyleBackColor = true;
@@ -1706,7 +1710,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel7.RowCount = 2;
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel7.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel7.Size = new System.Drawing.Size(654, 238);
             tableLayoutPanel7.TabIndex = 3;
             // 
             // gridCloudTypes
@@ -1721,11 +1725,12 @@ namespace Vatsim.Vatis.UI
             gridCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             gridCloudTypes.Location = new System.Drawing.Point(4, 3);
             gridCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridCloudTypes.MultiSelect = false;
             gridCloudTypes.Name = "gridCloudTypes";
             gridCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridCloudTypes.RowHeadersVisible = false;
             gridCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridCloudTypes.Size = new System.Drawing.Size(164, 11);
+            gridCloudTypes.Size = new System.Drawing.Size(646, 197);
             gridCloudTypes.TabIndex = 2;
             gridCloudTypes.CellEndEdit += gridCloudTypes_CellEndEdit;
             gridCloudTypes.CellValidating += gridCloudTypes_CellValidating;
@@ -1736,6 +1741,7 @@ namespace Vatsim.Vatis.UI
             // 
             dataGridViewTextBoxColumn7.HeaderText = "Acronym";
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -1753,12 +1759,12 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
             tableLayoutPanel9.Controls.Add(label24, 0, 0);
             tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
+            tableLayoutPanel9.Location = new System.Drawing.Point(3, 206);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             tableLayoutPanel9.RowCount = 1;
             tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
+            tableLayoutPanel9.Size = new System.Drawing.Size(648, 29);
             tableLayoutPanel9.TabIndex = 3;
             // 
             // label24
@@ -1768,7 +1774,7 @@ namespace Vatsim.Vatis.UI
             label24.Location = new System.Drawing.Point(0, 0);
             label24.Margin = new System.Windows.Forms.Padding(0);
             label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(166, 29);
+            label24.Size = new System.Drawing.Size(648, 29);
             label24.TabIndex = 2;
             label24.Text = "Available Variables: {altitude} and {convective}";
             label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1812,6 +1818,7 @@ namespace Vatsim.Vatis.UI
             gridConvectiveCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             gridConvectiveCloudTypes.Location = new System.Drawing.Point(4, 3);
             gridConvectiveCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridConvectiveCloudTypes.MultiSelect = false;
             gridConvectiveCloudTypes.Name = "gridConvectiveCloudTypes";
             gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridConvectiveCloudTypes.RowHeadersVisible = false;
@@ -1827,6 +1834,7 @@ namespace Vatsim.Vatis.UI
             // 
             dataGridViewTextBoxColumn9.HeaderText = "Acronym";
             dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -1841,7 +1849,7 @@ namespace Vatsim.Vatis.UI
             tabTemperature.Location = new System.Drawing.Point(4, 24);
             tabTemperature.Name = "tabTemperature";
             tabTemperature.Padding = new System.Windows.Forms.Padding(12);
-            tabTemperature.Size = new System.Drawing.Size(192, 72);
+            tabTemperature.Size = new System.Drawing.Size(706, 310);
             tabTemperature.TabIndex = 5;
             tabTemperature.Text = "Temperature";
             tabTemperature.UseVisualStyleBackColor = true;
@@ -1849,7 +1857,7 @@ namespace Vatsim.Vatis.UI
             // chkTempLeadingZero
             // 
             chkTempLeadingZero.AutoSize = true;
-            chkTempLeadingZero.Location = new System.Drawing.Point(34, 60);
+            chkTempLeadingZero.Location = new System.Drawing.Point(48, 60);
             chkTempLeadingZero.Name = "chkTempLeadingZero";
             chkTempLeadingZero.Size = new System.Drawing.Size(193, 19);
             chkTempLeadingZero.TabIndex = 21;
@@ -1861,7 +1869,7 @@ namespace Vatsim.Vatis.UI
             // chkTempPlusPrefix
             // 
             chkTempPlusPrefix.AutoSize = true;
-            chkTempPlusPrefix.Location = new System.Drawing.Point(34, 28);
+            chkTempPlusPrefix.Location = new System.Drawing.Point(48, 28);
             chkTempPlusPrefix.Name = "chkTempPlusPrefix";
             chkTempPlusPrefix.Size = new System.Drawing.Size(298, 19);
             chkTempPlusPrefix.TabIndex = 20;
@@ -1872,15 +1880,15 @@ namespace Vatsim.Vatis.UI
             // 
             // templateTemperature
             // 
-            templateTemperature.Location = new System.Drawing.Point(32, 92);
+            templateTemperature.Location = new System.Drawing.Point(46, 92);
             templateTemperature.Name = "templateTemperature";
             templateTemperature.NodeType = "Temperature";
             templateTemperature.Size = new System.Drawing.Size(615, 190);
             templateTemperature.TabIndex = 19;
             templateTemperature.TextTemplate = "";
-            variable164.Text = "temp";
-            variable164.ToolTip = "The temperature value from the METAR (e.g. \"05\")";
-            templateTemperature.Variables.Add(variable164);
+            variable50.Text = "temp";
+            variable50.ToolTip = "The temperature value from the METAR (e.g. \"05\")";
+            templateTemperature.Variables.Add(variable50);
             templateTemperature.VoiceTemplate = "";
             templateTemperature.TextTemplateChanged += OnTextTemplateChanged;
             templateTemperature.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1893,7 +1901,7 @@ namespace Vatsim.Vatis.UI
             tabDewpoint.Location = new System.Drawing.Point(4, 24);
             tabDewpoint.Name = "tabDewpoint";
             tabDewpoint.Padding = new System.Windows.Forms.Padding(12);
-            tabDewpoint.Size = new System.Drawing.Size(192, 72);
+            tabDewpoint.Size = new System.Drawing.Size(706, 310);
             tabDewpoint.TabIndex = 6;
             tabDewpoint.Text = "Dewpoint";
             tabDewpoint.UseVisualStyleBackColor = true;
@@ -1901,7 +1909,7 @@ namespace Vatsim.Vatis.UI
             // chkDewLeadingZero
             // 
             chkDewLeadingZero.AutoSize = true;
-            chkDewLeadingZero.Location = new System.Drawing.Point(34, 60);
+            chkDewLeadingZero.Location = new System.Drawing.Point(48, 60);
             chkDewLeadingZero.Name = "chkDewLeadingZero";
             chkDewLeadingZero.Size = new System.Drawing.Size(193, 19);
             chkDewLeadingZero.TabIndex = 24;
@@ -1913,7 +1921,7 @@ namespace Vatsim.Vatis.UI
             // chkDewPlusPrefix
             // 
             chkDewPlusPrefix.AutoSize = true;
-            chkDewPlusPrefix.Location = new System.Drawing.Point(34, 28);
+            chkDewPlusPrefix.Location = new System.Drawing.Point(48, 28);
             chkDewPlusPrefix.Name = "chkDewPlusPrefix";
             chkDewPlusPrefix.Size = new System.Drawing.Size(283, 19);
             chkDewPlusPrefix.TabIndex = 23;
@@ -1924,15 +1932,15 @@ namespace Vatsim.Vatis.UI
             // 
             // templateDewpoint
             // 
-            templateDewpoint.Location = new System.Drawing.Point(32, 92);
+            templateDewpoint.Location = new System.Drawing.Point(46, 92);
             templateDewpoint.Name = "templateDewpoint";
             templateDewpoint.NodeType = "Dewpoint";
             templateDewpoint.Size = new System.Drawing.Size(615, 190);
             templateDewpoint.TabIndex = 22;
             templateDewpoint.TextTemplate = "";
-            variable165.Text = "dewpoint";
-            variable165.ToolTip = "The dewpoint temperature value from the METAR (e.g. \"05\")";
-            templateDewpoint.Variables.Add(variable165);
+            variable51.Text = "dewpoint";
+            variable51.ToolTip = "The dewpoint temperature value from the METAR (e.g. \"05\")";
+            templateDewpoint.Variables.Add(variable51);
             templateDewpoint.VoiceTemplate = "";
             templateDewpoint.TextTemplateChanged += OnTextTemplateChanged;
             templateDewpoint.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1943,31 +1951,31 @@ namespace Vatsim.Vatis.UI
             tabAltimeter.Location = new System.Drawing.Point(4, 24);
             tabAltimeter.Name = "tabAltimeter";
             tabAltimeter.Padding = new System.Windows.Forms.Padding(12);
-            tabAltimeter.Size = new System.Drawing.Size(192, 72);
+            tabAltimeter.Size = new System.Drawing.Size(706, 310);
             tabAltimeter.TabIndex = 7;
             tabAltimeter.Text = "Altimeter";
             tabAltimeter.UseVisualStyleBackColor = true;
             // 
             // templateAltimeter
             // 
-            templateAltimeter.Location = new System.Drawing.Point(32, 60);
+            templateAltimeter.Location = new System.Drawing.Point(46, 60);
             templateAltimeter.Name = "templateAltimeter";
             templateAltimeter.NodeType = "Altimeter";
             templateAltimeter.Size = new System.Drawing.Size(615, 190);
             templateAltimeter.TabIndex = 25;
             templateAltimeter.TextTemplate = "";
-            variable166.Text = "altimeter";
-            variable166.ToolTip = "The altimeter value from the METAR report (e.g. \"2992\" or \"1013\").";
-            variable167.Text = "altimeter|text";
-            variable167.ToolTip = "Encodes the altimeter value into numeric word form (e.g. \"TWO NINER NINER TWO\")";
-            variable168.Text = "altimeter|inhg";
-            variable168.ToolTip = "Encodes the altimeter value to inHg (inches mercury) and includes the decimal point (e.g. Text: \"29.92\", Spoken: \"TWO NINER POINT NINER TWO\")";
-            variable169.Text = "altimeter|hpa";
-            variable169.ToolTip = "Encodes the altimeter value in hPa (hectopascal)";
-            templateAltimeter.Variables.Add(variable166);
-            templateAltimeter.Variables.Add(variable167);
-            templateAltimeter.Variables.Add(variable168);
-            templateAltimeter.Variables.Add(variable169);
+            variable52.Text = "altimeter";
+            variable52.ToolTip = "The altimeter value from the METAR report (e.g. \"2992\" or \"1013\").";
+            variable53.Text = "altimeter|text";
+            variable53.ToolTip = "Encodes the altimeter value into numeric word form (e.g. \"TWO NINER NINER TWO\")";
+            variable54.Text = "altimeter|inhg";
+            variable54.ToolTip = "Encodes the altimeter value to inHg (inches mercury) and includes the decimal point (e.g. Text: \"29.92\", Spoken: \"TWO NINER POINT NINER TWO\")";
+            variable55.Text = "altimeter|hpa";
+            variable55.ToolTip = "Encodes the altimeter value in hPa (hectopascal)";
+            templateAltimeter.Variables.Add(variable52);
+            templateAltimeter.Variables.Add(variable53);
+            templateAltimeter.Variables.Add(variable54);
+            templateAltimeter.Variables.Add(variable55);
             templateAltimeter.VoiceTemplate = "";
             templateAltimeter.TextTemplateChanged += OnTextTemplateChanged;
             templateAltimeter.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -1979,7 +1987,7 @@ namespace Vatsim.Vatis.UI
             tabClosing.Location = new System.Drawing.Point(4, 24);
             tabClosing.Name = "tabClosing";
             tabClosing.Padding = new System.Windows.Forms.Padding(3);
-            tabClosing.Size = new System.Drawing.Size(192, 72);
+            tabClosing.Size = new System.Drawing.Size(706, 310);
             tabClosing.TabIndex = 8;
             tabClosing.Text = "Closing Statement";
             tabClosing.UseVisualStyleBackColor = true;
@@ -1992,12 +2000,12 @@ namespace Vatsim.Vatis.UI
             templateClosingStatement.Size = new System.Drawing.Size(615, 210);
             templateClosingStatement.TabIndex = 1;
             templateClosingStatement.TextTemplate = "";
-            variable170.Text = "letter";
-            variable170.ToolTip = "The current ATIS letter (e.g. \"A\")";
-            variable171.Text = "letter|word";
-            variable171.ToolTip = "The current ATIS letter in word form (e.g. \"ALPHA\")";
-            templateClosingStatement.Variables.Add(variable170);
-            templateClosingStatement.Variables.Add(variable171);
+            variable56.Text = "letter";
+            variable56.ToolTip = "The current ATIS letter (e.g. \"A\")";
+            variable57.Text = "letter|word";
+            variable57.ToolTip = "The current ATIS letter in word form (e.g. \"ALPHA\")";
+            templateClosingStatement.Variables.Add(variable56);
+            templateClosingStatement.Variables.Add(variable57);
             templateClosingStatement.VoiceTemplate = "";
             templateClosingStatement.TextTemplateChanged += OnTextTemplateChanged;
             templateClosingStatement.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -2759,12 +2767,8 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TextBox wxIntensityLight;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridView gridWeatherTypes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.DataGridView gridWeatherDescriptors;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.TabControl tabControl5;
         private System.Windows.Forms.TabPage tabPage4;
         private NodeFormatTemplate templateCloudLayers;
@@ -2774,8 +2778,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.DataGridView gridConvectiveCloudTypes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.CheckBox chkConvertCloudsMetric;
         private System.Windows.Forms.CheckBox chkIdentifyCeilingLayer;
         private System.Windows.Forms.CheckBox chkTempLeadingZero;
@@ -2795,10 +2797,16 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkMagneticVar;
         private System.Windows.Forms.TextBox txtVis9999Text;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
     }
 }

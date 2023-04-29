@@ -811,6 +811,65 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero = chkDewLeadingZero.Checked;
         mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
 
+        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Clear();
+        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
+        {
+            if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+            {
+                var acronymValue = row.Cells[0].Value.ToString();
+                var spokenValue = row.Cells[1].Value.ToString();
+                if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                {
+                    mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Add(acronymValue, spokenValue);
+                }
+            }
+        }
+
+        mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Clear();
+        foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
+        {
+            if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+            {
+                var acronymValue = row.Cells[0].Value.ToString();
+                var spokenValue = row.Cells[1].Value.ToString();
+                if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                {
+                    mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Add(acronymValue, spokenValue);
+                }
+            }
+        }
+
+        mCurrentComposite.AtisFormat.Clouds.Types.Clear();
+        foreach (DataGridViewRow row in gridCloudTypes.Rows)
+        {
+            if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
+            {
+                var acronymValue = row.Cells[0].Value.ToString();
+                var spokenValue = row.Cells[1].Value.ToString();
+                var textValue = row.Cells[2].Value.ToString();
+                if (!string.IsNullOrEmpty(acronymValue)
+                    && !string.IsNullOrEmpty(spokenValue)
+                    && !string.IsNullOrEmpty(textValue))
+                {
+                    mCurrentComposite.AtisFormat.Clouds.Types.Add(acronymValue, new CloudType(textValue, spokenValue));
+                }
+            }
+        }
+
+        mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Clear();
+        foreach (DataGridViewRow row in gridConvectiveCloudTypes.Rows)
+        {
+            if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+            {
+                var acronymValue = row.Cells[0].Value.ToString();
+                var spokenValue = row.Cells[1].Value.ToString();
+                if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
+                {
+                    mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Add(acronymValue, spokenValue);
+                }
+            }
+        }
+
         List<string> usedContractions = new();
         foreach (DataGridViewRow row in gridContractions.Rows)
         {
