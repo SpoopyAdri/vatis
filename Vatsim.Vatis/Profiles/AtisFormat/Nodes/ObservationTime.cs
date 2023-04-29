@@ -1,4 +1,8 @@
-﻿namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using Vatsim.Vatis.Profiles.AtisFormat.Nodes.Converter;
+
+namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
 public class ObservationTime : BaseFormat
 {
     public ObservationTime()
@@ -9,5 +13,7 @@ public class ObservationTime : BaseFormat
             Voice = "{time} ZULU {special}"
         };
     }
-    public int StandardUpdateTime { get; set; }
+
+    [JsonConverter(typeof(ObservationTimeConverter))]
+    public List<int> StandardUpdateTime { get; set; }
 }

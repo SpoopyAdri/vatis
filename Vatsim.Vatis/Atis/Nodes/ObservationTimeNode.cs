@@ -21,8 +21,8 @@ public class ObservationTimeNode : BaseNode<ObservationDayTime>
     {
         var minutes = node.Time.Minutes;
 
-        mIsSpecialAtis = Composite.AtisFormat.ObservationTime != null
-            && Composite.AtisFormat.ObservationTime.StandardUpdateTime != minutes;
+        mIsSpecialAtis = Composite.AtisFormat.ObservationTime.StandardUpdateTime != null
+            && !Composite.AtisFormat.ObservationTime.StandardUpdateTime.Contains(minutes);
 
         VoiceAtis = ParseVoiceVariables(node, Composite.AtisFormat.ObservationTime.Template.Voice);
         TextAtis = ParseTextVariables(node, Composite.AtisFormat.ObservationTime.Template.Text);

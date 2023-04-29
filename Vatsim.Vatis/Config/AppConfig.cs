@@ -68,10 +68,6 @@ public class AppConfig : IAppConfig
         {
             SaveConfig();
         }
-        catch (Exception)
-        {
-            SaveConfig();
-        }
     }
 
     public void LoadConfig(string path)

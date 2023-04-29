@@ -35,6 +35,7 @@ namespace Vatsim.Vatis.UI
             Variable variable2 = new Variable();
             Variable variable3 = new Variable();
             Variable variable4 = new Variable();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileConfigurationForm));
             Variable variable5 = new Variable();
             Variable variable6 = new Variable();
             Variable variable7 = new Variable();
@@ -114,9 +115,9 @@ namespace Vatsim.Vatis.UI
             pageFormatting = new System.Windows.Forms.TabPage();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabObservationTime = new System.Windows.Forms.TabPage();
+            standardObservationTime = new System.Windows.Forms.TextBox();
             templateObservationTime = new NodeFormatTemplate();
             label5 = new System.Windows.Forms.Label();
-            standardObservationTime = new System.Windows.Forms.NumericUpDown();
             tabSurfaceWind = new System.Windows.Forms.TabPage();
             magneticVar = new System.Windows.Forms.NumericUpDown();
             chkMagneticVar = new System.Windows.Forms.CheckBox();
@@ -276,7 +277,6 @@ namespace Vatsim.Vatis.UI
             pageFormatting.SuspendLayout();
             tabControl2.SuspendLayout();
             tabObservationTime.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)standardObservationTime).BeginInit();
             tabSurfaceWind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)magneticVar).BeginInit();
             tabControl1.SuspendLayout();
@@ -647,9 +647,9 @@ namespace Vatsim.Vatis.UI
             // 
             // tabObservationTime
             // 
+            tabObservationTime.Controls.Add(standardObservationTime);
             tabObservationTime.Controls.Add(templateObservationTime);
             tabObservationTime.Controls.Add(label5);
-            tabObservationTime.Controls.Add(standardObservationTime);
             tabObservationTime.Location = new System.Drawing.Point(4, 24);
             tabObservationTime.Name = "tabObservationTime";
             tabObservationTime.Padding = new System.Windows.Forms.Padding(3);
@@ -658,9 +658,17 @@ namespace Vatsim.Vatis.UI
             tabObservationTime.Text = "Observation Time";
             tabObservationTime.UseVisualStyleBackColor = true;
             // 
+            // standardObservationTime
+            // 
+            standardObservationTime.Location = new System.Drawing.Point(199, 40);
+            standardObservationTime.Name = "standardObservationTime";
+            standardObservationTime.Size = new System.Drawing.Size(113, 23);
+            standardObservationTime.TabIndex = 19;
+            standardObservationTime.TextChanged += HandleControlValueChanged;
+            // 
             // templateObservationTime
             // 
-            templateObservationTime.Location = new System.Drawing.Point(32, 81);
+            templateObservationTime.Location = new System.Drawing.Point(46, 81);
             templateObservationTime.Name = "templateObservationTime";
             templateObservationTime.NodeType = "ObservationTime";
             templateObservationTime.Size = new System.Drawing.Size(615, 190);
@@ -685,23 +693,12 @@ namespace Vatsim.Vatis.UI
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(32, 44);
+            label5.Location = new System.Drawing.Point(46, 44);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(147, 15);
             label5.TabIndex = 16;
             label5.Text = "Routine Observation Time:\r\n";
-            compositeTooltip.SetToolTip(label5, "The routine observation time (minutes) of this METAR station. For example, if the METAR is normally updated at 53 minutes past the hour, enter 53.");
-            // 
-            // standardObservationTime
-            // 
-            standardObservationTime.Location = new System.Drawing.Point(186, 40);
-            standardObservationTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            standardObservationTime.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
-            standardObservationTime.Name = "standardObservationTime";
-            standardObservationTime.Size = new System.Drawing.Size(74, 23);
-            standardObservationTime.TabIndex = 15;
-            standardObservationTime.TextChanged += HandleControlValueChanged;
-            standardObservationTime.ValueChanged += HandleControlValueChanged;
+            compositeTooltip.SetToolTip(label5, resources.GetString("label5.ToolTip"));
             // 
             // tabSurfaceWind
             // 
@@ -712,7 +709,7 @@ namespace Vatsim.Vatis.UI
             tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
             tabSurfaceWind.Name = "tabSurfaceWind";
             tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
-            tabSurfaceWind.Size = new System.Drawing.Size(706, 310);
+            tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
             tabSurfaceWind.TabIndex = 1;
             tabSurfaceWind.Text = "Surface Wind";
             tabSurfaceWind.UseVisualStyleBackColor = true;
@@ -764,10 +761,10 @@ namespace Vatsim.Vatis.UI
             tabControl1.Controls.Add(windVariableDirection);
             tabControl1.Controls.Add(windCalm);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tabControl1.Location = new System.Drawing.Point(12, 43);
+            tabControl1.Location = new System.Drawing.Point(12, -195);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(682, 255);
+            tabControl1.Size = new System.Drawing.Size(168, 255);
             tabControl1.TabIndex = 2;
             // 
             // windStandard
@@ -776,7 +773,7 @@ namespace Vatsim.Vatis.UI
             windStandard.Location = new System.Drawing.Point(4, 24);
             windStandard.Name = "windStandard";
             windStandard.Padding = new System.Windows.Forms.Padding(3);
-            windStandard.Size = new System.Drawing.Size(674, 227);
+            windStandard.Size = new System.Drawing.Size(160, 227);
             windStandard.TabIndex = 0;
             windStandard.Text = "Standard";
             windStandard.UseVisualStyleBackColor = true;
@@ -820,7 +817,7 @@ namespace Vatsim.Vatis.UI
             windStandardGust.Location = new System.Drawing.Point(4, 24);
             windStandardGust.Name = "windStandardGust";
             windStandardGust.Padding = new System.Windows.Forms.Padding(3);
-            windStandardGust.Size = new System.Drawing.Size(674, 227);
+            windStandardGust.Size = new System.Drawing.Size(192, 72);
             windStandardGust.TabIndex = 1;
             windStandardGust.Text = "Standard Gust";
             windStandardGust.UseVisualStyleBackColor = true;
@@ -863,7 +860,7 @@ namespace Vatsim.Vatis.UI
             windVariable.Controls.Add(templateWindVariable);
             windVariable.Location = new System.Drawing.Point(4, 24);
             windVariable.Name = "windVariable";
-            windVariable.Size = new System.Drawing.Size(674, 227);
+            windVariable.Size = new System.Drawing.Size(192, 72);
             windVariable.TabIndex = 2;
             windVariable.Text = "Variable";
             windVariable.UseVisualStyleBackColor = true;
@@ -906,7 +903,7 @@ namespace Vatsim.Vatis.UI
             windVariableGust.Controls.Add(templateWindVariableGust);
             windVariableGust.Location = new System.Drawing.Point(4, 24);
             windVariableGust.Name = "windVariableGust";
-            windVariableGust.Size = new System.Drawing.Size(674, 227);
+            windVariableGust.Size = new System.Drawing.Size(192, 72);
             windVariableGust.TabIndex = 3;
             windVariableGust.Text = "Variable Gust";
             windVariableGust.UseVisualStyleBackColor = true;
@@ -949,7 +946,7 @@ namespace Vatsim.Vatis.UI
             windVariableDirection.Controls.Add(templateWindVariableDirection);
             windVariableDirection.Location = new System.Drawing.Point(4, 24);
             windVariableDirection.Name = "windVariableDirection";
-            windVariableDirection.Size = new System.Drawing.Size(674, 227);
+            windVariableDirection.Size = new System.Drawing.Size(192, 72);
             windVariableDirection.TabIndex = 4;
             windVariableDirection.Text = "Variable Direction";
             windVariableDirection.UseVisualStyleBackColor = true;
@@ -994,7 +991,7 @@ namespace Vatsim.Vatis.UI
             windCalm.Controls.Add(label16);
             windCalm.Location = new System.Drawing.Point(4, 24);
             windCalm.Name = "windCalm";
-            windCalm.Size = new System.Drawing.Size(674, 227);
+            windCalm.Size = new System.Drawing.Size(192, 72);
             windCalm.TabIndex = 5;
             windCalm.Text = "Calm";
             windCalm.UseVisualStyleBackColor = true;
@@ -1059,7 +1056,7 @@ namespace Vatsim.Vatis.UI
             tabVisibility.Location = new System.Drawing.Point(4, 24);
             tabVisibility.Name = "tabVisibility";
             tabVisibility.Padding = new System.Windows.Forms.Padding(12);
-            tabVisibility.Size = new System.Drawing.Size(706, 310);
+            tabVisibility.Size = new System.Drawing.Size(192, 72);
             tabVisibility.TabIndex = 2;
             tabVisibility.Text = "Visibility";
             tabVisibility.UseVisualStyleBackColor = true;
@@ -1072,7 +1069,7 @@ namespace Vatsim.Vatis.UI
             tabControl3.Location = new System.Drawing.Point(12, 12);
             tabControl3.Name = "tabControl3";
             tabControl3.SelectedIndex = 0;
-            tabControl3.Size = new System.Drawing.Size(682, 286);
+            tabControl3.Size = new System.Drawing.Size(168, 48);
             tabControl3.TabIndex = 20;
             // 
             // tabPage1
@@ -1081,7 +1078,7 @@ namespace Vatsim.Vatis.UI
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(674, 258);
+            tabPage1.Size = new System.Drawing.Size(160, 20);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Template";
             tabPage1.UseVisualStyleBackColor = true;
@@ -1114,7 +1111,7 @@ namespace Vatsim.Vatis.UI
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(12);
-            tabPage2.Size = new System.Drawing.Size(674, 258);
+            tabPage2.Size = new System.Drawing.Size(192, 72);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "ICAO Formatting";
             tabPage2.UseVisualStyleBackColor = true;
@@ -1354,7 +1351,7 @@ namespace Vatsim.Vatis.UI
             tabPresentWeather.Location = new System.Drawing.Point(4, 24);
             tabPresentWeather.Name = "tabPresentWeather";
             tabPresentWeather.Padding = new System.Windows.Forms.Padding(12);
-            tabPresentWeather.Size = new System.Drawing.Size(706, 310);
+            tabPresentWeather.Size = new System.Drawing.Size(192, 72);
             tabPresentWeather.TabIndex = 3;
             tabPresentWeather.Text = "Present Weather";
             tabPresentWeather.UseVisualStyleBackColor = true;
@@ -1369,7 +1366,7 @@ namespace Vatsim.Vatis.UI
             tabControl4.Location = new System.Drawing.Point(12, 12);
             tabControl4.Name = "tabControl4";
             tabControl4.SelectedIndex = 0;
-            tabControl4.Size = new System.Drawing.Size(682, 286);
+            tabControl4.Size = new System.Drawing.Size(168, 48);
             tabControl4.TabIndex = 3;
             // 
             // tabPage3
@@ -1378,7 +1375,7 @@ namespace Vatsim.Vatis.UI
             tabPage3.Location = new System.Drawing.Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            tabPage3.Size = new System.Drawing.Size(674, 258);
+            tabPage3.Size = new System.Drawing.Size(160, 20);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Template";
             tabPage3.UseVisualStyleBackColor = true;
@@ -1411,7 +1408,7 @@ namespace Vatsim.Vatis.UI
             tabPage11.Location = new System.Drawing.Point(4, 24);
             tabPage11.Name = "tabPage11";
             tabPage11.Padding = new System.Windows.Forms.Padding(5);
-            tabPage11.Size = new System.Drawing.Size(674, 258);
+            tabPage11.Size = new System.Drawing.Size(192, 72);
             tabPage11.TabIndex = 3;
             tabPage11.Text = "Intensity/Proximity Descriptors";
             tabPage11.UseVisualStyleBackColor = true;
@@ -1494,7 +1491,7 @@ namespace Vatsim.Vatis.UI
             tabPage9.Location = new System.Drawing.Point(4, 24);
             tabPage9.Name = "tabPage9";
             tabPage9.Padding = new System.Windows.Forms.Padding(10);
-            tabPage9.Size = new System.Drawing.Size(674, 258);
+            tabPage9.Size = new System.Drawing.Size(192, 72);
             tabPage9.TabIndex = 1;
             tabPage9.Text = "Weather Types";
             tabPage9.UseVisualStyleBackColor = true;
@@ -1511,7 +1508,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(654, 238);
+            tableLayoutPanel2.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // gridWeatherTypes
@@ -1531,7 +1528,7 @@ namespace Vatsim.Vatis.UI
             gridWeatherTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridWeatherTypes.RowHeadersVisible = false;
             gridWeatherTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridWeatherTypes.Size = new System.Drawing.Size(646, 232);
+            gridWeatherTypes.Size = new System.Drawing.Size(164, 46);
             gridWeatherTypes.TabIndex = 2;
             gridWeatherTypes.CellEndEdit += gridWeatherTypes_CellEndEdit;
             gridWeatherTypes.CellValidating += gridWeatherTypes_CellValidating;
@@ -1555,7 +1552,7 @@ namespace Vatsim.Vatis.UI
             tabPage10.Location = new System.Drawing.Point(4, 24);
             tabPage10.Name = "tabPage10";
             tabPage10.Padding = new System.Windows.Forms.Padding(10);
-            tabPage10.Size = new System.Drawing.Size(674, 258);
+            tabPage10.Size = new System.Drawing.Size(192, 72);
             tabPage10.TabIndex = 2;
             tabPage10.Text = "Weather Descriptors";
             tabPage10.UseVisualStyleBackColor = true;
@@ -1572,7 +1569,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             tableLayoutPanel6.RowCount = 1;
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel6.Size = new System.Drawing.Size(654, 238);
+            tableLayoutPanel6.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel6.TabIndex = 4;
             // 
             // gridWeatherDescriptors
@@ -1592,7 +1589,7 @@ namespace Vatsim.Vatis.UI
             gridWeatherDescriptors.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridWeatherDescriptors.RowHeadersVisible = false;
             gridWeatherDescriptors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridWeatherDescriptors.Size = new System.Drawing.Size(646, 232);
+            gridWeatherDescriptors.Size = new System.Drawing.Size(164, 46);
             gridWeatherDescriptors.TabIndex = 2;
             gridWeatherDescriptors.CellEndEdit += gridWeatherDescriptors_CellEndEdit;
             gridWeatherDescriptors.CellValidating += gridWeatherDescriptors_CellValidating;
@@ -1786,7 +1783,7 @@ namespace Vatsim.Vatis.UI
             tabPage7.Location = new System.Drawing.Point(4, 24);
             tabPage7.Name = "tabPage7";
             tabPage7.Padding = new System.Windows.Forms.Padding(10);
-            tabPage7.Size = new System.Drawing.Size(674, 258);
+            tabPage7.Size = new System.Drawing.Size(192, 72);
             tabPage7.TabIndex = 2;
             tabPage7.Text = "Convective Cloud Types";
             tabPage7.UseVisualStyleBackColor = true;
@@ -1803,7 +1800,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             tableLayoutPanel8.RowCount = 1;
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(654, 238);
+            tableLayoutPanel8.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel8.TabIndex = 4;
             // 
             // gridConvectiveCloudTypes
@@ -1823,7 +1820,7 @@ namespace Vatsim.Vatis.UI
             gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridConvectiveCloudTypes.RowHeadersVisible = false;
             gridConvectiveCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridConvectiveCloudTypes.Size = new System.Drawing.Size(646, 232);
+            gridConvectiveCloudTypes.Size = new System.Drawing.Size(164, 46);
             gridConvectiveCloudTypes.TabIndex = 2;
             gridConvectiveCloudTypes.CellEndEdit += gridConvectiveCloudTypes_CellEndEdit;
             gridConvectiveCloudTypes.CellValidating += gridConvectiveCloudTypes_CellValidating;
@@ -1849,7 +1846,7 @@ namespace Vatsim.Vatis.UI
             tabTemperature.Location = new System.Drawing.Point(4, 24);
             tabTemperature.Name = "tabTemperature";
             tabTemperature.Padding = new System.Windows.Forms.Padding(12);
-            tabTemperature.Size = new System.Drawing.Size(706, 310);
+            tabTemperature.Size = new System.Drawing.Size(192, 72);
             tabTemperature.TabIndex = 5;
             tabTemperature.Text = "Temperature";
             tabTemperature.UseVisualStyleBackColor = true;
@@ -1901,7 +1898,7 @@ namespace Vatsim.Vatis.UI
             tabDewpoint.Location = new System.Drawing.Point(4, 24);
             tabDewpoint.Name = "tabDewpoint";
             tabDewpoint.Padding = new System.Windows.Forms.Padding(12);
-            tabDewpoint.Size = new System.Drawing.Size(706, 310);
+            tabDewpoint.Size = new System.Drawing.Size(192, 72);
             tabDewpoint.TabIndex = 6;
             tabDewpoint.Text = "Dewpoint";
             tabDewpoint.UseVisualStyleBackColor = true;
@@ -1951,7 +1948,7 @@ namespace Vatsim.Vatis.UI
             tabAltimeter.Location = new System.Drawing.Point(4, 24);
             tabAltimeter.Name = "tabAltimeter";
             tabAltimeter.Padding = new System.Windows.Forms.Padding(12);
-            tabAltimeter.Size = new System.Drawing.Size(706, 310);
+            tabAltimeter.Size = new System.Drawing.Size(192, 72);
             tabAltimeter.TabIndex = 7;
             tabAltimeter.Text = "Altimeter";
             tabAltimeter.UseVisualStyleBackColor = true;
@@ -1987,7 +1984,7 @@ namespace Vatsim.Vatis.UI
             tabClosing.Location = new System.Drawing.Point(4, 24);
             tabClosing.Name = "tabClosing";
             tabClosing.Padding = new System.Windows.Forms.Padding(3);
-            tabClosing.Size = new System.Drawing.Size(706, 310);
+            tabClosing.Size = new System.Drawing.Size(192, 72);
             tabClosing.TabIndex = 8;
             tabClosing.Text = "Closing Statement";
             tabClosing.UseVisualStyleBackColor = true;
@@ -2556,7 +2553,6 @@ namespace Vatsim.Vatis.UI
             tabControl2.ResumeLayout(false);
             tabObservationTime.ResumeLayout(false);
             tabObservationTime.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)standardObservationTime).EndInit();
             tabSurfaceWind.ResumeLayout(false);
             tabSurfaceWind.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)magneticVar).EndInit();
@@ -2707,7 +2703,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.TabPage tabDewpoint;
         private System.Windows.Forms.TabPage tabAltimeter;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown standardObservationTime;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage windStandard;
         private System.Windows.Forms.TabPage windStandardGust;
@@ -2808,5 +2803,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.TextBox standardObservationTime;
     }
 }

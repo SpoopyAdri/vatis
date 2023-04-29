@@ -284,7 +284,7 @@ public partial class ProfileConfigurationForm : Form
 
         templateObservationTime.TextTemplate = mCurrentComposite.AtisFormat.ObservationTime.Template.Text;
         templateObservationTime.VoiceTemplate = mCurrentComposite.AtisFormat.ObservationTime.Template.Voice;
-        standardObservationTime.Value = mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime;
+        standardObservationTime.Text = string.Join(",", mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime ?? new List<int>());
 
         chkWindSpeakLeadingZero.Checked = mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero;
 
@@ -625,7 +625,7 @@ public partial class ProfileConfigurationForm : Form
         ctxExport.Enabled = false;
 
         vhfFrequency.Text = "118.000";
-        standardObservationTime.Value = 0;
+        standardObservationTime.Text = "";
         magneticVar.Value = 0;
         chkMagneticVar.Checked = false;
         txtIdsEndpoint.Text = "";
@@ -784,7 +784,34 @@ public partial class ProfileConfigurationForm : Form
             mPendingTextTemplateChanges.Remove(node);
         }
 
-        mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = (int)standardObservationTime.Value;
+        if (!string.IsNullOrEmpty(standardObservationTime.Text))
+        {
+            var observationTimes = new List<int>();
+            foreach (var interval in standardObservationTime.Text.Split(','))
+            {
+                if (int.TryParse(interval, out var value))
+                {
+                    if (value < 0 || value > 59)
+                    {
+                        MessageBox.Show("Invalid standard observation time. Time values must between 0 and 59.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    if (observationTimes.Contains(value))
+                    {
+                        MessageBox.Show("Duplicate standard observation time values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    observationTimes.Add(value);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid standard observation time format. Only numbers are accepted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = observationTimes;
+        }
+
         mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero = chkWindSpeakLeadingZero.Checked;
         mCurrentComposite.AtisFormat.SurfaceWind.Calm.CalmWindSpeed = (int)calmWindSpeed.Value;
         mCurrentComposite.AtisFormat.Visibility.IncludeVisibilitySuffix = chkVisibilitySuffix.Checked;
@@ -1425,7 +1452,7 @@ public partial class ProfileConfigurationForm : Form
 
                     if (profile.MetarObservation != null)
                     {
-                        existing.AtisFormat.ObservationTime.StandardUpdateTime = profile.MetarObservation.ObservationTimeValue;
+                        existing.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
                     }
 
                     existing.Contractions.Clear();
@@ -1517,7 +1544,7 @@ public partial class ProfileConfigurationForm : Form
 
                 if (profile.MetarObservation != null)
                 {
-                    composite.AtisFormat.ObservationTime.StandardUpdateTime = profile.MetarObservation.ObservationTimeValue;
+                    composite.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
                 }
 
                 foreach (var contraction in profile.Contractions)
