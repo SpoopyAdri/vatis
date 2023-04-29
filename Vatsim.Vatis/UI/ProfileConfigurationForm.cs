@@ -785,10 +785,8 @@ public partial class ProfileConfigurationForm : Form
         }
 
         mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = (int)standardObservationTime.Value;
-
         mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero = chkWindSpeakLeadingZero.Checked;
         mCurrentComposite.AtisFormat.SurfaceWind.Calm.CalmWindSpeed = (int)calmWindSpeed.Value;
-
         mCurrentComposite.AtisFormat.Visibility.IncludeVisibilitySuffix = chkVisibilitySuffix.Checked;
         mCurrentComposite.AtisFormat.Visibility.North = visDirNorth.Text;
         mCurrentComposite.AtisFormat.Visibility.NorthEast = visDirNorthEast.Text;
@@ -801,6 +799,17 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityVoice = txtVis9999Voice.Text;
         mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityText = txtVis9999Text.Text;
         mCurrentComposite.AtisFormat.Visibility.MetersCutoff = (int)visibilityMetersCutoff.Value;
+        mCurrentComposite.AtisFormat.PresentWeather.LightIntensity = wxIntensityLight.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.ModerateIntensity = wxIntensityModerate.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.HeavyIntensity = wxIntensityHeavy.Text;
+        mCurrentComposite.AtisFormat.PresentWeather.Vicinity = wxProximityVicinity.Text;
+        mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer = chkIdentifyCeilingLayer.Checked;
+        mCurrentComposite.AtisFormat.Clouds.ConvertToMetric = chkConvertCloudsMetric.Checked;
+        mCurrentComposite.AtisFormat.Temperature.UsePlusPrefix = chkTempPlusPrefix.Checked;
+        mCurrentComposite.AtisFormat.Temperature.PronounceLeadingZero = chkTempLeadingZero.Checked;
+        mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix = chkDewPlusPrefix.Checked;
+        mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero = chkDewLeadingZero.Checked;
+        mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
 
         List<string> usedContractions = new();
         foreach (DataGridViewRow row in gridContractions.Rows)
@@ -844,90 +853,6 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
-        mCurrentComposite.AtisFormat.PresentWeather.LightIntensity = wxIntensityLight.Text;
-        mCurrentComposite.AtisFormat.PresentWeather.ModerateIntensity = wxIntensityModerate.Text;
-        mCurrentComposite.AtisFormat.PresentWeather.HeavyIntensity = wxIntensityHeavy.Text;
-        mCurrentComposite.AtisFormat.PresentWeather.Vicinity = wxProximityVicinity.Text;
-
-        List<string> usedWeatherTypes = new();
-        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                try
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    if (usedWeatherTypes.Contains(acronymValue))
-                    {
-                        MessageBox.Show(this, $"Duplicate weather type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        gridWeatherTypes.Focus();
-                        return false;
-                    }
-
-                    usedWeatherTypes.Add(acronymValue);
-                }
-                catch { }
-            }
-        }
-
-        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Clear();
-        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    var spokenValue = row.Cells[1].Value.ToString();
-                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
-                    {
-                        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Add(acronymValue, spokenValue);
-                    }
-                }
-            }
-        }
-
-        List<string> usedWeatherDescriptors = new();
-        foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                try
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    if (usedWeatherDescriptors.Contains(acronymValue))
-                    {
-                        MessageBox.Show(this, $"Duplicate weather descriptor: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        gridWeatherDescriptors.Focus();
-                        return false;
-                    }
-
-                    usedWeatherDescriptors.Add(acronymValue);
-                }
-                catch { }
-            }
-        }
-
-        mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Clear();
-        foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    var spokenValue = row.Cells[1].Value.ToString();
-                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
-                    {
-                        mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Add(acronymValue, spokenValue);
-                    }
-                }
-            }
-        }
-
-        mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer = chkIdentifyCeilingLayer.Checked;
-        mCurrentComposite.AtisFormat.Clouds.ConvertToMetric = chkConvertCloudsMetric.Checked;
-
         List<Tuple<int, int>> usedTransitionLevels = new();
         foreach (DataGridViewRow row in gridTransitionLevels.Rows)
         {
@@ -970,16 +895,8 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
-        mCurrentComposite.AtisFormat.Temperature.UsePlusPrefix = chkTempPlusPrefix.Checked;
-        mCurrentComposite.AtisFormat.Temperature.PronounceLeadingZero = chkTempLeadingZero.Checked;
-        mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix = chkDewPlusPrefix.Checked;
-        mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero = chkDewLeadingZero.Checked;
-
-        mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
-
         btnApply.Enabled = false;
         btnOK.Enabled = true;
-
         mAppConfig.SaveConfig();
 
         return true;
@@ -1734,41 +1651,12 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void btnDeleteWeatherType_Click(object sender, EventArgs e)
-    {
-        if (gridWeatherTypes.SelectedRows.Count == 1)
-        {
-            if (!gridWeatherTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                gridWeatherTypes.Rows.RemoveAt(gridWeatherTypes.SelectedRows[0].Index);
-                btnApply.Enabled = true;
-            }
-        }
-        else
-        {
-            MessageBox.Show(this, "No weather type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
     private void gridWeatherTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         gridWeatherTypes.Rows[e.RowIndex].ErrorText = "";
     }
 
     private void gridWeatherTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-        btnApply.Enabled = true;
-    }
-
-    private void gridWeatherTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-    {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-        {
-            e.Cancel = true;
-        }
-    }
-
-    private void gridWeatherTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
         btnApply.Enabled = true;
     }
@@ -1792,41 +1680,12 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void btnDeleteWeatherDescriptor_Click(object sender, EventArgs e)
-    {
-        if (gridWeatherDescriptors.SelectedRows.Count == 1)
-        {
-            if (!gridWeatherDescriptors.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                gridWeatherDescriptors.Rows.RemoveAt(gridWeatherDescriptors.SelectedRows[0].Index);
-                btnApply.Enabled = true;
-            }
-        }
-        else
-        {
-            MessageBox.Show(this, "No weather descriptor selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
     private void gridWeatherDescriptors_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         gridWeatherDescriptors.Rows[e.RowIndex].ErrorText = "";
     }
 
     private void gridWeatherDescriptors_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-        btnApply.Enabled = true;
-    }
-
-    private void gridWeatherDescriptors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-    {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected weather descriptor?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-        {
-            e.Cancel = true;
-        }
-    }
-
-    private void gridWeatherDescriptors_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
         btnApply.Enabled = true;
     }
