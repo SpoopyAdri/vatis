@@ -201,13 +201,11 @@ namespace Vatsim.Vatis.UI
             gridCloudTypes = new System.Windows.Forms.DataGridView();
             dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            btnDeleteCloudType = new System.Windows.Forms.Button();
             label24 = new System.Windows.Forms.Label();
             tabPage7 = new System.Windows.Forms.TabPage();
             tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            btnDeleteConvectiveCloudType = new System.Windows.Forms.Button();
             gridConvectiveCloudTypes = new System.Windows.Forms.DataGridView();
             dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -316,7 +314,6 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.SuspendLayout();
             tabPage7.SuspendLayout();
             tableLayoutPanel8.SuspendLayout();
-            tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridConvectiveCloudTypes).BeginInit();
             tabTemperature.SuspendLayout();
             tabDewpoint.SuspendLayout();
@@ -1064,7 +1061,7 @@ namespace Vatsim.Vatis.UI
             tabVisibility.Location = new System.Drawing.Point(4, 24);
             tabVisibility.Name = "tabVisibility";
             tabVisibility.Padding = new System.Windows.Forms.Padding(12);
-            tabVisibility.Size = new System.Drawing.Size(706, 310);
+            tabVisibility.Size = new System.Drawing.Size(192, 72);
             tabVisibility.TabIndex = 2;
             tabVisibility.Text = "Visibility";
             tabVisibility.UseVisualStyleBackColor = true;
@@ -1077,7 +1074,7 @@ namespace Vatsim.Vatis.UI
             tabControl3.Location = new System.Drawing.Point(12, 12);
             tabControl3.Name = "tabControl3";
             tabControl3.SelectedIndex = 0;
-            tabControl3.Size = new System.Drawing.Size(682, 286);
+            tabControl3.Size = new System.Drawing.Size(168, 48);
             tabControl3.TabIndex = 20;
             // 
             // tabPage1
@@ -1086,7 +1083,7 @@ namespace Vatsim.Vatis.UI
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(674, 258);
+            tabPage1.Size = new System.Drawing.Size(160, 20);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Template";
             tabPage1.UseVisualStyleBackColor = true;
@@ -1119,7 +1116,7 @@ namespace Vatsim.Vatis.UI
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(12);
-            tabPage2.Size = new System.Drawing.Size(674, 258);
+            tabPage2.Size = new System.Drawing.Size(192, 72);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "ICAO Formatting";
             tabPage2.UseVisualStyleBackColor = true;
@@ -1643,7 +1640,7 @@ namespace Vatsim.Vatis.UI
             tabClouds.Location = new System.Drawing.Point(4, 24);
             tabClouds.Name = "tabClouds";
             tabClouds.Padding = new System.Windows.Forms.Padding(12);
-            tabClouds.Size = new System.Drawing.Size(192, 72);
+            tabClouds.Size = new System.Drawing.Size(706, 310);
             tabClouds.TabIndex = 4;
             tabClouds.Text = "Clouds";
             tabClouds.UseVisualStyleBackColor = true;
@@ -1657,7 +1654,7 @@ namespace Vatsim.Vatis.UI
             tabControl5.Location = new System.Drawing.Point(12, 12);
             tabControl5.Name = "tabControl5";
             tabControl5.SelectedIndex = 0;
-            tabControl5.Size = new System.Drawing.Size(168, 48);
+            tabControl5.Size = new System.Drawing.Size(682, 286);
             tabControl5.TabIndex = 4;
             // 
             // tabPage4
@@ -1668,7 +1665,7 @@ namespace Vatsim.Vatis.UI
             tabPage4.Location = new System.Drawing.Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(160, 20);
+            tabPage4.Size = new System.Drawing.Size(674, 258);
             tabPage4.TabIndex = 0;
             tabPage4.Text = "Template";
             tabPage4.UseVisualStyleBackColor = true;
@@ -1742,11 +1739,13 @@ namespace Vatsim.Vatis.UI
             // 
             // gridCloudTypes
             // 
+            gridCloudTypes.AllowUserToAddRows = false;
+            gridCloudTypes.AllowUserToDeleteRows = false;
             gridCloudTypes.AllowUserToResizeColumns = false;
             gridCloudTypes.AllowUserToResizeRows = false;
             gridCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             gridCloudTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8 });
+            gridCloudTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, Column1 });
             gridCloudTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             gridCloudTypes.Location = new System.Drawing.Point(4, 3);
             gridCloudTypes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1760,8 +1759,6 @@ namespace Vatsim.Vatis.UI
             gridCloudTypes.CellValidating += gridCloudTypes_CellValidating;
             gridCloudTypes.CellValueChanged += gridCloudTypes_CellValueChanged;
             gridCloudTypes.EditingControlShowing += gridCloudTypes_EditingControlShowing;
-            gridCloudTypes.UserDeletedRow += gridCloudTypes_UserDeletedRow;
-            gridCloudTypes.UserDeletingRow += gridCloudTypes_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -1773,12 +1770,15 @@ namespace Vatsim.Vatis.UI
             dataGridViewTextBoxColumn8.HeaderText = "Spoken";
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Text";
+            Column1.Name = "Column1";
+            // 
             // tableLayoutPanel9
             // 
-            tableLayoutPanel9.ColumnCount = 2;
+            tableLayoutPanel9.ColumnCount = 1;
             tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
-            tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.96774F));
-            tableLayoutPanel9.Controls.Add(btnDeleteCloudType, 1, 0);
             tableLayoutPanel9.Controls.Add(label24, 0, 0);
             tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
@@ -1789,18 +1789,6 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
             tableLayoutPanel9.TabIndex = 3;
             // 
-            // btnDeleteCloudType
-            // 
-            btnDeleteCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
-            btnDeleteCloudType.Location = new System.Drawing.Point(131, 0);
-            btnDeleteCloudType.Margin = new System.Windows.Forms.Padding(0);
-            btnDeleteCloudType.Name = "btnDeleteCloudType";
-            btnDeleteCloudType.Size = new System.Drawing.Size(35, 29);
-            btnDeleteCloudType.TabIndex = 1;
-            btnDeleteCloudType.Text = "Delete Selected";
-            btnDeleteCloudType.UseVisualStyleBackColor = true;
-            btnDeleteCloudType.Click += btnDeleteCloudType_Click;
-            // 
             // label24
             // 
             label24.AutoSize = true;
@@ -1808,7 +1796,7 @@ namespace Vatsim.Vatis.UI
             label24.Location = new System.Drawing.Point(0, 0);
             label24.Margin = new System.Windows.Forms.Padding(0);
             label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(131, 29);
+            label24.Size = new System.Drawing.Size(166, 29);
             label24.TabIndex = 2;
             label24.Text = "Available Variables: {altitude} and {convective}";
             label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1820,7 +1808,7 @@ namespace Vatsim.Vatis.UI
             tabPage7.Location = new System.Drawing.Point(4, 24);
             tabPage7.Name = "tabPage7";
             tabPage7.Padding = new System.Windows.Forms.Padding(10);
-            tabPage7.Size = new System.Drawing.Size(192, 72);
+            tabPage7.Size = new System.Drawing.Size(674, 258);
             tabPage7.TabIndex = 2;
             tabPage7.Text = "Convective Cloud Types";
             tabPage7.UseVisualStyleBackColor = true;
@@ -1829,48 +1817,21 @@ namespace Vatsim.Vatis.UI
             // 
             tableLayoutPanel8.ColumnCount = 1;
             tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel8.Controls.Add(tableLayoutPanel10, 0, 1);
             tableLayoutPanel8.Controls.Add(gridConvectiveCloudTypes, 0, 0);
             tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel8.Location = new System.Drawing.Point(10, 10);
             tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
             tableLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowCount = 1;
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(172, 52);
+            tableLayoutPanel8.Size = new System.Drawing.Size(654, 238);
             tableLayoutPanel8.TabIndex = 4;
-            // 
-            // tableLayoutPanel10
-            // 
-            tableLayoutPanel10.ColumnCount = 2;
-            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.19355F));
-            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.80645F));
-            tableLayoutPanel10.Controls.Add(btnDeleteConvectiveCloudType, 1, 0);
-            tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel10.Location = new System.Drawing.Point(3, 20);
-            tableLayoutPanel10.Name = "tableLayoutPanel10";
-            tableLayoutPanel10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            tableLayoutPanel10.RowCount = 1;
-            tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel10.Size = new System.Drawing.Size(166, 29);
-            tableLayoutPanel10.TabIndex = 4;
-            // 
-            // btnDeleteConvectiveCloudType
-            // 
-            btnDeleteConvectiveCloudType.Dock = System.Windows.Forms.DockStyle.Fill;
-            btnDeleteConvectiveCloudType.Location = new System.Drawing.Point(131, 0);
-            btnDeleteConvectiveCloudType.Margin = new System.Windows.Forms.Padding(0);
-            btnDeleteConvectiveCloudType.Name = "btnDeleteConvectiveCloudType";
-            btnDeleteConvectiveCloudType.Size = new System.Drawing.Size(35, 29);
-            btnDeleteConvectiveCloudType.TabIndex = 1;
-            btnDeleteConvectiveCloudType.Text = "Delete Selected";
-            btnDeleteConvectiveCloudType.UseVisualStyleBackColor = true;
-            btnDeleteConvectiveCloudType.Click += btnDeleteConvectiveCloudType_Click;
             // 
             // gridConvectiveCloudTypes
             // 
+            gridConvectiveCloudTypes.AllowUserToAddRows = false;
+            gridConvectiveCloudTypes.AllowUserToDeleteRows = false;
             gridConvectiveCloudTypes.AllowUserToResizeColumns = false;
             gridConvectiveCloudTypes.AllowUserToResizeRows = false;
             gridConvectiveCloudTypes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -1883,14 +1844,12 @@ namespace Vatsim.Vatis.UI
             gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridConvectiveCloudTypes.RowHeadersVisible = false;
             gridConvectiveCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridConvectiveCloudTypes.Size = new System.Drawing.Size(164, 11);
+            gridConvectiveCloudTypes.Size = new System.Drawing.Size(646, 232);
             gridConvectiveCloudTypes.TabIndex = 2;
             gridConvectiveCloudTypes.CellEndEdit += gridConvectiveCloudTypes_CellEndEdit;
             gridConvectiveCloudTypes.CellValidating += gridConvectiveCloudTypes_CellValidating;
             gridConvectiveCloudTypes.CellValueChanged += gridConvectiveCloudTypes_CellValueChanged;
             gridConvectiveCloudTypes.EditingControlShowing += gridConvectiveCloudTypes_EditingControlShowing;
-            gridConvectiveCloudTypes.UserDeletedRow += gridConvectiveCloudTypes_UserDeletedRow;
-            gridConvectiveCloudTypes.UserDeletingRow += gridConvectiveCloudTypes_UserDeletingRow;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -2660,7 +2619,6 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.PerformLayout();
             tabPage7.ResumeLayout(false);
             tableLayoutPanel8.ResumeLayout(false);
-            tableLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridConvectiveCloudTypes).EndInit();
             tabTemperature.ResumeLayout(false);
             tabTemperature.PerformLayout();
@@ -2842,10 +2800,7 @@ namespace Vatsim.Vatis.UI
         private NodeFormatTemplate templateCloudLayers;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Button btnDeleteCloudType;
         private System.Windows.Forms.DataGridView gridCloudTypes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.DataGridView gridConvectiveCloudTypes;
@@ -2853,10 +2808,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.CheckBox chkConvertCloudsMetric;
         private System.Windows.Forms.CheckBox chkIdentifyCeilingLayer;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.Button btnDeleteConvectiveCloudType;
         private System.Windows.Forms.CheckBox chkTempLeadingZero;
         private System.Windows.Forms.CheckBox chkTempPlusPrefix;
         private NodeFormatTemplate templateTemperature;
@@ -2874,5 +2825,10 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkMagneticVar;
         private System.Windows.Forms.TextBox txtVis9999Text;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Label label24;
     }
 }

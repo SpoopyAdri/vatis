@@ -13,6 +13,7 @@ using Vatsim.Vatis.Events;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Profiles.AtisFormat;
+using Vatsim.Vatis.Profiles.AtisFormat.Nodes;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.UI.Controls;
 using Vatsim.Vatis.UI.Dialogs;
@@ -370,7 +371,11 @@ public partial class ProfileConfigurationForm : Form
         {
             foreach (var type in mCurrentComposite.AtisFormat.Clouds.Types)
             {
-                gridCloudTypes.Rows.Add(type.Key, type.Value);
+                var cloudType = type.Value as CloudType;
+                if (cloudType != null)
+                {
+                    gridCloudTypes.Rows.Add(type.Key, cloudType.Voice, cloudType.Text);
+                }
             }
         }
 
@@ -922,82 +927,6 @@ public partial class ProfileConfigurationForm : Form
 
         mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer = chkIdentifyCeilingLayer.Checked;
         mCurrentComposite.AtisFormat.Clouds.ConvertToMetric = chkConvertCloudsMetric.Checked;
-
-        List<string> usedCloudTypes = new();
-        foreach (DataGridViewRow row in gridCloudTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                try
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    if (usedCloudTypes.Contains(acronymValue))
-                    {
-                        MessageBox.Show(this, $"Duplicate cloud type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        gridCloudTypes.Focus();
-                        return false;
-                    }
-
-                    usedCloudTypes.Add(acronymValue);
-                }
-                catch { }
-            }
-        }
-
-        mCurrentComposite.AtisFormat.Clouds.Types.Clear();
-        foreach (DataGridViewRow row in gridCloudTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    var spokenValue = row.Cells[1].Value.ToString();
-                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
-                    {
-                        mCurrentComposite.AtisFormat.Clouds.Types.Add(acronymValue, spokenValue);
-                    }
-                }
-            }
-        }
-
-        List<string> usedConvectiveCloudTypes = new();
-        foreach (DataGridViewRow row in gridConvectiveCloudTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                try
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    if (usedConvectiveCloudTypes.Contains(acronymValue))
-                    {
-                        MessageBox.Show(this, $"Duplicate convective cloud type: {acronymValue}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        gridConvectiveCloudTypes.Focus();
-                        return false;
-                    }
-
-                    usedConvectiveCloudTypes.Add(acronymValue);
-                }
-                catch { }
-            }
-        }
-
-        mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Clear();
-        foreach (DataGridViewRow row in gridConvectiveCloudTypes.Rows)
-        {
-            if (!row.IsNewRow)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    var acronymValue = row.Cells[0].Value.ToString();
-                    var spokenValue = row.Cells[1].Value.ToString();
-                    if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
-                    {
-                        mCurrentComposite.AtisFormat.Clouds.ConvectiveTypes.Add(acronymValue, spokenValue);
-                    }
-                }
-            }
-        }
 
         List<Tuple<int, int>> usedTransitionLevels = new();
         foreach (DataGridViewRow row in gridTransitionLevels.Rows)
@@ -1921,41 +1850,12 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void btnDeleteCloudType_Click(object sender, EventArgs e)
-    {
-        if (gridCloudTypes.SelectedRows.Count == 1)
-        {
-            if (!gridCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                gridCloudTypes.Rows.RemoveAt(gridCloudTypes.SelectedRows[0].Index);
-                btnApply.Enabled = true;
-            }
-        }
-        else
-        {
-            MessageBox.Show(this, "No cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
     private void gridCloudTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         gridCloudTypes.Rows[e.RowIndex].ErrorText = "";
     }
 
     private void gridCloudTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-        btnApply.Enabled = true;
-    }
-
-    private void gridCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-    {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-        {
-            e.Cancel = true;
-        }
-    }
-
-    private void gridCloudTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
         btnApply.Enabled = true;
     }
@@ -1979,41 +1879,12 @@ public partial class ProfileConfigurationForm : Form
         }
     }
 
-    private void btnDeleteConvectiveCloudType_Click(object sender, EventArgs e)
-    {
-        if (gridConvectiveCloudTypes.SelectedRows.Count == 1)
-        {
-            if (!gridConvectiveCloudTypes.SelectedRows[0].IsNewRow && MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                gridConvectiveCloudTypes.Rows.RemoveAt(gridConvectiveCloudTypes.SelectedRows[0].Index);
-                btnApply.Enabled = true;
-            }
-        }
-        else
-        {
-            MessageBox.Show(this, "No convective cloud type selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
     private void gridConvectiveCloudTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         gridConvectiveCloudTypes.Rows[e.RowIndex].ErrorText = "";
     }
 
     private void gridConvectiveCloudTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-        btnApply.Enabled = true;
-    }
-
-    private void gridConvectiveCloudTypes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-    {
-        if (MessageBox.Show(this, "Are you sure you want to delete the selected convective cloud type?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-        {
-            e.Cancel = true;
-        }
-    }
-
-    private void gridConvectiveCloudTypes_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
         btnApply.Enabled = true;
     }

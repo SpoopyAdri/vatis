@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Vatsim.Vatis.Profiles.AtisFormat.Nodes;
 using Vatsim.Vatis.Utils;
 using Vatsim.Vatis.Weather.Extensions;
 using Vatsim.Vatis.Weather.Objects;
@@ -49,21 +50,31 @@ public class CloudNode : BaseNode<CloudLayer>
 
     private string FormatCloudsText(CloudLayer layer)
     {
-        int altitude = layer.Altitude * 100;
+        int altitude = layer.Altitude;
         if (Composite.AtisFormat.Clouds.ConvertToMetric)
             altitude = (int)(altitude * 0.30);
 
-        if (Composite.AtisFormat.Clouds.ConvertToMetric
-            && (layer.CloudType == Weather.Enums.CloudType.Few
-                || layer.CloudType == Weather.Enums.CloudType.Scattered
-                || layer.CloudType == Weather.Enums.CloudType.Broken
-                || layer.CloudType == Weather.Enums.CloudType.Overcast
-                || layer.CloudType == Weather.Enums.CloudType.VerticalVisibility))
+        var cloudType = EnumTranslator.GetEnumDescription(layer.CloudType);
+        var convectiveType = EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType);
+
+        if (Composite.AtisFormat.Clouds.Types.ContainsKey(cloudType))
         {
-            return $"{EnumTranslator.GetEnumDescription(layer.CloudType)}{altitude / 100:000}{(layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None ? EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType) : "")}";
+            var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Text;
+            template = Regex.Replace(template, "{altitude}", altitude.ToString("000"), RegexOptions.IgnoreCase);
+
+            if (!Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
+            {
+                throw new AtisBuilderException("ConvectiveCloudType not found: " + convectiveType);
+            }
+
+            template = layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
+                ? Regex.Replace(template, "{convective}", convectiveType, RegexOptions.IgnoreCase)
+                : Regex.Replace(template, "{convective}", "", RegexOptions.IgnoreCase);
+
+            return template.Trim();
         }
 
-        return layer.RawValue;
+        return "";
     }
 
     private string FormatCloudsVoice(CloudLayer layer)
@@ -72,28 +83,22 @@ public class CloudNode : BaseNode<CloudLayer>
         if (Composite.AtisFormat.Clouds.ConvertToMetric)
             altitude = (int)(altitude * 0.30);
 
-        return FormatCloudTypeFromTemplate(altitude, layer);
-    }
-
-    private string FormatCloudTypeFromTemplate(int altitude, CloudLayer layer)
-    {
         var cloudType = EnumTranslator.GetEnumDescription(layer.CloudType);
         var convectiveType = EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType);
 
         if (Composite.AtisFormat.Clouds.Types.ContainsKey(cloudType))
         {
-            var template = Composite.AtisFormat.Clouds.Types[cloudType];
+            var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Voice;
             template = Regex.Replace(template, "{altitude}", altitude.ToWordString(), RegexOptions.IgnoreCase);
 
-            if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
-                && Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
+            if (!Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
             {
-                template = Regex.Replace(template, "{convective}", Composite.AtisFormat.Clouds.ConvectiveTypes[convectiveType], RegexOptions.IgnoreCase);
+                throw new AtisBuilderException("ConvectiveCloudType not found: " + convectiveType);
             }
-            else
-            {
-                template = Regex.Replace(template, "{convective}", "", RegexOptions.IgnoreCase);
-            }
+
+            template = layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
+                ? Regex.Replace(template, "{convective}", Composite.AtisFormat.Clouds.ConvectiveTypes[convectiveType], RegexOptions.IgnoreCase)
+                : Regex.Replace(template, "{convective}", "", RegexOptions.IgnoreCase);
 
             return Composite.AtisFormat.Clouds.IdentifyCeilingLayer && layer == mCeilingLayer
                 ? "ceiling " + template.Trim()

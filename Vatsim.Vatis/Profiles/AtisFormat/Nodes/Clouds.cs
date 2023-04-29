@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using Vatsim.Vatis.Profiles.AtisFormat.Nodes.Converter;
 
 namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
+
 public class Clouds : BaseFormat
 {
     public Clouds()
@@ -15,17 +18,18 @@ public class Clouds : BaseFormat
     public bool IdentifyCeilingLayer { get; set; } = true;
     public bool ConvertToMetric { get; set; }
 
-    public Dictionary<string, string> Types { get; set; } = new()
+    [JsonConverter(typeof(CloudConverter))]
+    public Dictionary<string, object> Types { get; set; } = new()
     {
-        { "FEW", "few clouds at {altitude}" },
-        { "SCT", "{altitude} scattered {convective}" },
-        { "BKN", "{altitude} broken {convective}" },
-        { "OVC", "{altitude} overcast {convective}" },
-        { "VV", "indefinite ceiling {altitude}" },
-        { "NSC", "no significant clouds" },
-        { "NCD", "no clouds detected" },
-        { "CLR", "sky clear below one-two thousand" },
-        { "SKC", "sky clear" }
+        { "FEW", new CloudType("FEW{altitude}", "few clouds at {altitude}") },
+        { "SCT", new CloudType("SCT{altitude}{convective}", "{altitude} scattered {convective}") },
+        { "BKN", new CloudType("BKN{altitude}{convective}", "{altitude} broken {convective}") },
+        { "OVC", new CloudType("OVC{altitude}{convective}", "{altitude} overcast {convective}") },
+        { "VV", new CloudType("VV{altitude}", "indefinite ceiling {altitude}") },
+        { "NSC", new CloudType("NSC", "no significant clouds") },
+        { "NCD", new CloudType("NCD", "no clouds detected") },
+        { "CLR", new CloudType("CLR", "sky clear below one-two thousand") },
+        { "SKC", new CloudType("SKC", "sky clear") },
     };
 
     public Dictionary<string, string> ConvectiveTypes { get; set; } = new()
@@ -33,4 +37,15 @@ public class Clouds : BaseFormat
         { "CB", "cumulonimbus" },
         { "TCU", "towering cumulus" }
     };
+}
+
+public class CloudType
+{
+    public string Text { get; set; }
+    public string Voice { get; set; }
+    public CloudType(string text, string voice)
+    {
+        Text = text;
+        Voice = voice;
+    }
 }
