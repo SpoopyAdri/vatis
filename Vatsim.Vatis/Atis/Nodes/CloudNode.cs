@@ -62,9 +62,10 @@ public class CloudNode : BaseNode<CloudLayer>
             var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Text;
             template = Regex.Replace(template, "{altitude}", altitude.ToString("000"), RegexOptions.IgnoreCase);
 
-            if (!Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
+            if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
+                && !Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
             {
-                throw new AtisBuilderException("ConvectiveCloudType not found: " + convectiveType);
+                return "";
             }
 
             template = layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
@@ -91,9 +92,10 @@ public class CloudNode : BaseNode<CloudLayer>
             var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Voice;
             template = Regex.Replace(template, "{altitude}", altitude.ToWordString(), RegexOptions.IgnoreCase);
 
-            if (!Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
+            if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
+                && !Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
             {
-                throw new AtisBuilderException("ConvectiveCloudType not found: " + convectiveType);
+                return "";
             }
 
             template = layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
