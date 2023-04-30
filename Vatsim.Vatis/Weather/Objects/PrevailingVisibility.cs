@@ -57,7 +57,7 @@ namespace Vatsim.Vatis.Weather.Objects
                 return;
             }
 
-            RawValue = string.Join("", tokens);
+            RawValue = string.Join(" ", tokens);
 
             var visibilityToken = tokens.First();
             if (visibilityToken.Equals("CAVOK"))
