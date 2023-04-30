@@ -175,7 +175,8 @@ public partial class ProfileConfigurationForm : Form
                 if (mCurrentComposite == null)
                     return;
 
-                pageTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
+                tabTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
+                tabIcaoVisFormatting.SetVisible(!mCurrentComposite.IsFaaAtis);
 
                 LoadComposite();
                 RefreshPresetList();
@@ -276,8 +277,8 @@ public partial class ProfileConfigurationForm : Form
         }
 
         gridTransitionLevels.Rows.Clear();
-        foreach (var tl in mCurrentComposite.TransitionLevels.OrderByDescending(t => t.Low)
-                     .ThenByDescending(t => t.High))
+        foreach (var tl in mCurrentComposite.AtisFormat.TransitionLevel.Values
+            .OrderByDescending(t => t.Low).ThenByDescending(t => t.High))
         {
             gridTransitionLevels.Rows.Add(tl.Low, tl.High, tl.Altitude);
         }
@@ -386,6 +387,12 @@ public partial class ProfileConfigurationForm : Form
             {
                 gridConvectiveCloudTypes.Rows.Add(type.Key, type.Value);
             }
+        }
+
+        if (mCurrentComposite.AtisFormat.TransitionLevel != null)
+        {
+            templateTransitionLevel.TextTemplate = mCurrentComposite.AtisFormat.TransitionLevel.Template.Text;
+            templateTransitionLevel.VoiceTemplate = mCurrentComposite.AtisFormat.TransitionLevel.Template.Voice;
         }
 
         chkAutoIncludeClosingStatement.Checked = mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement;
@@ -965,7 +972,7 @@ public partial class ProfileConfigurationForm : Form
             }
         }
 
-        mCurrentComposite.TransitionLevels.Clear();
+        mCurrentComposite.AtisFormat.TransitionLevel.Values.Clear();
         foreach (DataGridViewRow row in gridTransitionLevels.Rows)
         {
             if (!row.IsNewRow)
@@ -975,7 +982,7 @@ public partial class ProfileConfigurationForm : Form
                     var trLow = int.Parse(row.Cells[0].Value.ToString());
                     var trHigh = int.Parse(row.Cells[1].Value.ToString());
                     var tl = int.Parse(row.Cells[2].Value.ToString());
-                    mCurrentComposite.TransitionLevels.Add(new TransitionLevelMeta
+                    mCurrentComposite.AtisFormat.TransitionLevel.Values.Add(new TransitionLevelMeta
                     {
                         Low = trLow,
                         High = trHigh,
@@ -1665,6 +1672,19 @@ public partial class ProfileConfigurationForm : Form
                     arg.Handled = true;
                 }
             };
+        }
+    }
+
+    private void gridTransitionLevels_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        btnApply.Enabled = true;
+    }
+
+    private void gridTransitionLevels_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+    {
+        if (MessageBox.Show(this, "Are you sure you want to delete the selected transition level?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+        {
+            e.Cancel = true;
         }
     }
 

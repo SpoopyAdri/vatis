@@ -90,10 +90,10 @@ public class AtisBuilder : IAtisBuilder
 
         if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
         {
-            var voiceTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
-            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter}", composite.AtisLetter);
-            voiceTemplate = Regex.Replace(voiceTemplate, @"{letter\|word}", atisLetter);
-            template += voiceTemplate;
+            var closingTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
+            closingTemplate = Regex.Replace(closingTemplate, @"{letter}", composite.AtisLetter);
+            closingTemplate = Regex.Replace(closingTemplate, @"{letter\|word}", atisLetter);
+            template += closingTemplate;
         }
 
         composite.TextAtis = template;
@@ -369,34 +369,6 @@ public class AtisBuilder : IAtisBuilder
             notamText = "NOTAMS... " + notamText;
         }
 
-        var transitionLevelVoice = "";
-        var transitionLevelText = "";
-        if (!composite.IsFaaAtis)
-        {
-            transitionLevelText = "TL N/A";
-            transitionLevelVoice = "Transition level not determined";
-            if (composite.TransitionLevels != null)
-            {
-                var myMetar = metar;
-                var tlValue = composite.TransitionLevels.FirstOrDefault(t =>
-                {
-                    return myMetar.AltimeterSetting.Value >= t.Low
-                        && myMetar.AltimeterSetting.Value <= t.High;
-                });
-
-                if (tlValue != null)
-                {
-                    transitionLevelText = $"Transition level " +
-                                          $"{(composite.UseTransitionLevelPrefix ? "FL " : "")}" +
-                                          $"{tlValue.Altitude}";
-
-                    transitionLevelVoice = composite.UseTransitionLevelPrefix
-                        ? $"Transition level, flight level {tlValue.Altitude.ToSerialForm()}"
-                        : $"Transition level {tlValue.Altitude.ToSerialForm()}";
-                }
-            }
-        }
-
         variables = new List<AtisVariable>
         {
             new AtisVariable("FACILITY", composite.AirportData.ID, composite.AirportData.Name),
@@ -413,9 +385,34 @@ public class AtisBuilder : IAtisBuilder
             new AtisVariable("WX", completeWxStringAcars, completeWxStringVoice, new[]{"FULL_WX_STRING"}),
             new AtisVariable("ARPT_COND", airportConditions, airportConditions, new[]{"ARRDEP"}),
             new AtisVariable("NOTAMS", notamText, notamVoice),
-            new AtisVariable("TREND", trends.TextAtis, trends.VoiceAtis),
-            new AtisVariable("TL", transitionLevelText, transitionLevelVoice)
+            new AtisVariable("TREND", trends.TextAtis, trends.VoiceAtis)
         };
+
+        if (composite.AtisFormat.TransitionLevel != null)
+        {
+            var trl = composite.AtisFormat.TransitionLevel.Values.FirstOrDefault(t =>
+            {
+                return composite.DecodedMetar.AltimeterSetting.Value >= t.Low
+                && composite.DecodedMetar.AltimeterSetting.Value <= t.High;
+            });
+
+            if (trl != null)
+            {
+                var trlTemplateText = composite.AtisFormat.TransitionLevel.Template.Text;
+                trlTemplateText = Regex.Replace(trlTemplateText, @"{trl}", trl.Altitude.ToString());
+                trlTemplateText = Regex.Replace(trlTemplateText, @"{trl\|text}", trl.Altitude.ToSerialForm());
+
+                var trlTemplateVoice = composite.AtisFormat.TransitionLevel.Template.Voice;
+                trlTemplateVoice = Regex.Replace(trlTemplateVoice, @"{trl}", trl.Altitude.ToString());
+                trlTemplateVoice = Regex.Replace(trlTemplateVoice, @"{trl\|text}", trl.Altitude.ToSerialForm());
+
+                variables.Add(new AtisVariable("TL", trlTemplateText, trlTemplateVoice));
+            }
+            else
+            {
+                variables.Add(new AtisVariable("TL", "", ""));
+            }
+        }
 
         var closingTextTemplate = composite.AtisFormat.ClosingStatement.Template.Text;
         var closingVoiceTemplate = composite.AtisFormat.ClosingStatement.Template.Voice;

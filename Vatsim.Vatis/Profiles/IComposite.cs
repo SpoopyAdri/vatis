@@ -14,7 +14,6 @@ public interface IComposite
     bool AirportConditionsBeforeFreeText { get; set; }
     List<DefinedTextMeta> NotamDefinitions { get; set; }
     bool NotamsBeforeFreeText { get; set; }
-    List<TransitionLevelMeta> TransitionLevels { get; set; }
     uint Frequency { get; set; }
     AtisVoiceMeta AtisVoice { get; set; }
     string IDSEndpoint { get; set; }
@@ -25,6 +24,5 @@ public interface IComposite
     CodeRangeMeta CodeRange { get; set; }
     AtisFormat.AtisFormat AtisFormat { get; set; }
     bool UseNotamPrefix { get; set; }
-    bool UseTransitionLevelPrefix { get; set; }
     bool UseDecimalTerminology { get; set; }
 }

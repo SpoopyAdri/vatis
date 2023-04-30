@@ -21,7 +21,6 @@ public class Composite : IComposite, ICloneable
     public AtisVoiceMeta AtisVoice { get; set; } = new AtisVoiceMeta();
     public string IDSEndpoint { get; set; }
     public bool UseNotamPrefix { get; set; } = true;
-    public bool UseTransitionLevelPrefix { get; set; } = true;
     public bool UseDecimalTerminology { get; set; }
     public bool AirportConditionsBeforeFreeText { get; set; }
     public bool NotamsBeforeFreeText { get; set; }
@@ -29,7 +28,6 @@ public class Composite : IComposite, ICloneable
     public List<ContractionMeta> Contractions { get; set; } = new List<ContractionMeta>();
     public List<DefinedTextMeta> AirportConditionDefinitions { get; set; } = new List<DefinedTextMeta>();
     public List<DefinedTextMeta> NotamDefinitions { get; set; } = new List<DefinedTextMeta>();
-    public List<TransitionLevelMeta> TransitionLevels { get; set; } = new List<TransitionLevelMeta>();
     public AtisFormat.AtisFormat AtisFormat { get; set; } = new();
 
     // Legacy 
@@ -55,6 +53,15 @@ public class Composite : IComposite, ICloneable
         {
             AtisFormat.SurfaceWind.MagneticVariation.Enabled = value.Enabled;
             AtisFormat.SurfaceWind.MagneticVariation.MagneticDegrees = value.MagneticDegrees;
+        }
+    }
+
+    [JsonProperty]
+    private List<TransitionLevelMeta> TransitionLevels
+    {
+        set
+        {
+            AtisFormat.TransitionLevel.Values.AddRange(value);
         }
     }
 

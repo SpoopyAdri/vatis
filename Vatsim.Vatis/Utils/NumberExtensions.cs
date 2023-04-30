@@ -149,6 +149,12 @@ public static class NumberExtensions
         return input;
     }
 
+    /// <summary>
+    /// Converts number to serial numbers (separate digits)
+    /// For example, 1500...One Five Zero Zero
+    /// </summary>
+    /// <param name="input">Number to be converted</param>
+    /// <returns>Returns the serial formatted word string</returns>
     public static string ToSerialForm(this int number)
     {
         bool isNegative = number < 0;

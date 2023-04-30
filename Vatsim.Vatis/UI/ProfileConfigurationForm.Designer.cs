@@ -99,6 +99,8 @@ namespace Vatsim.Vatis.UI
             Variable variable57 = new Variable();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            Variable variable58 = new Variable();
+            Variable variable59 = new Variable();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             TlpMain = new System.Windows.Forms.TableLayoutPanel();
@@ -124,6 +126,14 @@ namespace Vatsim.Vatis.UI
             typeDeparture = new System.Windows.Forms.RadioButton();
             typeArrival = new System.Windows.Forms.RadioButton();
             label4 = new System.Windows.Forms.Label();
+            pagePresets = new System.Windows.Forms.TabPage();
+            chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
+            dynamicPresetControl = new System.Windows.Forms.Panel();
+            btnRenamePreset = new System.Windows.Forms.Button();
+            btnDeletePreset = new System.Windows.Forms.Button();
+            btnCopyPreset = new System.Windows.Forms.Button();
+            btnNewPreset = new System.Windows.Forms.Button();
+            ddlPresets = new System.Windows.Forms.ComboBox();
             pageFormatting = new System.Windows.Forms.TabPage();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabObservationTime = new System.Windows.Forms.TabPage();
@@ -153,7 +163,7 @@ namespace Vatsim.Vatis.UI
             tabControl3 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             templateVisibility = new NodeFormatTemplate();
-            tabPage2 = new System.Windows.Forms.TabPage();
+            tabIcaoVisFormatting = new System.Windows.Forms.TabPage();
             label25 = new System.Windows.Forms.Label();
             txtVis9999Text = new System.Windows.Forms.TextBox();
             visibilityMetersCutoff = new System.Windows.Forms.NumericUpDown();
@@ -230,33 +240,26 @@ namespace Vatsim.Vatis.UI
             templateDewpoint = new NodeFormatTemplate();
             tabAltimeter = new System.Windows.Forms.TabPage();
             templateAltimeter = new NodeFormatTemplate();
+            tabTransitionLevel = new System.Windows.Forms.TabPage();
+            tabControl6 = new System.Windows.Forms.TabControl();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            templateTransitionLevel = new NodeFormatTemplate();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            btnDeleteTransitionLevel = new System.Windows.Forms.Button();
+            gridTransitionLevels = new System.Windows.Forms.DataGridView();
+            dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            label26 = new System.Windows.Forms.Label();
             tabClosing = new System.Windows.Forms.TabPage();
             templateClosingStatement = new NodeFormatTemplate();
             chkAutoIncludeClosingStatement = new System.Windows.Forms.CheckBox();
-            pagePresets = new System.Windows.Forms.TabPage();
-            chkExternalAtisGenerator = new System.Windows.Forms.CheckBox();
-            dynamicPresetControl = new System.Windows.Forms.Panel();
-            btnRenamePreset = new System.Windows.Forms.Button();
-            btnDeletePreset = new System.Windows.Forms.Button();
-            btnCopyPreset = new System.Windows.Forms.Button();
-            btnNewPreset = new System.Windows.Forms.Button();
-            ddlPresets = new System.Windows.Forms.ComboBox();
             pageContractions = new System.Windows.Forms.TabPage();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             btnDeleteContraction = new System.Windows.Forms.Button();
             gridContractions = new System.Windows.Forms.DataGridView();
             ColumnFind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ColumnReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            pageTransitionLevel = new System.Windows.Forms.TabPage();
-            chkTransitionLevelPrefix = new System.Windows.Forms.CheckBox();
-            tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            gridTransitionLevels = new System.Windows.Forms.DataGridView();
-            low = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            high = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            transitionLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            panel3 = new System.Windows.Forms.Panel();
-            label13 = new System.Windows.Forms.Label();
-            btnDeleteTransitionLevel = new System.Windows.Forms.Button();
             btnManageComposite = new System.Windows.Forms.Button();
             ctxOptions = new System.Windows.Forms.ContextMenuStrip(components);
             ctxNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -286,6 +289,7 @@ namespace Vatsim.Vatis.UI
             pageGen.SuspendLayout();
             groupVoiceOption.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            pagePresets.SuspendLayout();
             pageFormatting.SuspendLayout();
             tabControl2.SuspendLayout();
             tabObservationTime.SuspendLayout();
@@ -302,7 +306,7 @@ namespace Vatsim.Vatis.UI
             tabVisibility.SuspendLayout();
             tabControl3.SuspendLayout();
             tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
+            tabIcaoVisFormatting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)visibilityMetersCutoff).BeginInit();
             groupBox1.SuspendLayout();
             tabPresentWeather.SuspendLayout();
@@ -328,15 +332,15 @@ namespace Vatsim.Vatis.UI
             tabTemperature.SuspendLayout();
             tabDewpoint.SuspendLayout();
             tabAltimeter.SuspendLayout();
+            tabTransitionLevel.SuspendLayout();
+            tabControl6.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).BeginInit();
             tabClosing.SuspendLayout();
-            pagePresets.SuspendLayout();
             pageContractions.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridContractions).BeginInit();
-            pageTransitionLevel.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).BeginInit();
-            panel3.SuspendLayout();
             ctxOptions.SuspendLayout();
             panel1.SuspendLayout();
             panelCompositeList.SuspendLayout();
@@ -350,7 +354,7 @@ namespace Vatsim.Vatis.UI
             TlpMain.ColumnCount = 3;
             TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 754F));
+            TlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 801F));
             TlpMain.Controls.Add(tableLayoutPanel1, 2, 0);
             TlpMain.Controls.Add(btnManageComposite, 1, 1);
             TlpMain.Controls.Add(panel1, 1, 0);
@@ -362,7 +366,7 @@ namespace Vatsim.Vatis.UI
             TlpMain.RowCount = 2;
             TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             TlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            TlpMain.Size = new System.Drawing.Size(954, 431);
+            TlpMain.Size = new System.Drawing.Size(1004, 431);
             TlpMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -373,28 +377,27 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(mainTabControl, 0, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(204, 3);
+            tableLayoutPanel1.Location = new System.Drawing.Point(207, 3);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(746, 390);
+            tableLayoutPanel1.Size = new System.Drawing.Size(793, 390);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // mainTabControl
             // 
             mainTabControl.Controls.Add(pageGen);
-            mainTabControl.Controls.Add(pageFormatting);
             mainTabControl.Controls.Add(pagePresets);
+            mainTabControl.Controls.Add(pageFormatting);
             mainTabControl.Controls.Add(pageContractions);
-            mainTabControl.Controls.Add(pageTransitionLevel);
             mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             mainTabControl.Enabled = false;
             mainTabControl.Location = new System.Drawing.Point(0, 0);
             mainTabControl.Margin = new System.Windows.Forms.Padding(0);
             mainTabControl.Name = "mainTabControl";
             mainTabControl.SelectedIndex = 0;
-            mainTabControl.Size = new System.Drawing.Size(746, 390);
+            mainTabControl.Size = new System.Drawing.Size(793, 390);
             mainTabControl.TabIndex = 1;
             // 
             // pageGen
@@ -416,7 +419,7 @@ namespace Vatsim.Vatis.UI
             pageGen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pageGen.Name = "pageGen";
             pageGen.Padding = new System.Windows.Forms.Padding(15);
-            pageGen.Size = new System.Drawing.Size(738, 362);
+            pageGen.Size = new System.Drawing.Size(785, 362);
             pageGen.TabIndex = 2;
             pageGen.Text = "General";
             pageGen.UseVisualStyleBackColor = true;
@@ -424,7 +427,7 @@ namespace Vatsim.Vatis.UI
             // chkNotamPrefix
             // 
             chkNotamPrefix.AutoSize = true;
-            chkNotamPrefix.Location = new System.Drawing.Point(105, 191);
+            chkNotamPrefix.Location = new System.Drawing.Point(68, 191);
             chkNotamPrefix.Name = "chkNotamPrefix";
             chkNotamPrefix.Size = new System.Drawing.Size(306, 19);
             chkNotamPrefix.TabIndex = 44;
@@ -435,7 +438,7 @@ namespace Vatsim.Vatis.UI
             // chkUseDecimalTerminology
             // 
             chkUseDecimalTerminology.AutoSize = true;
-            chkUseDecimalTerminology.Location = new System.Drawing.Point(105, 142);
+            chkUseDecimalTerminology.Location = new System.Drawing.Point(68, 142);
             chkUseDecimalTerminology.Name = "chkUseDecimalTerminology";
             chkUseDecimalTerminology.Size = new System.Drawing.Size(245, 19);
             chkUseDecimalTerminology.TabIndex = 43;
@@ -447,7 +450,7 @@ namespace Vatsim.Vatis.UI
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(549, 97);
+            label15.Location = new System.Drawing.Point(512, 97);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(18, 15);
             label15.TabIndex = 42;
@@ -456,7 +459,7 @@ namespace Vatsim.Vatis.UI
             // txtCodeRangeHigh
             // 
             txtCodeRangeHigh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtCodeRangeHigh.Location = new System.Drawing.Point(569, 93);
+            txtCodeRangeHigh.Location = new System.Drawing.Point(532, 93);
             txtCodeRangeHigh.Name = "txtCodeRangeHigh";
             txtCodeRangeHigh.Size = new System.Drawing.Size(45, 23);
             txtCodeRangeHigh.TabIndex = 41;
@@ -466,7 +469,7 @@ namespace Vatsim.Vatis.UI
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(422, 97);
+            label14.Location = new System.Drawing.Point(385, 97);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(74, 15);
             label14.TabIndex = 40;
@@ -475,7 +478,7 @@ namespace Vatsim.Vatis.UI
             // txtCodeRangeLow
             // 
             txtCodeRangeLow.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            txtCodeRangeLow.Location = new System.Drawing.Point(502, 93);
+            txtCodeRangeLow.Location = new System.Drawing.Point(465, 93);
             txtCodeRangeLow.Name = "txtCodeRangeLow";
             txtCodeRangeLow.Size = new System.Drawing.Size(45, 23);
             txtCodeRangeLow.TabIndex = 39;
@@ -487,7 +490,7 @@ namespace Vatsim.Vatis.UI
             groupVoiceOption.Controls.Add(radioTextToSpeech);
             groupVoiceOption.Controls.Add(ddlVoices);
             groupVoiceOption.Controls.Add(radioVoiceRecorded);
-            groupVoiceOption.Location = new System.Drawing.Point(102, 240);
+            groupVoiceOption.Location = new System.Drawing.Point(65, 240);
             groupVoiceOption.Name = "groupVoiceOption";
             groupVoiceOption.Size = new System.Drawing.Size(534, 25);
             groupVoiceOption.TabIndex = 38;
@@ -534,7 +537,7 @@ namespace Vatsim.Vatis.UI
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(102, 295);
+            label2.Location = new System.Drawing.Point(65, 295);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(78, 15);
@@ -545,7 +548,7 @@ namespace Vatsim.Vatis.UI
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(102, 52);
+            label3.Location = new System.Drawing.Point(65, 52);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(65, 15);
@@ -555,7 +558,7 @@ namespace Vatsim.Vatis.UI
             // 
             // txtIdsEndpoint
             // 
-            txtIdsEndpoint.Location = new System.Drawing.Point(196, 291);
+            txtIdsEndpoint.Location = new System.Drawing.Point(159, 291);
             txtIdsEndpoint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtIdsEndpoint.Name = "txtIdsEndpoint";
             txtIdsEndpoint.Size = new System.Drawing.Size(438, 23);
@@ -564,7 +567,7 @@ namespace Vatsim.Vatis.UI
             // 
             // vhfFrequency
             // 
-            vhfFrequency.Location = new System.Drawing.Point(174, 48);
+            vhfFrequency.Location = new System.Drawing.Point(137, 48);
             vhfFrequency.Mask = "000.000";
             vhfFrequency.Name = "vhfFrequency";
             vhfFrequency.PromptChar = '#';
@@ -577,7 +580,7 @@ namespace Vatsim.Vatis.UI
             flowLayoutPanel2.Controls.Add(typeCombined);
             flowLayoutPanel2.Controls.Add(typeDeparture);
             flowLayoutPanel2.Controls.Add(typeArrival);
-            flowLayoutPanel2.Location = new System.Drawing.Point(174, 93);
+            flowLayoutPanel2.Location = new System.Drawing.Point(137, 93);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new System.Drawing.Size(235, 23);
             flowLayoutPanel2.TabIndex = 37;
@@ -621,12 +624,106 @@ namespace Vatsim.Vatis.UI
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(102, 97);
+            label4.Location = new System.Drawing.Point(65, 97);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(59, 15);
             label4.TabIndex = 35;
             label4.Text = "ATIS Type:";
+            // 
+            // pagePresets
+            // 
+            pagePresets.Controls.Add(chkExternalAtisGenerator);
+            pagePresets.Controls.Add(dynamicPresetControl);
+            pagePresets.Controls.Add(btnRenamePreset);
+            pagePresets.Controls.Add(btnDeletePreset);
+            pagePresets.Controls.Add(btnCopyPreset);
+            pagePresets.Controls.Add(btnNewPreset);
+            pagePresets.Controls.Add(ddlPresets);
+            pagePresets.Location = new System.Drawing.Point(4, 24);
+            pagePresets.Name = "pagePresets";
+            pagePresets.Padding = new System.Windows.Forms.Padding(10);
+            pagePresets.Size = new System.Drawing.Size(785, 362);
+            pagePresets.TabIndex = 0;
+            pagePresets.Text = "Presets";
+            pagePresets.UseVisualStyleBackColor = true;
+            // 
+            // chkExternalAtisGenerator
+            // 
+            chkExternalAtisGenerator.AutoSize = true;
+            chkExternalAtisGenerator.Enabled = false;
+            chkExternalAtisGenerator.Location = new System.Drawing.Point(14, 41);
+            chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
+            chkExternalAtisGenerator.Size = new System.Drawing.Size(242, 19);
+            chkExternalAtisGenerator.TabIndex = 7;
+            chkExternalAtisGenerator.Text = "Use external ATIS generator (e.g. UniATIS)";
+            chkExternalAtisGenerator.UseVisualStyleBackColor = true;
+            chkExternalAtisGenerator.CheckedChanged += HandleControlValueChanged;
+            // 
+            // dynamicPresetControl
+            // 
+            dynamicPresetControl.Location = new System.Drawing.Point(14, 64);
+            dynamicPresetControl.Name = "dynamicPresetControl";
+            dynamicPresetControl.Size = new System.Drawing.Size(757, 286);
+            dynamicPresetControl.TabIndex = 6;
+            // 
+            // btnRenamePreset
+            // 
+            btnRenamePreset.Enabled = false;
+            btnRenamePreset.Location = new System.Drawing.Point(635, 13);
+            btnRenamePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRenamePreset.Name = "btnRenamePreset";
+            btnRenamePreset.Size = new System.Drawing.Size(64, 24);
+            btnRenamePreset.TabIndex = 5;
+            btnRenamePreset.Text = "Rename";
+            btnRenamePreset.UseVisualStyleBackColor = true;
+            btnRenamePreset.Click += btnRenamePreset_Click;
+            // 
+            // btnDeletePreset
+            // 
+            btnDeletePreset.Enabled = false;
+            btnDeletePreset.Location = new System.Drawing.Point(703, 13);
+            btnDeletePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeletePreset.Name = "btnDeletePreset";
+            btnDeletePreset.Size = new System.Drawing.Size(64, 24);
+            btnDeletePreset.TabIndex = 3;
+            btnDeletePreset.Text = "Delete";
+            btnDeletePreset.UseVisualStyleBackColor = true;
+            btnDeletePreset.Click += btnDeletePreset_Click;
+            // 
+            // btnCopyPreset
+            // 
+            btnCopyPreset.Enabled = false;
+            btnCopyPreset.Location = new System.Drawing.Point(567, 13);
+            btnCopyPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCopyPreset.Name = "btnCopyPreset";
+            btnCopyPreset.Size = new System.Drawing.Size(64, 24);
+            btnCopyPreset.TabIndex = 2;
+            btnCopyPreset.Text = "Copy";
+            btnCopyPreset.UseVisualStyleBackColor = true;
+            btnCopyPreset.Click += btnCopyPreset_Click;
+            // 
+            // btnNewPreset
+            // 
+            btnNewPreset.Location = new System.Drawing.Point(499, 13);
+            btnNewPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnNewPreset.Name = "btnNewPreset";
+            btnNewPreset.Size = new System.Drawing.Size(64, 24);
+            btnNewPreset.TabIndex = 1;
+            btnNewPreset.Text = "New";
+            btnNewPreset.UseVisualStyleBackColor = true;
+            btnNewPreset.Click += btnNewPreset_Click;
+            // 
+            // ddlPresets
+            // 
+            ddlPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ddlPresets.FormattingEnabled = true;
+            ddlPresets.Location = new System.Drawing.Point(14, 14);
+            ddlPresets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ddlPresets.Name = "ddlPresets";
+            ddlPresets.Size = new System.Drawing.Size(481, 23);
+            ddlPresets.TabIndex = 0;
+            ddlPresets.SelectedIndexChanged += ddlPresets_SelectedIndexChanged;
             // 
             // pageFormatting
             // 
@@ -634,7 +731,7 @@ namespace Vatsim.Vatis.UI
             pageFormatting.Location = new System.Drawing.Point(4, 24);
             pageFormatting.Name = "pageFormatting";
             pageFormatting.Padding = new System.Windows.Forms.Padding(12);
-            pageFormatting.Size = new System.Drawing.Size(738, 362);
+            pageFormatting.Size = new System.Drawing.Size(785, 362);
             pageFormatting.TabIndex = 4;
             pageFormatting.Text = "Formatting";
             pageFormatting.UseVisualStyleBackColor = true;
@@ -649,12 +746,13 @@ namespace Vatsim.Vatis.UI
             tabControl2.Controls.Add(tabTemperature);
             tabControl2.Controls.Add(tabDewpoint);
             tabControl2.Controls.Add(tabAltimeter);
+            tabControl2.Controls.Add(tabTransitionLevel);
             tabControl2.Controls.Add(tabClosing);
             tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl2.Location = new System.Drawing.Point(12, 12);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(714, 338);
+            tabControl2.Size = new System.Drawing.Size(761, 338);
             tabControl2.TabIndex = 0;
             // 
             // tabObservationTime
@@ -665,14 +763,14 @@ namespace Vatsim.Vatis.UI
             tabObservationTime.Location = new System.Drawing.Point(4, 24);
             tabObservationTime.Name = "tabObservationTime";
             tabObservationTime.Padding = new System.Windows.Forms.Padding(3);
-            tabObservationTime.Size = new System.Drawing.Size(706, 310);
+            tabObservationTime.Size = new System.Drawing.Size(753, 310);
             tabObservationTime.TabIndex = 0;
             tabObservationTime.Text = "Observation Time";
             tabObservationTime.UseVisualStyleBackColor = true;
             // 
             // standardObservationTime
             // 
-            standardObservationTime.Location = new System.Drawing.Point(199, 40);
+            standardObservationTime.Location = new System.Drawing.Point(187, 40);
             standardObservationTime.Name = "standardObservationTime";
             standardObservationTime.Size = new System.Drawing.Size(113, 23);
             standardObservationTime.TabIndex = 19;
@@ -680,10 +778,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateObservationTime
             // 
-            templateObservationTime.Location = new System.Drawing.Point(46, 81);
+            templateObservationTime.Location = new System.Drawing.Point(34, 81);
             templateObservationTime.Name = "templateObservationTime";
             templateObservationTime.NodeType = "ObservationTime";
-            templateObservationTime.Size = new System.Drawing.Size(615, 190);
+            templateObservationTime.Size = new System.Drawing.Size(685, 190);
             templateObservationTime.TabIndex = 18;
             templateObservationTime.TextTemplate = "";
             variable1.Text = "time";
@@ -705,7 +803,7 @@ namespace Vatsim.Vatis.UI
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(46, 44);
+            label5.Location = new System.Drawing.Point(34, 44);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(147, 15);
             label5.TabIndex = 16;
@@ -723,7 +821,7 @@ namespace Vatsim.Vatis.UI
             tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
             tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
             tabSurfaceWind.TabIndex = 1;
-            tabSurfaceWind.Text = "Surface Wind";
+            tabSurfaceWind.Text = "Wind";
             tabSurfaceWind.UseVisualStyleBackColor = true;
             // 
             // magneticVar
@@ -792,10 +890,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindStandard
             // 
-            templateWindStandard.Location = new System.Drawing.Point(30, 16);
+            templateWindStandard.Location = new System.Drawing.Point(18, 16);
             templateWindStandard.Name = "templateWindStandard";
             templateWindStandard.NodeType = "SurfaceWind.Standard";
-            templateWindStandard.Size = new System.Drawing.Size(615, 195);
+            templateWindStandard.Size = new System.Drawing.Size(685, 195);
             templateWindStandard.TabIndex = 19;
             templateWindStandard.TextTemplate = "";
             variable5.Text = "wind";
@@ -836,10 +934,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindStanardGust
             // 
-            templateWindStanardGust.Location = new System.Drawing.Point(30, 16);
+            templateWindStanardGust.Location = new System.Drawing.Point(18, 16);
             templateWindStanardGust.Name = "templateWindStanardGust";
             templateWindStanardGust.NodeType = "SurfaceWind.StandardGust";
-            templateWindStanardGust.Size = new System.Drawing.Size(615, 195);
+            templateWindStanardGust.Size = new System.Drawing.Size(685, 195);
             templateWindStanardGust.TabIndex = 20;
             templateWindStanardGust.TextTemplate = "";
             variable12.Text = "wind";
@@ -879,10 +977,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindVariable
             // 
-            templateWindVariable.Location = new System.Drawing.Point(30, 16);
+            templateWindVariable.Location = new System.Drawing.Point(18, 16);
             templateWindVariable.Name = "templateWindVariable";
             templateWindVariable.NodeType = "SurfaceWind.Variable";
-            templateWindVariable.Size = new System.Drawing.Size(615, 195);
+            templateWindVariable.Size = new System.Drawing.Size(685, 195);
             templateWindVariable.TabIndex = 20;
             templateWindVariable.TextTemplate = "";
             variable19.Text = "wind";
@@ -922,10 +1020,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindVariableGust
             // 
-            templateWindVariableGust.Location = new System.Drawing.Point(30, 16);
+            templateWindVariableGust.Location = new System.Drawing.Point(18, 16);
             templateWindVariableGust.Name = "templateWindVariableGust";
             templateWindVariableGust.NodeType = "SurfaceWind.VariableGust";
-            templateWindVariableGust.Size = new System.Drawing.Size(615, 195);
+            templateWindVariableGust.Size = new System.Drawing.Size(685, 195);
             templateWindVariableGust.TabIndex = 20;
             templateWindVariableGust.TextTemplate = "";
             variable26.Text = "wind";
@@ -965,10 +1063,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindVariableDirection
             // 
-            templateWindVariableDirection.Location = new System.Drawing.Point(30, 16);
+            templateWindVariableDirection.Location = new System.Drawing.Point(18, 16);
             templateWindVariableDirection.Name = "templateWindVariableDirection";
             templateWindVariableDirection.NodeType = "SurfaceWind.VariableDirection";
-            templateWindVariableDirection.Size = new System.Drawing.Size(615, 195);
+            templateWindVariableDirection.Size = new System.Drawing.Size(685, 195);
             templateWindVariableDirection.TabIndex = 20;
             templateWindVariableDirection.TextTemplate = "";
             variable33.Text = "wind";
@@ -1010,10 +1108,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateWindCalm
             // 
-            templateWindCalm.Location = new System.Drawing.Point(30, 32);
+            templateWindCalm.Location = new System.Drawing.Point(18, 33);
             templateWindCalm.Name = "templateWindCalm";
             templateWindCalm.NodeType = "SurfaceWind.Calm";
-            templateWindCalm.Size = new System.Drawing.Size(615, 185);
+            templateWindCalm.Size = new System.Drawing.Size(685, 185);
             templateWindCalm.TabIndex = 20;
             templateWindCalm.TextTemplate = "";
             variable40.Text = "wind";
@@ -1043,7 +1141,7 @@ namespace Vatsim.Vatis.UI
             // 
             // calmWindSpeed
             // 
-            calmWindSpeed.Location = new System.Drawing.Point(127, 8);
+            calmWindSpeed.Location = new System.Drawing.Point(128, 9);
             calmWindSpeed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             calmWindSpeed.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             calmWindSpeed.Name = "calmWindSpeed";
@@ -1055,7 +1153,7 @@ namespace Vatsim.Vatis.UI
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(30, 10);
+            label16.Location = new System.Drawing.Point(18, 11);
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(104, 15);
             label16.TabIndex = 17;
@@ -1076,7 +1174,7 @@ namespace Vatsim.Vatis.UI
             // tabControl3
             // 
             tabControl3.Controls.Add(tabPage1);
-            tabControl3.Controls.Add(tabPage2);
+            tabControl3.Controls.Add(tabIcaoVisFormatting);
             tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             tabControl3.Location = new System.Drawing.Point(12, 12);
             tabControl3.Name = "tabControl3";
@@ -1097,10 +1195,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateVisibility
             // 
-            templateVisibility.Location = new System.Drawing.Point(30, 34);
+            templateVisibility.Location = new System.Drawing.Point(18, 34);
             templateVisibility.Name = "templateVisibility";
             templateVisibility.NodeType = "Visibility";
-            templateVisibility.Size = new System.Drawing.Size(615, 190);
+            templateVisibility.Size = new System.Drawing.Size(685, 190);
             templateVisibility.TabIndex = 19;
             templateVisibility.TextTemplate = "";
             variable47.Text = "visibility";
@@ -1110,28 +1208,28 @@ namespace Vatsim.Vatis.UI
             templateVisibility.TextTemplateChanged += OnTextTemplateChanged;
             templateVisibility.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
-            // tabPage2
+            // tabIcaoVisFormatting
             // 
-            tabPage2.Controls.Add(label25);
-            tabPage2.Controls.Add(txtVis9999Text);
-            tabPage2.Controls.Add(visibilityMetersCutoff);
-            tabPage2.Controls.Add(label6);
-            tabPage2.Controls.Add(chkVisibilitySuffix);
-            tabPage2.Controls.Add(groupBox1);
-            tabPage2.Controls.Add(txtVis9999Voice);
-            tabPage2.Controls.Add(label19);
-            tabPage2.Location = new System.Drawing.Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(12);
-            tabPage2.Size = new System.Drawing.Size(192, 72);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "ICAO Formatting";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabIcaoVisFormatting.Controls.Add(label25);
+            tabIcaoVisFormatting.Controls.Add(txtVis9999Text);
+            tabIcaoVisFormatting.Controls.Add(visibilityMetersCutoff);
+            tabIcaoVisFormatting.Controls.Add(label6);
+            tabIcaoVisFormatting.Controls.Add(chkVisibilitySuffix);
+            tabIcaoVisFormatting.Controls.Add(groupBox1);
+            tabIcaoVisFormatting.Controls.Add(txtVis9999Voice);
+            tabIcaoVisFormatting.Controls.Add(label19);
+            tabIcaoVisFormatting.Location = new System.Drawing.Point(4, 24);
+            tabIcaoVisFormatting.Name = "tabIcaoVisFormatting";
+            tabIcaoVisFormatting.Padding = new System.Windows.Forms.Padding(12);
+            tabIcaoVisFormatting.Size = new System.Drawing.Size(192, 72);
+            tabIcaoVisFormatting.TabIndex = 1;
+            tabIcaoVisFormatting.Text = "ICAO Formatting";
+            tabIcaoVisFormatting.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new System.Drawing.Point(347, 227);
+            label25.Location = new System.Drawing.Point(356, 49);
             label25.Name = "label25";
             label25.Size = new System.Drawing.Size(66, 15);
             label25.TabIndex = 28;
@@ -1140,15 +1238,15 @@ namespace Vatsim.Vatis.UI
             // 
             // txtVis9999Text
             // 
-            txtVis9999Text.Location = new System.Drawing.Point(419, 223);
+            txtVis9999Text.Location = new System.Drawing.Point(443, 45);
             txtVis9999Text.Name = "txtVis9999Text";
-            txtVis9999Text.Size = new System.Drawing.Size(227, 23);
+            txtVis9999Text.Size = new System.Drawing.Size(214, 23);
             txtVis9999Text.TabIndex = 27;
             txtVis9999Text.TextChanged += HandleControlValueChanged;
             // 
             // visibilityMetersCutoff
             // 
-            visibilityMetersCutoff.Location = new System.Drawing.Point(290, 12);
+            visibilityMetersCutoff.Location = new System.Drawing.Point(306, 14);
             visibilityMetersCutoff.Maximum = new decimal(new int[] { 9000, 0, 0, 0 });
             visibilityMetersCutoff.Name = "visibilityMetersCutoff";
             visibilityMetersCutoff.Size = new System.Drawing.Size(105, 23);
@@ -1159,7 +1257,7 @@ namespace Vatsim.Vatis.UI
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(201, 16);
+            label6.Location = new System.Drawing.Point(217, 18);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(83, 15);
             label6.TabIndex = 24;
@@ -1169,7 +1267,7 @@ namespace Vatsim.Vatis.UI
             // chkVisibilitySuffix
             // 
             chkVisibilitySuffix.AutoSize = true;
-            chkVisibilitySuffix.Location = new System.Drawing.Point(26, 14);
+            chkVisibilitySuffix.Location = new System.Drawing.Point(28, 16);
             chkVisibilitySuffix.Name = "chkVisibilitySuffix";
             chkVisibilitySuffix.Size = new System.Drawing.Size(167, 19);
             chkVisibilitySuffix.TabIndex = 23;
@@ -1196,9 +1294,9 @@ namespace Vatsim.Vatis.UI
             groupBox1.Controls.Add(label17);
             groupBox1.Controls.Add(label18);
             groupBox1.Controls.Add(visDirSouth);
-            groupBox1.Location = new System.Drawing.Point(26, 39);
+            groupBox1.Location = new System.Drawing.Point(28, 76);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(622, 170);
+            groupBox1.Size = new System.Drawing.Size(665, 169);
             groupBox1.TabIndex = 18;
             groupBox1.TabStop = false;
             groupBox1.Text = "Visibility Direction";
@@ -1206,7 +1304,7 @@ namespace Vatsim.Vatis.UI
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(41, 32);
+            label7.Location = new System.Drawing.Point(44, 31);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(41, 15);
             label7.TabIndex = 0;
@@ -1214,7 +1312,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirNorth
             // 
-            visDirNorth.Location = new System.Drawing.Point(87, 28);
+            visDirNorth.Location = new System.Drawing.Point(90, 27);
             visDirNorth.Name = "visDirNorth";
             visDirNorth.Size = new System.Drawing.Size(214, 23);
             visDirNorth.TabIndex = 1;
@@ -1223,7 +1321,7 @@ namespace Vatsim.Vatis.UI
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(17, 66);
+            label8.Location = new System.Drawing.Point(20, 65);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(65, 15);
             label8.TabIndex = 2;
@@ -1231,7 +1329,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirNorthWest
             // 
-            visDirNorthWest.Location = new System.Drawing.Point(392, 130);
+            visDirNorthWest.Location = new System.Drawing.Point(430, 130);
             visDirNorthWest.Name = "visDirNorthWest";
             visDirNorthWest.Size = new System.Drawing.Size(214, 23);
             visDirNorthWest.TabIndex = 15;
@@ -1239,7 +1337,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirNorthEast
             // 
-            visDirNorthEast.Location = new System.Drawing.Point(87, 62);
+            visDirNorthEast.Location = new System.Drawing.Point(90, 61);
             visDirNorthEast.Name = "visDirNorthEast";
             visDirNorthEast.Size = new System.Drawing.Size(214, 23);
             visDirNorthEast.TabIndex = 3;
@@ -1248,7 +1346,7 @@ namespace Vatsim.Vatis.UI
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(317, 134);
+            label11.Location = new System.Drawing.Point(355, 134);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(70, 15);
             label11.TabIndex = 14;
@@ -1257,7 +1355,7 @@ namespace Vatsim.Vatis.UI
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(51, 100);
+            label9.Location = new System.Drawing.Point(54, 99);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(31, 15);
             label9.TabIndex = 4;
@@ -1265,7 +1363,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirWest
             // 
-            visDirWest.Location = new System.Drawing.Point(392, 96);
+            visDirWest.Location = new System.Drawing.Point(430, 96);
             visDirWest.Name = "visDirWest";
             visDirWest.Size = new System.Drawing.Size(214, 23);
             visDirWest.TabIndex = 13;
@@ -1273,7 +1371,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirEast
             // 
-            visDirEast.Location = new System.Drawing.Point(87, 96);
+            visDirEast.Location = new System.Drawing.Point(90, 95);
             visDirEast.Name = "visDirEast";
             visDirEast.Size = new System.Drawing.Size(214, 23);
             visDirEast.TabIndex = 5;
@@ -1282,7 +1380,7 @@ namespace Vatsim.Vatis.UI
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(351, 100);
+            label12.Location = new System.Drawing.Point(389, 100);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(36, 15);
             label12.TabIndex = 12;
@@ -1291,7 +1389,7 @@ namespace Vatsim.Vatis.UI
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(17, 134);
+            label10.Location = new System.Drawing.Point(20, 133);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(65, 15);
             label10.TabIndex = 6;
@@ -1299,7 +1397,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirSouthWest
             // 
-            visDirSouthWest.Location = new System.Drawing.Point(392, 62);
+            visDirSouthWest.Location = new System.Drawing.Point(430, 62);
             visDirSouthWest.Name = "visDirSouthWest";
             visDirSouthWest.Size = new System.Drawing.Size(214, 23);
             visDirSouthWest.TabIndex = 11;
@@ -1307,7 +1405,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirSouthEast
             // 
-            visDirSouthEast.Location = new System.Drawing.Point(87, 130);
+            visDirSouthEast.Location = new System.Drawing.Point(90, 129);
             visDirSouthEast.Name = "visDirSouthEast";
             visDirSouthEast.Size = new System.Drawing.Size(214, 23);
             visDirSouthEast.TabIndex = 7;
@@ -1316,7 +1414,7 @@ namespace Vatsim.Vatis.UI
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(317, 66);
+            label17.Location = new System.Drawing.Point(355, 66);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(70, 15);
             label17.TabIndex = 10;
@@ -1325,7 +1423,7 @@ namespace Vatsim.Vatis.UI
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(346, 32);
+            label18.Location = new System.Drawing.Point(384, 32);
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(41, 15);
             label18.TabIndex = 8;
@@ -1333,7 +1431,7 @@ namespace Vatsim.Vatis.UI
             // 
             // visDirSouth
             // 
-            visDirSouth.Location = new System.Drawing.Point(392, 28);
+            visDirSouth.Location = new System.Drawing.Point(430, 28);
             visDirSouth.Name = "visDirSouth";
             visDirSouth.Size = new System.Drawing.Size(214, 23);
             visDirSouth.TabIndex = 9;
@@ -1341,16 +1439,16 @@ namespace Vatsim.Vatis.UI
             // 
             // txtVis9999Voice
             // 
-            txtVis9999Voice.Location = new System.Drawing.Point(110, 223);
+            txtVis9999Voice.Location = new System.Drawing.Point(122, 45);
             txtVis9999Voice.Name = "txtVis9999Voice";
-            txtVis9999Voice.Size = new System.Drawing.Size(227, 23);
+            txtVis9999Voice.Size = new System.Drawing.Size(213, 23);
             txtVis9999Voice.TabIndex = 17;
             txtVis9999Voice.TextChanged += HandleControlValueChanged;
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(29, 227);
+            label19.Location = new System.Drawing.Point(28, 49);
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(73, 15);
             label19.TabIndex = 16;
@@ -1365,7 +1463,7 @@ namespace Vatsim.Vatis.UI
             tabPresentWeather.Padding = new System.Windows.Forms.Padding(12);
             tabPresentWeather.Size = new System.Drawing.Size(192, 72);
             tabPresentWeather.TabIndex = 3;
-            tabPresentWeather.Text = "Present Weather";
+            tabPresentWeather.Text = "Weather";
             tabPresentWeather.UseVisualStyleBackColor = true;
             // 
             // tabControl4
@@ -1394,10 +1492,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templatePresentWeather
             // 
-            templatePresentWeather.Location = new System.Drawing.Point(30, 39);
+            templatePresentWeather.Location = new System.Drawing.Point(18, 39);
             templatePresentWeather.Name = "templatePresentWeather";
             templatePresentWeather.NodeType = "PresentWeather";
-            templatePresentWeather.Size = new System.Drawing.Size(615, 180);
+            templatePresentWeather.Size = new System.Drawing.Size(685, 180);
             templatePresentWeather.TabIndex = 19;
             templatePresentWeather.TextTemplate = "";
             variable48.Text = "weather";
@@ -1657,7 +1755,7 @@ namespace Vatsim.Vatis.UI
             tabClouds.Location = new System.Drawing.Point(4, 24);
             tabClouds.Name = "tabClouds";
             tabClouds.Padding = new System.Windows.Forms.Padding(12);
-            tabClouds.Size = new System.Drawing.Size(706, 310);
+            tabClouds.Size = new System.Drawing.Size(192, 72);
             tabClouds.TabIndex = 4;
             tabClouds.Text = "Clouds";
             tabClouds.UseVisualStyleBackColor = true;
@@ -1671,7 +1769,7 @@ namespace Vatsim.Vatis.UI
             tabControl5.Location = new System.Drawing.Point(12, 12);
             tabControl5.Name = "tabControl5";
             tabControl5.SelectedIndex = 0;
-            tabControl5.Size = new System.Drawing.Size(682, 286);
+            tabControl5.Size = new System.Drawing.Size(168, 48);
             tabControl5.TabIndex = 4;
             // 
             // tabPage4
@@ -1682,7 +1780,7 @@ namespace Vatsim.Vatis.UI
             tabPage4.Location = new System.Drawing.Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(674, 258);
+            tabPage4.Size = new System.Drawing.Size(160, 20);
             tabPage4.TabIndex = 0;
             tabPage4.Text = "Template";
             tabPage4.UseVisualStyleBackColor = true;
@@ -1690,7 +1788,7 @@ namespace Vatsim.Vatis.UI
             // chkConvertCloudsMetric
             // 
             chkConvertCloudsMetric.AutoSize = true;
-            chkConvertCloudsMetric.Location = new System.Drawing.Point(238, 20);
+            chkConvertCloudsMetric.Location = new System.Drawing.Point(225, 20);
             chkConvertCloudsMetric.Name = "chkConvertCloudsMetric";
             chkConvertCloudsMetric.Size = new System.Drawing.Size(223, 19);
             chkConvertCloudsMetric.TabIndex = 21;
@@ -1702,7 +1800,7 @@ namespace Vatsim.Vatis.UI
             // chkIdentifyCeilingLayer
             // 
             chkIdentifyCeilingLayer.AutoSize = true;
-            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(31, 20);
+            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(18, 20);
             chkIdentifyCeilingLayer.Name = "chkIdentifyCeilingLayer";
             chkIdentifyCeilingLayer.Size = new System.Drawing.Size(201, 19);
             chkIdentifyCeilingLayer.TabIndex = 20;
@@ -1713,10 +1811,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateCloudLayers
             // 
-            templateCloudLayers.Location = new System.Drawing.Point(30, 59);
+            templateCloudLayers.Location = new System.Drawing.Point(18, 58);
             templateCloudLayers.Name = "templateCloudLayers";
             templateCloudLayers.NodeType = "Clouds";
-            templateCloudLayers.Size = new System.Drawing.Size(615, 180);
+            templateCloudLayers.Size = new System.Drawing.Size(685, 180);
             templateCloudLayers.TabIndex = 19;
             templateCloudLayers.TextTemplate = "";
             variable49.Text = "clouds";
@@ -1732,7 +1830,7 @@ namespace Vatsim.Vatis.UI
             tabPage6.Location = new System.Drawing.Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new System.Windows.Forms.Padding(10);
-            tabPage6.Size = new System.Drawing.Size(674, 258);
+            tabPage6.Size = new System.Drawing.Size(192, 72);
             tabPage6.TabIndex = 1;
             tabPage6.Text = "Cloud Types";
             tabPage6.UseVisualStyleBackColor = true;
@@ -1751,7 +1849,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel7.RowCount = 2;
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel7.Size = new System.Drawing.Size(654, 238);
+            tableLayoutPanel7.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel7.TabIndex = 3;
             // 
             // gridCloudTypes
@@ -1787,7 +1885,7 @@ namespace Vatsim.Vatis.UI
             gridCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridCloudTypes.RowHeadersVisible = false;
             gridCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridCloudTypes.Size = new System.Drawing.Size(646, 197);
+            gridCloudTypes.Size = new System.Drawing.Size(164, 11);
             gridCloudTypes.TabIndex = 2;
             gridCloudTypes.CellEndEdit += gridCloudTypes_CellEndEdit;
             gridCloudTypes.CellValidating += gridCloudTypes_CellValidating;
@@ -1816,12 +1914,12 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
             tableLayoutPanel9.Controls.Add(label24, 0, 0);
             tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel9.Location = new System.Drawing.Point(3, 206);
+            tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             tableLayoutPanel9.RowCount = 1;
             tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel9.Size = new System.Drawing.Size(648, 29);
+            tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
             tableLayoutPanel9.TabIndex = 3;
             // 
             // label24
@@ -1831,7 +1929,7 @@ namespace Vatsim.Vatis.UI
             label24.Location = new System.Drawing.Point(0, 0);
             label24.Margin = new System.Windows.Forms.Padding(0);
             label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(648, 29);
+            label24.Size = new System.Drawing.Size(166, 29);
             label24.TabIndex = 2;
             label24.Text = "Available Variables: {altitude} and {convective}";
             label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1930,7 +2028,7 @@ namespace Vatsim.Vatis.UI
             // chkTempLeadingZero
             // 
             chkTempLeadingZero.AutoSize = true;
-            chkTempLeadingZero.Location = new System.Drawing.Point(48, 60);
+            chkTempLeadingZero.Location = new System.Drawing.Point(36, 60);
             chkTempLeadingZero.Name = "chkTempLeadingZero";
             chkTempLeadingZero.Size = new System.Drawing.Size(193, 19);
             chkTempLeadingZero.TabIndex = 21;
@@ -1942,7 +2040,7 @@ namespace Vatsim.Vatis.UI
             // chkTempPlusPrefix
             // 
             chkTempPlusPrefix.AutoSize = true;
-            chkTempPlusPrefix.Location = new System.Drawing.Point(48, 28);
+            chkTempPlusPrefix.Location = new System.Drawing.Point(36, 28);
             chkTempPlusPrefix.Name = "chkTempPlusPrefix";
             chkTempPlusPrefix.Size = new System.Drawing.Size(298, 19);
             chkTempPlusPrefix.TabIndex = 20;
@@ -1953,10 +2051,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateTemperature
             // 
-            templateTemperature.Location = new System.Drawing.Point(46, 92);
+            templateTemperature.Location = new System.Drawing.Point(34, 92);
             templateTemperature.Name = "templateTemperature";
             templateTemperature.NodeType = "Temperature";
-            templateTemperature.Size = new System.Drawing.Size(615, 190);
+            templateTemperature.Size = new System.Drawing.Size(685, 190);
             templateTemperature.TabIndex = 19;
             templateTemperature.TextTemplate = "";
             variable50.Text = "temp";
@@ -1982,7 +2080,7 @@ namespace Vatsim.Vatis.UI
             // chkDewLeadingZero
             // 
             chkDewLeadingZero.AutoSize = true;
-            chkDewLeadingZero.Location = new System.Drawing.Point(48, 60);
+            chkDewLeadingZero.Location = new System.Drawing.Point(36, 60);
             chkDewLeadingZero.Name = "chkDewLeadingZero";
             chkDewLeadingZero.Size = new System.Drawing.Size(193, 19);
             chkDewLeadingZero.TabIndex = 24;
@@ -1994,7 +2092,7 @@ namespace Vatsim.Vatis.UI
             // chkDewPlusPrefix
             // 
             chkDewPlusPrefix.AutoSize = true;
-            chkDewPlusPrefix.Location = new System.Drawing.Point(48, 28);
+            chkDewPlusPrefix.Location = new System.Drawing.Point(36, 28);
             chkDewPlusPrefix.Name = "chkDewPlusPrefix";
             chkDewPlusPrefix.Size = new System.Drawing.Size(283, 19);
             chkDewPlusPrefix.TabIndex = 23;
@@ -2005,10 +2103,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateDewpoint
             // 
-            templateDewpoint.Location = new System.Drawing.Point(46, 92);
+            templateDewpoint.Location = new System.Drawing.Point(34, 92);
             templateDewpoint.Name = "templateDewpoint";
             templateDewpoint.NodeType = "Dewpoint";
-            templateDewpoint.Size = new System.Drawing.Size(615, 190);
+            templateDewpoint.Size = new System.Drawing.Size(685, 190);
             templateDewpoint.TabIndex = 22;
             templateDewpoint.TextTemplate = "";
             variable51.Text = "dewpoint";
@@ -2024,17 +2122,17 @@ namespace Vatsim.Vatis.UI
             tabAltimeter.Location = new System.Drawing.Point(4, 24);
             tabAltimeter.Name = "tabAltimeter";
             tabAltimeter.Padding = new System.Windows.Forms.Padding(12);
-            tabAltimeter.Size = new System.Drawing.Size(192, 72);
+            tabAltimeter.Size = new System.Drawing.Size(753, 310);
             tabAltimeter.TabIndex = 7;
             tabAltimeter.Text = "Altimeter";
             tabAltimeter.UseVisualStyleBackColor = true;
             // 
             // templateAltimeter
             // 
-            templateAltimeter.Location = new System.Drawing.Point(46, 60);
+            templateAltimeter.Location = new System.Drawing.Point(34, 60);
             templateAltimeter.Name = "templateAltimeter";
             templateAltimeter.NodeType = "Altimeter";
-            templateAltimeter.Size = new System.Drawing.Size(615, 190);
+            templateAltimeter.Size = new System.Drawing.Size(685, 190);
             templateAltimeter.TabIndex = 25;
             templateAltimeter.TextTemplate = "";
             variable52.Text = "altimeter";
@@ -2053,6 +2151,146 @@ namespace Vatsim.Vatis.UI
             templateAltimeter.TextTemplateChanged += OnTextTemplateChanged;
             templateAltimeter.VoiceTemplateChanged += OnVoiceTemplateChanged;
             // 
+            // tabTransitionLevel
+            // 
+            tabTransitionLevel.Controls.Add(tabControl6);
+            tabTransitionLevel.Location = new System.Drawing.Point(4, 24);
+            tabTransitionLevel.Name = "tabTransitionLevel";
+            tabTransitionLevel.Padding = new System.Windows.Forms.Padding(12);
+            tabTransitionLevel.Size = new System.Drawing.Size(753, 310);
+            tabTransitionLevel.TabIndex = 9;
+            tabTransitionLevel.Text = "Transition Level";
+            tabTransitionLevel.UseVisualStyleBackColor = true;
+            // 
+            // tabControl6
+            // 
+            tabControl6.Controls.Add(tabPage2);
+            tabControl6.Controls.Add(tabPage5);
+            tabControl6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl6.Location = new System.Drawing.Point(12, 12);
+            tabControl6.Name = "tabControl6";
+            tabControl6.SelectedIndex = 0;
+            tabControl6.Size = new System.Drawing.Size(729, 286);
+            tabControl6.TabIndex = 27;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(templateTransitionLevel);
+            tabPage2.Location = new System.Drawing.Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            tabPage2.Size = new System.Drawing.Size(721, 258);
+            tabPage2.TabIndex = 0;
+            tabPage2.Text = "Template";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // templateTransitionLevel
+            // 
+            templateTransitionLevel.Location = new System.Drawing.Point(21, 27);
+            templateTransitionLevel.Name = "templateTransitionLevel";
+            templateTransitionLevel.NodeType = "TransitionLevel";
+            templateTransitionLevel.Size = new System.Drawing.Size(685, 190);
+            templateTransitionLevel.TabIndex = 26;
+            templateTransitionLevel.TextTemplate = "";
+            variable56.Text = "trl";
+            variable56.ToolTip = "The transition level altitude value (e.g. \"65\")";
+            variable57.Text = "trl|text";
+            variable57.ToolTip = "Encodes the transition level altitude value into numeric word form (e.g. \"SIX FIVE\")";
+            templateTransitionLevel.Variables.Add(variable56);
+            templateTransitionLevel.Variables.Add(variable57);
+            templateTransitionLevel.VoiceTemplate = "";
+            templateTransitionLevel.TextTemplateChanged += OnTextTemplateChanged;
+            templateTransitionLevel.VoiceTemplateChanged += OnVoiceTemplateChanged;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(btnDeleteTransitionLevel);
+            tabPage5.Controls.Add(gridTransitionLevels);
+            tabPage5.Controls.Add(label26);
+            tabPage5.Location = new System.Drawing.Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            tabPage5.Size = new System.Drawing.Size(192, 72);
+            tabPage5.TabIndex = 1;
+            tabPage5.Text = "Transition Levels";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteTransitionLevel
+            // 
+            btnDeleteTransitionLevel.Location = new System.Drawing.Point(598, 225);
+            btnDeleteTransitionLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDeleteTransitionLevel.Name = "btnDeleteTransitionLevel";
+            btnDeleteTransitionLevel.Size = new System.Drawing.Size(120, 27);
+            btnDeleteTransitionLevel.TabIndex = 1;
+            btnDeleteTransitionLevel.Text = "Delete Selected";
+            btnDeleteTransitionLevel.UseVisualStyleBackColor = true;
+            btnDeleteTransitionLevel.Click += btnDeleteTransitionLevel_Click;
+            // 
+            // gridTransitionLevels
+            // 
+            gridTransitionLevels.AllowUserToResizeColumns = false;
+            gridTransitionLevels.AllowUserToResizeRows = false;
+            gridTransitionLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gridTransitionLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            gridTransitionLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            gridTransitionLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridTransitionLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            gridTransitionLevels.DefaultCellStyle = dataGridViewCellStyle10;
+            gridTransitionLevels.Dock = System.Windows.Forms.DockStyle.Top;
+            gridTransitionLevels.Location = new System.Drawing.Point(3, 3);
+            gridTransitionLevels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridTransitionLevels.MultiSelect = false;
+            gridTransitionLevels.Name = "gridTransitionLevels";
+            gridTransitionLevels.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            gridTransitionLevels.RowHeadersVisible = false;
+            gridTransitionLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridTransitionLevels.Size = new System.Drawing.Size(186, 216);
+            gridTransitionLevels.TabIndex = 2;
+            gridTransitionLevels.CellEndEdit += gridTransitionLevels_CellEndEdit;
+            gridTransitionLevels.CellValidating += gridTransitionLevels_CellValidating;
+            gridTransitionLevels.CellValueChanged += gridTransitionLevels_CellValueChanged;
+            gridTransitionLevels.EditingControlShowing += gridTransitionLevels_EditingControlShowing;
+            gridTransitionLevels.UserDeletedRow += gridTransitionLevels_UserDeletedRow;
+            gridTransitionLevels.UserDeletingRow += gridTransitionLevels_UserDeletingRow;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.HeaderText = "QNH Low";
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.HeaderText = "QNH High";
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.HeaderText = "Transition Level";
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new System.Drawing.Point(1, 231);
+            label26.Name = "label26";
+            label26.Size = new System.Drawing.Size(216, 15);
+            label26.TabIndex = 2;
+            label26.Text = "Low and High QNH values are required.\r\n";
+            // 
             // tabClosing
             // 
             tabClosing.Controls.Add(templateClosingStatement);
@@ -2060,25 +2298,25 @@ namespace Vatsim.Vatis.UI
             tabClosing.Location = new System.Drawing.Point(4, 24);
             tabClosing.Name = "tabClosing";
             tabClosing.Padding = new System.Windows.Forms.Padding(3);
-            tabClosing.Size = new System.Drawing.Size(192, 72);
+            tabClosing.Size = new System.Drawing.Size(753, 310);
             tabClosing.TabIndex = 8;
             tabClosing.Text = "Closing Statement";
             tabClosing.UseVisualStyleBackColor = true;
             // 
             // templateClosingStatement
             // 
-            templateClosingStatement.Location = new System.Drawing.Point(46, 70);
+            templateClosingStatement.Location = new System.Drawing.Point(34, 70);
             templateClosingStatement.Name = "templateClosingStatement";
             templateClosingStatement.NodeType = "ClosingStatement";
-            templateClosingStatement.Size = new System.Drawing.Size(615, 210);
+            templateClosingStatement.Size = new System.Drawing.Size(685, 210);
             templateClosingStatement.TabIndex = 1;
             templateClosingStatement.TextTemplate = "";
-            variable56.Text = "letter";
-            variable56.ToolTip = "The current ATIS letter (e.g. \"A\")";
-            variable57.Text = "letter|word";
-            variable57.ToolTip = "The current ATIS letter in word form (e.g. \"ALPHA\")";
-            templateClosingStatement.Variables.Add(variable56);
-            templateClosingStatement.Variables.Add(variable57);
+            variable58.Text = "letter";
+            variable58.ToolTip = "The current ATIS letter (e.g. \"A\")";
+            variable59.Text = "letter|word";
+            variable59.ToolTip = "The current ATIS letter in word form (e.g. \"ALPHA\")";
+            templateClosingStatement.Variables.Add(variable58);
+            templateClosingStatement.Variables.Add(variable59);
             templateClosingStatement.VoiceTemplate = "";
             templateClosingStatement.TextTemplateChanged += OnTextTemplateChanged;
             templateClosingStatement.VoiceTemplateChanged += OnVoiceTemplateChanged;
@@ -2086,7 +2324,7 @@ namespace Vatsim.Vatis.UI
             // chkAutoIncludeClosingStatement
             // 
             chkAutoIncludeClosingStatement.AutoSize = true;
-            chkAutoIncludeClosingStatement.Location = new System.Drawing.Point(46, 31);
+            chkAutoIncludeClosingStatement.Location = new System.Drawing.Point(34, 31);
             chkAutoIncludeClosingStatement.Name = "chkAutoIncludeClosingStatement";
             chkAutoIncludeClosingStatement.Size = new System.Drawing.Size(354, 19);
             chkAutoIncludeClosingStatement.TabIndex = 0;
@@ -2095,100 +2333,6 @@ namespace Vatsim.Vatis.UI
             chkAutoIncludeClosingStatement.UseVisualStyleBackColor = true;
             chkAutoIncludeClosingStatement.CheckedChanged += HandleControlValueChanged;
             // 
-            // pagePresets
-            // 
-            pagePresets.Controls.Add(chkExternalAtisGenerator);
-            pagePresets.Controls.Add(dynamicPresetControl);
-            pagePresets.Controls.Add(btnRenamePreset);
-            pagePresets.Controls.Add(btnDeletePreset);
-            pagePresets.Controls.Add(btnCopyPreset);
-            pagePresets.Controls.Add(btnNewPreset);
-            pagePresets.Controls.Add(ddlPresets);
-            pagePresets.Location = new System.Drawing.Point(4, 24);
-            pagePresets.Name = "pagePresets";
-            pagePresets.Padding = new System.Windows.Forms.Padding(10);
-            pagePresets.Size = new System.Drawing.Size(738, 362);
-            pagePresets.TabIndex = 0;
-            pagePresets.Text = "Presets";
-            pagePresets.UseVisualStyleBackColor = true;
-            // 
-            // chkExternalAtisGenerator
-            // 
-            chkExternalAtisGenerator.AutoSize = true;
-            chkExternalAtisGenerator.Enabled = false;
-            chkExternalAtisGenerator.Location = new System.Drawing.Point(15, 41);
-            chkExternalAtisGenerator.Name = "chkExternalAtisGenerator";
-            chkExternalAtisGenerator.Size = new System.Drawing.Size(242, 19);
-            chkExternalAtisGenerator.TabIndex = 7;
-            chkExternalAtisGenerator.Text = "Use external ATIS generator (e.g. UniATIS)";
-            chkExternalAtisGenerator.UseVisualStyleBackColor = true;
-            chkExternalAtisGenerator.CheckedChanged += HandleControlValueChanged;
-            // 
-            // dynamicPresetControl
-            // 
-            dynamicPresetControl.Location = new System.Drawing.Point(15, 64);
-            dynamicPresetControl.Name = "dynamicPresetControl";
-            dynamicPresetControl.Size = new System.Drawing.Size(681, 286);
-            dynamicPresetControl.TabIndex = 6;
-            // 
-            // btnRenamePreset
-            // 
-            btnRenamePreset.Enabled = false;
-            btnRenamePreset.Location = new System.Drawing.Point(565, 13);
-            btnRenamePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnRenamePreset.Name = "btnRenamePreset";
-            btnRenamePreset.Size = new System.Drawing.Size(64, 24);
-            btnRenamePreset.TabIndex = 5;
-            btnRenamePreset.Text = "Rename";
-            btnRenamePreset.UseVisualStyleBackColor = true;
-            btnRenamePreset.Click += btnRenamePreset_Click;
-            // 
-            // btnDeletePreset
-            // 
-            btnDeletePreset.Enabled = false;
-            btnDeletePreset.Location = new System.Drawing.Point(632, 13);
-            btnDeletePreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnDeletePreset.Name = "btnDeletePreset";
-            btnDeletePreset.Size = new System.Drawing.Size(64, 24);
-            btnDeletePreset.TabIndex = 3;
-            btnDeletePreset.Text = "Delete";
-            btnDeletePreset.UseVisualStyleBackColor = true;
-            btnDeletePreset.Click += btnDeletePreset_Click;
-            // 
-            // btnCopyPreset
-            // 
-            btnCopyPreset.Enabled = false;
-            btnCopyPreset.Location = new System.Drawing.Point(497, 13);
-            btnCopyPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnCopyPreset.Name = "btnCopyPreset";
-            btnCopyPreset.Size = new System.Drawing.Size(64, 24);
-            btnCopyPreset.TabIndex = 2;
-            btnCopyPreset.Text = "Copy";
-            btnCopyPreset.UseVisualStyleBackColor = true;
-            btnCopyPreset.Click += btnCopyPreset_Click;
-            // 
-            // btnNewPreset
-            // 
-            btnNewPreset.Location = new System.Drawing.Point(429, 13);
-            btnNewPreset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnNewPreset.Name = "btnNewPreset";
-            btnNewPreset.Size = new System.Drawing.Size(64, 24);
-            btnNewPreset.TabIndex = 1;
-            btnNewPreset.Text = "New";
-            btnNewPreset.UseVisualStyleBackColor = true;
-            btnNewPreset.Click += btnNewPreset_Click;
-            // 
-            // ddlPresets
-            // 
-            ddlPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            ddlPresets.FormattingEnabled = true;
-            ddlPresets.Location = new System.Drawing.Point(15, 14);
-            ddlPresets.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            ddlPresets.Name = "ddlPresets";
-            ddlPresets.Size = new System.Drawing.Size(408, 23);
-            ddlPresets.TabIndex = 0;
-            ddlPresets.SelectedIndexChanged += ddlPresets_SelectedIndexChanged;
-            // 
             // pageContractions
             // 
             pageContractions.Controls.Add(tableLayoutPanel3);
@@ -2196,7 +2340,7 @@ namespace Vatsim.Vatis.UI
             pageContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pageContractions.Name = "pageContractions";
             pageContractions.Padding = new System.Windows.Forms.Padding(12);
-            pageContractions.Size = new System.Drawing.Size(738, 362);
+            pageContractions.Size = new System.Drawing.Size(785, 362);
             pageContractions.TabIndex = 1;
             pageContractions.Text = "Contractions";
             pageContractions.UseVisualStyleBackColor = true;
@@ -2215,12 +2359,12 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(714, 338);
+            tableLayoutPanel3.Size = new System.Drawing.Size(761, 338);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // btnDeleteContraction
             // 
-            btnDeleteContraction.Location = new System.Drawing.Point(590, 306);
+            btnDeleteContraction.Location = new System.Drawing.Point(637, 306);
             btnDeleteContraction.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnDeleteContraction.Name = "btnDeleteContraction";
             btnDeleteContraction.Size = new System.Drawing.Size(120, 27);
@@ -2235,24 +2379,24 @@ namespace Vatsim.Vatis.UI
             gridContractions.AllowUserToResizeRows = false;
             gridContractions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             gridContractions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            gridContractions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            gridContractions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             gridContractions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridContractions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ColumnFind, ColumnReplace });
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            gridContractions.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            gridContractions.DefaultCellStyle = dataGridViewCellStyle12;
             gridContractions.Dock = System.Windows.Forms.DockStyle.Fill;
             gridContractions.Location = new System.Drawing.Point(4, 3);
             gridContractions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2260,7 +2404,7 @@ namespace Vatsim.Vatis.UI
             gridContractions.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridContractions.RowHeadersVisible = false;
             gridContractions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridContractions.Size = new System.Drawing.Size(706, 297);
+            gridContractions.Size = new System.Drawing.Size(753, 297);
             gridContractions.TabIndex = 2;
             gridContractions.CellEndEdit += gridContractions_CellEndEdit;
             gridContractions.CellValidating += gridContractions_CellValidating;
@@ -2279,131 +2423,6 @@ namespace Vatsim.Vatis.UI
             ColumnReplace.HeaderText = "Spoken";
             ColumnReplace.Name = "ColumnReplace";
             // 
-            // pageTransitionLevel
-            // 
-            pageTransitionLevel.Controls.Add(chkTransitionLevelPrefix);
-            pageTransitionLevel.Controls.Add(tableLayoutPanel5);
-            pageTransitionLevel.Location = new System.Drawing.Point(4, 24);
-            pageTransitionLevel.Name = "pageTransitionLevel";
-            pageTransitionLevel.Padding = new System.Windows.Forms.Padding(12);
-            pageTransitionLevel.Size = new System.Drawing.Size(738, 362);
-            pageTransitionLevel.TabIndex = 3;
-            pageTransitionLevel.Text = "Transition Level";
-            pageTransitionLevel.UseVisualStyleBackColor = true;
-            // 
-            // chkTransitionLevelPrefix
-            // 
-            chkTransitionLevelPrefix.AutoSize = true;
-            chkTransitionLevelPrefix.Location = new System.Drawing.Point(13, 14);
-            chkTransitionLevelPrefix.Name = "chkTransitionLevelPrefix";
-            chkTransitionLevelPrefix.Size = new System.Drawing.Size(316, 19);
-            chkTransitionLevelPrefix.TabIndex = 4;
-            chkTransitionLevelPrefix.Text = "Prepend \"flight level\" to spoken transition level altitude";
-            chkTransitionLevelPrefix.UseVisualStyleBackColor = true;
-            chkTransitionLevelPrefix.CheckedChanged += HandleControlValueChanged;
-            // 
-            // tableLayoutPanel5
-            // 
-            tableLayoutPanel5.ColumnCount = 1;
-            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel5.Controls.Add(gridTransitionLevels, 0, 0);
-            tableLayoutPanel5.Controls.Add(panel3, 0, 1);
-            tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tableLayoutPanel5.Location = new System.Drawing.Point(12, 43);
-            tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 99.99999F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(714, 307);
-            tableLayoutPanel5.TabIndex = 3;
-            // 
-            // gridTransitionLevels
-            // 
-            gridTransitionLevels.AllowUserToResizeColumns = false;
-            gridTransitionLevels.AllowUserToResizeRows = false;
-            gridTransitionLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            gridTransitionLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            gridTransitionLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            gridTransitionLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridTransitionLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { low, high, transitionLevel });
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            gridTransitionLevels.DefaultCellStyle = dataGridViewCellStyle12;
-            gridTransitionLevels.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridTransitionLevels.Location = new System.Drawing.Point(4, 3);
-            gridTransitionLevels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridTransitionLevels.Name = "gridTransitionLevels";
-            gridTransitionLevels.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            gridTransitionLevels.RowHeadersVisible = false;
-            gridTransitionLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridTransitionLevels.Size = new System.Drawing.Size(706, 266);
-            gridTransitionLevels.TabIndex = 2;
-            gridTransitionLevels.CellEndEdit += gridTransitionLevels_CellEndEdit;
-            gridTransitionLevels.CellValidating += gridTransitionLevels_CellValidating;
-            gridTransitionLevels.CellValueChanged += gridTransitionLevels_CellValueChanged;
-            gridTransitionLevels.EditingControlShowing += gridTransitionLevels_EditingControlShowing;
-            // 
-            // low
-            // 
-            low.HeaderText = "QNH Low";
-            low.Name = "low";
-            // 
-            // high
-            // 
-            high.HeaderText = "QNH High";
-            high.Name = "high";
-            // 
-            // transitionLevel
-            // 
-            transitionLevel.HeaderText = "Transition Level";
-            transitionLevel.Name = "transitionLevel";
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(label13);
-            panel3.Controls.Add(btnDeleteTransitionLevel);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(0, 272);
-            panel3.Margin = new System.Windows.Forms.Padding(0);
-            panel3.Name = "panel3";
-            panel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            panel3.Size = new System.Drawing.Size(714, 35);
-            panel3.TabIndex = 3;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(4, 10);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(216, 15);
-            label13.TabIndex = 2;
-            label13.Text = "Low and High QNH values are required.\r\n";
-            // 
-            // btnDeleteTransitionLevel
-            // 
-            btnDeleteTransitionLevel.Location = new System.Drawing.Point(590, 4);
-            btnDeleteTransitionLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnDeleteTransitionLevel.Name = "btnDeleteTransitionLevel";
-            btnDeleteTransitionLevel.Size = new System.Drawing.Size(120, 27);
-            btnDeleteTransitionLevel.TabIndex = 1;
-            btnDeleteTransitionLevel.Text = "Delete Selected";
-            btnDeleteTransitionLevel.UseVisualStyleBackColor = true;
-            btnDeleteTransitionLevel.Click += btnDeleteTransitionLevel_Click;
-            // 
             // btnManageComposite
             // 
             btnManageComposite.AutoSize = true;
@@ -2412,7 +2431,7 @@ namespace Vatsim.Vatis.UI
             btnManageComposite.Location = new System.Drawing.Point(4, 399);
             btnManageComposite.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
             btnManageComposite.Name = "btnManageComposite";
-            btnManageComposite.Size = new System.Drawing.Size(193, 29);
+            btnManageComposite.Size = new System.Drawing.Size(196, 29);
             btnManageComposite.TabIndex = 2;
             btnManageComposite.Text = "Manage Composite...";
             btnManageComposite.UseVisualStyleBackColor = true;
@@ -2482,7 +2501,7 @@ namespace Vatsim.Vatis.UI
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(194, 390);
+            panel1.Size = new System.Drawing.Size(197, 390);
             panel1.TabIndex = 3;
             // 
             // label1
@@ -2490,7 +2509,7 @@ namespace Vatsim.Vatis.UI
             label1.Dock = System.Windows.Forms.DockStyle.Fill;
             label1.Location = new System.Drawing.Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(194, 24);
+            label1.Size = new System.Drawing.Size(197, 24);
             label1.TabIndex = 3;
             label1.Text = "Composites";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2506,7 +2525,7 @@ namespace Vatsim.Vatis.UI
             panelCompositeList.Name = "panelCompositeList";
             panelCompositeList.Padding = new System.Windows.Forms.Padding(6);
             panelCompositeList.ShowBorder = true;
-            panelCompositeList.Size = new System.Drawing.Size(194, 366);
+            panelCompositeList.Size = new System.Drawing.Size(197, 366);
             panelCompositeList.TabIndex = 2;
             // 
             // TreeMenu
@@ -2522,7 +2541,7 @@ namespace Vatsim.Vatis.UI
             TreeMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TreeMenu.Name = "TreeMenu";
             TreeMenu.ShowLines = false;
-            TreeMenu.Size = new System.Drawing.Size(182, 354);
+            TreeMenu.Size = new System.Drawing.Size(185, 354);
             TreeMenu.TabIndex = 0;
             TreeMenu.DrawNode += TreeMenu_DrawNode;
             TreeMenu.AfterSelect += TreeMenu_AfterSelect;
@@ -2534,15 +2553,15 @@ namespace Vatsim.Vatis.UI
             flowLayoutPanel1.Controls.Add(btnOK);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(200, 396);
+            flowLayoutPanel1.Location = new System.Drawing.Point(203, 396);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(751, 35);
+            flowLayoutPanel1.Size = new System.Drawing.Size(798, 35);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new System.Drawing.Point(660, 3);
+            btnCancel.Location = new System.Drawing.Point(707, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(88, 29);
             btnCancel.TabIndex = 0;
@@ -2553,7 +2572,7 @@ namespace Vatsim.Vatis.UI
             // btnApply
             // 
             btnApply.Enabled = false;
-            btnApply.Location = new System.Drawing.Point(584, 3);
+            btnApply.Location = new System.Drawing.Point(631, 3);
             btnApply.Name = "btnApply";
             btnApply.Size = new System.Drawing.Size(70, 29);
             btnApply.TabIndex = 1;
@@ -2563,7 +2582,7 @@ namespace Vatsim.Vatis.UI
             // 
             // btnOK
             // 
-            btnOK.Location = new System.Drawing.Point(508, 3);
+            btnOK.Location = new System.Drawing.Point(555, 3);
             btnOK.Name = "btnOK";
             btnOK.Size = new System.Drawing.Size(70, 29);
             btnOK.TabIndex = 2;
@@ -2634,7 +2653,7 @@ namespace Vatsim.Vatis.UI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(984, 461);
+            ClientSize = new System.Drawing.Size(1034, 461);
             ControlBox = false;
             Controls.Add(TlpMain);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -2657,6 +2676,8 @@ namespace Vatsim.Vatis.UI
             groupVoiceOption.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
+            pagePresets.ResumeLayout(false);
+            pagePresets.PerformLayout();
             pageFormatting.ResumeLayout(false);
             tabControl2.ResumeLayout(false);
             tabObservationTime.ResumeLayout(false);
@@ -2676,8 +2697,8 @@ namespace Vatsim.Vatis.UI
             tabVisibility.ResumeLayout(false);
             tabControl3.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            tabIcaoVisFormatting.ResumeLayout(false);
+            tabIcaoVisFormatting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)visibilityMetersCutoff).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -2709,19 +2730,17 @@ namespace Vatsim.Vatis.UI
             tabDewpoint.ResumeLayout(false);
             tabDewpoint.PerformLayout();
             tabAltimeter.ResumeLayout(false);
+            tabTransitionLevel.ResumeLayout(false);
+            tabControl6.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).EndInit();
             tabClosing.ResumeLayout(false);
             tabClosing.PerformLayout();
-            pagePresets.ResumeLayout(false);
-            pagePresets.PerformLayout();
             pageContractions.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridContractions).EndInit();
-            pageTransitionLevel.ResumeLayout(false);
-            pageTransitionLevel.PerformLayout();
-            tableLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gridTransitionLevels).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ctxOptions.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panelCompositeList.ResumeLayout(false);
@@ -2777,13 +2796,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.ComboBox ddlVoices;
         private System.Windows.Forms.TextBox txtIdsEndpoint;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage pageTransitionLevel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button btnDeleteTransitionLevel;
-        private System.Windows.Forms.DataGridView gridTransitionLevels;
-        private System.Windows.Forms.DataGridViewTextBoxColumn low;
-        private System.Windows.Forms.DataGridViewTextBoxColumn high;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transitionLevel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.MaskedTextBox vhfFrequency;
         private System.Windows.Forms.RadioButton typeCombined;
@@ -2791,8 +2803,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.RadioButton typeArrival;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel groupVoiceOption;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtCodeRangeLow;
@@ -2830,7 +2840,7 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkWindSpeakLeadingZero;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabIcaoVisFormatting;
         private NodeFormatTemplate templateVisibility;
         private System.Windows.Forms.TextBox visDirNorthWest;
         private System.Windows.Forms.Label label11;
@@ -2890,7 +2900,6 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.CheckBox chkDewPlusPrefix;
         private NodeFormatTemplate templateDewpoint;
         private NodeFormatTemplate templateAltimeter;
-        private System.Windows.Forms.CheckBox chkTransitionLevelPrefix;
         private System.Windows.Forms.CheckBox chkUseDecimalTerminology;
         private System.Windows.Forms.TabPage tabClosing;
         private System.Windows.Forms.CheckBox chkAutoIncludeClosingStatement;
@@ -2912,5 +2921,16 @@ namespace Vatsim.Vatis.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.TextBox standardObservationTime;
+        private System.Windows.Forms.TabPage tabTransitionLevel;
+        private NodeFormatTemplate templateTransitionLevel;
+        private global::System.Windows.Forms.TabControl tabControl6;
+        private global::System.Windows.Forms.TabPage tabPage2;
+        private global::System.Windows.Forms.TabPage tabPage5;
+        private global::System.Windows.Forms.DataGridView gridTransitionLevels;
+        private global::System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private global::System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private global::System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private global::System.Windows.Forms.Label label26;
+        private global::System.Windows.Forms.Button btnDeleteTransitionLevel;
     }
 }
