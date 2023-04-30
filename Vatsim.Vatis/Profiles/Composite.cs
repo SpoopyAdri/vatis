@@ -33,8 +33,21 @@ public class Composite : IComposite, ICloneable
     public AtisFormat.AtisFormat AtisFormat { get; set; } = new();
 
     // Legacy 
-    [JsonProperty] private int AtisFrequency { set => Frequency = (uint)((value + 100000) * 1000); }
-    [JsonProperty] private dynamic ObservationTime { set => AtisFormat.ObservationTime.StandardUpdateTime = value.Time; }
+    [JsonProperty] 
+    private int AtisFrequency { set => Frequency = (uint)((value + 100000) * 1000); }
+
+    [JsonProperty]
+    private dynamic ObservationTime
+    {
+        set
+        {
+            if ((bool)value.Enabled)
+            {
+                AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { (int)value.Time };
+            }
+        }
+    }
+
     [JsonProperty]
     private MagneticVariationMeta MagneticVariation
     {

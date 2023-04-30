@@ -811,6 +811,10 @@ public partial class ProfileConfigurationForm : Form
             }
             mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = observationTimes;
         }
+        else
+        {
+            mCurrentComposite.AtisFormat.ObservationTime.StandardUpdateTime = null;
+        }
 
         mCurrentComposite.AtisFormat.SurfaceWind.SpeakLeadingZero = chkWindSpeakLeadingZero.Checked;
         mCurrentComposite.AtisFormat.SurfaceWind.Calm.CalmWindSpeed = (int)calmWindSpeed.Value;
@@ -1452,7 +1456,10 @@ public partial class ProfileConfigurationForm : Form
 
                     if (profile.MetarObservation != null)
                     {
-                        existing.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
+                        if (profile.MetarObservation.Enable)
+                        {
+                            existing.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
+                        }
                     }
 
                     existing.Contractions.Clear();
@@ -1544,7 +1551,10 @@ public partial class ProfileConfigurationForm : Form
 
                 if (profile.MetarObservation != null)
                 {
-                    composite.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
+                    if (profile.MetarObservation.Enable)
+                    {
+                        composite.AtisFormat.ObservationTime.StandardUpdateTime = new List<int> { profile.MetarObservation.ObservationTimeValue };
+                    }
                 }
 
                 foreach (var contraction in profile.Contractions)
