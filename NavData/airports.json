@@ -55950,6 +55950,18 @@
     "Lon": 26.606667
   },
   {
+    "ID":"LTFM",
+    "Name":"ISTANBUL",
+    "Lat":41.275278,
+    "Lon":28.751944
+  },
+  {
+    "ID":"LTFO",
+    "Name":"Rize Artvin",
+    "Lat":41.179722222222,
+    "Lon":40.848888888889
+  }, 
+  {
     "ID": "LUBL",
     "Name": "BALTI INTERNATIONAL AIRPORT",
     "Lat": 47.838467,
