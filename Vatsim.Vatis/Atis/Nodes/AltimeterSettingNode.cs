@@ -20,6 +20,9 @@ public class AltimeterSettingNode : BaseNode<AltimeterSetting>
 
     public void Parse(AltimeterSetting node)
     {
+        if (node == null)
+            return;
+
         if (node.UnitType == Weather.Enums.AltimeterUnitType.InchesOfMercury)
         {
             mPressureInHg = node.Value / 100.0;

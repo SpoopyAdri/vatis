@@ -138,8 +138,8 @@ public partial class MiniDisplayForm : Form
                     Icao = composite.Identifier,
                     AtisLetter = composite.AtisLetter,
                     Metar = composite?.DecodedMetar?.RawMetar ?? "",
-                    Wind = composite?.DecodedMetar?.SurfaceWind.RawValue ?? "-M-",
-                    Altimeter = composite?.DecodedMetar?.AltimeterSetting.RawValue ?? "-M-",
+                    Wind = composite?.DecodedMetar?.SurfaceWind?.RawValue ?? "-M-",
+                    Altimeter = composite?.DecodedMetar?.AltimeterSetting?.RawValue ?? "-M-",
                     Composite = composite,
                     Dock = DockStyle.Fill
                 };
@@ -152,8 +152,8 @@ public partial class MiniDisplayForm : Form
                 composite.MetarReceived += (sender, args) => item.Metar = args.Value;
                 composite.DecodedMetarUpdated += (sender, args) =>
                 {
-                    item.Wind = composite.DecodedMetar?.SurfaceWind.RawValue ?? "-M";
-                    item.Altimeter = composite.DecodedMetar?.AltimeterSetting.RawValue ?? "-M";
+                    item.Wind = composite.DecodedMetar?.SurfaceWind?.RawValue ?? "-M";
+                    item.Altimeter = composite.DecodedMetar?.AltimeterSetting?.RawValue ?? "-M";
                 };
                 composite.NewAtisUpdate += (sender, args) =>
                 {
