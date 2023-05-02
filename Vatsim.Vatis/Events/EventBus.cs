@@ -20,12 +20,19 @@ public static class EventBus
 
         if (subscriber is Control control)
         {
-            if (control.InvokeRequired)
+            try
             {
-                control.Invoke(() =>
+                if (control.InvokeRequired)
                 {
-                    Register(control);
-                });
+                    control.Invoke(() =>
+                    {
+                        Register(control);
+                    });
+                    return;
+                }
+            }
+            catch (ObjectDisposedException)
+            {
                 return;
             }
         }
@@ -54,12 +61,19 @@ public static class EventBus
 
         if (subscriber is Control control)
         {
-            if (control.InvokeRequired)
+            try
             {
-                control.Invoke(() =>
+                if (control.InvokeRequired)
                 {
-                    Unregister(control);
-                });
+                    control.Invoke(() =>
+                    {
+                        Unregister(control);
+                    });
+                    return;
+                }
+            }
+            catch (ObjectDisposedException)
+            {
                 return;
             }
         }
@@ -81,12 +95,19 @@ public static class EventBus
     {
         if (sender is Control control)
         {
-            if (control.InvokeRequired)
+            try
             {
-                control.Invoke(() =>
+                if (control.InvokeRequired)
                 {
-                    PublishInternal(sender, evt);
-                });
+                    control.Invoke(() =>
+                    {
+                        PublishInternal(sender, evt);
+                    });
+                    return;
+                }
+            }
+            catch (ObjectDisposedException)
+            {
                 return;
             }
         }
