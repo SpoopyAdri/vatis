@@ -210,6 +210,7 @@ internal partial class CompositePanel : UserControl
             case MouseButtons.Right:
                 if (letter == mComposite.CodeRange.Low)
                 {
+                    letter = mComposite.CodeRange.High;
                     atisLetter.Text = mComposite.CodeRange.High.ToString();
                 }
                 else
@@ -221,6 +222,7 @@ internal partial class CompositePanel : UserControl
             case MouseButtons.Left:
                 if (letter == mComposite.CodeRange.High)
                 {
+                    letter = mComposite.CodeRange.Low;
                     atisLetter.Text = mComposite.CodeRange.Low.ToString();
                 }
                 else
