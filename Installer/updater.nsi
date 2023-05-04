@@ -38,7 +38,7 @@ Section
 
   ;Copy new files
   SetOutPath "$INSTDIR\Application"
-  File /r "..\Vatsim.Vatis\update\*"
+  File /r "..\Vatsim.Vatis\publish\*"
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"

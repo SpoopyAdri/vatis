@@ -32,7 +32,6 @@ jobs:
       working-directory: ./Vatsim.Vatis
       run: |
         dotnet publish --runtime win-x64 --self-contained true --configuration Release -p:PublishReadyToRun=true --output ./publish
-        dotnet publish --runtime win-x64 --self-contained false --configuration Release -p:PublishReadyToRun=true --output ./update
         $hash = (Get-FileHash .\publish\vATIS.exe -Algorithm SHA256).Hash.ToLower()
         echo "CLIENT_HASH=$hash" >> $env:GITHUB_ENV
         $path = ls .\publish\vATIS.dll | select -First 1 | % fullname
@@ -55,7 +54,6 @@ jobs:
         cmake .. -DCLIENT_HASH=${{ env.CLIENT_HASH }} -DVATSIM_CLIENT_ID=${{ secrets.CLIENT_ID }} -DVATSIM_CLIENT_KEY=${{ secrets.CLIENT_KEY }} -DTEST_VERSION=${{ env.TEST_VERSION }}
         cmake --build . --config RelWithDebInfo
         Copy-Item -Path .\RelWithDebInfo\VatsimAuth.dll -Destination ..\..\Vatsim.Vatis\publish\
-        Copy-Item -Path .\RelWithDebInfo\VatsimAuth.dll -Destination ..\..\Vatsim.Vatis\update\
 
     - name: Create installer
       uses: joncloud/makensis-action@v4
