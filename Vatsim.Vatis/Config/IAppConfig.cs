@@ -24,8 +24,6 @@ public interface IAppConfig
     string MicrophoneDevice { get; set; }
     string PlaybackDevice { get; set; }
     List<VoiceMetaData> Voices { get; set; }
-    string AuthToken { get; set; }
-    DateTime AuthTokenGeneratedAt { get; set; }
     void LoadConfig(string path);
     void SaveConfig();
 }

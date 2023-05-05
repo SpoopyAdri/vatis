@@ -26,6 +26,7 @@ public class Bindings : NinjectModule
         Bind<INavDataRepository>().To(typeof(NavDataRepository)).InSingletonScope();
         Bind<IAudioManager>().To(typeof(AudioManager)).InSingletonScope();
         Bind<ITextToSpeechRequest>().To(typeof(TextToSpeechRequest)).InSingletonScope();
+        Bind<IAuthTokenManager>().To(typeof(AuthTokenManager)).InSingletonScope();
         Bind<IWindowFactory>().ToFactory();
         Bind<IConnectionFactory>().ToFactory();
     }

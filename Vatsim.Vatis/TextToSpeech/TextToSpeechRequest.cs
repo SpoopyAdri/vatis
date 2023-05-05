@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -12,40 +11,21 @@ namespace Vatsim.Vatis.TextToSpeech;
 
 public class TextToSpeechRequest : ITextToSpeechRequest
 {
-    private const string FSD_JWT_ENDPOINT = "https://auth.vatsim.net/api/fsd-jwt";
     private const string TTS_SERVICE_ENDPOINT = "https://tts.clowd.io/Request";
     private readonly IAppConfig mAppConfig;
     private readonly IDownloader mDownloader;
-    private string mJwtToken;
-    private DateTime mJwtValidTo;
+    private readonly IAuthTokenManager mAuthTokenManager;
 
-    public TextToSpeechRequest(IAppConfig config, IDownloader downloader)
+    public TextToSpeechRequest(IAppConfig config, IDownloader downloader, IAuthTokenManager authTokenManager)
     {
         mAppConfig = config;
         mDownloader = downloader;
+        mAuthTokenManager = authTokenManager;
     }
 
     public async Task<byte[]> RequestSynthesizedText(string text, CancellationToken token)
     {
-        if (string.IsNullOrEmpty(mJwtToken) || mJwtValidTo < DateTime.UtcNow)
-        {
-            try
-            {
-                var requestBody = new PasswordTokenRequest(mAppConfig.UserId, mAppConfig.Password);
-                var response = await mDownloader.PostJsonAsyncResponse<PasswordTokenResponse>(FSD_JWT_ENDPOINT, requestBody, token);
-                if (response != null)
-                {
-                    mJwtToken = response.token;
-                    var handler = new JwtSecurityTokenHandler();
-                    var jwtToken = handler.ReadJwtToken(mJwtToken);
-                    if (jwtToken != null)
-                    {
-                        mJwtValidTo = jwtToken.ValidTo.ToUniversalTime();
-                    }
-                }
-            }
-            catch (OperationCanceledException) { }
-        }
+        var authToken = await mAuthTokenManager.GetAuthToken();
 
         try
         {
@@ -53,7 +33,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
             {
                 Text = text,
                 Voice = mAppConfig.Voices.FirstOrDefault(n => n.Name == mAppConfig.CurrentComposite.AtisVoice.Voice).Id ?? "default",
-                Jwt = mJwtToken
+                Jwt = authToken
             };
 
             var ttsResponse = await mDownloader.PostJsonDownloadAsync(TTS_SERVICE_ENDPOINT, ttsDto, token);

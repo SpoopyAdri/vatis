@@ -29,12 +29,6 @@ public class AppConfig : IAppConfig
     [JsonIgnore] 
     public Composite CurrentComposite { get; set; }
 
-    [JsonIgnore]
-    public string AuthToken { get; set; }
-
-    [JsonIgnore]
-    public DateTime AuthTokenGeneratedAt { get; set; }
-
     public string Name { get; set; }
 
     public NetworkRating NetworkRating { get; set; }
