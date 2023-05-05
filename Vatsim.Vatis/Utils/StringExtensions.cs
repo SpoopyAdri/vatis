@@ -118,20 +118,6 @@ public static class StringExtensions
         return result.ToUpper();
     }
 
-    /// <summary>
-    /// This method safely finds and replaces a string.
-    /// </summary>
-    /// <param name="input">The string to search</param>
-    /// <param name="find">The string to find</param>
-    /// <param name="replace">The string to replace the find with</param>
-    /// <param name="matchWholeWord">Should match whole world?</param>
-    /// <returns></returns>
-    public static string SafeReplace(this string input, string find, string replace, bool matchWholeWord)
-    {
-        string textToFind = matchWholeWord ? string.Format(@"\b{0}\b", find) : find;
-        return Regex.Replace(input, textToFind, replace);
-    }
-
     public static string RandomLetter()
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

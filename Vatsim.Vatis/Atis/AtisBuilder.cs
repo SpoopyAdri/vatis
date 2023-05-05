@@ -21,14 +21,14 @@ namespace Vatsim.Vatis.Atis;
 
 public class AtisBuilder : IAtisBuilder
 {
-    private readonly INavDataRepository mNavData;
+    private readonly INavDataRepository mNavDataRepository;
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
     private readonly IAudioManager mAudioManager;
     private readonly IDownloader mDownloader;
 
     public AtisBuilder(INavDataRepository airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
     {
-        mNavData = airportDatabase;
+        mNavDataRepository = airportDatabase;
         mTextToSpeechRequest = textToSpeechRequest;
         mAudioManager = audioManager;
         mDownloader = downloader;
@@ -53,7 +53,7 @@ public class AtisBuilder : IAtisBuilder
 
         if (composite.AirportData == null)
         {
-            composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
+            composite.AirportData = mNavDataRepository.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
         }
 
         ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
@@ -116,7 +116,7 @@ public class AtisBuilder : IAtisBuilder
             throw new AtisBuilderException("DecodedMetar is null");
         }
 
-        composite.AirportData = mNavData.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
+        composite.AirportData = mNavDataRepository.GetAirport(composite.Identifier) ?? throw new AtisBuilderException($"{composite.Identifier} not found in airport database.");
 
         ParseNodesFromMetar(composite, out string atisLetter, out List<AtisVariable> variables);
 
@@ -435,6 +435,43 @@ public class AtisBuilder : IAtisBuilder
 
     private string FormatForTextToSpeech(string input, Composite composite)
     {
+        // user defined contractions
+        foreach (var contraction in composite.Contractions)
+        {
+            input = Regex.Replace(input, $@"(?<![\w\d]){Regex.Escape(contraction.String)}(?![\w\d])", contraction.Spoken, RegexOptions.IgnoreCase);
+        }
+
+        // default contractions
+        foreach (var translation in Translations)
+        {
+            input = Regex.Replace(input, $@"(?<![\w\d]){Regex.Escape(translation.Key)}(?![\w\d])", translation.Value, RegexOptions.IgnoreCase);
+        }
+
+        // airports and navaid identifiers
+        var navdataMatches = Regex.Matches(input, @"\+([A-Z0-9]{3,4})");
+        if (navdataMatches.Count > 0)
+        {
+            foreach (Match match in navdataMatches)
+            {
+                if (match.Groups == null || match.Groups.Count == 0)
+                    continue;
+
+                var navaid = mNavDataRepository.GetNavaid(match.Groups[1].Value);
+                if (navaid != null)
+                {
+                    input = Regex.Replace(input, $@"(?<![\w\d]){Regex.Escape(match.Value)}(?![\w\d])", navaid.Name);
+                }
+                else
+                {
+                    var airport = mNavDataRepository.GetAirport(match.Groups[1].Value);
+                    if (airport != null)
+                    {
+                        input = Regex.Replace(input, $@"(?<![\w\d]){Regex.Escape(match.Value)}(?![\w\d])", airport.Name);
+                    }
+                }
+            }
+        }
+
         // parse zulu times
         input = Regex.Replace(input, @"([0-9])([0-9])([0-9])([0-8])Z",
             m => string.Format($"{int.Parse(m.Groups[1].Value).ToSerialForm()} " +
@@ -466,48 +503,6 @@ public class AtisBuilder : IAtisBuilder
 
         // read numbers in serial format
         input = Regex.Replace(input, @"([+-])?([0-9]+\.?[0-9]*|\.[0-9]+)(?![^{]*\})", m => m.Value.ToSerialForm(composite.UseDecimalTerminology));
-
-        // user defined contractions
-        foreach (var x in composite.Contractions)
-        {
-            input = input.SafeReplace(x.String.ToUpper(), x.Spoken.ToUpper(), true);
-        }
-
-        // default contractions
-        foreach (var word in Translations)
-        {
-            input = input.SafeReplace(word.Key.ToUpper(), word.Value.ToUpper(), true);
-        }
-
-        // format navaids identifiers
-        var navaids = Regex.Matches(input, @"(?<=\+)([A-Z]{3})");
-        if (navaids.Count > 0)
-        {
-            foreach (var (match, find) in from Match match in navaids
-                                          let find = mNavData.GetNavaid(match.Value)
-                                          where find != null
-                                          select (match, find))
-            {
-                input = Regex
-                    .Replace(input, $@"\b(?<=\+){match.Value}\b", x => find.Name)
-                    .Replace("+", "");
-            }
-        }
-
-        // format airport identifiers
-        var airports = Regex.Matches(input, @"(?<=\+)([A-Z0-9]{4})");
-        if (airports.Count > 0)
-        {
-            foreach (var (match, find) in from Match match in airports
-                                          let find = mNavData.GetAirport(match.Value)
-                                          where find != null
-                                          select (match, find))
-            {
-                input = Regex
-                    .Replace(input, $@"\b(?<=\+){match.Value}\b", x => find.Name)
-                    .Replace("+", "");
-            }
-        }
 
         input = Regex.Replace(input, @"(?<=\*)(-?[\,0-9]+)", "$1");
         input = Regex.Replace(input, @"(?<=\#)(-?[\,0-9]+)", "$1");
