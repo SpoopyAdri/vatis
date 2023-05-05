@@ -21,12 +21,12 @@ namespace Vatsim.Vatis.Atis;
 
 public class AtisBuilder : IAtisBuilder
 {
-    private readonly INavaidDatabase mNavData;
+    private readonly INavDataRepository mNavData;
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
     private readonly IAudioManager mAudioManager;
     private readonly IDownloader mDownloader;
 
-    public AtisBuilder(INavaidDatabase airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
+    public AtisBuilder(INavDataRepository airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
     {
         mNavData = airportDatabase;
         mTextToSpeechRequest = textToSpeechRequest;

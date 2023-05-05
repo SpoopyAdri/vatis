@@ -25,7 +25,7 @@ public partial class ProfileConfigurationForm : Form
 {
     private readonly IAppConfig mAppConfig;
     private readonly IWindowFactory mWindowFactory;
-    private readonly INavaidDatabase mNavaidDatabase;
+    private readonly INavDataRepository mNavaidDatabase;
     private Control mPresetControl;
 
     private Composite mCurrentComposite = null;
@@ -35,7 +35,7 @@ public partial class ProfileConfigurationForm : Form
     private List<Tuple<BaseFormat, string>> mPendingTextTemplateChanges = new();
 
     public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
-        INavaidDatabase navaidDatabase)
+        INavDataRepository navaidDatabase)
     {
         InitializeComponent();
 

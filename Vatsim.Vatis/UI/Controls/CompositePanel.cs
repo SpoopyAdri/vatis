@@ -30,7 +30,7 @@ internal partial class CompositePanel : UserControl
     public event EventHandler<EventArgs> AtisLetterChanged;
     public event EventHandler<EventArgs> PresetChanged;
     public event EventHandler<EventArgs> GenerateNewAtis;
-    public event EventHandler<RecordedAtisChanged> RecordedAtisMemoryStreamChanged; 
+    public event EventHandler<RecordedAtisChanged> RecordedAtisMemoryStreamChanged;
 
     public bool VoiceRecordEnabled
     {

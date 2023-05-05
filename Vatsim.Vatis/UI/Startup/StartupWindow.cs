@@ -15,17 +15,21 @@ namespace Vatsim.Vatis.UI.Startup
 {
     public partial class StartupWindow : Form
     {
-        private IClientUpdater mClientUpdater;
-        private INavaidDatabase mNavData;
-        private IWindowFactory mWindowFactory;
-        private IDownloader mDownloader;
-        private IAppConfig mAppConfig;
+        private readonly IClientUpdater mClientUpdater;
+        private readonly INavDataUpdater mNavDataUpdater;
+        private readonly INavDataRepository mNavDataRepository;
+        private readonly IWindowFactory mWindowFactory;
+        private readonly IDownloader mDownloader;
+        private readonly IAppConfig mAppConfig;
+        private const string VOICE_LIST_URL = "https://tts.clowd.io/voices";
+        private const string VATSIM_STATUS_URL = "https://status.vatsim.net/status.json";
 
-        public StartupWindow(IClientUpdater clientUpdater, IWindowFactory windowFactory, INavaidDatabase navData, IAppConfig appConfig, IDownloader downloader)
+        public StartupWindow(IClientUpdater clientUpdater, INavDataUpdater navDataUpdater, IWindowFactory windowFactory, INavDataRepository navData, IAppConfig appConfig, IDownloader downloader)
         {
             mClientUpdater = clientUpdater;
+            mNavDataUpdater = navDataUpdater;
             mWindowFactory = windowFactory;
-            mNavData = navData;
+            mNavDataRepository = navData;
             mAppConfig = appConfig;
             mDownloader = downloader;
             InitializeComponent();
@@ -55,8 +59,11 @@ namespace Vatsim.Vatis.UI.Startup
                 Application.Exit();
             }
 
-            UpdateStatusLabel("Loading NavData...");
-            await mNavData.LoadDatabases();
+            UpdateStatusLabel("Checking for navdata updates..");
+            await mNavDataUpdater.CheckForNewNavData();
+
+            UpdateStatusLabel("Loading navdata...");
+            await mNavDataRepository.Initialize();
 
             UpdateStatusLabel("Downloading network server list...");
             await DownloadServerList();
@@ -71,7 +78,7 @@ namespace Vatsim.Vatis.UI.Startup
         {
             try
             {
-                var voices = await mDownloader.DownloadJsonStringAsync<List<VoiceMetaData>>("https://tts.clowd.io/Voices");
+                var voices = await mDownloader.DownloadJsonStringAsync<List<VoiceMetaData>>(VOICE_LIST_URL);
 
                 if (voices != null)
                 {
@@ -84,7 +91,7 @@ namespace Vatsim.Vatis.UI.Startup
 
         private async Task DownloadServerList()
         {
-            var servers = await Vatsim.Network.NetworkInfo.DownloadServerList("https://status.vatsim.net/status.json");
+            var servers = await Vatsim.Network.NetworkInfo.DownloadServerList(VATSIM_STATUS_URL);
             if (servers != null && servers.Count > 0)
             {
                 mAppConfig.CachedServers.Clear();

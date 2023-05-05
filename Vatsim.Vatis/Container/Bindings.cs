@@ -20,9 +20,10 @@ public class Bindings : NinjectModule
         Bind<VatisAppContext>().ToSelf();
         Bind<IAppConfig>().To(typeof(AppConfig)).InSingletonScope();
         Bind<IClientUpdater>().To(typeof(ClientUpdater)).InSingletonScope();
+        Bind<INavDataUpdater>().To(typeof(NavDataUpdater)).InSingletonScope();
         Bind<IDownloader>().To(typeof(Downloader)).InSingletonScope();
         Bind<IAtisBuilder>().To(typeof(AtisBuilder)).InSingletonScope();
-        Bind<INavaidDatabase>().To(typeof(NavaidDatabase)).InSingletonScope();
+        Bind<INavDataRepository>().To(typeof(NavDataRepository)).InSingletonScope();
         Bind<IAudioManager>().To(typeof(AudioManager)).InSingletonScope();
         Bind<ITextToSpeechRequest>().To(typeof(TextToSpeechRequest)).InSingletonScope();
         Bind<IWindowFactory>().ToFactory();

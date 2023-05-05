@@ -10,6 +10,7 @@ public static class PathProvider
     public static string AppConfigFilePath => Path.Combine(mInstallPath, "AppConfig.json");
     public static string AirportsFilePath => Path.Combine(mInstallPath, "Airports.json");
     public static string NavaidsFilePath => Path.Combine(mInstallPath, "Navaids.json");
+    public static string NavDataSerialFilePath => Path.Combine(mInstallPath, "NavDataSerial.json");
     public static void SetInstallPath(string path)
     {
         mInstallPath = path;

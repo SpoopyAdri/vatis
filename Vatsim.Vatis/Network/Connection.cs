@@ -44,7 +44,7 @@ public class Connection
 
     private readonly FSDSession mSession;
     private readonly IAppConfig mAppConfig;
-    private readonly INavaidDatabase mAirportDatabase;
+    private readonly INavDataRepository mAirportDatabase;
     private readonly IDownloader mDownloader;
     private readonly ClientProperties mClientProperties;
     private readonly string mVolumeSerial;
@@ -57,7 +57,7 @@ public class Connection
     private List<string> mEuroscopeSubscribers = new List<string>();
     private List<string> mCapsReceived = new List<string>();
 
-    public Connection(IAppConfig config, INavaidDatabase airportDatabase, IDownloader downloader)
+    public Connection(IAppConfig config, INavDataRepository airportDatabase, IDownloader downloader)
     {
         mAppConfig = config;
         mAirportDatabase = airportDatabase;
