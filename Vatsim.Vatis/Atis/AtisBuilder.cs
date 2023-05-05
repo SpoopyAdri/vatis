@@ -497,6 +497,31 @@ public class AtisBuilder : IAtisBuilder
                         (m.Groups[1].Value == "RWYS" || m.Groups[1].Value == "RUNWAYS"),
                 leadingZero: !composite.IsFaaAtis));
 
+        // parse individual runway: ^18R
+        var runwayMatches = Regex.Matches(input, @"\^(0[1-9]|1[0-9]|2[0-9]|3[0-6])([LRC]?)");
+        if (runwayMatches.Count > 0)
+        {
+            foreach (Match rwy in runwayMatches)
+            {
+                var designator = "";
+                switch (rwy.Groups[2].Value)
+                {
+                    case "L":
+                        designator = "left";
+                        break;
+                    case "R":
+                        designator = "right";
+                        break;
+                    case "C":
+                        designator = "center";
+                        break;
+                }
+
+                var replace = int.Parse(rwy.Groups[1].Value).ToSerialForm(leadingZero: !composite.IsFaaAtis) + " " + designator;
+                input = Regex.Replace(input, $@"(?<![\w\d]){Regex.Escape(rwy.Value)}(?![\w\d])", replace.Trim());
+            }
+        }
+
         // read numbers in group format, prefixed with # or surrounded with {}
         input = Regex.Replace(input, @"\*(-?[\,0-9]+)", m => int.Parse(m.Groups[1].Value.Replace(",", "")).ToGroupForm());
         input = Regex.Replace(input, @"\{(-?[\,0-9]+)\}", m => int.Parse(m.Groups[1].Value.Replace(",", "")).ToGroupForm());

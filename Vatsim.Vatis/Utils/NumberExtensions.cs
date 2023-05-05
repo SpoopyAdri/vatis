@@ -155,15 +155,19 @@ public static class NumberExtensions
     /// </summary>
     /// <param name="input">Number to be converted</param>
     /// <returns>Returns the serial formatted word string</returns>
-    public static string ToSerialForm(this int number)
+    public static string ToSerialForm(this int number, bool leadingZero = false)
     {
-        bool isNegative = number < 0;
         List<string> temp = new();
+
+        if (number < 10 && leadingZero)
+            temp.Add("zero");
+
         foreach (var x in Math.Abs(number).ToString().Select(q => new string(q, 1)).ToArray())
         {
             temp.Add(int.Parse(x).ToWordString());
         }
-        return $"{(isNegative ? "minus " : "")}{string.Join(" ", temp)}";
+
+        return $"{(number < 0 ? "minus " : "")}{string.Join(" ", temp)}";
     }
 
     public static int NormalizeHeading(this int heading)
