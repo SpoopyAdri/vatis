@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes.Converter;
 public class CloudConverter : JsonConverter<Dictionary<string, object>>

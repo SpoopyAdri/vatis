@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Vatsim.Network;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.TextToSpeech;

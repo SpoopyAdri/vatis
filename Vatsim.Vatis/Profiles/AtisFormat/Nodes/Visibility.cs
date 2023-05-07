@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Vatsim.Vatis.Profiles.AtisFormat.Nodes;
 public class Visibility : BaseFormat

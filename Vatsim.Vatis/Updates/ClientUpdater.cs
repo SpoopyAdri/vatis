@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using Vatsim.Vatis.Io;
-using Serilog;
-using Newtonsoft.Json;
-using System.Reflection;
-using System;
-using MoreLinq;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
+using System.Reflection;
+using System.Threading.Tasks;
+using MoreLinq;
+using Newtonsoft.Json;
+using Serilog;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.Io;
 
 namespace Vatsim.Vatis.Updates;
 
