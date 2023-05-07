@@ -10,10 +10,12 @@ vATIS is a simple and intuitive program for generating ATIS broadcasts on the VA
 :globe_with_meridians: [Documentation](https://docs.vatis.clowd.io)
 
 # Contributing
-xPilot is written in C# (.NET 6.0). Please read the [Contribution Guide](CONTRIBUTING.md) for details on how to contribute to the project. Changes to the vATIS navdata can be contributed in the [vATIS NavData](https://github.com/vatis-project/navdata) repository.
+vATIS is written in C# (.NET 6.0). Please read the [Contribution Guide](CONTRIBUTING.md) for details on how to contribute to the project. Changes to the vATIS navdata can be contributed in the [vATIS NavData](https://github.com/vatis-project/navdata) repository.
 
 # Licensing
-xPilot is licensed under the [GPLv3 open-source license](LICENSE).
+vATIS is licensed under the [GPLv3 open-source license](LICENSE).
+
+The VatsimAuth library used in this project is proprietary and is not distributed under any license terms, see [VatsimAuth_License.txt](VatsimAuth_License.txt) for details.
 
 # Acknowledgments
 * [GeoVR](https://github.com/macaba/GeoVR) AFV client library

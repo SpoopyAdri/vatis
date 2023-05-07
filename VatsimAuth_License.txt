@@ -1,0 +1,17 @@
+                        VatsimAuth Library
+                    Proprietary Software Notice
+
+vATIS is distributed by the vatis-project 
+<https://github.com/vatis-project/vatis> and linked with a proprietary 
+software library called "VatsimAuth," which enables vATIS to connect 
+to the VATSIM network.
+
+The VatsimAuth source code is proprietary, and VatsimAuth is not 
+distributed under any license terms. All rights are reserved. 
+Specifically, you may not distribute copies of VatsimAuth.
+
+The distribution of VatsimAuth with vATIS does not confer any additional 
+permissions as defined in Section 7 of the GNU General Public License, 
+and VatsimAuth is not part of the corresponding source of vATIS as defined 
+in Section 1. In particular, if you convey a work based on vATIS, you are 
+not permitted to distribute VatsimAuth with that work.
