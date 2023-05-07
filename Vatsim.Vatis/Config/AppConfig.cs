@@ -43,6 +43,8 @@ public class AppConfig : IAppConfig
 
     public WindowProperties WindowProperties { get; set; }
 
+    public WindowProperties MiniDisplayWindowProperties { get; set; }
+
     public List<Profile> Profiles { get; set; }
 
     public List<VoiceMetaData> Voices { get; set; }

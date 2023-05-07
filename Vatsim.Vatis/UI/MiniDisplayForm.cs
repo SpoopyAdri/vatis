@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Events;
 using Vatsim.Vatis.UI.Controls;
+using Vatsim.Vatis.Utils;
 
 namespace Vatsim.Vatis.UI;
 
@@ -12,8 +13,7 @@ public partial class MiniDisplayForm : Form
 {
     private readonly IAppConfig mAppConfig;
     private readonly Timer mUtcClock;
-    private const int WM_NCLBUTTONDOWN = 0xA1;
-    private const int HT_CAPTION = 0x2;
+    private bool mInitializing = true;
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -57,7 +57,7 @@ public partial class MiniDisplayForm : Form
         if (e.Button == MouseButtons.Left)
         {
             ReleaseCapture();
-            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            SendMessage(Handle, 0xA1, 0x2, 0);
         }
     }
 
@@ -92,7 +92,27 @@ public partial class MiniDisplayForm : Form
     {
         base.OnLoad(e);
         EventBus.Register(this);
-        TopMost = mAppConfig.WindowProperties.TopMost;
+
+        if (mAppConfig.MiniDisplayWindowProperties == null)
+        {
+            mAppConfig.MiniDisplayWindowProperties = new WindowProperties();
+            mAppConfig.MiniDisplayWindowProperties.Location = ScreenUtils.CenterOnScreen(this);
+            mAppConfig.SaveConfig();
+        }
+
+        TopMost = mAppConfig.MiniDisplayWindowProperties.TopMost = mAppConfig.WindowProperties.TopMost;
+        ScreenUtils.ApplyWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
+        mInitializing = false;
+    }
+
+    protected override void OnMove(EventArgs e)
+    {
+        base.OnMove(e);
+
+        if (!mInitializing)
+        {
+            ScreenUtils.SaveWindowProperties(mAppConfig.MiniDisplayWindowProperties, this);
+        }
     }
 
     private void RefreshDisplay()

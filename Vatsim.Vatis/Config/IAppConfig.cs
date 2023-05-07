@@ -18,6 +18,7 @@ public interface IAppConfig
     bool SuppressNotifications { get; set; }
     bool ConfigRequired { get; }
     WindowProperties WindowProperties { get; set; }
+    WindowProperties MiniDisplayWindowProperties { get; set; }
     List<Profile> Profiles { get; set; }
     Profile CurrentProfile { get; set; }
     Composite CurrentComposite { get; set; }
