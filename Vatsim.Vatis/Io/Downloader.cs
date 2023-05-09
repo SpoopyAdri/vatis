@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,10 +19,33 @@ public class Downloader : IDownloader
 
     public Downloader()
     {
-        mHttpClient = new HttpClient
+        mHttpClient = new HttpClient(new SocketsHttpHandler()
         {
-            Timeout = TimeSpan.FromSeconds(20)
-        };
+            // Force HttpClient to use IPv4 address
+            ConnectCallback = async (context, cancellationToken) =>
+            {
+                // Use DNS to look up the IP address of the target host
+                // SocketException is thrown if there is no IP address for the host
+                var entry = await Dns.GetHostEntryAsync(context.DnsEndPoint.Host, AddressFamily.InterNetwork, cancellationToken);
+
+                // Open the connection to the target host/port and disable Nagle's algorithm
+                var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                socket.NoDelay = true;
+
+                try
+                {
+                    await socket.ConnectAsync(entry.AddressList, context.DnsEndPoint.Port, cancellationToken);
+                    return new NetworkStream(socket, true);
+                }
+                catch
+                {
+                    socket.Dispose();
+                    throw;
+                }
+            }
+        });
+
+        mHttpClient.Timeout = TimeSpan.FromSeconds(20);
 
         var productVersion =
             GetType().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ??
