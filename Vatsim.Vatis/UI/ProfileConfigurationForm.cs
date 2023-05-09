@@ -43,9 +43,25 @@ public partial class ProfileConfigurationForm : Form
         mWindowFactory = windowFactory;
         mNavaidDatabase = navaidDatabase;
 
+        mainTabControl.Selected += (e, args) =>
+        {
+            if (args.TabPage == pageFormatting)
+            {
+                tabTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
+            }
+        };
+
+        formattingTabControl.Selected += (e, args) =>
+        {
+            if (args.TabPage == tabIcaoVisFormatting)
+            {
+                tabIcaoVisFormatting.SetVisible(!mCurrentComposite.IsFaaAtis);
+            }
+        };
+
         RefreshCompositeList();
         LoadVoiceList();
-    }
+    } 
 
     protected override CreateParams CreateParams
     {
@@ -175,8 +191,11 @@ public partial class ProfileConfigurationForm : Form
                 if (mCurrentComposite == null)
                     return;
 
-                tabTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
-                tabIcaoVisFormatting.SetVisible(!mCurrentComposite.IsFaaAtis);
+                if (mainTabControl.SelectedTab == pageFormatting)
+                {
+                    tabTransitionLevel.SetVisible(!mCurrentComposite.IsFaaAtis);
+                    tabIcaoVisFormatting.SetVisible(!mCurrentComposite.IsFaaAtis);
+                }
 
                 LoadComposite();
                 RefreshPresetList();
@@ -187,7 +206,7 @@ public partial class ProfileConfigurationForm : Form
     private void LoadComposite()
     {
         chkNotamPrefix.Checked = mCurrentComposite.UseNotamPrefix;
-        chkNotamPrefix.Text = mCurrentComposite.IsFaaAtis ? "Prefix spoken NOTAMs with \"Notices to Air Missions\"" : "Prefix spoken NOTAMs with \"Notices to Air Men\"";
+        chkNotamPrefix.Text = mCurrentComposite.IsFaaAtis ? "Prefix spoken NOTAMs with \"Notices to Air Missions\"" : "Prefix spoken NOTAMs with \"Notices to Airmen\"";
 
         vhfFrequency.Text = (mCurrentComposite.Frequency / 1000).ToString("000.000");
 
