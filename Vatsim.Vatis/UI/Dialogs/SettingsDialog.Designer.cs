@@ -29,229 +29,222 @@ namespace Vatsim.Vatis.UI.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ddlNetworkRating = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtVatsimPassword = new System.Windows.Forms.TextBox();
-            this.txtVatsimId = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.ddlServerName = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkKeepVisible = new System.Windows.Forms.CheckBox();
-            this.chkSuppressNotifications = new System.Windows.Forms.CheckBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            ddlNetworkRating = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            txtVatsimPassword = new System.Windows.Forms.TextBox();
+            txtVatsimId = new System.Windows.Forms.TextBox();
+            txtName = new System.Windows.Forms.TextBox();
+            ddlServerName = new System.Windows.Forms.ComboBox();
+            label9 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            chkKeepVisible = new System.Windows.Forms.CheckBox();
+            chkSuppressNotifications = new System.Windows.Forms.CheckBox();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
+            groupBox3.SuspendLayout();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.ddlNetworkRating);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.txtVatsimPassword);
-            this.groupBox3.Controls.Add(this.txtVatsimId);
-            this.groupBox3.Controls.Add(this.txtName);
-            this.groupBox3.Controls.Add(this.ddlServerName);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(45, 34);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(276, 306);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Network Settings";
+            groupBox3.Controls.Add(ddlNetworkRating);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(txtVatsimPassword);
+            groupBox3.Controls.Add(txtVatsimId);
+            groupBox3.Controls.Add(txtName);
+            groupBox3.Controls.Add(ddlServerName);
+            groupBox3.Controls.Add(label9);
+            groupBox3.Controls.Add(label7);
+            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(label5);
+            groupBox3.Location = new System.Drawing.Point(45, 34);
+            groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox3.Size = new System.Drawing.Size(276, 306);
+            groupBox3.TabIndex = 0;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Network Settings";
             // 
             // ddlNetworkRating
             // 
-            this.ddlNetworkRating.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlNetworkRating.FormattingEnabled = true;
-            this.ddlNetworkRating.Location = new System.Drawing.Point(17, 205);
-            this.ddlNetworkRating.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ddlNetworkRating.Name = "ddlNetworkRating";
-            this.ddlNetworkRating.Size = new System.Drawing.Size(245, 23);
-            this.ddlNetworkRating.TabIndex = 3;
-            this.ddlNetworkRating.TabStop = false;
+            ddlNetworkRating.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ddlNetworkRating.FormattingEnabled = true;
+            ddlNetworkRating.Location = new System.Drawing.Point(17, 205);
+            ddlNetworkRating.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ddlNetworkRating.Name = "ddlNetworkRating";
+            ddlNetworkRating.Size = new System.Drawing.Size(245, 23);
+            ddlNetworkRating.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 183);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Network Rating:";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(15, 183);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(92, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Network Rating:";
             // 
             // txtVatsimPassword
             // 
-            this.txtVatsimPassword.Location = new System.Drawing.Point(17, 153);
-            this.txtVatsimPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtVatsimPassword.Name = "txtVatsimPassword";
-            this.txtVatsimPassword.PasswordChar = '●';
-            this.txtVatsimPassword.Size = new System.Drawing.Size(245, 23);
-            this.txtVatsimPassword.TabIndex = 2;
+            txtVatsimPassword.Location = new System.Drawing.Point(17, 153);
+            txtVatsimPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtVatsimPassword.Name = "txtVatsimPassword";
+            txtVatsimPassword.PasswordChar = '●';
+            txtVatsimPassword.Size = new System.Drawing.Size(245, 23);
+            txtVatsimPassword.TabIndex = 2;
             // 
             // txtVatsimId
             // 
-            this.txtVatsimId.Location = new System.Drawing.Point(17, 101);
-            this.txtVatsimId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtVatsimId.Name = "txtVatsimId";
-            this.txtVatsimId.Size = new System.Drawing.Size(245, 23);
-            this.txtVatsimId.TabIndex = 1;
+            txtVatsimId.Location = new System.Drawing.Point(17, 101);
+            txtVatsimId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtVatsimId.Name = "txtVatsimId";
+            txtVatsimId.Size = new System.Drawing.Size(245, 23);
+            txtVatsimId.TabIndex = 1;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(17, 49);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(245, 23);
-            this.txtName.TabIndex = 0;
+            txtName.Location = new System.Drawing.Point(17, 49);
+            txtName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(245, 23);
+            txtName.TabIndex = 0;
             // 
             // ddlServerName
             // 
-            this.ddlServerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlServerName.FormattingEnabled = true;
-            this.ddlServerName.Location = new System.Drawing.Point(17, 257);
-            this.ddlServerName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ddlServerName.Name = "ddlServerName";
-            this.ddlServerName.Size = new System.Drawing.Size(245, 23);
-            this.ddlServerName.TabIndex = 4;
-            this.ddlServerName.TabStop = false;
+            ddlServerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ddlServerName.FormattingEnabled = true;
+            ddlServerName.Location = new System.Drawing.Point(17, 257);
+            ddlServerName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ddlServerName.Name = "ddlServerName";
+            ddlServerName.Size = new System.Drawing.Size(245, 23);
+            ddlServerName.TabIndex = 4;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 235);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 15);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Network Server:";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(15, 235);
+            label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(90, 15);
+            label9.TabIndex = 4;
+            label9.Text = "Network Server:";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 27);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 15);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Your Name:";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(15, 27);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(69, 15);
+            label7.TabIndex = 0;
+            label7.Text = "Your Name:";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 131);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 15);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "VATSIM Password:";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(15, 131);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(102, 15);
+            label6.TabIndex = 2;
+            label6.Text = "VATSIM Password:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 79);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "VATSIM ID:";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(15, 79);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(63, 15);
+            label5.TabIndex = 1;
+            label5.Text = "VATSIM ID:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chkKeepVisible);
-            this.groupBox1.Controls.Add(this.chkSuppressNotifications);
-            this.groupBox1.Location = new System.Drawing.Point(45, 360);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox1.Size = new System.Drawing.Size(276, 104);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Settings";
+            groupBox1.Controls.Add(chkKeepVisible);
+            groupBox1.Controls.Add(chkSuppressNotifications);
+            groupBox1.Location = new System.Drawing.Point(45, 360);
+            groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox1.Size = new System.Drawing.Size(276, 104);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Settings";
             // 
             // chkKeepVisible
             // 
-            this.chkKeepVisible.AutoSize = true;
-            this.chkKeepVisible.Location = new System.Drawing.Point(15, 65);
-            this.chkKeepVisible.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkKeepVisible.Name = "chkKeepVisible";
-            this.chkKeepVisible.Size = new System.Drawing.Size(164, 19);
-            this.chkKeepVisible.TabIndex = 6;
-            this.chkKeepVisible.TabStop = false;
-            this.chkKeepVisible.Text = "Keep vATIS window visible";
-            this.chkKeepVisible.UseVisualStyleBackColor = true;
+            chkKeepVisible.AutoSize = true;
+            chkKeepVisible.Location = new System.Drawing.Point(15, 65);
+            chkKeepVisible.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            chkKeepVisible.Name = "chkKeepVisible";
+            chkKeepVisible.Size = new System.Drawing.Size(164, 19);
+            chkKeepVisible.TabIndex = 1;
+            chkKeepVisible.Text = "Keep vATIS window visible";
+            chkKeepVisible.UseVisualStyleBackColor = true;
             // 
             // chkSuppressNotifications
             // 
-            this.chkSuppressNotifications.AutoSize = true;
-            this.chkSuppressNotifications.Location = new System.Drawing.Point(15, 32);
-            this.chkSuppressNotifications.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.chkSuppressNotifications.Name = "chkSuppressNotifications";
-            this.chkSuppressNotifications.Size = new System.Drawing.Size(238, 19);
-            this.chkSuppressNotifications.TabIndex = 5;
-            this.chkSuppressNotifications.TabStop = false;
-            this.chkSuppressNotifications.Text = "Suppress ATIS update notification sound";
-            this.chkSuppressNotifications.UseVisualStyleBackColor = true;
+            chkSuppressNotifications.AutoSize = true;
+            chkSuppressNotifications.Location = new System.Drawing.Point(15, 32);
+            chkSuppressNotifications.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            chkSuppressNotifications.Name = "chkSuppressNotifications";
+            chkSuppressNotifications.Size = new System.Drawing.Size(238, 19);
+            chkSuppressNotifications.TabIndex = 0;
+            chkSuppressNotifications.Text = "Suppress ATIS update notification sound";
+            chkSuppressNotifications.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(236, 479);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 27);
-            this.btnCancel.TabIndex = 13;
-            this.btnCancel.TabStop = false;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(236, 479);
+            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(86, 27);
+            btnCancel.TabIndex = 3;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(43, 479);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(112, 27);
-            this.btnSave.TabIndex = 11;
-            this.btnSave.TabStop = false;
-            this.btnSave.Text = "Save Settings";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Location = new System.Drawing.Point(43, 479);
+            btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(112, 27);
+            btnSave.TabIndex = 2;
+            btnSave.Text = "Save Settings";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
-            // SettingsForm
+            // SettingsDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 541);
-            this.ControlBox = false;
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "SettingsDialog";
-            this.Padding = new System.Windows.Forms.Padding(10);
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "vATIS Settings";
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(364, 541);
+            ControlBox = false;
+            Controls.Add(btnCancel);
+            Controls.Add(btnSave);
+            Controls.Add(groupBox1);
+            Controls.Add(groupBox3);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "SettingsDialog";
+            Padding = new System.Windows.Forms.Padding(10);
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "vATIS Settings";
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
