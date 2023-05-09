@@ -61,7 +61,7 @@ public partial class ProfileConfigurationForm : Form
 
         RefreshCompositeList();
         LoadVoiceList();
-    } 
+    }
 
     protected override CreateParams CreateParams
     {
