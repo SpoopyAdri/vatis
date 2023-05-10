@@ -17,8 +17,7 @@ public class Clouds : BaseFormat
 
     public bool IdentifyCeilingLayer { get; set; } = true;
     public bool ConvertToMetric { get; set; }
-    public string UndeterminedLayerText { get; set; } = "undetermined";
-    public string UndeterminedLayerVoice { get; set; } = "undetermined";
+    public UndeterminedLayer UndeterminedLayerAltitude { get; set; } = new UndeterminedLayer("undetermined", "undetermined");
 
     [JsonConverter(typeof(CloudConverter))]
     public Dictionary<string, object> Types { get; set; } = new()
@@ -39,6 +38,17 @@ public class Clouds : BaseFormat
         { "CB", "cumulonimbus" },
         { "TCU", "towering cumulus" }
     };
+}
+
+public class UndeterminedLayer
+{
+    public string Text { get; set; }
+    public string Voice { get; set; }
+    public UndeterminedLayer(string text, string voice)
+    {
+        Text = text;
+        Voice = voice;
+    }
 }
 
 public class CloudType

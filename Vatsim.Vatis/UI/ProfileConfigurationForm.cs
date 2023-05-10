@@ -364,8 +364,8 @@ public partial class ProfileConfigurationForm : Form
         visDirNorthWest.Text = mCurrentComposite.AtisFormat.Visibility.NorthWest;
         txtVis9999Voice.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityVoice;
         txtVis9999Text.Text = mCurrentComposite.AtisFormat.Visibility.UnlimitedVisibilityText;
-        txtUndeterminedLayerText.Text = mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerText;
-        txtUndeterminedLayerVoice.Text = mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerVoice;
+        txtUndeterminedLayerText.Text = mCurrentComposite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Text;
+        txtUndeterminedLayerVoice.Text = mCurrentComposite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Voice;
 
         gridWeatherTypes.Rows.Clear();
         if (mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes != null)
@@ -864,8 +864,8 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.AtisFormat.PresentWeather.Vicinity = wxProximityVicinity.Text;
         mCurrentComposite.AtisFormat.Clouds.IdentifyCeilingLayer = chkIdentifyCeilingLayer.Checked;
         mCurrentComposite.AtisFormat.Clouds.ConvertToMetric = chkConvertCloudsMetric.Checked;
-        mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerText = txtUndeterminedLayerText.Text;
-        mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerVoice = txtUndeterminedLayerVoice.Text;
+        mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerAltitude.Text = txtUndeterminedLayerText.Text;
+        mCurrentComposite.AtisFormat.Clouds.UndeterminedLayerAltitude.Voice = txtUndeterminedLayerVoice.Text;
         mCurrentComposite.AtisFormat.Temperature.UsePlusPrefix = chkTempPlusPrefix.Checked;
         mCurrentComposite.AtisFormat.Temperature.PronounceLeadingZero = chkTempLeadingZero.Checked;
         mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix = chkDewPlusPrefix.Checked;

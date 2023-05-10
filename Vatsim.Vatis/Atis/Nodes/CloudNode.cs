@@ -62,7 +62,7 @@ public class CloudNode : BaseNode<CloudLayer>
             var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Text;
 
             template = layer.IsCloudBelow
-                ? Regex.Replace(template, "{altitude}", $" {Composite.AtisFormat.Clouds.UndeterminedLayerText} ", RegexOptions.IgnoreCase)
+                ? Regex.Replace(template, "{altitude}", $" {Composite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Text ?? "undetermined"} ", RegexOptions.IgnoreCase)
                 : Regex.Replace(template, "{altitude}", altitude.ToString("000"), RegexOptions.IgnoreCase);
 
             if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
@@ -95,7 +95,7 @@ public class CloudNode : BaseNode<CloudLayer>
             var template = (Composite.AtisFormat.Clouds.Types[cloudType] as CloudType).Voice;
 
             template = layer.IsCloudBelow
-                ? Regex.Replace(template, "{altitude}", $" {Composite.AtisFormat.Clouds.UndeterminedLayerVoice} ", RegexOptions.IgnoreCase)
+                ? Regex.Replace(template, "{altitude}", $" {Composite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Voice ?? "undetermined"} ", RegexOptions.IgnoreCase)
                 : Regex.Replace(template, "{altitude}", altitude.ToWordString(), RegexOptions.IgnoreCase);
 
             if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
