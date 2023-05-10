@@ -49,6 +49,7 @@ public class Connection
     private Timer mMetarUpdateTimer;
     private string mPublicIp;
     private string mPreviousMetar;
+    private DateTime mLastMetarReceivedTime;
     private Airport mAirport;
     private List<string> mSubscribers = new List<string>();
     private List<string> mEuroscopeSubscribers = new List<string>();
@@ -147,7 +148,10 @@ public class Connection
     {
         if (e.PDU.ErrorType == NetworkError.NoWeatherProfile)
         {
-            MetarNotFoundReceived?.Invoke(this, EventArgs.Empty);
+            if (string.IsNullOrEmpty(mPreviousMetar) || (DateTime.UtcNow - mLastMetarReceivedTime).TotalMinutes > 30)
+            {
+                MetarNotFoundReceived?.Invoke(this, EventArgs.Empty);
+            }
         }
         else if (e.PDU.Fatal)
         {
@@ -172,6 +176,7 @@ public class Connection
             MetarResponseReceived?.Invoke(this, new MetarResponseReceived(e.PDU.Metar, isNewMetar));
         }
         mPreviousMetar = e.PDU.Metar;
+        mLastMetarReceivedTime = DateTime.UtcNow;
     }
 
     private void OnClientQueryResponseReceived(object sender, DataReceivedEventArgs<PDUClientQueryResponse> e)
