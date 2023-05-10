@@ -214,6 +214,10 @@ namespace Vatsim.Vatis.UI
             tabClouds = new System.Windows.Forms.TabPage();
             tabControl5 = new System.Windows.Forms.TabControl();
             tabPage4 = new System.Windows.Forms.TabPage();
+            label13 = new System.Windows.Forms.Label();
+            txtUndeterminedLayerText = new System.Windows.Forms.TextBox();
+            txtUndeterminedLayerVoice = new System.Windows.Forms.TextBox();
+            label27 = new System.Windows.Forms.Label();
             chkConvertCloudsMetric = new System.Windows.Forms.CheckBox();
             chkIdentifyCeilingLayer = new System.Windows.Forms.CheckBox();
             templateCloudLayers = new NodeFormatTemplate();
@@ -819,7 +823,7 @@ namespace Vatsim.Vatis.UI
             tabSurfaceWind.Location = new System.Drawing.Point(4, 24);
             tabSurfaceWind.Name = "tabSurfaceWind";
             tabSurfaceWind.Padding = new System.Windows.Forms.Padding(12);
-            tabSurfaceWind.Size = new System.Drawing.Size(753, 310);
+            tabSurfaceWind.Size = new System.Drawing.Size(192, 72);
             tabSurfaceWind.TabIndex = 1;
             tabSurfaceWind.Text = "Wind";
             tabSurfaceWind.UseVisualStyleBackColor = true;
@@ -871,10 +875,10 @@ namespace Vatsim.Vatis.UI
             tabControl1.Controls.Add(windVariableDirection);
             tabControl1.Controls.Add(windCalm);
             tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tabControl1.Location = new System.Drawing.Point(12, 43);
+            tabControl1.Location = new System.Drawing.Point(12, -195);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(729, 255);
+            tabControl1.Size = new System.Drawing.Size(168, 255);
             tabControl1.TabIndex = 2;
             // 
             // windStandard
@@ -883,7 +887,7 @@ namespace Vatsim.Vatis.UI
             windStandard.Location = new System.Drawing.Point(4, 24);
             windStandard.Name = "windStandard";
             windStandard.Padding = new System.Windows.Forms.Padding(3);
-            windStandard.Size = new System.Drawing.Size(721, 227);
+            windStandard.Size = new System.Drawing.Size(160, 227);
             windStandard.TabIndex = 0;
             windStandard.Text = "Standard";
             windStandard.UseVisualStyleBackColor = true;
@@ -1774,6 +1778,10 @@ namespace Vatsim.Vatis.UI
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(label13);
+            tabPage4.Controls.Add(txtUndeterminedLayerText);
+            tabPage4.Controls.Add(txtUndeterminedLayerVoice);
+            tabPage4.Controls.Add(label27);
             tabPage4.Controls.Add(chkConvertCloudsMetric);
             tabPage4.Controls.Add(chkIdentifyCeilingLayer);
             tabPage4.Controls.Add(templateCloudLayers);
@@ -1785,10 +1793,46 @@ namespace Vatsim.Vatis.UI
             tabPage4.Text = "Template";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(341, 42);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(118, 15);
+            label13.TabIndex = 32;
+            label13.Text = "Undetermined (Text):";
+            compositeTooltip.SetToolTip(label13, "The text ATIS string if the cloud layer altitude is ///");
+            // 
+            // txtUndeterminedLayerText
+            // 
+            txtUndeterminedLayerText.Location = new System.Drawing.Point(470, 38);
+            txtUndeterminedLayerText.Name = "txtUndeterminedLayerText";
+            txtUndeterminedLayerText.Size = new System.Drawing.Size(177, 23);
+            txtUndeterminedLayerText.TabIndex = 31;
+            txtUndeterminedLayerText.TextChanged += HandleControlValueChanged;
+            // 
+            // txtUndeterminedLayerVoice
+            // 
+            txtUndeterminedLayerVoice.Location = new System.Drawing.Point(154, 38);
+            txtUndeterminedLayerVoice.Name = "txtUndeterminedLayerVoice";
+            txtUndeterminedLayerVoice.Size = new System.Drawing.Size(176, 23);
+            txtUndeterminedLayerVoice.TabIndex = 30;
+            txtUndeterminedLayerVoice.TextChanged += HandleControlValueChanged;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new System.Drawing.Point(18, 42);
+            label27.Name = "label27";
+            label27.Size = new System.Drawing.Size(125, 15);
+            label27.TabIndex = 29;
+            label27.Text = "Undetermined (Voice):";
+            compositeTooltip.SetToolTip(label27, "The spoken text if the cloud layer height is ///");
+            // 
             // chkConvertCloudsMetric
             // 
             chkConvertCloudsMetric.AutoSize = true;
-            chkConvertCloudsMetric.Location = new System.Drawing.Point(225, 20);
+            chkConvertCloudsMetric.Location = new System.Drawing.Point(225, 14);
             chkConvertCloudsMetric.Name = "chkConvertCloudsMetric";
             chkConvertCloudsMetric.Size = new System.Drawing.Size(223, 19);
             chkConvertCloudsMetric.TabIndex = 21;
@@ -1800,7 +1844,7 @@ namespace Vatsim.Vatis.UI
             // chkIdentifyCeilingLayer
             // 
             chkIdentifyCeilingLayer.AutoSize = true;
-            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(18, 20);
+            chkIdentifyCeilingLayer.Location = new System.Drawing.Point(20, 14);
             chkIdentifyCeilingLayer.Name = "chkIdentifyCeilingLayer";
             chkIdentifyCeilingLayer.Size = new System.Drawing.Size(201, 19);
             chkIdentifyCeilingLayer.TabIndex = 20;
@@ -1811,10 +1855,10 @@ namespace Vatsim.Vatis.UI
             // 
             // templateCloudLayers
             // 
-            templateCloudLayers.Location = new System.Drawing.Point(18, 58);
+            templateCloudLayers.Location = new System.Drawing.Point(18, 70);
             templateCloudLayers.Name = "templateCloudLayers";
             templateCloudLayers.NodeType = "Clouds";
-            templateCloudLayers.Size = new System.Drawing.Size(685, 180);
+            templateCloudLayers.Size = new System.Drawing.Size(685, 175);
             templateCloudLayers.TabIndex = 19;
             templateCloudLayers.TextTemplate = "";
             variable49.Text = "clouds";
@@ -1830,7 +1874,7 @@ namespace Vatsim.Vatis.UI
             tabPage6.Location = new System.Drawing.Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new System.Windows.Forms.Padding(10);
-            tabPage6.Size = new System.Drawing.Size(721, 258);
+            tabPage6.Size = new System.Drawing.Size(192, 72);
             tabPage6.TabIndex = 1;
             tabPage6.Text = "Cloud Types";
             tabPage6.UseVisualStyleBackColor = true;
@@ -1849,7 +1893,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel7.RowCount = 2;
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            tableLayoutPanel7.Size = new System.Drawing.Size(701, 238);
+            tableLayoutPanel7.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel7.TabIndex = 3;
             // 
             // gridCloudTypes
@@ -1885,7 +1929,7 @@ namespace Vatsim.Vatis.UI
             gridCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridCloudTypes.RowHeadersVisible = false;
             gridCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridCloudTypes.Size = new System.Drawing.Size(693, 197);
+            gridCloudTypes.Size = new System.Drawing.Size(164, 11);
             gridCloudTypes.TabIndex = 2;
             gridCloudTypes.CellEndEdit += gridCloudTypes_CellEndEdit;
             gridCloudTypes.CellValidating += gridCloudTypes_CellValidating;
@@ -1914,12 +1958,12 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
             tableLayoutPanel9.Controls.Add(label24, 0, 0);
             tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel9.Location = new System.Drawing.Point(3, 206);
+            tableLayoutPanel9.Location = new System.Drawing.Point(3, 20);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             tableLayoutPanel9.RowCount = 1;
             tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel9.Size = new System.Drawing.Size(695, 29);
+            tableLayoutPanel9.Size = new System.Drawing.Size(166, 29);
             tableLayoutPanel9.TabIndex = 3;
             // 
             // label24
@@ -1929,7 +1973,7 @@ namespace Vatsim.Vatis.UI
             label24.Location = new System.Drawing.Point(0, 0);
             label24.Margin = new System.Windows.Forms.Padding(0);
             label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(695, 29);
+            label24.Size = new System.Drawing.Size(166, 29);
             label24.TabIndex = 2;
             label24.Text = "Available Variables: {altitude} and {convective}";
             label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1941,7 +1985,7 @@ namespace Vatsim.Vatis.UI
             tabPage7.Location = new System.Drawing.Point(4, 24);
             tabPage7.Name = "tabPage7";
             tabPage7.Padding = new System.Windows.Forms.Padding(10);
-            tabPage7.Size = new System.Drawing.Size(721, 258);
+            tabPage7.Size = new System.Drawing.Size(192, 72);
             tabPage7.TabIndex = 2;
             tabPage7.Text = "Convective Cloud Types";
             tabPage7.UseVisualStyleBackColor = true;
@@ -1958,7 +2002,7 @@ namespace Vatsim.Vatis.UI
             tableLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             tableLayoutPanel8.RowCount = 1;
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(701, 238);
+            tableLayoutPanel8.Size = new System.Drawing.Size(172, 52);
             tableLayoutPanel8.TabIndex = 4;
             // 
             // gridConvectiveCloudTypes
@@ -1994,7 +2038,7 @@ namespace Vatsim.Vatis.UI
             gridConvectiveCloudTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             gridConvectiveCloudTypes.RowHeadersVisible = false;
             gridConvectiveCloudTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            gridConvectiveCloudTypes.Size = new System.Drawing.Size(693, 232);
+            gridConvectiveCloudTypes.Size = new System.Drawing.Size(164, 46);
             gridConvectiveCloudTypes.TabIndex = 2;
             gridConvectiveCloudTypes.CellEndEdit += gridConvectiveCloudTypes_CellEndEdit;
             gridConvectiveCloudTypes.CellValidating += gridConvectiveCloudTypes_CellValidating;
@@ -2932,5 +2976,9 @@ namespace Vatsim.Vatis.UI
         private global::System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private global::System.Windows.Forms.Label label26;
         private global::System.Windows.Forms.Button btnDeleteTransitionLevel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtUndeterminedLayerText;
+        private System.Windows.Forms.TextBox txtUndeterminedLayerVoice;
+        private System.Windows.Forms.Label label27;
     }
 }

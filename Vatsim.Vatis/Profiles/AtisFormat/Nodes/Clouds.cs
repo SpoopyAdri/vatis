@@ -17,6 +17,8 @@ public class Clouds : BaseFormat
 
     public bool IdentifyCeilingLayer { get; set; } = true;
     public bool ConvertToMetric { get; set; }
+    public string UndeterminedLayerText { get; set; } = "undetermined";
+    public string UndeterminedLayerVoice { get; set; } = "undetermined";
 
     [JsonConverter(typeof(CloudConverter))]
     public Dictionary<string, object> Types { get; set; } = new()

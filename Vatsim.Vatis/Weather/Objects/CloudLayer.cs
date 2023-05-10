@@ -117,7 +117,7 @@ namespace Vatsim.Vatis.Weather.Objects
             if (token.StartsWith("///"))
             {
                 isCloudBelow = true;
-                return (0, token);
+                return (0, token[3..]);
             }
 
             if (!int.TryParse(token[..3], out var altitude))
