@@ -51,11 +51,11 @@ public partial class NotamDefinitionsDialog : Form
             lstConditions.SelectedItem = definition;
 
             int idx = 1;
-            mComposite.AirportConditionDefinitions.Clear();
+            mComposite.NotamDefinitions.Clear();
             foreach (DefinedTextMeta condition in lstConditions.Items)
             {
                 condition.Ordinal = idx++;
-                mComposite.AirportConditionDefinitions.Add(condition);
+                mComposite.NotamDefinitions.Add(condition);
             }
         }
     }
@@ -71,11 +71,11 @@ public partial class NotamDefinitionsDialog : Form
             lstConditions.SelectedItem = definition;
 
             int idx = 1;
-            mComposite.AirportConditionDefinitions.Clear();
+            mComposite.NotamDefinitions.Clear();
             foreach (DefinedTextMeta condition in lstConditions.Items)
             {
                 condition.Ordinal = idx++;
-                mComposite.AirportConditionDefinitions.Add(condition);
+                mComposite.NotamDefinitions.Add(condition);
             }
         }
     }
