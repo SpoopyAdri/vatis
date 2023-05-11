@@ -87,6 +87,7 @@ public class AtisBuilder : IAtisBuilder
         template = Regex.Replace(template, @"(?<=\#)(-?[\,0-9]+)", "$1");
         template = Regex.Replace(template, @"(?<=\+)([A-Z]{3})", "$1");
         template = Regex.Replace(template, @"(?<=\+)([A-Z]{4})", "$1");
+        template = Regex.Replace(template, @"(?<![\w\d])\^((?:0[1-9]|1[0-9]|2[0-9]|3[0-6])(?:[LRC]?))(?![\w\d])", "$1"); // strip caret from single runway parsing ^18R
 
         if (!composite.CurrentPreset.HasClosingVariable && composite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement)
         {
