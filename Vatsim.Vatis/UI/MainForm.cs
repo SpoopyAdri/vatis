@@ -361,7 +361,7 @@ public partial class MainForm : Form
                         else
                         {
                             tabPage.CompositeMeta.VoiceRecordEnabled = !composite.AtisVoice.UseTextToSpeech;
-                            mAtisBuilder.BuildTextAtis(composite);
+                            composite.TextAtis = mAtisBuilder.BuildTextAtis(composite);
                             await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                         }
                     }
@@ -399,7 +399,7 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.BuildTextAtis(composite);
+                        composite.TextAtis = mAtisBuilder.BuildTextAtis(composite);
                         await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };
@@ -444,7 +444,7 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.BuildTextAtis(composite);
+                        composite.TextAtis = mAtisBuilder.BuildTextAtis(composite);
                         await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };
@@ -478,7 +478,7 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        mAtisBuilder.BuildTextAtis(composite);
+                        composite.TextAtis = mAtisBuilder.BuildTextAtis(composite);
                         await mAtisBuilder.UpdateIds(composite, cancellationToken.Token);
                     }
                 };

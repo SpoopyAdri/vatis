@@ -4,12 +4,16 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using NAudio.Wave;
 using Newtonsoft.Json;
+using Vatsim.Vatis.Atis;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Core;
 using Vatsim.Vatis.Events;
+using Vatsim.Vatis.Io;
 using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.Profiles.AtisFormat;
@@ -26,7 +30,17 @@ public partial class ProfileConfigurationForm : Form
     private readonly IAppConfig mAppConfig;
     private readonly IWindowFactory mWindowFactory;
     private readonly INavDataRepository mNavaidDatabase;
+    private readonly IDownloader mDownloader;
+    private readonly IAtisBuilder mAtisBuilder;
     private Control mPresetControl;
+
+    private Composite mSandboxComposite = null;
+    private Preset mSandboxPreset = null;
+    private bool mSandboxAudioPlaying = false;
+    private byte[] mSandboxAudioBytes;
+    private CancellationTokenSource mSandboxCancellationToken;
+    private WaveOutEvent mSandboxAudioOut;
+    private readonly Weather.MetarParser mMetarParser = new();
 
     private Composite mCurrentComposite = null;
     private Preset mCurrentPreset = null;
@@ -35,13 +49,15 @@ public partial class ProfileConfigurationForm : Form
     private List<Tuple<BaseFormat, string>> mPendingTextTemplateChanges = new();
 
     public ProfileConfigurationForm(IWindowFactory windowFactory, IAppConfig appConfig,
-        INavDataRepository navaidDatabase)
+        INavDataRepository navaidDatabase, IDownloader downloader, IAtisBuilder atisBuilder)
     {
         InitializeComponent();
 
         mAppConfig = appConfig;
         mWindowFactory = windowFactory;
         mNavaidDatabase = navaidDatabase;
+        mDownloader = downloader;
+        mAtisBuilder = atisBuilder;
 
         mainTabControl.Selected += (e, args) =>
         {
@@ -84,6 +100,12 @@ public partial class ProfileConfigurationForm : Form
     {
         EventBus.Unregister(this);
         base.OnFormClosing(e);
+
+        if (mSandboxAudioOut != null)
+        {
+            mSandboxAudioOut.Stop();
+            mSandboxAudioPlaying = false;
+        }
     }
 
     private void LoadVoiceList()
@@ -187,6 +209,8 @@ public partial class ProfileConfigurationForm : Form
 
                 mCurrentComposite = mAppConfig.CurrentProfile.Composites
                     .FirstOrDefault(x => x.Id == composite.Id);
+
+                mSandboxComposite = mCurrentComposite.Clone();
 
                 if (mCurrentComposite == null)
                     return;
@@ -562,7 +586,8 @@ public partial class ProfileConfigurationForm : Form
                         }
                     }
 
-                    var clone = (Composite)composite.Clone();
+                    var clone = composite.Clone();
+                    clone.Id = Guid.NewGuid();
                     clone.Identifier = dlg.Identifier;
                     clone.Name = dlg.CompositeName;
                     clone.AtisType = dlg.Type;
@@ -570,7 +595,9 @@ public partial class ProfileConfigurationForm : Form
                     var presets = new List<Preset>();
                     foreach (var preset in composite.Presets)
                     {
-                        presets.Add((Preset)preset.Clone());
+                        var presetClone = preset.Clone();
+                        presetClone.Id = Guid.NewGuid();
+                        presets.Add(presetClone);
                     }
                     clone.Presets = presets;
 
@@ -1019,6 +1046,9 @@ public partial class ProfileConfigurationForm : Form
         btnOK.Enabled = true;
         mAppConfig.SaveConfig();
 
+        mSandboxComposite = mCurrentComposite.Clone();
+        RefreshSandboxPreset();
+
         return true;
     }
 
@@ -1063,14 +1093,17 @@ public partial class ProfileConfigurationForm : Form
 
     private void PopulateSelectedPreset()
     {
-        mCurrentPreset = mCurrentComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlPresets.SelectedValue.ToString());
-
-        if (mCurrentPreset != null)
+        if (ddlPresets.SelectedItem != null)
         {
-            chkExternalAtisGenerator.Enabled = true;
-            chkExternalAtisGenerator.Checked = mCurrentPreset.ExternalGenerator.Enabled;
+            mCurrentPreset = mCurrentComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlPresets.SelectedValue.ToString());
 
-            AddDynamicPresetControl();
+            if (mCurrentPreset != null)
+            {
+                chkExternalAtisGenerator.Enabled = true;
+                chkExternalAtisGenerator.Checked = mCurrentPreset.ExternalGenerator.Enabled;
+
+                AddDynamicPresetControl();
+            }
         }
     }
 
@@ -1199,7 +1232,8 @@ public partial class ProfileConfigurationForm : Form
                 }
                 else
                 {
-                    var clone = (Preset)mCurrentPreset.Clone();
+                    var clone = mCurrentPreset.Clone();
+                    clone.Id = Guid.NewGuid();
                     clone.Name = dlg.Value;
                     mCurrentComposite.Presets.Add(clone);
                     mAppConfig.SaveConfig();
@@ -1236,10 +1270,17 @@ public partial class ProfileConfigurationForm : Form
         {
             ddlPresets.DataSource = null;
             ddlPresets.Items.Clear();
-
             ddlPresets.DataSource = mCurrentComposite.Presets;
             ddlPresets.DisplayMember = "Name";
             ddlPresets.ValueMember = "Id";
+
+            mSandboxComposite = mCurrentComposite.Clone();
+            ddlSandboxPresets.DataSource = null;
+            ddlSandboxPresets.Items.Clear();
+            ddlSandboxPresets.DataSource = mSandboxComposite.Presets;
+            ddlSandboxPresets.DisplayMember = "Name";
+            ddlSandboxPresets.ValueMember = "Id";
+            ddlSandboxPresets.SelectedIndex = -1;
 
             if (mPresetControl != null)
                 dynamicPresetControl.Controls.Remove(mPresetControl);
@@ -1925,5 +1966,160 @@ public partial class ProfileConfigurationForm : Form
         magneticVar.Enabled = chkMagneticVar.Checked;
 
         btnApply.Enabled = true;
+    }
+
+    private async void btnFetchMetar_Click(object sender, EventArgs e)
+    {
+        var metar = await mDownloader.DownloadStringAsync("https://metar.vatsim.net/metar.php?id=" + mSandboxComposite.Identifier);
+
+        txtSandboxMetar.Text = string.IsNullOrEmpty(metar) ? "METAR NOT FOUND" : metar;
+
+        if (!string.IsNullOrEmpty(metar) && ddlAtisLetter.SelectedItem == null)
+        {
+            ddlAtisLetter.SelectedIndex = 0;
+        }
+    }
+
+    private async void btnRefreshAtis_Click(object sender, EventArgs e)
+    {
+        if (mAppConfig.ConfigRequired)
+        {
+            MessageBox.Show(this, "Your VATSIM ID or Password are not set. You must enter these in the Settings before continuing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (ddlSandboxPresets.SelectedItem == null)
+        {
+            MessageBox.Show(this, "You must select a Preset.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            ddlPresets.Focus();
+            return;
+        }
+
+        if (string.IsNullOrEmpty(txtSandboxMetar.Text))
+        {
+            MessageBox.Show(this, "You must fetch the METAR or enter one manually.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            txtSandboxMetar.Focus();
+            return;
+        }
+
+        if (!mSandboxComposite.AtisVoice.UseTextToSpeech)
+        {
+            MessageBox.Show(this, "This composite is not configured for text to speech.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        try
+        {
+            if (mSandboxAudioOut != null && mSandboxAudioOut.PlaybackState == PlaybackState.Playing)
+            {
+                mSandboxAudioOut.Stop();
+                mSandboxAudioPlaying = false;
+                txtSandboxVoiceAtis.Text = "";
+            }
+
+            mSandboxCancellationToken = new CancellationTokenSource();
+            btnPlayVoiceAtis.Enabled = false;
+            mSandboxAudioBytes = null;
+
+            mSandboxComposite.DecodedMetar = mMetarParser.Parse(txtSandboxMetar.Text);
+            mSandboxComposite.CurrentPreset = mSandboxPreset;
+            mSandboxComposite.AtisLetter = ddlAtisLetter.Text;
+            mSandboxPreset.AirportConditions = txtSandboxAirportConds.Text;
+            mSandboxPreset.Notams = txtSandboxNotams.Text;
+            txtSandboxTextAtis.Text = mAtisBuilder.BuildTextAtis(mSandboxComposite);
+
+            txtSandboxVoiceAtis.Text = "LOADING...";
+            var voiceAtis = await mAtisBuilder.BuildVoiceAtis(mSandboxComposite, mSandboxCancellationToken.Token, true);
+
+            if (!string.IsNullOrEmpty(voiceAtis.Item1))
+            {
+                txtSandboxVoiceAtis.Text = voiceAtis.Item1.ToUpper();
+            }
+
+            if (voiceAtis.Item2 != null)
+            {
+                mSandboxAudioBytes = voiceAtis.Item2;
+                btnPlayVoiceAtis.Enabled = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, "An error occurred while trying to test the ATIS:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+    }
+
+    private void btnPlayVoiceAtis_Click(object sender, EventArgs e)
+    {
+        if (mSandboxComposite == null) return;
+
+        if (!mSandboxComposite.AtisVoice.UseTextToSpeech)
+        {
+            MessageBox.Show(this, "This composite is not configured for text to speech.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (mSandboxAudioBytes == null)
+        {
+            MessageBox.Show(this, "Synthesized voice data is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (mSandboxAudioOut == null)
+        {
+            mSandboxAudioOut = new WaveOutEvent();
+            mSandboxAudioOut.DeviceNumber = -1; // default
+            mSandboxAudioOut.PlaybackStopped += delegate
+            {
+                btnPlayVoiceAtis.Text = "Play Voice ATIS";
+                mSandboxAudioPlaying = false;
+            };
+        }
+
+        if (!mSandboxAudioPlaying)
+        {
+            mSandboxAudioPlaying = true;
+            btnPlayVoiceAtis.Text = "Stop Playback";
+
+            IWaveProvider provider = new RawSourceWaveStream(new MemoryStream(mSandboxAudioBytes), new WaveFormat(48000, 1));
+            mSandboxAudioOut.Init(provider);
+            mSandboxAudioOut.Play();
+        }
+        else
+        {
+            mSandboxAudioOut.Stop();
+            mSandboxAudioPlaying = false;
+        }
+    }
+
+    private void ddlSandboxPresets_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RefreshSandboxPreset();
+    }
+
+    private void lblSandboxAirportCond_Click(object sender, EventArgs e)
+    {
+        using var dlg = new ReadOnlyDefinitionsDialog(mSandboxComposite, ReadOnlyDefinitionsDialog.DefinitionType.AirportConditions);
+        dlg.ShowDialog(this);
+    }
+
+    private void lblSandboxNotams_Click(object sender, EventArgs e)
+    {
+        using var dlg = new ReadOnlyDefinitionsDialog(mSandboxComposite, ReadOnlyDefinitionsDialog.DefinitionType.Notams);
+        dlg.ShowDialog(this);
+    }
+
+    private void RefreshSandboxPreset()
+    {
+        if (ddlSandboxPresets.SelectedItem != null)
+        {
+            mSandboxPreset = mSandboxComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlSandboxPresets.SelectedValue.ToString());
+
+            if (mSandboxPreset != null)
+            {
+                txtSandboxAirportConds.Text = mSandboxPreset.AirportConditions;
+                txtSandboxNotams.Text = mSandboxPreset.Notams;
+            }
+        }
     }
 }

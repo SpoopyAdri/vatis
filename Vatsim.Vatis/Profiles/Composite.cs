@@ -10,7 +10,7 @@ using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Profiles;
 
-public class Composite : IComposite, ICloneable
+public class Composite : IComposite
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
@@ -63,13 +63,6 @@ public class Composite : IComposite, ICloneable
         {
             AtisFormat.TransitionLevel.Values.AddRange(value);
         }
-    }
-
-    public object Clone()
-    {
-        var composite = (Composite)MemberwiseClone();
-        composite.Id = Guid.NewGuid();
-        return composite;
     }
 
     public override string ToString() => AtisType != AtisType.Combined ? $"{Name} ({Identifier}) {AtisType}" : $"{Name} ({Identifier})";

@@ -19,6 +19,9 @@ public class ObservationTimeNode : BaseNode<ObservationDayTime>
 
     public void Parse(ObservationDayTime node)
     {
+        if (node == null)
+            return;
+
         var minutes = node.Time.Minutes;
 
         mIsSpecialAtis = Composite.AtisFormat.ObservationTime.StandardUpdateTime != null

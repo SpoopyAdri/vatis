@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Vatsim.Vatis.Profiles;
 
 [Serializable]
-public class Preset : IPreset, ICloneable
+public class Preset : IPreset
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
@@ -22,13 +22,6 @@ public class Preset : IPreset, ICloneable
 
     [JsonIgnore]
     public bool HasClosingVariable => new string[] { "[CLOSING]", "$CLOSING", "[CLOSING:VOX]", "$CLOSING:VOX" }.Any(n => Template.Contains(n));
-
-    public object Clone()
-    {
-        var preset = (Preset)MemberwiseClone();
-        preset.Id = Guid.NewGuid();
-        return preset;
-    }
 
     public override string ToString() => Name;
 }

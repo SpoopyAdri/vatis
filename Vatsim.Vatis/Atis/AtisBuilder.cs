@@ -34,7 +34,7 @@ public class AtisBuilder : IAtisBuilder
         mDownloader = downloader;
     }
 
-    public void BuildTextAtis(Composite composite)
+    public string BuildTextAtis(Composite composite)
     {
         if (composite == null)
         {
@@ -97,10 +97,10 @@ public class AtisBuilder : IAtisBuilder
             template += closingTemplate;
         }
 
-        composite.TextAtis = template;
+        return template;
     }
 
-    public async Task BuildVoiceAtis(Composite composite, CancellationToken cancellationToken)
+    public async Task<(string, byte[])> BuildVoiceAtis(Composite composite, CancellationToken cancellationToken, bool sandbox = false)
     {
         if (composite == null)
         {
@@ -133,11 +133,11 @@ public class AtisBuilder : IAtisBuilder
 
             composite.TextAtis = externalAtis.ToUpper();
 
-            return;
+            return (null, null);
         }
 
         // build standard ATIS
-        BuildTextAtis(composite);
+        composite.TextAtis = BuildTextAtis(composite);
 
         var template = composite.CurrentPreset.Template;
 
@@ -177,16 +177,18 @@ public class AtisBuilder : IAtisBuilder
             text = Regex.Replace(text, "\\s+([.,!\":])", "$1");
 
             // catches multiple ATIS letter button presses in quick succession
-            await Task.Delay(5000, cancellationToken);
+            await Task.Delay(sandbox ? 0 : 5000, cancellationToken);
 
             var synthesizedAudio = await mTextToSpeechRequest.RequestSynthesizedText(text, cancellationToken);
 
-            if (synthesizedAudio != null)
+            if (synthesizedAudio != null && sandbox == false)
             {
                 await UpdateIds(composite, cancellationToken);
 
                 await mAudioManager.AddOrUpdateBot(synthesizedAudio, composite.AtisCallsign, composite.Frequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
+
+            return (text, synthesizedAudio);
         }
         else
         {
@@ -197,6 +199,8 @@ public class AtisBuilder : IAtisBuilder
                 await mAudioManager.AddOrUpdateBot(composite.RecordedMemoryStream.ToArray(), composite.AtisCallsign, composite.Frequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
             }
         }
+
+        return (null, null);
     }
 
     public async Task UpdateIds(Composite composite, CancellationToken cancellationToken)
