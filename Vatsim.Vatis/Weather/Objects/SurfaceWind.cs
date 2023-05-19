@@ -38,7 +38,7 @@ namespace Vatsim.Vatis.Weather.Objects
         /// Max wind speed or gust speed
         /// </summary>
         [DataMember(Name = "gustSpeed", EmitDefaultValue = false)]
-        public int GustSpeed { get; init; }
+        public int? GustSpeed { get; init; }
 
         /// <summary>
         /// Type of wind unit

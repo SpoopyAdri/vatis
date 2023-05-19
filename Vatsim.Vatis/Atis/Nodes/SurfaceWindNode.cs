@@ -134,9 +134,9 @@ public class SurfaceWindNode : BaseNode<SurfaceWind>
         format = Regex.Replace(format, "{wind_spd}", node.Speed.ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, @"{wind_spd\|kt}", node.ToKts(node.Speed).ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, @"{wind_spd\|mps}", node.ToMps(node.Speed).ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, "{wind_gust}", node.GustSpeed.ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, @"{wind_gust\|kt}", node.ToKts(node.GustSpeed).ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
-        format = Regex.Replace(format, @"{wind_gust\|mps}", node.ToMps(node.GustSpeed).ToString(leadingZero).ToSerialForm(), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, "{wind_gust}", node.GustSpeed?.ToString(leadingZero).ToSerialForm() ?? "", RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, @"{wind_gust\|kt}", (node.GustSpeed.HasValue ? node.ToKts(node.GustSpeed.Value).ToString(leadingZero).ToSerialForm() : ""), RegexOptions.IgnoreCase);
+        format = Regex.Replace(format, @"{wind_gust\|mps}", (node.GustSpeed.HasValue ? node.ToMps(node.GustSpeed.Value).ToString(leadingZero).ToSerialForm() : ""), RegexOptions.IgnoreCase);
         format = Regex.Replace(format, "{wind_vmin}", node.ExtremeWindDirections?.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000").ToSerialForm() ?? "", RegexOptions.IgnoreCase);
         format = Regex.Replace(format, "{wind_vmax}", node.ExtremeWindDirections?.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000").ToSerialForm() ?? "", RegexOptions.IgnoreCase);
         format = Regex.Replace(format, "{wind_unit}", GetSpokenWindUnit(node), RegexOptions.IgnoreCase);
@@ -155,13 +155,11 @@ public class SurfaceWindNode : BaseNode<SurfaceWind>
         format = Regex.Replace(format, "{wind_spd}", node.Speed.ToString("00"));
         format = Regex.Replace(format, @"{wind_spd\|kt}", node.ToKts(node.Speed).ToString("00"));
         format = Regex.Replace(format, @"{wind_spd\|mps}", node.ToMps(node.Speed).ToString("00"));
-        format = Regex.Replace(format, "{wind_gust}", node.GustSpeed.ToString("00"));
-        format = Regex.Replace(format, @"{wind_gust\|kt}", node.ToKts(node.GustSpeed).ToString("00"));
-        format = Regex.Replace(format, @"{wind_gust\|mps}", node.ToMps(node.GustSpeed).ToString("00"));
-        format = Regex.Replace(format, "{wind_vmin}",
-            node.ExtremeWindDirections?.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000") ?? "");
-        format = Regex.Replace(format, "{wind_vmax}",
-            node.ExtremeWindDirections?.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000") ?? "");
+        format = Regex.Replace(format, "{wind_gust}", node.GustSpeed?.ToString("00") ?? "");
+        format = Regex.Replace(format, @"{wind_gust\|kt}", (node.GustSpeed.HasValue ? node.ToKts(node.GustSpeed.Value).ToString("00") : ""));
+        format = Regex.Replace(format, @"{wind_gust\|mps}", (node.GustSpeed.HasValue ? node.ToMps(node.GustSpeed.Value).ToString("00") : ""));
+        format = Regex.Replace(format, "{wind_vmin}", node.ExtremeWindDirections?.FirstExtremeDirection.ApplyMagVar(magVarDeg).ToString("000") ?? "");
+        format = Regex.Replace(format, "{wind_vmax}", node.ExtremeWindDirections?.LastExtremeWindDirection.ApplyMagVar(magVarDeg).ToString("000") ?? "");
         format = Regex.Replace(format, "{wind_unit}", EnumTranslator.GetEnumDescription(node.WindUnit));
         format = Regex.Replace(format, "{wind}", node.RawValue);
         return format;
