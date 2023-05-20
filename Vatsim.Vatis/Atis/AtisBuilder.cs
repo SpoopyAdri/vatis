@@ -15,6 +15,7 @@ using Vatsim.Vatis.NavData;
 using Vatsim.Vatis.Profiles;
 using Vatsim.Vatis.TextToSpeech;
 using Vatsim.Vatis.Utils;
+using Vatsim.Vatis.Weather;
 using Vatsim.Vatis.Weather.Objects;
 
 namespace Vatsim.Vatis.Atis;
@@ -25,6 +26,7 @@ public class AtisBuilder : IAtisBuilder
     private readonly ITextToSpeechRequest mTextToSpeechRequest;
     private readonly IAudioManager mAudioManager;
     private readonly IDownloader mDownloader;
+    private readonly MetarParser mMetarParser;
 
     public AtisBuilder(INavDataRepository airportDatabase, ITextToSpeechRequest textToSpeechRequest, IAudioManager audioManager, IDownloader downloader)
     {
@@ -32,6 +34,7 @@ public class AtisBuilder : IAtisBuilder
         mTextToSpeechRequest = textToSpeechRequest;
         mAudioManager = audioManager;
         mDownloader = downloader;
+        mMetarParser = new MetarParser();
     }
 
     public string BuildTextAtis(Composite composite)
@@ -79,6 +82,34 @@ public class AtisBuilder : IAtisBuilder
                     template = template.Replace($"${alias}", variable.TextReplace);
                 }
             }
+        }
+
+        try
+        {
+            // Custom station altimeter: [PRESSURE_ICAO]
+            template = Regex.Replace(template, @"\[PRESSURE_(\w{4})\]", match =>
+            {
+                var icao = match.Groups[1].Value;
+                var task = Task.Run(() => mDownloader.DownloadStringAsync("https://metar.vatsim.net/metar.php?id=" + icao));
+                task.Wait(TimeSpan.FromSeconds(5));
+
+                var metar = mMetarParser.Parse(task.Result);
+                if (metar != null)
+                {
+                    if (metar.AltimeterSetting == null)
+                        return "";
+
+                    composite.CustomStationAltimeter = metar.AltimeterSetting.Value;
+
+                    return metar.AltimeterSetting.Value.ToString();
+                }
+
+                return "";
+            }, RegexOptions.IgnoreCase);
+        }
+        catch
+        {
+            template = Regex.Replace(template, @"\[PRESSURE_(\w{4})\]", "", RegexOptions.IgnoreCase);
         }
 
         template = Regex.Replace(template, @"\s+(?=[.,?!])", ""); // remove extra spaces before punctuation
@@ -140,6 +171,9 @@ public class AtisBuilder : IAtisBuilder
         composite.TextAtis = BuildTextAtis(composite);
 
         var template = composite.CurrentPreset.Template;
+
+        // Custom station altimeter
+        template = Regex.Replace(template, @"\[PRESSURE_(\w{4})\]", composite.CustomStationAltimeter?.ToSerialForm() ?? "", RegexOptions.IgnoreCase);
 
         foreach (var variable in variables)
         {

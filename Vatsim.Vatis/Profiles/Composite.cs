@@ -76,6 +76,7 @@ public class Composite : IComposite
     [JsonIgnore] public Connection Connection { get; set; }
     [JsonIgnore] public Airport AirportData { get; set; }
     [JsonIgnore] public bool IsFaaAtis => Identifier.StartsWith("K") || Identifier.StartsWith("P");
+    [JsonIgnore] public int? CustomStationAltimeter { get; set; }
 
     [JsonIgnore] public EventHandler<ClientEventArgs<string>> MetarReceived;
     [JsonIgnore] public EventHandler<ClientEventArgs<string>> NewAtisUpdate;
