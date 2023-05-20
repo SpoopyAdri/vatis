@@ -52,7 +52,7 @@ public class CloudNode : BaseNode<CloudLayer>
     {
         int altitude = layer.Altitude;
         if (Composite.AtisFormat.Clouds.ConvertToMetric)
-            altitude = (int)(altitude * 0.30);
+            altitude *= 30;
 
         var cloudType = EnumTranslator.GetEnumDescription(layer.CloudType);
         var convectiveType = EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType);
@@ -83,9 +83,15 @@ public class CloudNode : BaseNode<CloudLayer>
 
     private string FormatCloudsVoice(CloudLayer layer)
     {
-        int altitude = layer.Altitude * 100;
+        int altitude = layer.Altitude;
         if (Composite.AtisFormat.Clouds.ConvertToMetric)
-            altitude = (int)(altitude * 0.30);
+        {
+            altitude *= 30;
+        }
+        else
+        {
+            altitude *= 100;
+        }
 
         var cloudType = EnumTranslator.GetEnumDescription(layer.CloudType);
         var convectiveType = EnumTranslator.GetEnumDescription(layer.ConvectiveCloudType);
@@ -96,7 +102,7 @@ public class CloudNode : BaseNode<CloudLayer>
 
             template = layer.IsCloudBelow
                 ? Regex.Replace(template, "{altitude}", $" {Composite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Voice ?? "undetermined"} ", RegexOptions.IgnoreCase)
-                : Regex.Replace(template, "{altitude}", altitude.ToWordString(), RegexOptions.IgnoreCase);
+                : Regex.Replace(template, "{altitude}", Composite.AtisFormat.Clouds.ConvertToMetric ? (altitude < 1000 ? altitude.ToGroupForm() : altitude.ToWordString()) + " meters" : altitude.ToWordString(), RegexOptions.IgnoreCase);
 
             if (layer.ConvectiveCloudType != Weather.Enums.ConvectiveCloudType.None
                 && !Composite.AtisFormat.Clouds.ConvectiveTypes.ContainsKey(convectiveType))
