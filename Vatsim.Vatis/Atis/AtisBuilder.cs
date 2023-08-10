@@ -531,7 +531,7 @@ public class AtisBuilder : IAtisBuilder
                 leadingZero: !composite.IsFaaAtis));
 
         // parse individual runway: ^18R
-        var runwayMatches = Regex.Matches(input, @"\^(0[1-9]|1[0-9]|2[0-9]|3[0-6])([LRC]?)");
+        var runwayMatches = Regex.Matches(input, @"\^([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-6])([LRC]?)");
         if (runwayMatches.Count > 0)
         {
             foreach (Match rwy in runwayMatches)
