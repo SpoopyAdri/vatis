@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vatsim.Vatis.Config;
 using Vatsim.Vatis.Io;
 using Vatsim.Vatis.Network;
+using Vatsim.Vatis.Profiles;
 
 namespace Vatsim.Vatis.TextToSpeech;
 
@@ -23,7 +24,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
         mAuthTokenManager = authTokenManager;
     }
 
-    public async Task<byte[]> RequestSynthesizedText(string text, CancellationToken token)
+    public async Task<byte[]> RequestSynthesizedText(string text, Composite composite, CancellationToken token)
     {
         var authToken = await mAuthTokenManager.GetAuthToken();
 
@@ -32,7 +33,7 @@ public class TextToSpeechRequest : ITextToSpeechRequest
             var ttsDto = new TextToSpeechRequestDto
             {
                 Text = text,
-                Voice = mAppConfig.Voices.FirstOrDefault(n => n.Name == mAppConfig.CurrentComposite.AtisVoice.Voice).Id ?? "default",
+                Voice = mAppConfig.Voices.FirstOrDefault(n => n.Name == composite.AtisVoice.Voice).Id ?? "default",
                 Jwt = authToken
             };
 

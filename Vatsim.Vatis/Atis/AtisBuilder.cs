@@ -164,7 +164,19 @@ public class AtisBuilder : IAtisBuilder
 
             composite.TextAtis = externalAtis.ToUpper();
 
-            return (null, null);
+            // catches multiple ATIS letter button presses in quick succession
+            await Task.Delay(sandbox ? 0 : 5000, cancellationToken);
+
+            var synthesizedAudio = await mTextToSpeechRequest.RequestSynthesizedText(externalAtis, composite, cancellationToken);
+
+            if (synthesizedAudio != null && sandbox == false)
+            {
+                await UpdateIds(composite, cancellationToken);
+
+                await mAudioManager.AddOrUpdateBot(synthesizedAudio, composite.AtisCallsign, composite.Frequency, composite.AirportData.Latitude, composite.AirportData.Longitude);
+            }
+
+            return (externalAtis.ToUpper(), synthesizedAudio);
         }
 
         // build standard ATIS
@@ -213,7 +225,7 @@ public class AtisBuilder : IAtisBuilder
             // catches multiple ATIS letter button presses in quick succession
             await Task.Delay(sandbox ? 0 : 5000, cancellationToken);
 
-            var synthesizedAudio = await mTextToSpeechRequest.RequestSynthesizedText(text, cancellationToken);
+            var synthesizedAudio = await mTextToSpeechRequest.RequestSynthesizedText(text, composite, cancellationToken);
 
             if (synthesizedAudio != null && sandbox == false)
             {
