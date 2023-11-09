@@ -2604,7 +2604,6 @@ namespace Vatsim.Vatis.UI
             // 
             this.ddlAtisLetter.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
             this.ddlAtisLetter.FormattingEnabled = (true);
-            this.ddlAtisLetter.Items.AddRange(new global::System.Object[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
             this.ddlAtisLetter.Location = (new global::System.Drawing.Point(84, 58));
             this.ddlAtisLetter.Name = ("ddlAtisLetter");
             this.ddlAtisLetter.Size = (new global::System.Drawing.Size(78, 23));
