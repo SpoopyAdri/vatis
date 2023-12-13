@@ -393,15 +393,6 @@ public partial class ProfileConfigurationForm : Form
         txtUndeterminedLayerText.Text = mCurrentComposite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Text;
         txtUndeterminedLayerVoice.Text = mCurrentComposite.AtisFormat.Clouds?.UndeterminedLayerAltitude.Voice;
 
-        gridWeatherTypes.Rows.Clear();
-        if (mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes != null)
-        {
-            foreach (var type in mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes)
-            {
-                gridWeatherTypes.Rows.Add(type.Key, type.Value);
-            }
-        }
-
         gridWeatherDescriptors.Rows.Clear();
         if (mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors != null)
         {
@@ -900,20 +891,6 @@ public partial class ProfileConfigurationForm : Form
         mCurrentComposite.AtisFormat.Dewpoint.UsePlusPrefix = chkDewPlusPrefix.Checked;
         mCurrentComposite.AtisFormat.Dewpoint.PronounceLeadingZero = chkDewLeadingZero.Checked;
         mCurrentComposite.AtisFormat.ClosingStatement.AutoIncludeClosingStatement = chkAutoIncludeClosingStatement.Checked;
-
-        mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Clear();
-        foreach (DataGridViewRow row in gridWeatherTypes.Rows)
-        {
-            if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-            {
-                var acronymValue = row.Cells[0].Value.ToString();
-                var spokenValue = row.Cells[1].Value.ToString();
-                if (!string.IsNullOrEmpty(acronymValue) && !string.IsNullOrEmpty(spokenValue))
-                {
-                    mCurrentComposite.AtisFormat.PresentWeather.WeatherTypes.Add(acronymValue, spokenValue);
-                }
-            }
-        }
 
         mCurrentComposite.AtisFormat.PresentWeather.WeatherDescriptors.Clear();
         foreach (DataGridViewRow row in gridWeatherDescriptors.Rows)
@@ -1830,35 +1807,6 @@ public partial class ProfileConfigurationForm : Form
                     mPendingTextTemplateChanges.Add(new Tuple<BaseFormat, string>(node, template.TextTemplate));
                 }
             }
-        }
-    }
-
-    private void gridWeatherTypes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-    {
-        gridWeatherTypes.Rows[e.RowIndex].ErrorText = "";
-    }
-
-    private void gridWeatherTypes_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-        btnApply.Enabled = true;
-    }
-
-    private void gridWeatherTypes_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-    {
-        if (ActiveControl == btnCancel)
-        {
-            e.Cancel = true;
-            btnCancel_Click(null, EventArgs.Empty);
-        }
-    }
-
-    private void gridWeatherTypes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-    {
-        if (e.Control is TextBox textBox)
-        {
-            textBox.CharacterCasing = gridWeatherTypes.CurrentCell.ColumnIndex == 0
-                ? CharacterCasing.Upper
-                : CharacterCasing.Normal;
         }
     }
 

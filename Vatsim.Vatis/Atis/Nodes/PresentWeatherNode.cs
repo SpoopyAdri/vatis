@@ -56,7 +56,7 @@ public class PresentWeatherNode : BaseNode<WeatherPhenomena>
                 result.Add(Composite.AtisFormat.PresentWeather.ModerateIntensity);
             }
 
-            result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
+            result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Type]);
             result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Descriptor]);
         }
         else
@@ -84,7 +84,7 @@ public class PresentWeatherNode : BaseNode<WeatherPhenomena>
 
             if (!string.IsNullOrEmpty(node.Type))
             {
-                result.Add(Composite.AtisFormat.PresentWeather.WeatherTypes[node.Type]);
+                result.Add(Composite.AtisFormat.PresentWeather.WeatherDescriptors[node.Type]);
             }
 
             if (node.IntensityProximity == "VC")
