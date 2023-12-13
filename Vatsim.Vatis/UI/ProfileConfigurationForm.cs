@@ -115,6 +115,13 @@ public partial class ProfileConfigurationForm : Form
         ddlVoices.DisplayMember = "Name";
     }
 
+    // Populates the Letter dropdown on the sandbox tab with the appropriate range of ATIS letters for the current composite
+    private void LoadAtisLetters()
+    {
+        ddlAtisLetter.Items.Clear();
+        ddlAtisLetter.Items.AddRange(Enumerable.Range(mCurrentComposite.CodeRange.Low, mCurrentComposite.CodeRange.High - mCurrentComposite.CodeRange.Low + 1).Select(i => (object)(char)i).ToArray());
+    }
+
     private TreeNode CreateTreeMenuNode(string name, object tag)
     {
         return new TreeNode
@@ -223,6 +230,7 @@ public partial class ProfileConfigurationForm : Form
 
                 LoadComposite();
                 RefreshPresetList();
+                LoadAtisLetters();
             }
         }
     }
@@ -238,18 +246,12 @@ public partial class ProfileConfigurationForm : Form
         {
             case AtisType.Combined:
                 typeCombined.Checked = true;
-                txtCodeRangeLow.Enabled = false;
-                txtCodeRangeHigh.Enabled = false;
                 break;
             case AtisType.Departure:
                 typeDeparture.Checked = true;
-                txtCodeRangeLow.Enabled = true;
-                txtCodeRangeHigh.Enabled = true;
                 break;
             case AtisType.Arrival:
                 typeArrival.Checked = true;
-                txtCodeRangeLow.Enabled = true;
-                txtCodeRangeHigh.Enabled = true;
                 break;
         }
 
@@ -812,8 +814,8 @@ public partial class ProfileConfigurationForm : Form
             return false;
         }
 
-        mCurrentComposite.CodeRange.Low = (typeDeparture.Checked || typeArrival.Checked) ? char.Parse(txtCodeRangeLow.Text) : 'A';
-        mCurrentComposite.CodeRange.High = (typeDeparture.Checked || typeArrival.Checked) ? char.Parse(txtCodeRangeHigh.Text) : 'Z';
+        mCurrentComposite.CodeRange.Low = char.Parse(txtCodeRangeLow.Text);
+        mCurrentComposite.CodeRange.High = char.Parse(txtCodeRangeHigh.Text);
 
         if (mCurrentPreset != null)
         {
@@ -1961,8 +1963,6 @@ public partial class ProfileConfigurationForm : Form
         }
 
         ddlVoices.Enabled = !radioVoiceRecorded.Checked;
-        txtCodeRangeLow.Enabled = typeDeparture.Checked || typeArrival.Checked;
-        txtCodeRangeHigh.Enabled = typeDeparture.Checked || typeArrival.Checked;
         magneticVar.Enabled = chkMagneticVar.Checked;
 
         btnApply.Enabled = true;
@@ -2111,6 +2111,8 @@ public partial class ProfileConfigurationForm : Form
 
     private void RefreshSandboxPreset()
     {
+        LoadAtisLetters();
+
         if (ddlSandboxPresets.SelectedItem != null)
         {
             mSandboxPreset = mSandboxComposite.Presets.FirstOrDefault(x => x.Id.ToString() == ddlSandboxPresets.SelectedValue.ToString());
