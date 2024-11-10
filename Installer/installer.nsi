@@ -74,7 +74,7 @@ SectionEnd
 
 ;Desktop Shortcut
 Section "Desktop Shortcut" DesktopShortcut
-CreateShortcut "$desktop\vATIS.lnk" "$INSTDIR\vATIS.exe"
+CreateShortcut "$desktop\vATIS.lnk" "$INSTDIR\Application\vATIS.exe"
 SectionEnd
 
 ;Uninstaller
